@@ -18,23 +18,51 @@ function Ball.Create()
     return setmetatable(tmpBall, ball_mt);
 end
 
-function Ball:IsCollidingWithRacket(racket)
-    local rightRacketSide = self.posX <= racket.posX + racket.width and (self.posY + self.height >= racket.posY and self.posY <= racket.posY + racket.height);
-    local leftRacketSide = self.posX + self.width >= racket.posX and (self.posY >= racket.posY and self.posY <= racket.posY + racket.height);
+function Ball:IsCollidingHorizontallyWithRacket(racket)
+    local racketRightFacePosX = racket.posX + racket.width;
+    local racketLeftFacePosX = racket.posX;
+    local racketDownFacePosY = racket.posY + racket.height;
+    local racketUpperFacePosY = racket.posY;
+    local ballDownFacePosY = self.posY + self.height;
+    local ballUpperFacePosY = self.posY;
+    local ballLeftFacePosX = self.posX;
+    local ballRightFacePosX = self.posX + self.width;
 
-    if leftRacketSide then
-        return true;
+    local rightRacketSide = ballLeftFacePosX <= racketRightFacePosX and (ballDownFacePosY >= racketUpperFacePosY and ballUpperFacePosY <= racketDownFacePosY);
+    local leftRacketSide = ballRightFacePosX >= racketLeftFacePosX and (ballDownFacePosY >= racketUpperFacePosY and ballUpperFacePosY <= racketDownFacePosY);
+
+    if racket == leftRacket then
+        return rightRacketSide;
+    else
+        return leftRacketSide;
     end
-    return false;
 end
 
-function Ball:IsCollidingVerticallyWithRacket(racket)
-    local downRacketSide = self.posY <= racket.posY + racket.height and (self.posX + self.width >= racket.posX and self.posX <= racket.posX + racket.width);
-    local upperRacketSide = self.posY + self.height >= racket.posY and (self.posX + self.width >= racket.posX and self.posX <= racket.posX + racket.width);
-    return downRacketSide or upperRacketSide;
+function Ball:IsCollidingWithRacket(racket)
+    local racketRightFacePosX = racket.posX + racket.width;
+    local racketLeftFacePosX = racket.posX;
+    local racketDownFacePosY = racket.posY + racket.height;
+    local racketUpperFacePosY = racket.posY;
+    local ballDownFacePosY = self.posY + self.height;
+    local ballUpperFacePosY = self.posY;
+    local ballLeftFacePosX = self.posX;
+    local ballRightFacePosX = self.posX + self.width;
+
+    local leftBallSide = ballLeftFacePosX == racketRightFacePosX and (ballDownFacePosY >= racketUpperFacePosY and ballUpperFacePosY <= racketDownFacePosY);
+    local rightBallSide = ballRightFacePosX == racketLeftFacePosX and (ballDownFacePosY >= racketUpperFacePosY and ballUpperFacePosY <= racketDownFacePosY);
+    local downBallSide = ballDownFacePosY == racketUpperFacePosY and (ballRightFacePosX >= racketLeftFacePosX and ballLeftFacePosX <= racketRightFacePosX);
+    local upperBallSide = ballUpperFacePosY == racketDownFacePosY and (ballRightFacePosX >= racketLeftFacePosX and ballLeftFacePosX <= racketRightFacePosX);
+
+    if leftBallSide or rightBallSide then
+        return 0;
+    elseif downBallSide or upperBallSide then
+        return 1;
+    else
+        return 2;
+    end
 end
 
-function Ball:IsCollidingVertically()
+function Ball:IsCollidingWithUpAndDownWalls()
     return self.posY <= 0 or self.posY >= love.graphics.getHeight() - self.width;
 end
 
