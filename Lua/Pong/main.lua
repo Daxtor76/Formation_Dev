@@ -20,6 +20,9 @@ rightRacket.posY = rightRacket.posY - rightRacket.height/2;
 ball = Ball.Create();
 
 function love.load()
+    sounds = {};
+    sounds.collide = love.audio.newSource("Sounds/mur.wav", "static");
+    sounds.defeat = love.audio.newSource("Sounds/perdu.wav", "static");
 end
 
 function love.update(dt)

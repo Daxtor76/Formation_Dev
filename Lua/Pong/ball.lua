@@ -40,8 +40,10 @@ function Ball:IsCollidingWithRacket(racket)
     local upperBallSide = ballUpperFacePosY == racketDownFacePosY and (ballRightFacePosX >= racketLeftFacePosX and ballLeftFacePosX <= racketRightFacePosX);
 
     if leftBallSide or rightBallSide then
+        sounds.collide:play();
         return 0;
     elseif downBallSide or upperBallSide then
+        sounds.collide:play();
         return 1;
     else
         return 2;
@@ -55,10 +57,13 @@ function Ball:IsCollidingOnWalls()
     local ballRightFacePosX = self.posX + self.width;
 
     if ballUpperFacePosY <= 0 or ballDownFacePosY >= love.graphics.getHeight() then
+        sounds.collide:play();
         return 1;
     elseif ballLeftFacePosX <= 0 then
+        sounds.defeat:play();
         return 2;
     elseif ballRightFacePosX >= love.graphics.getWidth() then
+        sounds.defeat:play();
         return 3;
     else
         return 0;
