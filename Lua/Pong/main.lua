@@ -9,16 +9,25 @@ io.stdout:setvbuf("no")
 local Racket = require("racket");
 local Racket2 = require("racket");
 local Ball = require("ball");
-leftRacket = Racket.Create(10, 10);
+
+leftRacket = Racket.Create(10, love.graphics.getHeight()/2);
+leftRacket.posY = leftRacket.posY - leftRacket.height/2;
+
 rightRacket = Racket2.Create(love.graphics.getWidth() - 10, love.graphics.getHeight()/2);
 rightRacket.posX = rightRacket.posX - rightRacket.width;
 rightRacket.posY = rightRacket.posY - rightRacket.height/2;
+
 ball = Ball.Create();
 
 function love.load()
 end
 
 function love.update(dt)
+    -- General controls
+    if love.keyboard.isDown("space") then
+        ResetGame();
+    end
+
     -- Left Racket controls
     if love.keyboard.isDown("z") and leftRacket:CanMove("up") then
         leftRacket:Move("up");
@@ -35,6 +44,7 @@ function love.update(dt)
 
     -- Ball
     ball:Move();
+
     if ball:IsCollidingWithRacket(leftRacket) == 0 or ball:IsCollidingWithRacket(rightRacket) == 0 then
         print("Horizontal side of the ball is colliding");
         ball.movementSpeedX = -ball.movementSpeedX;
@@ -42,8 +52,20 @@ function love.update(dt)
         print("Vertical side of the ball is colliding");
         ball.movementSpeedY = -ball.movementSpeedY;
     end
-    if ball:IsCollidingWithUpAndDownWalls() then
-        ball.movementSpeedY = -ball.movementSpeedY;
+
+    if ball:IsCollidingOnWalls() ~= 0 then
+        if ball:IsCollidingOnWalls() == 1 then
+            ball.movementSpeedY = -ball.movementSpeedY;
+        else
+            if ball:IsCollidingOnWalls() == 2 then
+                print("Right Player wins : +1pt !")
+                rightRacket.score = rightRacket.score + 1;
+            elseif ball:IsCollidingOnWalls() == 3 then
+                print("Left Player wins : +1pt !")
+                leftRacket.score = leftRacket.score + 1;
+            end
+            ball:ResetPos();
+        end
     end
 end
 
@@ -51,7 +73,21 @@ function love.draw()
     love.graphics.rectangle("fill", leftRacket.posX, leftRacket.posY, leftRacket.width, leftRacket.height);
     love.graphics.rectangle("fill", rightRacket.posX, rightRacket.posY, rightRacket.width, rightRacket.height);
     love.graphics.rectangle("fill", ball.posX, ball.posY, ball.width, ball.height);
+    love.graphics.line(love.graphics.getWidth()/2, 0, love.graphics.getWidth()/2, love.graphics.getHeight());
+    love.graphics.print(leftRacket.score, love.graphics.getWidth()/2 - 50, 15);
+    love.graphics.print(rightRacket.score, love.graphics.getWidth()/2 + 20, 15);
 end
 
 function love.keypressed(key)
+end
+
+function ResetGame()
+    leftRacket:Reset(10, love.graphics.getHeight()/2);
+    leftRacket.posY = leftRacket.posY - leftRacket.height/2;
+
+    rightRacket:Reset(love.graphics.getWidth() - 10, love.graphics.getHeight()/2);
+    rightRacket.posX = rightRacket.posX - rightRacket.width;
+    rightRacket.posY = rightRacket.posY - rightRacket.height/2;
+
+    ball:ResetPos();
 end

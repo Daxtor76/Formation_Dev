@@ -7,14 +7,20 @@ function Racket.Create(posX, posY)
     print("Création d'une instance de Racket");
 
     local tmpRacket = {};
-    tmpRacket.nombre = 1;
     tmpRacket.width = 20;
     tmpRacket.height = 80;
     tmpRacket.posX = posX;
     tmpRacket.posY = posY;
     tmpRacket.movementSpeed = 4;
+    tmpRacket.score = 0;
 
     return setmetatable(tmpRacket, racket_mt);
+end
+
+function Racket:Reset(posX, posY)
+    self.posX = posX;
+    self.posY = posY;
+    self.score = 0;
 end
 
 function Racket:Move(direction)

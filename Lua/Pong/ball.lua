@@ -18,24 +18,10 @@ function Ball.Create()
     return setmetatable(tmpBall, ball_mt);
 end
 
-function Ball:IsCollidingHorizontallyWithRacket(racket)
-    local racketRightFacePosX = racket.posX + racket.width;
-    local racketLeftFacePosX = racket.posX;
-    local racketDownFacePosY = racket.posY + racket.height;
-    local racketUpperFacePosY = racket.posY;
-    local ballDownFacePosY = self.posY + self.height;
-    local ballUpperFacePosY = self.posY;
-    local ballLeftFacePosX = self.posX;
-    local ballRightFacePosX = self.posX + self.width;
-
-    local rightRacketSide = ballLeftFacePosX <= racketRightFacePosX and (ballDownFacePosY >= racketUpperFacePosY and ballUpperFacePosY <= racketDownFacePosY);
-    local leftRacketSide = ballRightFacePosX >= racketLeftFacePosX and (ballDownFacePosY >= racketUpperFacePosY and ballUpperFacePosY <= racketDownFacePosY);
-
-    if racket == leftRacket then
-        return rightRacketSide;
-    else
-        return leftRacketSide;
-    end
+function Ball:ResetPos()
+    self.posX = love.graphics.getWidth()/2 - self.width/2;
+    self.posY = love.graphics.getHeight()/2 - self.height/2;
+    self.direction = love.math.random(0, 3);
 end
 
 function Ball:IsCollidingWithRacket(racket)
@@ -62,8 +48,21 @@ function Ball:IsCollidingWithRacket(racket)
     end
 end
 
-function Ball:IsCollidingWithUpAndDownWalls()
-    return self.posY <= 0 or self.posY >= love.graphics.getHeight() - self.width;
+function Ball:IsCollidingOnWalls()
+    local ballDownFacePosY = self.posY + self.height;
+    local ballUpperFacePosY = self.posY;
+    local ballLeftFacePosX = self.posX;
+    local ballRightFacePosX = self.posX + self.width;
+
+    if ballUpperFacePosY <= 0 or ballDownFacePosY >= love.graphics.getHeight() then
+        return 1;
+    elseif ballLeftFacePosX <= 0 then
+        return 2;
+    elseif ballRightFacePosX >= love.graphics.getWidth() then
+        return 3;
+    else
+        return 0;
+    end
 end
 
 function Ball:Move()
