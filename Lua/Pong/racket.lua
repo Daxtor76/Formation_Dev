@@ -11,7 +11,7 @@ function Racket.Create(posX, posY)
     tmpRacket.height = 80;
     tmpRacket.posX = posX;
     tmpRacket.posY = posY;
-    tmpRacket.movementSpeed = 10;
+    tmpRacket.movementSpeed = 500;
     tmpRacket.score = 0;
 
     return setmetatable(tmpRacket, racket_mt);
@@ -23,11 +23,11 @@ function Racket:Reset(posX, posY)
     self.score = 0;
 end
 
-function Racket:Move(direction)
+function Racket:Move(direction, deltaTime)
     if direction == "up" then
-        self.posY = self.posY - self.movementSpeed;
+        self.posY = self.posY - self.movementSpeed * deltaTime;
     elseif direction == "down" then
-        self.posY = self.posY + self.movementSpeed;
+        self.posY = self.posY + self.movementSpeed * deltaTime;
     end
 end
 

@@ -32,30 +32,30 @@ function love.update(dt)
 
     -- Left Racket controls
     if love.keyboard.isDown("z") and leftRacket:CanMove("up") then
-        leftRacket:Move("up");
+        leftRacket:Move("up", dt);
     elseif love.keyboard.isDown("s") and leftRacket:CanMove("down") then
-        leftRacket:Move("down");
+        leftRacket:Move("down", dt);
     end
 
     -- Right Racket controls
     if love.keyboard.isDown("up") and rightRacket:CanMove("up") then
-        rightRacket:Move("up");
+        rightRacket:Move("up", dt);
     elseif love.keyboard.isDown("down") and rightRacket:CanMove("down") then
-        rightRacket:Move("down");
+        rightRacket:Move("down", dt);
     end
 
     -- Ball
-    ball:Move(ball.accel);
+    ball:Move(ball.accel, dt);
 
     if ball:IsCollidingWithRacket(leftRacket) == 1 then
         ball.movementSpeedX = -ball.movementSpeedX;
         ball:Replace(leftRacket.posX + leftRacket.width, ball.posY);
-        ball:IncreaseAccel(0.1);
+        ball:IncreaseAccel(ball.accelIncreasePerCollision);
         sounds.collide:play();
     elseif ball:IsCollidingWithRacket(rightRacket) == 3 then
         ball.movementSpeedX = -ball.movementSpeedX;
         ball:Replace(rightRacket.posX - ball.width, ball.posY);
-        ball:IncreaseAccel(0.1);
+        ball:IncreaseAccel(ball.accelIncreasePerCollision);
         sounds.collide:play();
     end
 
@@ -69,7 +69,7 @@ function love.update(dt)
         elseif ball:IsCollidingOnWalls() == 2 then
             ball.movementSpeedY = -ball.movementSpeedY;
             ball:Replace(ball.posX, 0);
-            ball:IncreaseAccel(0.1);
+            ball:IncreaseAccel(ball.accelIncreasePerCollision);
             sounds.collide:play();
         elseif ball:IsCollidingOnWalls() == 3 then
             print("Left Player wins : +1pt !")
@@ -80,7 +80,7 @@ function love.update(dt)
         elseif ball:IsCollidingOnWalls() == 4 then
             ball.movementSpeedY = -ball.movementSpeedY;
             ball:Replace(ball.posX, love.graphics.getHeight() - ball.height);
-            ball:IncreaseAccel(0.1);
+            ball:IncreaseAccel(ball.accelIncreasePerCollision);
             sounds.collide:play();
         end
     end

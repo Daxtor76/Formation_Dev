@@ -11,9 +11,12 @@ function Ball.Create()
     tmpBall.height = 20;
     tmpBall.posX = love.graphics.getWidth()/2 - tmpBall.width/2;
     tmpBall.posY = love.graphics.getHeight()/2 - tmpBall.height/2;
-    tmpBall.movementSpeedX = 4;
-    tmpBall.movementSpeedY = 4;
-    tmpBall.accel = 1.1;
+    tmpBall.baseMovementSpeed = 250;
+    tmpBall.baseAccel = 1.1;
+    tmpBall.accelIncreasePerCollision = 0.1;
+    tmpBall.movementSpeedX = tmpBall.baseMovementSpeed;
+    tmpBall.movementSpeedY = tmpBall.baseMovementSpeed;
+    tmpBall.accel = tmpBall.baseAccel;
     tmpBall.direction = love.math.random(0, 3);
 
     return setmetatable(tmpBall, ball_mt);
@@ -31,9 +34,9 @@ function Ball:Replace(newPosX, newPosY)
 end
 
 function Ball:ResetSpeed()
-    self.movementSpeedX = 4;
-    self.movementSpeedY = 4;
-    self.accel = 1.1;
+    self.movementSpeedX = self.baseMovementSpeed;
+    self.movementSpeedY = self.baseMovementSpeed;
+    self.accel = self.baseAccel;
 end
 
 function Ball:IncreaseAccel(amount)
@@ -56,16 +59,12 @@ function Ball:IsCollidingWithRacket(racket)
     local upperBallSide = (ballUpperFacePosY < racketDownFacePosY and ballUpperFacePosY > racketUpperFacePosY) and (ballRightFacePosX > racketLeftFacePosX and ballLeftFacePosX < racketRightFacePosX);
 
     if leftBallSide then
-        print("1");
         return 1;
     elseif rightBallSide then
-        print("3");
         return 3;
     elseif upperBallSide then
-        print("2");
         return 2;
     elseif downBallSide then
-        print("4");
         return 4;
     else
         return 0;
@@ -91,23 +90,23 @@ function Ball:IsCollidingOnWalls()
     end
 end
 
-function Ball:Move(accelFactor)
+function Ball:Move(accelFactor, deltaTime)
     if self.direction == 0 then
         -- haut gauche
-        self.posX = self.posX - self.movementSpeedX * accelFactor;
-        self.posY = self.posY - self.movementSpeedY * accelFactor;
+        self.posX = self.posX - self.movementSpeedX * accelFactor * deltaTime;
+        self.posY = self.posY - self.movementSpeedY * accelFactor * deltaTime;
     elseif self.direction == 1 then
         -- haut droite
-        self.posX = self.posX + self.movementSpeedX * accelFactor;
-        self.posY = self.posY - self.movementSpeedY * accelFactor;
+        self.posX = self.posX + self.movementSpeedX * accelFactor * deltaTime;
+        self.posY = self.posY - self.movementSpeedY * accelFactor * deltaTime;
     elseif self.direction == 2 then
         -- bas droite
-        self.posX = self.posX + self.movementSpeedX * accelFactor;
-        self.posY = self.posY + self.movementSpeedY * accelFactor;
+        self.posX = self.posX + self.movementSpeedX * accelFactor * deltaTime;
+        self.posY = self.posY + self.movementSpeedY * accelFactor * deltaTime;
     elseif self.direction == 3 then
         -- bas gauche
-        self.posX = self.posX - self.movementSpeedX * accelFactor;
-        self.posY = self.posY + self.movementSpeedY * accelFactor;
+        self.posX = self.posX - self.movementSpeedX * accelFactor * deltaTime;
+        self.posY = self.posY + self.movementSpeedY * accelFactor * deltaTime;
     end
 end
 
