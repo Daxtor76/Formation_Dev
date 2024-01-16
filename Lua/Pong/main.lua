@@ -25,11 +25,6 @@ function love.load()
 end
 
 function love.update(dt)
-    -- General controls
-    if love.keyboard.isDown("space") then
-        ResetGame();
-    end
-
     -- Left Racket controls
     if love.keyboard.isDown("z") and leftRacket:CanMove("up") then
         leftRacket:Move("up", dt);
@@ -96,6 +91,10 @@ function love.draw()
 end
 
 function love.keypressed(key)
+    -- General controls
+    if key == "space" then
+        ResetGame();
+    end
 end
 
 function ResetGame()
