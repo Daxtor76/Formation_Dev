@@ -13,6 +13,7 @@ function Racket.Create(posX, posY)
     tmpRacket.posY = posY;
     tmpRacket.movementSpeed = 500;
     tmpRacket.score = 0;
+    tmpRacket.isRed = false;
 
     return setmetatable(tmpRacket, racket_mt);
 end

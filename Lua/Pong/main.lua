@@ -40,7 +40,11 @@ function love.update(dt)
     end
 
     -- Ball
-    ball:Move(ball.accel, dt);
+    if sounds.defeat:isPlaying() == false then
+        ball:Move(ball.accel, dt);
+        leftRacket.isRed = false;
+        rightRacket.isRed = false;
+    end
 
     if ball:IsCollidingWithRacket(leftRacket) == 1 then
         ball.movementSpeedX = -ball.movementSpeedX;
@@ -58,6 +62,7 @@ function love.update(dt)
         if ball:IsCollidingOnWalls() == 1 then
             print("Right Player wins : +1pt !")
             rightRacket.score = rightRacket.score + 1;
+            leftRacket.isRed = true;
             sounds.defeat:play();
             ball:ResetPos();
             ball:ResetSpeed();
@@ -69,6 +74,7 @@ function love.update(dt)
         elseif ball:IsCollidingOnWalls() == 3 then
             print("Left Player wins : +1pt !")
             leftRacket.score = leftRacket.score + 1;
+            rightRacket.isRed = true;
             sounds.defeat:play();
             ball:ResetPos();
             ball:ResetSpeed();
@@ -82,12 +88,35 @@ function love.update(dt)
 end
 
 function love.draw()
-    love.graphics.rectangle("fill", leftRacket.posX, leftRacket.posY, leftRacket.width, leftRacket.height);
-    love.graphics.rectangle("fill", rightRacket.posX, rightRacket.posY, rightRacket.width, rightRacket.height);
+    -- WHITE THINGS
+    love.graphics.setColor(255, 255, 255);
+
+    -- Ball rendering
     love.graphics.rectangle("fill", ball.posX, ball.posY, ball.width, ball.height);
+
+    -- Middle line rendering
     love.graphics.line(love.graphics.getWidth()/2, 0, love.graphics.getWidth()/2, love.graphics.getHeight());
+
+    -- Score rendering
     love.graphics.print(leftRacket.score, love.graphics.getWidth()/2 - 50, 15);
     love.graphics.print(rightRacket.score, love.graphics.getWidth()/2 + 20, 15);
+
+    -- Rackets rendering
+    if leftRacket.isRed and sounds.defeat:isPlaying() then
+        love.graphics.setColor(255, 0, 0);
+        love.graphics.rectangle("fill", leftRacket.posX, leftRacket.posY, leftRacket.width, leftRacket.height);
+        love.graphics.setColor(255, 255, 255);
+        love.graphics.rectangle("fill", rightRacket.posX, rightRacket.posY, rightRacket.width, rightRacket.height);
+    elseif rightRacket.isRed and sounds.defeat:isPlaying() then
+        love.graphics.setColor(255, 0, 0);
+        love.graphics.rectangle("fill", rightRacket.posX, rightRacket.posY, rightRacket.width, rightRacket.height);
+        love.graphics.setColor(255, 255, 255);
+        love.graphics.rectangle("fill", leftRacket.posX, leftRacket.posY, leftRacket.width, leftRacket.height);
+    else
+        love.graphics.setColor(255, 255, 255);
+        love.graphics.rectangle("fill", leftRacket.posX, leftRacket.posY, leftRacket.width, leftRacket.height);
+        love.graphics.rectangle("fill", rightRacket.posX, rightRacket.posY, rightRacket.width, rightRacket.height);
+    end
 end
 
 function love.keypressed(key)
