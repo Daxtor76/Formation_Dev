@@ -7,7 +7,7 @@ function Racket.Create(posX, posY)
     print("Création d'une instance de Racket");
 
     local tmpRacket = {};
-    tmpRacket.width = 20;
+    tmpRacket.width = 10;
     tmpRacket.height = 80;
     tmpRacket.posX = posX;
     tmpRacket.posY = posY;

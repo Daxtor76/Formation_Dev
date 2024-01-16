@@ -25,6 +25,11 @@ function Ball:ResetPos()
     self.direction = love.math.random(0, 3);
 end
 
+function Ball:Replace(newPosX, newPosY)
+    self.posX = newPosX;
+    self.posY = newPosY;
+end
+
 function Ball:ResetSpeed()
     self.movementSpeedX = 4;
     self.movementSpeedY = 4;
@@ -47,16 +52,20 @@ function Ball:IsCollidingWithRacket(racket)
 
     local leftBallSide = (ballLeftFacePosX < racketRightFacePosX and ballLeftFacePosX > racketLeftFacePosX) and (ballDownFacePosY > racketUpperFacePosY and ballUpperFacePosY < racketDownFacePosY);
     local rightBallSide = (ballRightFacePosX > racketLeftFacePosX and ballRightFacePosX < racketRightFacePosX) and (ballDownFacePosY > racketUpperFacePosY and ballUpperFacePosY < racketDownFacePosY);
-    local downBallSide = ballDownFacePosY > racketUpperFacePosY and (ballRightFacePosX > racketLeftFacePosX and ballLeftFacePosX < racketRightFacePosX);
-    local upperBallSide = ballUpperFacePosY < racketDownFacePosY and (ballRightFacePosX > racketLeftFacePosX and ballLeftFacePosX < racketRightFacePosX);
+    local downBallSide = (ballDownFacePosY > racketUpperFacePosY and ballDownFacePosY < racketDownFacePosY) and (ballRightFacePosX > racketLeftFacePosX and ballLeftFacePosX < racketRightFacePosX);
+    local upperBallSide = (ballUpperFacePosY < racketDownFacePosY and ballUpperFacePosY > racketUpperFacePosY) and (ballRightFacePosX > racketLeftFacePosX and ballLeftFacePosX < racketRightFacePosX);
 
     if leftBallSide then
+        print("1");
         return 1;
-    elseif upperBallSide then
-        return 2;
     elseif rightBallSide then
+        print("3");
         return 3;
+    elseif upperBallSide then
+        print("2");
+        return 2;
     elseif downBallSide then
+        print("4");
         return 4;
     else
         return 0;

@@ -7,13 +7,12 @@ end
 io.stdout:setvbuf("no")
 
 local Racket = require("racket");
-local Racket2 = require("racket");
 local Ball = require("ball");
 
 leftRacket = Racket.Create(10, love.graphics.getHeight()/2);
 leftRacket.posY = leftRacket.posY - leftRacket.height/2;
 
-rightRacket = Racket2.Create(love.graphics.getWidth() - 10, love.graphics.getHeight()/2);
+rightRacket = Racket.Create(love.graphics.getWidth() - 10, love.graphics.getHeight()/2);
 rightRacket.posX = rightRacket.posX - rightRacket.width;
 rightRacket.posY = rightRacket.posY - rightRacket.height/2;
 
@@ -49,26 +48,15 @@ function love.update(dt)
     ball:Move(ball.accel);
 
     if ball:IsCollidingWithRacket(leftRacket) == 1 then
-        print("Left side of the ball is colliding with racket left");
         ball.movementSpeedX = -ball.movementSpeedX;
+        ball:Replace(leftRacket.posX + leftRacket.width, ball.posY);
         ball:IncreaseAccel(0.1);
         sounds.collide:play();
-    --elseif ball:IsCollidingWithRacket(leftRacket) == 2 or ball:IsCollidingWithRacket(rightRacket) == 2 then
-        --print("Upper side of the ball is colliding");
-        --ball.movementSpeedY = -ball.movementSpeedY;
-        --ball:IncreaseAccel(0.1);
-        --sounds.collide:play();
-    end
-    if ball:IsCollidingWithRacket(rightRacket) == 3 then
-        print("Right side of the ball is colliding with racket right");
+    elseif ball:IsCollidingWithRacket(rightRacket) == 3 then
         ball.movementSpeedX = -ball.movementSpeedX;
+        ball:Replace(rightRacket.posX - ball.width, ball.posY);
         ball:IncreaseAccel(0.1);
         sounds.collide:play();
-    --elseif ball:IsCollidingWithRacket(leftRacket) == 4 or ball:IsCollidingWithRacket(rightRacket) == 4 then
-        --print("Down side of the ball is colliding");
-        --ball.movementSpeedY = -ball.movementSpeedY;
-        --ball:IncreaseAccel(0.1);
-        --sounds.collide:play();
     end
 
     if ball:IsCollidingOnWalls() ~= 0 then
@@ -80,6 +68,7 @@ function love.update(dt)
             ball:ResetSpeed();
         elseif ball:IsCollidingOnWalls() == 2 then
             ball.movementSpeedY = -ball.movementSpeedY;
+            ball:Replace(ball.posX, 0);
             ball:IncreaseAccel(0.1);
             sounds.collide:play();
         elseif ball:IsCollidingOnWalls() == 3 then
@@ -90,6 +79,7 @@ function love.update(dt)
             ball:ResetSpeed();
         elseif ball:IsCollidingOnWalls() == 4 then
             ball.movementSpeedY = -ball.movementSpeedY;
+            ball:Replace(ball.posX, love.graphics.getHeight() - ball.height);
             ball:IncreaseAccel(0.1);
             sounds.collide:play();
         end
