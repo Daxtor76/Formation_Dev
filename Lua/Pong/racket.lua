@@ -11,7 +11,7 @@ function Racket.Create(posX, posY)
     tmpRacket.height = 80;
     tmpRacket.posX = posX;
     tmpRacket.posY = posY;
-    tmpRacket.movementSpeed = 4;
+    tmpRacket.movementSpeed = 10;
     tmpRacket.score = 0;
 
     return setmetatable(tmpRacket, racket_mt);

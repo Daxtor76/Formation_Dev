@@ -46,28 +46,52 @@ function love.update(dt)
     end
 
     -- Ball
-    ball:Move();
+    ball:Move(ball.accel);
 
-    if ball:IsCollidingWithRacket(leftRacket) == 0 or ball:IsCollidingWithRacket(rightRacket) == 0 then
-        print("Horizontal side of the ball is colliding");
+    if ball:IsCollidingWithRacket(leftRacket) == 1 then
+        print("Left side of the ball is colliding with racket left");
         ball.movementSpeedX = -ball.movementSpeedX;
-    elseif ball:IsCollidingWithRacket(leftRacket) == 1 or ball:IsCollidingWithRacket(rightRacket) == 1 then
-        print("Vertical side of the ball is colliding");
-        ball.movementSpeedY = -ball.movementSpeedY;
+        ball:IncreaseAccel(0.1);
+        sounds.collide:play();
+    --elseif ball:IsCollidingWithRacket(leftRacket) == 2 or ball:IsCollidingWithRacket(rightRacket) == 2 then
+        --print("Upper side of the ball is colliding");
+        --ball.movementSpeedY = -ball.movementSpeedY;
+        --ball:IncreaseAccel(0.1);
+        --sounds.collide:play();
+    end
+    if ball:IsCollidingWithRacket(rightRacket) == 3 then
+        print("Right side of the ball is colliding with racket right");
+        ball.movementSpeedX = -ball.movementSpeedX;
+        ball:IncreaseAccel(0.1);
+        sounds.collide:play();
+    --elseif ball:IsCollidingWithRacket(leftRacket) == 4 or ball:IsCollidingWithRacket(rightRacket) == 4 then
+        --print("Down side of the ball is colliding");
+        --ball.movementSpeedY = -ball.movementSpeedY;
+        --ball:IncreaseAccel(0.1);
+        --sounds.collide:play();
     end
 
     if ball:IsCollidingOnWalls() ~= 0 then
         if ball:IsCollidingOnWalls() == 1 then
-            ball.movementSpeedY = -ball.movementSpeedY;
-        else
-            if ball:IsCollidingOnWalls() == 2 then
-                print("Right Player wins : +1pt !")
-                rightRacket.score = rightRacket.score + 1;
-            elseif ball:IsCollidingOnWalls() == 3 then
-                print("Left Player wins : +1pt !")
-                leftRacket.score = leftRacket.score + 1;
-            end
+            print("Right Player wins : +1pt !")
+            rightRacket.score = rightRacket.score + 1;
+            sounds.defeat:play();
             ball:ResetPos();
+            ball:ResetSpeed();
+        elseif ball:IsCollidingOnWalls() == 2 then
+            ball.movementSpeedY = -ball.movementSpeedY;
+            ball:IncreaseAccel(0.1);
+            sounds.collide:play();
+        elseif ball:IsCollidingOnWalls() == 3 then
+            print("Left Player wins : +1pt !")
+            leftRacket.score = leftRacket.score + 1;
+            sounds.defeat:play();
+            ball:ResetPos();
+            ball:ResetSpeed();
+        elseif ball:IsCollidingOnWalls() == 4 then
+            ball.movementSpeedY = -ball.movementSpeedY;
+            ball:IncreaseAccel(0.1);
+            sounds.collide:play();
         end
     end
 end
@@ -93,4 +117,5 @@ function ResetGame()
     rightRacket.posY = rightRacket.posY - rightRacket.height/2;
 
     ball:ResetPos();
+    ball:ResetSpeed();
 end
