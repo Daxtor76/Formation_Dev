@@ -36,8 +36,6 @@ function love.update(dt)
         ship:DisableEngine();
     end
 
-    print(GetDistance(ship.posX, ship.posY, moon.posX, moon.posY) - moon.radius);
-
     -- Collisions
     if (GetDistance(ship.posX, ship.posY, moon.posX, moon.posY) - moon.radius) < 10 and love.keyboard.isDown("z") == false then
         ship.velX = 0;
@@ -67,6 +65,9 @@ function love.draw()
 end
 
 function love.keypressed(key)
+    if key == "space" then
+        ResetGame();
+    end
 end
 
 function ApplyGravity(obj, dt)
@@ -75,4 +76,13 @@ end
 
 function GetDistance(x1, y1, x2, y2)
     return math.sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2);
+end
+
+function ResetGame()
+    ship.posX = screenWidth / 2;
+    ship.posY = screenHeight / 2;
+    ship.velX = 0;
+    ship.velY = 0;
+    ship.rotation = -90;
+    ship.isEngineOn = false;
 end
