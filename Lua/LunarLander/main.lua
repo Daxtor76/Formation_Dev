@@ -23,6 +23,11 @@ function love.load()
 end
 
 function love.update(dt)
+    local distanceShipMoon = GetDistance(ship.posX, ship.posY, moon.posX, moon.posY) - moon.radius;
+    local distanceNoseMoon = GetDistance(ship.posX + ship.width/2, ship.posY, moon.posX, moon.posY) - moon.radius;
+    --print(distanceShipMoon);
+    --print(distanceNoseMoon);
+
     -- Ship
         -- Apply velocity on ship pos
     ship.posX = ship.posX + ship.velX;
@@ -37,18 +42,23 @@ function love.update(dt)
     end
 
     -- Collisions
-    if (GetDistance(ship.posX, ship.posY, moon.posX, moon.posY) - moon.radius) < 10 and love.keyboard.isDown("z") == false then
+    if  distanceShipMoon < 14 and love.keyboard.isDown("z") == false then
         ship.velX = 0;
         ship.velY = 0;
+
+        -- Check defeat
+        if ship.rotation < -120 or ship.rotation > -60 then
+            ResetGame();
+        end
     else
         -- Gravity
         ApplyGravity(ship, dt);
     end
 
         -- Rotation
-    if love.keyboard.isDown("d") then
+    if distanceShipMoon >= 14 and love.keyboard.isDown("d") then
         ship:SetRotation(ship.rotationSpeed, dt);
-    elseif love.keyboard.isDown("q") then
+    elseif distanceShipMoon >= 14 and love.keyboard.isDown("q") then
         ship:SetRotation(-ship.rotationSpeed, dt);
     end
 end
