@@ -2,22 +2,22 @@ local Ball = {};
 
 local ball_mt = {__index = Ball};
 
-function Ball.Create()
+function Ball.Create(racket)
 
     print("Création d'une instance de Ball");
 
     local tmpBall = {};
     tmpBall.width = 20;
     tmpBall.height = 20;
-    tmpBall.posX = love.graphics.getWidth()/2 - tmpBall.width/2;
-    tmpBall.posY = love.graphics.getHeight()/2 - tmpBall.height/2;
+    tmpBall.posX = racket.posX + racket.width/2 - tmpBall.width/2;
+    tmpBall.posY = racket.posY - tmpBall.height;
     tmpBall.baseMovementSpeed = 250;
-    tmpBall.baseAccel = 1.1;
+    tmpBall.baseAccel = 1;
     tmpBall.accelIncreasePerCollision = 0.1;
     tmpBall.movementSpeedX = tmpBall.baseMovementSpeed;
     tmpBall.movementSpeedY = tmpBall.baseMovementSpeed;
     tmpBall.accel = tmpBall.baseAccel;
-    tmpBall.direction = love.math.random(0, 3);
+    tmpBall.direction = love.math.random(0, 1);
 
     return setmetatable(tmpBall, ball_mt);
 end
@@ -25,7 +25,7 @@ end
 function Ball:ResetPos()
     self.posX = love.graphics.getWidth()/2 - self.width/2;
     self.posY = love.graphics.getHeight()/2 - self.height/2;
-    self.direction = love.math.random(0, 3);
+    self.direction = love.math.random(0, 1);
 end
 
 function Ball:Replace(newPosX, newPosY)
@@ -43,6 +43,16 @@ function Ball:IncreaseAccel(amount)
     self.accel = self.accel + amount;
 end
 
+function Ball:GetRacketCollisionLocation(racket)
+     -- Cette fonction doit me donner la position où la balle a tapé dans la raquette (-20=gauche, 80=droite)
+    return self.posX - racket.posX + 20;
+end
+
+function Ball:FollowRacket(racket)
+    self.posX = racket.posX + racket.width/2 - self.width/2
+    self.posY = racket.posY - self.height;
+end
+
 function Ball:IsCollidingWithRacket(racket)
     local racketRightFacePosX = racket.posX + racket.width;
     local racketLeftFacePosX = racket.posX;
@@ -58,17 +68,7 @@ function Ball:IsCollidingWithRacket(racket)
     local downBallSide = (ballDownFacePosY > racketUpperFacePosY and ballDownFacePosY < racketDownFacePosY) and (ballRightFacePosX > racketLeftFacePosX and ballLeftFacePosX < racketRightFacePosX);
     local upperBallSide = (ballUpperFacePosY < racketDownFacePosY and ballUpperFacePosY > racketUpperFacePosY) and (ballRightFacePosX > racketLeftFacePosX and ballLeftFacePosX < racketRightFacePosX);
 
-    if leftBallSide then
-        return 1;
-    elseif rightBallSide then
-        return 3;
-    elseif upperBallSide then
-        return 2;
-    elseif downBallSide then
-        return 4;
-    else
-        return 0;
-    end
+    return downBallSide;
 end
 
 function Ball:IsCollidingOnWalls()
