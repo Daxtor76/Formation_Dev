@@ -45,7 +45,7 @@ end
 
 function Ball:GetRacketCollisionLocation(racket)
      -- Cette fonction doit me donner la position où la balle a tapé dans la raquette (-20=gauche, 80=droite)
-    return self.posX - racket.posX + 20;
+    return self.posX - racket.posX + self.width;
 end
 
 function Ball:FollowRacket(racket)
