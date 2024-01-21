@@ -32,14 +32,29 @@ function love.update(dt)
     end
 
     -- Ball
+        -- Movement
     if gameState == "Preparation" then
         ball:FollowRacket(racket)
     else
         ball:Move(ball.accel, dt);
     end
 
+        -- Collisions
     if ball:IsCollidingWithRacket(racket) then
-        print(ball:GetRacketCollisionLocation(racket))
+        local collPos = ball:GetRacketCollisionLocation(racket)
+        if collPos >= 0 and collPos < 33 then
+            ball.movementSpeedX = ball.baseMovementSpeed;
+            if Sign(ball.movementSpeedX) == 1 then
+                ball.movementSpeedX = -ball.movementSpeedX;
+            end
+        elseif collPos >= 33 and collPos < 66 then
+            ball.movementSpeedX = 0;
+        else
+            ball.movementSpeedX = ball.baseMovementSpeed;
+            if Sign(ball.movementSpeedX) == -1 then
+                ball.movementSpeedX = -ball.movementSpeedX;
+            end
+        end
         ball.movementSpeedY = -ball.movementSpeedY;
         ball:Replace(ball.posX, racket.posY - ball.height);
         sounds.collide:play();
@@ -84,14 +99,19 @@ end
 
 function love.keypressed(key)
     -- General controls
-    if key == "space" then
+    if key == "space" and gameState ~= "Playing" then
         LaunchBall();
     end
 end
 
 function LaunchBall()
     gameState = "Playing";
+    ball:ApplyDirection(racket:ScreenPlacement());
 end
 
 function ResetGame()
+end
+
+function Sign(n)
+	return n < 0 and -1 or n > 0 and 1 or 0
 end

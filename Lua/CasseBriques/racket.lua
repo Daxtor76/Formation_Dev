@@ -39,4 +39,14 @@ function Racket:CanMove(direction)
     return false;
 end
 
+function Racket:ScreenPlacement()
+    if self.posX + self.width/2 < love.graphics.getWidth()/3 then
+        return 0;
+    elseif self.posX + self.width/2 > (love.graphics.getWidth()/3)*2 then
+        return 1;
+    else
+        return 2;
+    end
+end
+
 return Racket;

@@ -17,7 +17,6 @@ function Ball.Create(racket)
     tmpBall.movementSpeedX = tmpBall.baseMovementSpeed;
     tmpBall.movementSpeedY = tmpBall.baseMovementSpeed;
     tmpBall.accel = tmpBall.baseAccel;
-    tmpBall.direction = love.math.random(0, 1);
 
     return setmetatable(tmpBall, ball_mt);
 end
@@ -44,7 +43,7 @@ function Ball:IncreaseAccel(amount)
 end
 
 function Ball:GetRacketCollisionLocation(racket)
-     -- Cette fonction doit me donner la position où la balle a tapé dans la raquette (-20=gauche, 80=droite)
+     -- Cette fonction doit me donner la position où la balle a tapé sur la raquette (0=gauche, 100=droite)
     return self.posX - racket.posX + self.width;
 end
 
@@ -90,24 +89,21 @@ function Ball:IsCollidingOnWalls()
     end
 end
 
-function Ball:Move(accelFactor, deltaTime)
-    if self.direction == 0 then
+function Ball:ApplyDirection(direction)
+    if direction == 0 then
         -- haut gauche
-        self.posX = self.posX - self.movementSpeedX * accelFactor * deltaTime;
-        self.posY = self.posY - self.movementSpeedY * accelFactor * deltaTime;
-    elseif self.direction == 1 then
+        self.movementSpeedX = -self.movementSpeedX;
+        self.movementSpeedY = -self.movementSpeedY;
+    elseif direction == 1 then
         -- haut droite
-        self.posX = self.posX + self.movementSpeedX * accelFactor * deltaTime;
-        self.posY = self.posY - self.movementSpeedY * accelFactor * deltaTime;
-    elseif self.direction == 2 then
-        -- bas droite
-        self.posX = self.posX + self.movementSpeedX * accelFactor * deltaTime;
-        self.posY = self.posY + self.movementSpeedY * accelFactor * deltaTime;
-    elseif self.direction == 3 then
-        -- bas gauche
-        self.posX = self.posX - self.movementSpeedX * accelFactor * deltaTime;
-        self.posY = self.posY + self.movementSpeedY * accelFactor * deltaTime;
+        self.movementSpeedX = self.movementSpeedX;
+        self.movementSpeedY = -self.movementSpeedY;
     end
+end
+
+function Ball:Move(accelFactor, deltaTime)
+    self.posX = self.posX + self.movementSpeedX * accelFactor * deltaTime;
+    self.posY = self.posY + self.movementSpeedY * accelFactor * deltaTime;
 end
 
 return Ball;
