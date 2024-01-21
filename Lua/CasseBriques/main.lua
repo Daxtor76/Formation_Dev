@@ -10,6 +10,7 @@ gameState = "Preparation";
 
 local Racket = require("racket");
 local Ball = require("ball");
+local Brick = require("brick");
 
 racket = Racket.Create(love.graphics.getWidth()/2, love.graphics.getHeight());
 racket.posX = racket.posX - racket.width/2;
