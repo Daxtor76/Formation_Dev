@@ -13,8 +13,6 @@ local Ball = require("ball");
 local Brick = require("brick");
 
 racket = Racket.Create(love.graphics.getWidth()/2, love.graphics.getHeight());
-racket.posX = racket.posX - racket.width/2;
-racket.posY = racket.posY - racket.height*3;
 
 ball = Ball.Create(racket);
 
@@ -134,8 +132,12 @@ end
 
 function love.keypressed(key)
     -- General controls
-    if key == "space" and gameState ~= "Playing" then
-        LaunchBall();
+    if key == "space" then
+        if gameState == "Preparation" then
+            LaunchBall();
+        elseif gameState == "Playing" then
+            ResetGame();
+        end
     end
 end
 
@@ -163,6 +165,14 @@ function PopulateBricks(lines, columns)
 end
 
 function ResetGame()
+    bricks = PopulateBricks(6, 10);
+
+    racket:Reset();
+
+    ball:ResetPos();
+    ball:ResetSpeed();
+
+    gameState = "Preparation";
 end
 
 function Sign(n)

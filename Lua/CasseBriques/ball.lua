@@ -9,6 +9,8 @@ function Ball.Create(racket)
     local tmpBall = {};
     tmpBall.width = 20;
     tmpBall.height = 20;
+    tmpBall.basePosX = racket.posX + racket.width/2 - tmpBall.width/2;
+    tmpBall.basePosY = racket.posY - tmpBall.height;
     tmpBall.posX = racket.posX + racket.width/2 - tmpBall.width/2;
     tmpBall.posY = racket.posY - tmpBall.height;
     tmpBall.baseMovementSpeed = 250;
@@ -22,9 +24,8 @@ function Ball.Create(racket)
 end
 
 function Ball:ResetPos()
-    self.posX = love.graphics.getWidth()/2 - self.width/2;
-    self.posY = love.graphics.getHeight()/2 - self.height/2;
-    self.direction = love.math.random(0, 1);
+    self.posX = self.basePosX;
+    self.posY = self.basePosY;
 end
 
 function Ball:Replace(newPosX, newPosY)

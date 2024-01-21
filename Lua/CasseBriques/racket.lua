@@ -9,17 +9,18 @@ function Racket.Create(posX, posY)
     local tmpRacket = {};
     tmpRacket.width = 80;
     tmpRacket.height = 20;
-    tmpRacket.posX = posX;
-    tmpRacket.posY = posY;
+    tmpRacket.basePosX = posX - tmpRacket.width/2;
+    tmpRacket.basePosY = posY - tmpRacket.height*3;
+    tmpRacket.posX = posX - tmpRacket.width/2;
+    tmpRacket.posY = posY - tmpRacket.height*3;
     tmpRacket.movementSpeed = 500;
 
     return setmetatable(tmpRacket, racket_mt);
 end
 
-function Racket:Reset(posX, posY)
-    self.posX = posX;
-    self.posY = posY;
-    self.score = 0;
+function Racket:Reset()
+    self.posX = self.basePosX;
+    self.posY = self.basePosY;
 end
 
 function Racket:Move(direction, deltaTime)
