@@ -20,24 +20,6 @@ ball = Ball.Create(racket);
 
 bricks = {};
 
-function PopulateBricks(lines, columns)
-    local bricks = {}
-
-    for i=1, lines do
-        for y=1, columns do
-            local brick = Brick.Create();
-            brick.posX = y*brick.width + y*brick.margin;
-            brick.posY = i*brick.height + i*brick.margin;
-            table.insert(bricks, brick);
-            print("Pos x : "..brick.posX.." / Pos y : "..brick.posY);
-        end
-    end
-    
-    print(#bricks.." bricks added");
-
-    return bricks;
-end
-
 function love.load()
     sounds = {};
     sounds.collide = love.audio.newSource("Sounds/mur.wav", "static");
@@ -62,6 +44,7 @@ function love.update(dt)
     end
 
         -- Collisions
+            -- Racket
     if ball:IsCollidingWithRacket(racket) then
         local collPos = ball:GetRacketCollisionLocation(racket)
         if collPos >= 0 and collPos < 33 then
@@ -82,6 +65,7 @@ function love.update(dt)
         sounds.collide:play();
     end
 
+            -- Walls
     if ball:IsCollidingOnWalls() ~= 0 then
         if ball:IsCollidingOnWalls() == 1 then
             ball.movementSpeedX = -ball.movementSpeedX;
@@ -102,6 +86,28 @@ function love.update(dt)
             sounds.collide:play();
         end
     end
+            -- Bricks
+    for i=1, #bricks do
+        local colValue = ball:IsCollidingWithBrick(bricks[i]);
+        if colValue ~= 0 then
+            if bricks[i].life > 0 then
+                bricks[i]:TakeDamages(1);
+                if colValue == 1 then
+                    ball.movementSpeedX = -ball.movementSpeedX;
+                    ball:Replace(bricks[i].posX + bricks[i].width, ball.posY);
+                elseif colValue == 2 then
+                    ball.movementSpeedY = -ball.movementSpeedY;
+                    ball:Replace(ball.posX, bricks[i].posY + bricks[i].height);
+                elseif colValue == 3 then
+                    ball.movementSpeedX = -ball.movementSpeedX;
+                    ball:Replace(bricks[i].posX, ball.posY);
+                elseif colValue == 4 then
+                    ball.movementSpeedY = -ball.movementSpeedY;
+                    ball:Replace(ball.posX, bricks[i].posY);
+                end
+            end
+        end
+    end
 end
 
 function love.draw()
@@ -120,7 +126,9 @@ function love.draw()
 
     -- Bricks rendering
     for i=1, #bricks do
-        love.graphics.rectangle("fill", bricks[i].posX, bricks[i].posY, bricks[i].width, bricks[i].height);
+        if bricks[i].life > 0 then
+            love.graphics.rectangle("fill", bricks[i].posX, bricks[i].posY, bricks[i].width, bricks[i].height);
+        end
     end
 end
 
@@ -134,6 +142,24 @@ end
 function LaunchBall()
     gameState = "Playing";
     ball:ApplyDirection(racket:ScreenPlacement());
+end
+
+function PopulateBricks(lines, columns)
+    local bricks = {}
+
+    for i=1, lines do
+        for y=1, columns do
+            local brick = Brick.Create(40, 20, ball.width*2);
+            brick.posX = y*brick.width + y*brick.margin;
+            brick.posY = i*brick.height + i*brick.margin;
+            table.insert(bricks, brick);
+            --print("Pos x : "..brick.posX.." / Pos y : "..brick.posY);
+        end
+    end
+    
+    print(#bricks.." bricks added");
+
+    return bricks;
 end
 
 function ResetGame()

@@ -70,6 +70,36 @@ function Ball:IsCollidingWithRacket(racket)
     return downBallSide;
 end
 
+function Ball:IsCollidingWithBrick(brick)
+    local brickRightFacePosX = brick.posX + brick.width;
+    local brickLeftFacePosX = brick.posX;
+    local brickDownFacePosY = brick.posY + brick.height;
+    local brickUpperFacePosY = brick.posY;
+    local ballDownFacePosY = self.posY + self.height;
+    local ballUpperFacePosY = self.posY;
+    local ballLeftFacePosX = self.posX;
+    local ballRightFacePosX = self.posX + self.width;
+
+    local leftBallSide = (ballLeftFacePosX < brickRightFacePosX and ballLeftFacePosX > brickLeftFacePosX) and (ballDownFacePosY > brickUpperFacePosY and ballUpperFacePosY < brickDownFacePosY);
+    local rightBallSide = (ballRightFacePosX > brickLeftFacePosX and ballRightFacePosX < brickRightFacePosX) and (ballDownFacePosY > brickUpperFacePosY and ballUpperFacePosY < brickDownFacePosY);
+    local downBallSide = (ballDownFacePosY > brickUpperFacePosY and ballDownFacePosY < brickDownFacePosY) and (ballRightFacePosX > brickLeftFacePosX and ballLeftFacePosX < brickRightFacePosX);
+    local upperBallSide = (ballUpperFacePosY < brickDownFacePosY and ballUpperFacePosY > brickUpperFacePosY) and (ballRightFacePosX > brickLeftFacePosX and ballLeftFacePosX < brickRightFacePosX);
+
+    if leftBallSide then
+        return 1;
+    elseif upperBallSide then
+        return 2;
+    elseif rightBallSide then
+        return 3;
+    elseif downBallSide then
+        return 4;
+    else
+        return 0;
+    end
+
+    return leftBallSide or rightBallSide or downBallSide or upperBallSide;
+end
+
 function Ball:IsCollidingOnWalls()
     local ballDownFacePosY = self.posY + self.height;
     local ballUpperFacePosY = self.posY;
