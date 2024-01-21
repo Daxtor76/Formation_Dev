@@ -18,10 +18,31 @@ racket.posY = racket.posY - racket.height*3;
 
 ball = Ball.Create(racket);
 
+bricks = {};
+
+function PopulateBricks(lines, columns)
+    local bricks = {}
+
+    for i=1, lines do
+        for y=1, columns do
+            local brick = Brick.Create();
+            brick.posX = y*brick.width + y*brick.margin;
+            brick.posY = i*brick.height + i*brick.margin;
+            table.insert(bricks, brick);
+            print("Pos x : "..brick.posX.." / Pos y : "..brick.posY);
+        end
+    end
+    
+    print(#bricks.." bricks added");
+
+    return bricks;
+end
+
 function love.load()
     sounds = {};
     sounds.collide = love.audio.newSource("Sounds/mur.wav", "static");
     sounds.defeat = love.audio.newSource("Sounds/perdu.wav", "static");
+    bricks = PopulateBricks(6, 10);
 end
 
 function love.update(dt)
@@ -95,6 +116,11 @@ function love.draw()
         love.graphics.rectangle("fill", racket.posX + racket.width/2 - ball.width/2, racket.posY - ball.height, ball.width, ball.height);
     else
         love.graphics.rectangle("fill", ball.posX, ball.posY, ball.width, ball.height);
+    end
+
+    -- Bricks rendering
+    for i=1, #bricks do
+        love.graphics.rectangle("fill", bricks[i].posX, bricks[i].posY, bricks[i].width, bricks[i].height);
     end
 end
 
