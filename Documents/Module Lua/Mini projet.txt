@@ -1,0 +1,7 @@
+Pour jeudi 25/01:
+
+variable de pos
+image
+game loop
+image se déplace à l'écran (sort d'un côté et revient de l'autre)
+déplacement solo => elle fait sa vie
