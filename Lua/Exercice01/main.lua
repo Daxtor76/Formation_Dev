@@ -6,21 +6,38 @@ end
 -- Cette ligne permet d'afficher des traces dans la console pendant l'éxécution
 io.stdout:setvbuf("no")
 
-Entity = require("entity");
-Ship = require("ship");
+screenWidth = love.graphics.getWidth();
+screenHeight = love.graphics.getHeight();
 
-local myEntity = Entity:New(10, 10);
-local myEntity2 = Ship:New(200, 200);
+Ship = require("ship");
+ships = {};
 
 function love.load()
+    ships = PopulateShips(10);
 end
 
 function love.update(dt)
-    Entity:Update();
+    -- Ship movement
+    for i=1, #ships do
+        ships[i]:Move(dt);
+    end
 end
 
 function love.draw()
+    -- Ship rendering
+    for i=1, #ships do
+        love.graphics.draw(ships[i].ship, ships[i].posX + ships[i].width/2, ships[i].posY + ships[i].height/2, ships[i].rotation);
+    end
 end
 
 function love.keypressed(key)
+end
+
+function PopulateShips(amount)
+    local ships = {}
+    for i=1, amount do
+        ship = Ship:New(love.math.random(0, screenWidth), love.math.random(0, screenHeight));
+        ships[i] = ship;
+    end
+    return ships;
 end
