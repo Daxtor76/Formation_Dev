@@ -13,8 +13,8 @@ function Ship:New(posX, posY)
     tmpShip.posX = posX - tmpShip.width/2;
     tmpShip.posY = posY - tmpShip.height/2;
     tmpShip.speed = love.math.random(75, 150);
-    tmpShip.direction = love.math.random(1, 8);
-    tmpShip.rotation = ConvertAngle(tmpShip.direction * 45);
+    tmpShip.direction = love.math.random(0, 7);
+    tmpShip.rotation = ConvertAngle((tmpShip.direction + 1) * 45);
     tmpShip.timer = love.math.random(4, 10);
     tmpShip.currentTimer = tmpShip.timer;
     return tmpShip;
@@ -45,31 +45,31 @@ function Ship:IsCollidingOnWalls()
 end
 
 function Ship:Move(deltaTime)
-    if self.direction == 1 then
+    if self.direction == 0 then
         -- gauche
         self.posX = self.posX%screenWidth - self.speed * deltaTime;
-    elseif self.direction == 2 then
+    elseif self.direction == 1 then
         -- haut gauche
         self.posX = self.posX%screenWidth - self.speed * deltaTime;
         self.posY = self.posY%screenHeight - self.speed * deltaTime;
-    elseif self.direction == 3 then
+    elseif self.direction == 2 then
         -- haut
         self.posY = self.posY%screenHeight - self.speed * deltaTime;
-    elseif self.direction == 4 then
+    elseif self.direction == 3 then
         -- haut droite
         self.posX = self.posX%screenWidth + self.speed * deltaTime;
         self.posY = self.posY%screenHeight - self.speed * deltaTime;
-    elseif self.direction == 5 then
+    elseif self.direction == 4 then
         -- droite
         self.posX = self.posX%screenWidth + self.speed * deltaTime;
-    elseif self.direction == 6 then
+    elseif self.direction == 5 then
         -- bas droite
         self.posX = self.posX%screenWidth + self.speed * deltaTime;
         self.posY = self.posY%screenHeight + self.speed * deltaTime;
-    elseif self.direction == 7 then
+    elseif self.direction == 6 then
         -- bas
         self.posY = self.posY%screenHeight + self.speed * deltaTime;
-    elseif self.direction == 8 then
+    elseif self.direction == 7 then
         -- bas gauche
         self.posX = self.posX%screenWidth - self.speed * deltaTime;
         self.posY = self.posY%screenHeight + self.speed * deltaTime;

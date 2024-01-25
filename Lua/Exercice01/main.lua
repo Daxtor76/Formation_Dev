@@ -21,8 +21,8 @@ function love.update(dt)
     for i=1, #ships do
         ships[i]:Move(dt);
         if ships[i]:IsTimeToChangeDirection(dt) then
-            ships[i].direction = love.math.random(ships[i].direction%8 - 1, ships[i].direction%8 + 1);
-            ships[i].rotation = ConvertAngle(ships[i].direction * 45);
+            ships[i].direction = love.math.random((ships[i].direction - 1)%8, (ships[i].direction + 1)%8);
+            ships[i].rotation = ConvertAngle((ships[i].direction + 1) * 45);
         end
     end
 end
