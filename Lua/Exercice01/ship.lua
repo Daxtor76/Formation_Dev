@@ -12,10 +12,17 @@ function Ship:New(posX, posY)
     tmpShip.height = tmpShip.ship:getHeight();
     tmpShip.posX = posX - tmpShip.width/2;
     tmpShip.posY = posY - tmpShip.height/2;
-    tmpShip.speed = 100;
+    tmpShip.speed = love.math.random(75, 150);
     tmpShip.direction = love.math.random(1, 8);
     tmpShip.rotation = ConvertAngle(tmpShip.direction * 45);
+    tmpShip.timer = love.math.random(4, 10);
+    tmpShip.currentTimer = tmpShip.timer;
     return tmpShip;
+end
+
+function Ship:IsTimeToChangeDirection(deltaTime)
+    self.currentTimer = self.currentTimer%self.timer - deltaTime;
+    return self.currentTimer <= 0;
 end
 
 function Ship:IsCollidingOnWalls()
@@ -35,16 +42,6 @@ function Ship:IsCollidingOnWalls()
     else
         return 0;
     end
-end
-
-function Ship:Teleport(wallId)
-    self.posX = love.graphics.getWidth() - self.posX;
-    self.posY = love.graphics.getHeight() - self.posY;
-end
-
-function Ship:Replace(newPosX, newPosY)
-    self.posX = newPosX;
-    self.posY = newPosY;
 end
 
 function Ship:Move(deltaTime)
