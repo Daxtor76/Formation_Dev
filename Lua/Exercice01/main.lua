@@ -13,7 +13,7 @@ Ship = require("ship");
 ships = {};
 
 function love.load()
-    ships = PopulateShips(10);
+    ships = PopulateShips(20);
 end
 
 function love.update(dt)
@@ -30,7 +30,7 @@ end
 function love.draw()
     -- Ship rendering
     for i=1, #ships do
-        love.graphics.draw(ships[i].ship, ships[i].posX + ships[i].width/2, ships[i].posY + ships[i].height/2, ships[i].rotation, 1, 1, ships[i].width/2, ships[i].height/2);
+        love.graphics.draw(ships[i].ship, ships[i].posX, ships[i].posY, ships[i].rotation, 1, 1, ships[i].pivotPosX, ships[i].pivotPosY);
     end
 end
 
