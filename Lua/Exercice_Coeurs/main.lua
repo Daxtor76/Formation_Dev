@@ -23,14 +23,30 @@ heart.height = heart.img:getHeight();
 
 heartLeft = {};
 heartLeft.img = love.graphics.newImage("Images/heart_left.png");
-heartLeft.displayOffset = 25;
+heartLeft.displayOffsetX = 16;
+heartLeft.displayOffsetY = 25;
 heartLeft.width = heart.img:getWidth();
 heartLeft.height = heart.img:getHeight();
+heartLeft.timer = 0.4;
+heartLeft.currentTimer = heartLeft.timer;
+heartLeft.isDisplayed = true;
+
+function isTimerOver(obj, deltaTime)
+    obj.currentTimer = obj.currentTimer - deltaTime;
+    return obj.currentTimer <= 0;
+end
+function ResetTimer(obj)
+    obj.currentTimer = obj.timer;
+end
 
 function love.load()
 end
 
 function love.update(dt)
+    if dino.life == 0.5 and isTimerOver(heartLeft, dt) then
+        heartLeft.isDisplayed = not heartLeft.isDisplayed;
+        ResetTimer(heartLeft);
+    end
 end
 
 function love.draw()
@@ -40,7 +56,9 @@ function love.draw()
     end
 
     if dino.life - math.floor(dino.life) > 0 then
-        love.graphics.draw(heartLeft.img, dino.life%math.ceil(dino.maxLife) * heartLeft.width + heartLeft.displayOffset * 0.65, heartLeft.displayOffset)
+        if heartLeft.isDisplayed then
+            love.graphics.draw(heartLeft.img, dino.life%math.ceil(dino.maxLife) * heartLeft.width + heartLeft.displayOffsetX, heartLeft.displayOffsetY)
+        end
     end
 end
 
