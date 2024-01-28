@@ -13,7 +13,7 @@ Dino = require("dino");
 dinos = {};
 
 function love.load()
-    dinos = PopulateDinos(1);
+    dinos = PopulateDinos(10);
 end
 
 function love.update(dt)
