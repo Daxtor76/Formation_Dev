@@ -30,9 +30,9 @@ end
 
 function PopulateAnims()
     local anims = {};
-    local idleAnim = AnimState:New(24, 30, 0, 2, 4, "loop");
-    local runAnim = AnimState:New(24, 30, 3, 9, 7, "loop");
-    local hitAnim = AnimState:New(24, 30, 14, 16, 5, "once");
+    local idleAnim = AnimState:New(24, 30, 0, 2, 4);
+    local runAnim = AnimState:New(24, 30, 3, 9, 7);
+    local hitAnim = AnimState:New(24, 30, 14, 16, 5);
     anims[0] = idleAnim;
     anims[1] = runAnim;
     anims[2] = hitAnim;
@@ -40,7 +40,7 @@ function PopulateAnims()
     return anims;
 end
 
-function Dino:GetCurrentSpriteToDisplay()
+function Dino:GetCurrentQuadToDisplay()
     local sprite = self.anims[self.state];
     return love.graphics.newQuad((sprite.width * sprite.from) + (sprite.width * self.frame), 0, sprite.width, sprite.height, self.spritesheet);
 end
@@ -59,8 +59,6 @@ function Dino:IsAnimOver(deltaTime)
 end
 
 function Dino:ChangeState(newState)
-    self.floatFrame = 0;
-    self.frame = 0;
     if newState == "idle" or newState == 0 then
         self.state = 0;
     elseif newState == "run" or newState == 1 then
@@ -68,6 +66,8 @@ function Dino:ChangeState(newState)
     elseif newState == "hit" or newState == 2 then
         self.state = 2;
     end
+    self.floatFrame = 0;
+    self.frame = 0;
     print("Dino goes in state "..self.state);
 end
 

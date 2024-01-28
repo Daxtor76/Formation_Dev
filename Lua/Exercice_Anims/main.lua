@@ -13,13 +13,12 @@ Dino = require("dino");
 dinos = {};
 
 function love.load()
-    dinos = PopulateDinos(10);
+    dinos = PopulateDinos(1);
 end
 
 function love.update(dt)
     -- Dino movement
     for i=1, #dinos do
-        dinos[i]:UpdateAnim(dt);
         if dinos[i].state == 1 then
             dinos[i]:Move(dt);
 
@@ -29,15 +28,16 @@ function love.update(dt)
         elseif dinos[i].state == 2 then
             if dinos[i]:IsAnimOver(dt) then
                 if dinos[i]:IsCollidingOnWalls() == 1 then
-                    dinos[i]:Replace(dinos[i].width, dinos[i].posY);
                     dinos[i]:ChangeDirection(4);
+                    dinos[i]:Replace(dinos[i].width, dinos[i].posY);
                 elseif dinos[i]:IsCollidingOnWalls() == 3 then
-                    dinos[i]:Replace(screenWidth - dinos[i].width, dinos[i].posY);
                     dinos[i]:ChangeDirection(0);
+                    dinos[i]:Replace(screenWidth - dinos[i].width, dinos[i].posY);
                 end
                 dinos[i]:ChangeState("run");
             end
         end
+        dinos[i]:UpdateAnim(dt);
     end
 end
 
@@ -45,7 +45,7 @@ function love.draw()
     -- Ship rendering
     for i=1, #dinos do
         love.graphics.draw(dinos[i].spritesheet, 
-            dinos[i]:GetCurrentSpriteToDisplay(), 
+            dinos[i]:GetCurrentQuadToDisplay(), 
             dinos[i].posX, 
             dinos[i].posY, 
             0, 

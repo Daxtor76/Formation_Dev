@@ -9,7 +9,6 @@ function AnimState:New(width, height, from, to, speed, playMode)
     tmpAnimState.from = from;
     tmpAnimState.to = to;
     tmpAnimState.speed = speed;
-    tmpAnimState.playMode = playMode;
     return tmpAnimState;
 end
 
