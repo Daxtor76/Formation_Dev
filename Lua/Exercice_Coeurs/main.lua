@@ -47,6 +47,11 @@ function love.update(dt)
         heartLeft.isDisplayed = not heartLeft.isDisplayed;
         ResetTimer(heartLeft);
     end
+    -- ou 
+    --heartLeft.isDisplayed = dino.life == 0.5 and isTimerOver(heartLeft, dt);
+    --if heartLeft.isDisplayed then
+        --ResetTimer(heartLeft);
+    --end
 end
 
 function love.draw()
@@ -62,7 +67,8 @@ function love.draw()
     end
 end
 
-function love.keypressed(key)
+function love.keypressed(key, scancode)
+    print(scancode); -- Plutôt utiliser le scancode pour que le jeu soit jouable sur tous les claviers de la même façon
     if key == "space" then
         dino:ModifyLife(smallDamages);
     elseif key == "p" then

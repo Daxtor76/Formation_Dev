@@ -1,0 +1,7 @@
+Assets pierre feuille ciseaux
+Des cercles qui bougent aléatoirement
+Chaque cercle a un type pierre feuille ou ciseau
+Quand deux cercles collisionnent -> résultat du combat
+Deux types identiques qui collisionnent -> instancier un nouveau cercle du même type
+
+=> Coordonnées polaires ? Kézako ?
