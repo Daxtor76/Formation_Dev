@@ -50,7 +50,9 @@ function love.draw()
             dinos[i].posY, 
             0, 
             dinos[i].scaleX, 
-            dinos[i].scaleY);
+            dinos[i].scaleY,
+            dinos[i].pivotX,
+            dinos[i].pivotY);
     end
 end
 

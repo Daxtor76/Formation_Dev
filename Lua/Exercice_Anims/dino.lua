@@ -16,6 +16,8 @@ function Dino:New(posX, posY)
     tmpDino.direction = 4;
     tmpDino.scaleX = 1;
     tmpDino.scaleY = 1;
+    tmpDino.pivotX = tmpDino.width/2;
+    tmpDino.pivotY = tmpDino.height/2;
 
     tmpDino.anims = PopulateAnims();
     tmpDino.state = 1;
@@ -88,8 +90,8 @@ end
 function Dino:IsCollidingOnWalls()
     local downFacePosY = self.posY + self.height;
     local upperFacePosY = self.posY;
-    local leftFacePosX = self.posX - self.width;
-    local rightFacePosX = self.posX + self.width;
+    local leftFacePosX = self.posX - self.width/2;
+    local rightFacePosX = self.posX + self.width/2;
 
     if leftFacePosX < 0 then
         return 1;
