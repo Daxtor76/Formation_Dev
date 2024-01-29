@@ -38,21 +38,22 @@ function love.update(dt)
             end
         end
         dinos[i]:UpdateAnim(dt);
+        dinos[i].update(dt); -- TEST : Appelle l'update de l'instance de Dino
+
+        for key, value in pairs(dinos) do -- Récupère chaque élément d'une table et sa valeur
+            --print(key.." - "..value);
+        end
+
+        for index, value in ipairs(dinos) do -- Récupère un élément d'une table pour tous les éléments d'une table
+            print(index.." - "..value.posX);
+        end
     end
 end
 
 function love.draw()
     -- Ship rendering
     for i=1, #dinos do
-        love.graphics.draw(dinos[i].spritesheet, 
-            dinos[i]:GetCurrentQuadToDisplay(), 
-            dinos[i].posX, 
-            dinos[i].posY, 
-            0, 
-            dinos[i].scaleX, 
-            dinos[i].scaleY,
-            dinos[i].pivotX,
-            dinos[i].pivotY);
+        dinos[i].draw();
     end
 end
 

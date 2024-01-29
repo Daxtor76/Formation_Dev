@@ -19,6 +19,21 @@ function Dino:New(posX, posY)
     tmpDino.pivotX = tmpDino.width*0.5;
     tmpDino.pivotY = tmpDino.height*0.5;
 
+    tmpDino.update = function(dt)
+        print(tmpDino.posX);
+    end
+    tmpDino.draw = function()
+        love.graphics.draw(tmpDino.spritesheet, 
+            tmpDino:GetCurrentQuadToDisplay(), 
+            tmpDino.posX, 
+            tmpDino.posY, 
+            0, 
+            tmpDino.scaleX, 
+            tmpDino.scaleY,
+            tmpDino.pivotX,
+            tmpDino.pivotY);
+    end
+
     tmpDino.anims = PopulateAnims();
     tmpDino.state = 1;
     tmpDino.frame = 0;
@@ -54,10 +69,7 @@ end
 
 function Dino:IsAnimOver(deltaTime)
     local animTimer = (self.floatFrame + self.anims[self.state].speed * deltaTime)
-    if math.ceil(animTimer) > (self.anims[self.state].to - self.anims[self.state].from + 1) then
-        return true;
-    end
-    return false;
+    return math.ceil(animTimer) > (self.anims[self.state].to - self.anims[self.state].from + 1);
 end
 
 function Dino:ChangeState(newState)
