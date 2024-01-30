@@ -4,6 +4,7 @@ function Symbol:New(symbolType, name)
     local tmpSymbol = {};
     setmetatable(tmpSymbol, {__index = Symbol});
     tmpSymbol.type = symbolType;
+    tmpSymbol.enemies = tmpSymbol:GetEnemies();
     tmpSymbol.name = symbolType.."";
     tmpSymbol.img = love.graphics.newImage("Images/"..tmpSymbol.type..".png");
     tmpSymbol.width = tmpSymbol.img:getWidth();
@@ -35,8 +36,9 @@ function Symbol:New(symbolType, name)
         for key, value in pairs(symbols) do
             if tmpSymbol ~= value then
                 if tmpSymbol:IsSymbolColliding(value) then
-                    -- Ajouter ici les conditions de quel type gagne sur quel autre
-                    table.remove(symbols, key);
+                    if value.type == tmpSymbol.enemies[0] or value.type == tmpSymbol.enemies[1] then
+                        table.remove(symbols, key);
+                    end
                 end
             end
         end
@@ -56,6 +58,29 @@ function Symbol:New(symbolType, name)
     print("Create instance of Symbol of type "..tmpSymbol.type);
 
     return tmpSymbol;
+end
+
+function Symbol:GetEnemies()
+    local enemies = {};
+
+    if self.type == "Lizard" then
+        enemies[0] = "Spock";
+        enemies[1] = "Paper";
+    elseif self.type == "Paper" then
+        enemies[0] = "Rock";
+        enemies[1] = "Spock";
+    elseif self.type == "Rock" then
+        enemies[0] = "Lizard";
+        enemies[1] = "Scissors";
+    elseif self.type == "Scissors" then
+        enemies[0] = "Paper";
+        enemies[1] = "Lizard";
+    elseif self.type == "Spock" then
+        enemies[0] = "Scissors";
+        enemies[1] = "Rock";
+    end
+
+    return enemies;
 end
 
 function Symbol:IsSymbolColliding(other)
