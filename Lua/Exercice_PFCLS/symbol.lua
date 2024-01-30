@@ -1,9 +1,10 @@
 local Symbol = {};
 
-function Symbol:New(symbolType)
+function Symbol:New(symbolType, name)
     local tmpSymbol = {};
     setmetatable(tmpSymbol, {__index = Symbol});
     tmpSymbol.type = symbolType;
+    tmpSymbol.name = symbolType.."";
     tmpSymbol.img = love.graphics.newImage("Images/"..tmpSymbol.type..".png");
     tmpSymbol.width = tmpSymbol.img:getWidth();
     tmpSymbol.height = tmpSymbol.img:getHeight();
@@ -30,6 +31,15 @@ function Symbol:New(symbolType)
             tmpSymbol.speedY = -tmpSymbol.speedY;
             tmpSymbol:Replace(tmpSymbol.posX, screenHeight - tmpSymbol.height*0.5);
         end
+
+        for key, value in pairs(symbols) do
+            if tmpSymbol ~= value then
+                if tmpSymbol:IsSymbolColliding(value) then
+                    -- Ajouter ici les conditions de quel type gagne sur quel autre
+                    table.remove(symbols, key);
+                end
+            end
+        end
     end
 
     tmpSymbol.Draw = function()
@@ -46,6 +56,11 @@ function Symbol:New(symbolType)
     print("Create instance of Symbol of type "..tmpSymbol.type);
 
     return tmpSymbol;
+end
+
+function Symbol:IsSymbolColliding(other)
+    local distance = math.sqrt((self.posX - other.posX)^2 + (self.posY - other.posY)^2)
+    return distance < (self.width*0.5 + other.width*0.5)
 end
 
 function Symbol:Replace(newPosX, newPosY)
