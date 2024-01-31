@@ -36,7 +36,8 @@ function Symbol:New(symbolType, name)
         for key, value in pairs(symbols) do
             if tmpSymbol ~= value then
                 if tmpSymbol:IsSymbolColliding(value) then
-                    if value.type == tmpSymbol.enemies[0] or value.type == tmpSymbol.enemies[1] then
+                    if tmpSymbol.enemies[0] == value.type or tmpSymbol.enemies[1] == value.type then
+                        symbolsCount[value.type] = symbolsCount[value.type] - 1;
                         table.remove(symbols, key);
                     end
                 end
@@ -55,7 +56,7 @@ function Symbol:New(symbolType, name)
             tmpSymbol.pivotY);
     end
 
-    print("Create instance of Symbol of type "..tmpSymbol.type);
+    --print("Create instance of Symbol of type "..tmpSymbol.type);
 
     return tmpSymbol;
 end
