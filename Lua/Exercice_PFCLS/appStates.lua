@@ -1,0 +1,2 @@
+appState = {};
+appState.state = "Playing";

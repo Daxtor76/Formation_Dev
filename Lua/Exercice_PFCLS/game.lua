@@ -1,3 +1,4 @@
+require("appStates");
 local Symbol = require("symbol");
 
 symbols = {};
@@ -5,7 +6,6 @@ symbolsCount = {};
 
 function NewGameState()
     local game = {};
-    game.state = "Playing";
 
     game.Load = function()
         symbols = game.PopulateSymbols(5, 5, 5, 5, 5);
@@ -13,7 +13,7 @@ function NewGameState()
     end
     
     game.Update = function(dt)
-        if game.state == "Playing" then
+        if appState.state == "Playing" then
             -- Symbols update
             for index, value in ipairs(symbols) do
                 value.Update(dt);
@@ -22,9 +22,9 @@ function NewGameState()
 
         -- Check End Game conditions
         if game.IsGameFinished() then
-            game.state = "End";
+            appState.state = "End";
         else
-            game.state = "Playing";
+            appState.state = "Playing";
         end
     end
 
@@ -42,7 +42,7 @@ function NewGameState()
         end
 
         -- Winner message display
-        if game.state == "End" then
+        if appState.state == "End" then
             love.graphics.print(game.GetWinnerType().." Wins!", screenWidth*0.5, screenHeight*0.5);
         end
     end
