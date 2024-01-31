@@ -6,12 +6,14 @@ end
 -- Cette ligne permet d'afficher des traces dans la console pendant l'éxécution
 io.stdout:setvbuf("no")
 
+require("gameStates");
+
 screenWidth = love.graphics.getWidth();
 screenHeight = love.graphics.getHeight();
 
-require("gameStates");
 local gameState = NewGameState();
 local Symbol = require("symbol");
+
 symbols = {};
 
 function love.load()
@@ -20,24 +22,11 @@ function love.load()
 end
 
 function love.update(dt)
-    -- Symbols update
-    for index, value in ipairs(symbols) do
-        value.Update(dt);
-    end
+    gameState.Update(dt);
 end
 
 function love.draw()
-    -- Symbols rendering
-    for index, value in ipairs(symbols) do
-        value.Draw();
-    end
-
-    -- Display survivors counts
-    local scoreDisplayOffset = 0
-    for key, value in pairs(symbolsCount) do
-        scoreDisplayOffset = scoreDisplayOffset + 15;
-        love.graphics.print(key.." : "..value, 10, 10 + scoreDisplayOffset);
-    end
+    gameState.Draw();
 end
 
 function love.keypressed(key)
