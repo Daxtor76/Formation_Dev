@@ -103,5 +103,12 @@ function NewGameState()
         return survivorsTypeCount == 1;
     end
 
+    game.Reset = function()
+        symbols = {};
+        symbolsCount = {};
+        game.Load();
+        appState.state = "Playing";
+    end
+
     return game;
 end
