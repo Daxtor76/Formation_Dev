@@ -11,6 +11,10 @@ function Hero:New(x, y)
 
     tmpHero.posX = x;
     tmpHero.posY = y;
+    tmpHero.width = 24;
+    tmpHero.height = 24;
+    tmpHero.pivotX = tmpHero.width*0.5;
+    tmpHero.pivotY = tmpHero.height*0.5;
 
     tmpHero.spritesheet = love.graphics.newImage("images/player/character.png");
     tmpHero.anims = PopulateAnims();
@@ -27,32 +31,66 @@ function Hero:Draw()
         self.rotation, 
         self.scaleX, 
         self.scaleY, 
-        0, 
-        0
+        self.pivotX, 
+        self.pivotY
     );
+end
+
+function Hero:UpdateDirectionByKeysPressed()
+    if love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) or 
+        love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) or 
+        love.keyboard.isDown("d") or 
+        love.keyboard.isDown("s") then
+            self:ChangeState("run");
+    end
+
+    if love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) and love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) then
+        self.direction = 2;
+    elseif love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) and love.keyboard.isDown("d") then
+        self.direction = 4;
+    elseif love.keyboard.isDown("d") and love.keyboard.isDown("s") then
+        self.direction = 6;
+    elseif love.keyboard.isDown("s") and love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) then
+        self.direction = 8;
+    elseif love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) then
+        self.direction = 1;
+    elseif love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) then
+        self.direction = 3;
+    elseif love.keyboard.isDown("d") then
+        self.direction = 5;
+    elseif love.keyboard.isDown("s") then
+        self.direction = 7;
+    else
+        self:ChangeState("idle");
+        self.direction = math.floor((self.direction)/(self.state+1));
+    end
 end
 
 function PopulateAnims()
     local anims = {};
-    local idleAnim = Anim:New(24, 30, 0, 2, 10);
-    anims[0] = idleAnim;
+    local idleAnims = {};
+    local runAnims = {};
+    anims[0] = idleAnims;
+    anims[1] = runAnims;
+
+    local idleBottomAnim = Anim:New(24, 24, 0, 3, 5);
+    local idleLeftAnim = Anim:New(24, 24, 4, 7, 5);
+    local idleRightAnim = Anim:New(24, 24, 8, 11, 5);
+    local idleTopAnim = Anim:New(24, 24, 12, 15, 5);
+    local runBottomAnim = Anim:New(24, 24, 16, 21, 8);
+    local runLeftAnim = Anim:New(24, 24, 22, 27, 8);
+    local runRightAnim = Anim:New(24, 24, 28, 33, 8);
+    local runTopAnim = Anim:New(24, 24, 34, 39, 8);
+    anims[0][0] = idleLeftAnim;
+    anims[0][1] = idleTopAnim;
+    anims[0][2] = idleRightAnim;
+    anims[0][3] = idleBottomAnim;
+    anims[1][0] = runLeftAnim;
+    anims[1][1] = runTopAnim;
+    anims[1][2] = runRightAnim;
+    anims[1][3] = runBottomAnim;
 
     return anims;
-end
-
-function Hero:GetCurrentQuadToDisplay()
-    local sprite = self.anims[self.state];
-    return love.graphics.newQuad((sprite.width * sprite.from) + (sprite.width * self.frame), 0, sprite.width, sprite.height, self.spritesheet);
-end
-
-function Hero:UpdateAnim(deltaTime)
-    self.floatFrame = (self.floatFrame + self.anims[self.state].speed * deltaTime)%(self.anims[self.state].to - self.anims[self.state].from + 1);
-    self.frame = math.floor(self.floatFrame);
-end
-
-function Hero:IsAnimOver(deltaTime)
-    local animTimer = (self.floatFrame + self.anims[self.state].speed * deltaTime)
-    return math.ceil(animTimer) > (self.anims[self.state].to - self.anims[self.state].from + 1);
 end
 
 return Hero;

@@ -8,13 +8,17 @@ io.stdout:setvbuf("no")
 
 require("entities/_entity");
 local Hero = require("entities/hero");
-local hero = Hero:New(10, 10);
+local hero = Hero:New(screenWidth*0.5, screenHeight*0.5);
 
 function love.load()
 end
 
 function love.update(dt)
+    hero:UpdateDirectionByKeysPressed();
     hero:UpdateAnim(dt);
+    if hero.state == 1 then
+        hero:Move(dt);
+    end
 end
 
 function love.draw()
@@ -22,5 +26,4 @@ function love.draw()
 end
 
 function love.keypressed(key)
-    print(key);
 end
