@@ -10,25 +10,27 @@ function Weapon:New(x, y)
     setmetatable(tmpWeapon, {__index = Weapon});
 
     tmpWeapon.posX = x;
-    tmpWeapon.posY = y;
-    tmpWeapon.width = 24;
-    tmpWeapon.height = 24;
+    tmpWeapon.posY = y + 20;
+    tmpWeapon.width = 50;
+    tmpWeapon.height = 50;
     tmpWeapon.pivotX = tmpWeapon.width*0.5;
     tmpWeapon.pivotY = tmpWeapon.height*0.5;
 
-    tmpWeapon.spritesheet = love.graphics.newImage("images/player/Bow.png");
-    tmpWeapon.anims = PopulateAnims();
+    tmpWeapon.spritesheet = love.graphics.newImage("images/player/bow.png");
+    tmpWeapon.anims = tmpWeapon:PopulateAnims();
+    tmpWeapon.renderLayer = 0;
 
     return tmpWeapon;
 end
 
 function Weapon:Draw()
+    local angle = math.atan2(GetMousePos()["y"] - self.posY, GetMousePos()["x"] - self.posX) - math.pi*0.5;
     love.graphics.draw(
         self.spritesheet,
         self:GetCurrentQuadToDisplay(self.anims[self.state][0]),
         self.posX,
         self.posY,
-        self.rotation,
+        angle,
         self.scaleX,
         self.scaleY,
         self.pivotX,
@@ -36,12 +38,12 @@ function Weapon:Draw()
     );
 end
 
-function PopulateAnims()
+function Weapon:PopulateAnims()
     local anims = {};
     local idleAnims = {};
     anims[0] = idleAnims;
 
-    local idleAnim = Anim:New(24, 24, 0, 0, 1);
+    local idleAnim = Anim:New(self.width, self.height, 0, 0, 1);
     anims[0][0] = idleAnim;
 
     return anims;

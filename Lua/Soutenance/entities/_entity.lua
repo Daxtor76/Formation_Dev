@@ -25,6 +25,7 @@ function _Entity:New(name)
     tmpEntity.state = 0;
     tmpEntity.frame = 0;
     tmpEntity.floatFrame = 0;
+    tmpEntity.renderLayer = 0;
 
     return tmpEntity;
 end
@@ -53,6 +54,10 @@ function _Entity:IsAnimOver(deltaTime)
     return math.ceil(animTimer) > (self.anims[self.state][animId].to - self.anims[self.state][animId].from + 1);
 end
 
+function _Entity:ChangeRenderLayer(newLayer)
+    self.renderLayer = newLayer;
+end
+
 function _Entity:ChangeState(newState)
     if newState == "idle" or newState == 0 then
         self.state = 0;
@@ -79,6 +84,11 @@ function _Entity:IsCollidingOnWalls()
     else
         return 0;
     end
+end
+
+function _Entity:Replace(newPosX, newPosY)
+    self.posX = newPosX;
+    self.posY = newPosY;
 end
 
 function _Entity:Move(deltaTime)

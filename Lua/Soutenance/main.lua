@@ -9,18 +9,22 @@ io.stdout:setvbuf("no")
 require("utils");
 require("entities/_entity");
 local Hero = require("entities/hero");
---local Weapon = require("entities/weapon");
-local hero = Hero:New(screenWidth*0.5, screenHeight*0.5);
---local weapon = Weapon:New(hero.posX, hero.posY);
+local Weapon = require("entities/weapon");
+hero = Hero:New(screenWidth*0.5, screenHeight*0.5);
+weapon = Weapon:New(hero.posX, hero.posY);
+
+renderList = {};
+renderList[0] = hero;
+renderList[1] = weapon;
 
 function love.load()
 end
 
 function love.update(dt)
-    -- Some maths / Clean it later
-    --x = GetDistance(GetMousePos()["x"], GetMousePos()["y"], hero.posX, hero.posY) * math.cos(angle);
-    --y = GetDistance(GetMousePos()["x"], GetMousePos()["y"], hero.posX, hero.posY) * math.sin(angle);
+    -- Weapon Controls
+    weapon:Replace(hero.posX, hero.posY);
 
+    -- Hero Controls
     hero:UpdateCharacterDirectionByMousePos();
     
     if (love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) or 
@@ -37,21 +41,23 @@ function love.update(dt)
         end
     end
 
-    hero:UpdateAnim(dt, hero.anims[hero.state][math.floor((hero.characterDirection)/2)%4]);
-    --weapon:UpdateAnim(dt, weapon.anims[weapon.state][0]);
+    -- Hero Movement
     if hero.state == 1 then
         hero:Move(dt);
     end
+
+    -- Animations
+    hero:UpdateAnim(dt, hero.anims[hero.state][math.floor((hero.characterDirection)/2)%4]);
+    weapon:UpdateAnim(dt, weapon.anims[weapon.state][0]);
 end
 
 function love.draw()
-    hero:Draw();
-    --weapon:Draw();
-    --love.graphics.line(hero.posX, hero.posY, GetMousePos()["x"], GetMousePos()["y"]);
-end
-
-function love.keypressed(key)
-end
-
-function love.keyreleased(key)
+    -- Render entities layer by layer (0 = the deepest)
+    for y = 0, 1 do
+        for i=0, #renderList do
+            if renderList[i].renderLayer == y then
+                renderList[i]:Draw();
+            end
+        end
+    end
 end

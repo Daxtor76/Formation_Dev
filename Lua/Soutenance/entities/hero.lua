@@ -17,7 +17,8 @@ function Hero:New(x, y)
     tmpHero.pivotY = tmpHero.height*0.5;
 
     tmpHero.spritesheet = love.graphics.newImage("images/player/character.png");
-    tmpHero.anims = PopulateAnims();
+    tmpHero.anims = tmpHero:PopulateAnims();
+    tmpHero.renderLayer = 1;
 
     return tmpHero;
 end
@@ -39,6 +40,12 @@ end
 function Hero:UpdateCharacterDirectionByMousePos()
     local angle = math.atan2(self.posY - GetMousePos()["y"], self.posX - GetMousePos()["x"]);
     self.characterDirection = math.floor(((math.deg(angle)+360)%360)/45) + 1;
+    
+    if self.characterDirection >= 1 and self.characterDirection <= 4 then
+        self:ChangeRenderLayer(1);
+    else
+        self:ChangeRenderLayer(0);
+    end
 end
 
 function Hero:UpdateMovementDirectionByKeysPressed()
@@ -61,21 +68,21 @@ function Hero:UpdateMovementDirectionByKeysPressed()
     end
 end
 
-function PopulateAnims()
+function Hero:PopulateAnims()
     local anims = {};
     local idleAnims = {};
     local runAnims = {};
     anims[0] = idleAnims;
     anims[1] = runAnims;
 
-    local idleBottomAnim = Anim:New(24, 24, 0, 3, 5);
-    local idleLeftAnim = Anim:New(24, 24, 4, 7, 5);
-    local idleRightAnim = Anim:New(24, 24, 8, 11, 5);
-    local idleTopAnim = Anim:New(24, 24, 12, 15, 5);
-    local runBottomAnim = Anim:New(24, 24, 16, 21, 8);
-    local runLeftAnim = Anim:New(24, 24, 22, 27, 8);
-    local runRightAnim = Anim:New(24, 24, 28, 33, 8);
-    local runTopAnim = Anim:New(24, 24, 34, 39, 8);
+    local idleBottomAnim = Anim:New(self.width, self.height, 0, 3, 5);
+    local idleLeftAnim = Anim:New(self.width, self.height, 4, 7, 5);
+    local idleRightAnim = Anim:New(self.width, self.height, 8, 11, 5);
+    local idleTopAnim = Anim:New(self.width, self.height, 12, 15, 5);
+    local runBottomAnim = Anim:New(self.width, self.height, 16, 21, 8);
+    local runLeftAnim = Anim:New(self.width, self.height, 22, 27, 8);
+    local runRightAnim = Anim:New(self.width, self.height, 28, 33, 8);
+    local runTopAnim = Anim:New(self.width, self.height, 34, 39, 8);
     anims[0][0] = idleLeftAnim;
     anims[0][1] = idleTopAnim;
     anims[0][2] = idleRightAnim;
