@@ -73,13 +73,15 @@ function _Entity:IsCollidingOnWalls()
     local leftFacePosX = self.posX - self.width;
     local rightFacePosX = self.posX + self.width;
 
-    if leftFacePosX < 0 then
+    -- TO DO : Add Corners detection to make the background move diagonally
+
+    if leftFacePosX < 100 then
         return 1;
-    elseif upperFacePosY < 0 then
+    elseif upperFacePosY < 100 then
         return 2;
-    elseif rightFacePosX > love.graphics.getWidth() then
+    elseif rightFacePosX > love.graphics.getWidth() - 100 then
         return 3;
-    elseif downFacePosY > love.graphics.getHeight() then
+    elseif downFacePosY > love.graphics.getHeight() - 100 then
         return 4;
     else
         return 0;

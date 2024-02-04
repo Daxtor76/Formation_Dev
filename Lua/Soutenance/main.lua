@@ -18,6 +18,10 @@ renderList[0] = hero;
 renderList[1] = weapon;
 
 function love.load()
+    bg = {};
+    bg.img = love.graphics.newImage("images/background/Texture/TX Tileset Grass.png");
+    bg.posX = 0;
+    bg.posY = 0;
 end
 
 function love.update(dt)
@@ -43,7 +47,17 @@ function love.update(dt)
 
     -- Hero Movement
     if hero.state == 1 then
-        hero:Move(dt);
+        if hero:IsCollidingOnWalls() == 1 and (hero.movementDirection == 8 or hero.movementDirection == 1 or hero.movementDirection == 2) then
+            bg.posX = bg.posX + 500 * dt;
+        elseif hero:IsCollidingOnWalls() == 2 and (hero.movementDirection == 2 or hero.movementDirection == 3 or hero.movementDirection == 4) then
+            bg.posY = bg.posY + 500 * dt;
+        elseif hero:IsCollidingOnWalls() == 3 and (hero.movementDirection == 4 or hero.movementDirection == 5 or hero.movementDirection == 6) then
+            bg.posX = bg.posX - 500 * dt;
+        elseif hero:IsCollidingOnWalls() == 4 and (hero.movementDirection == 6 or hero.movementDirection == 7 or hero.movementDirection == 8) then
+            bg.posY = bg.posY - 500 * dt;
+        else
+            hero:Move(dt);
+        end
     end
 
     -- Animations
@@ -52,6 +66,8 @@ function love.update(dt)
 end
 
 function love.draw()
+
+    love.graphics.draw(bg.img, bg.posX, bg.posY, 0, 10, 10);
     -- Render entities layer by layer (0 = the deepest)
     for y = 0, 1 do
         for i=0, #renderList do
