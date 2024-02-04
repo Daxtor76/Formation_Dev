@@ -37,13 +37,6 @@ function Hero:Draw()
 end
 
 function Hero:UpdateDirectionByKeysPressed()
-    if love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) or 
-        love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) or 
-        love.keyboard.isDown("d") or 
-        love.keyboard.isDown("s") then
-            self:ChangeState("run");
-    end
-
     if love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) and love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) then
         self.direction = 2;
     elseif love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) and love.keyboard.isDown("d") then
@@ -60,9 +53,6 @@ function Hero:UpdateDirectionByKeysPressed()
         self.direction = 5;
     elseif love.keyboard.isDown("s") then
         self.direction = 7;
-    else
-        self:ChangeState("idle");
-        self.direction = math.floor((self.direction)/(self.state+1));
     end
 end
 

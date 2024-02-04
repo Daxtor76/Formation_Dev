@@ -40,19 +40,19 @@ function _Entity:Draw()
 end
 
 function _Entity:GetCurrentQuadToDisplay()
-    local animId = math.floor((self.direction)/(self.state+1));
+    local animId = math.floor((self.direction)/2)%4;
     local sprite = self.anims[self.state][animId];
     return love.graphics.newQuad((sprite.width * sprite.from) + (sprite.width * self.frame), 0, sprite.width, sprite.height, self.spritesheet);
 end
 
 function _Entity:UpdateAnim(deltaTime)
-    local animId = math.floor((self.direction)/(self.state+1));
+    local animId = math.floor((self.direction)/2)%4;
     self.floatFrame = (self.floatFrame + self.anims[self.state][animId].speed * deltaTime)%(self.anims[self.state][animId].to - self.anims[self.state][animId].from + 1);
     self.frame = math.floor(self.floatFrame);
 end
 
 function _Entity:IsAnimOver(deltaTime)
-    local animId = math.floor((self.direction)/(self.state+1));
+    local animId = math.floor((self.direction)/2)%4;
     local animTimer = (self.floatFrame + self.anims[self.state][animId].speed * deltaTime)
     return math.ceil(animTimer) > (self.anims[self.state][animId].to - self.anims[self.state][animId].from + 1);
 end
@@ -63,8 +63,6 @@ function _Entity:ChangeState(newState)
     elseif newState == "run" or newState == 1 then
         self.state = 1;
     end
-    --self.floatFrame = 0;
-    --self.frame = 0;
     print("Entity goes in state "..self.state);
 end
 
