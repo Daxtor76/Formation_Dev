@@ -15,12 +15,26 @@ function love.load()
 end
 
 function love.update(dt)
-    angle = math.atan2(hero.posY - GetMousePos()["y"], hero.posX - GetMousePos()["x"])
-    x = GetDistance(GetMousePos()["x"], GetMousePos()["y"], hero.posX, hero.posY) * math.cos(angle);
-    y = GetDistance(GetMousePos()["x"], GetMousePos()["y"], hero.posX, hero.posY) * math.sin(angle);
-    --print(x.."/"..y);
-    hero.direction = math.floor(((math.deg(angle)+360)%360)/45) + 1;
-    -- = math.abs(math.floor(test)*2)
+    -- Some maths / Clean it later
+    --x = GetDistance(GetMousePos()["x"], GetMousePos()["y"], hero.posX, hero.posY) * math.cos(angle);
+    --y = GetDistance(GetMousePos()["x"], GetMousePos()["y"], hero.posX, hero.posY) * math.sin(angle);
+
+    hero:UpdateCharacterDirectionByMousePos();
+    
+    if (love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) or 
+        love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) or 
+        love.keyboard.isDown("d") or 
+        love.keyboard.isDown("s")) then 
+        hero:UpdateMovementDirectionByKeysPressed();
+        if hero.state ~= 1 then
+            hero:ChangeState("run");
+        end
+    else
+        if hero.state ~= 0 then
+            hero:ChangeState("idle");
+        end
+    end
+
     hero:UpdateAnim(dt);
     if hero.state == 1 then
         hero:Move(dt);
@@ -33,13 +47,6 @@ function love.draw()
 end
 
 function love.keypressed(key)
-    if (love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) or 
-        love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) or 
-        love.keyboard.isDown("d") or 
-        love.keyboard.isDown("s")) and hero.state ~= 1 then
-            hero:ChangeState("run");
-            hero:UpdateDirectionByKeysPressed();
-    end
 end
 
 function love.keyreleased(key)

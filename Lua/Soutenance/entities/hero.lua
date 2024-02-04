@@ -17,6 +17,7 @@ function Hero:New(x, y)
     tmpHero.pivotY = tmpHero.height*0.5;
 
     tmpHero.spritesheet = love.graphics.newImage("images/player/character.png");
+    tmpHero.weapon = love.graphics.newImage("images/player/Bow.png");
     tmpHero.anims = PopulateAnims();
 
     return tmpHero;
@@ -34,25 +35,40 @@ function Hero:Draw()
         self.pivotX, 
         self.pivotY
     );
+    love.graphics.draw(
+        self.weapon,
+        self.posX,
+        self.posY,
+        self.rotation,
+        self.scaleX,
+        self.scaleY,
+        self.pivotX,
+        self.pivotY
+    );
 end
 
-function Hero:UpdateDirectionByKeysPressed()
+function Hero:UpdateCharacterDirectionByMousePos()
+    local angle = math.atan2(self.posY - GetMousePos()["y"], self.posX - GetMousePos()["x"]);
+    self.characterDirection = math.floor(((math.deg(angle)+360)%360)/45) + 1;
+end
+
+function Hero:UpdateMovementDirectionByKeysPressed()
     if love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) and love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) then
-        self.direction = 2;
+        self.movementDirection = 2;
     elseif love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) and love.keyboard.isDown("d") then
-        self.direction = 4;
+        self.movementDirection = 4;
     elseif love.keyboard.isDown("d") and love.keyboard.isDown("s") then
-        self.direction = 6;
+        self.movementDirection = 6;
     elseif love.keyboard.isDown("s") and love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) then
-        self.direction = 8;
+        self.movementDirection = 8;
     elseif love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) then
-        self.direction = 1;
+        self.movementDirection = 1;
     elseif love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) then
-        self.direction = 3;
+        self.movementDirection = 3;
     elseif love.keyboard.isDown("d") then
-        self.direction = 5;
+        self.movementDirection = 5;
     elseif love.keyboard.isDown("s") then
-        self.direction = 7;
+        self.movementDirection = 7;
     end
 end
 
