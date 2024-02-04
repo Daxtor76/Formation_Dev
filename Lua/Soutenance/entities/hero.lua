@@ -5,8 +5,8 @@ local Hero = {};
 setmetatable(Hero, {__index = _Entity});
 
 function Hero:New(x, y)
-    print("Création d'une instance de Hero");
-    local tmpHero = _Entity:New();
+    local tmpHero = _Entity:New("Hero");
+    print("Création d'une instance de "..tmpHero.name);
     setmetatable(tmpHero, {__index = Hero});
 
     tmpHero.posX = x;
@@ -17,7 +17,6 @@ function Hero:New(x, y)
     tmpHero.pivotY = tmpHero.height*0.5;
 
     tmpHero.spritesheet = love.graphics.newImage("images/player/character.png");
-    tmpHero.weapon = love.graphics.newImage("images/player/Bow.png");
     tmpHero.anims = PopulateAnims();
 
     return tmpHero;
@@ -26,23 +25,13 @@ end
 function Hero:Draw()
     love.graphics.draw(
         self.spritesheet,
-        self:GetCurrentQuadToDisplay(),
+        self:GetCurrentQuadToDisplay(self.anims[self.state][math.floor((self.characterDirection)/2)%4]),
         self.posX, 
         self.posY, 
         self.rotation, 
         self.scaleX, 
         self.scaleY, 
         self.pivotX, 
-        self.pivotY
-    );
-    love.graphics.draw(
-        self.weapon,
-        self.posX,
-        self.posY,
-        self.rotation,
-        self.scaleX,
-        self.scaleY,
-        self.pivotX,
         self.pivotY
     );
 end

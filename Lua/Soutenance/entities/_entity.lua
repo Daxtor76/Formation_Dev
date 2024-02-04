@@ -2,11 +2,11 @@ require("utils");
 local _Entity = {};
 Anim = require("animation/anim");
 
-function _Entity:New()
-    print("Création d'une instance de Entity");
+function _Entity:New(name)
     local tmpEntity = {};
     setmetatable(tmpEntity, _Entity);
 
+    tmpEntity.name = name;
     tmpEntity.posX = 10;
     tmpEntity.posY = 10;
     tmpEntity.width = 0;
@@ -38,15 +38,12 @@ end
 function _Entity:Draw()
 end
 
-function _Entity:GetCurrentQuadToDisplay()
-    local animId = math.floor((self.characterDirection)/2)%4;
-    local sprite = self.anims[self.state][animId];
-    return love.graphics.newQuad((sprite.width * sprite.from) + (sprite.width * self.frame), 0, sprite.width, sprite.height, self.spritesheet);
+function _Entity:GetCurrentQuadToDisplay(animation)
+    return love.graphics.newQuad((animation.width * animation.from) + (animation.width * self.frame), 0, animation.width, animation.height, self.spritesheet);
 end
 
-function _Entity:UpdateAnim(deltaTime)
-    local animId = math.floor((self.characterDirection)/2)%4;
-    self.floatFrame = (self.floatFrame + self.anims[self.state][animId].speed * deltaTime)%(self.anims[self.state][animId].to - self.anims[self.state][animId].from + 1);
+function _Entity:UpdateAnim(deltaTime, animation)
+    self.floatFrame = (self.floatFrame + animation.speed * deltaTime)%(animation.to - animation.from + 1);
     self.frame = math.floor(self.floatFrame);
 end
 

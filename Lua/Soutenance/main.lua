@@ -9,7 +9,9 @@ io.stdout:setvbuf("no")
 require("utils");
 require("entities/_entity");
 local Hero = require("entities/hero");
+--local Weapon = require("entities/weapon");
 local hero = Hero:New(screenWidth*0.5, screenHeight*0.5);
+--local weapon = Weapon:New(hero.posX, hero.posY);
 
 function love.load()
 end
@@ -35,7 +37,8 @@ function love.update(dt)
         end
     end
 
-    hero:UpdateAnim(dt);
+    hero:UpdateAnim(dt, hero.anims[hero.state][math.floor((hero.characterDirection)/2)%4]);
+    --weapon:UpdateAnim(dt, weapon.anims[weapon.state][0]);
     if hero.state == 1 then
         hero:Move(dt);
     end
@@ -43,6 +46,7 @@ end
 
 function love.draw()
     hero:Draw();
+    --weapon:Draw();
     --love.graphics.line(hero.posX, hero.posY, GetMousePos()["x"], GetMousePos()["y"]);
 end
 

@@ -1,5 +1,3 @@
--- Les fonctions de calcul
-
 screenWidth = love.graphics.getWidth();
 screenHeight = love.graphics.getHeight();
 
