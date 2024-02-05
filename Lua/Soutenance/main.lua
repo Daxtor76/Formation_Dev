@@ -8,6 +8,10 @@ io.stdout:setvbuf("no")
 
 -- TO DO: Charger tous les require dans main car si existe à plusieurs endroits, ne sera chargé qu'une fois tout pareil
 require("utils");
+SceneController = require("scenes/sceneController")
+require("scenes/menuScene")
+require("scenes/gameScene")
+
 require("entities/_entity");
 local Hero = require("entities/hero");
 local Weapon = require("entities/weapon");
@@ -29,15 +33,9 @@ function love.load()
     bg.posY = 0;
 end
 
--- TO DO: Ajouter un ScenesController.lua qui va gérer les états du jeu
--- une table qui contient toutes les scènes (états du jeu)
--- qui contient la scène courante
--- une fonction pour changer de scène
--- une fonction pour charger les dépendances nécessaires
--- une fonction updateCurrentScene(dt)
--- une fonction drawCurrentScene()
-
 function love.update(dt)
+    SceneController.SetCurrentScene("toto");
+    SceneController.UpdateCurrentScene();
     -- Weapon Controls
     weapon:Replace(hero.posX, hero.posY);
 
