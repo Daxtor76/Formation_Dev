@@ -14,7 +14,7 @@ local Weapon = require("entities/weapon");
 hero = Hero:New(screenWidth*0.5, screenHeight*0.5);
 weapon = Weapon:New(hero.posX, hero.posY);
 
-local scrollSpeed = 500;
+local scrollSpeed = 350;
 local scrollDist = 150;
 
 local renderList = {};
@@ -71,7 +71,9 @@ function love.update(dt)
 end
 
 function love.draw()
+    -- BG
     love.graphics.draw(bg.img, bg.posX, bg.posY, 0, 10, 10);
+
     -- Render entities layer by layer (0 = the deepest)
     for y = 0, 1 do
         for i=0, #renderList do
@@ -80,4 +82,7 @@ function love.draw()
             end
         end
     end
+
+    -- Crosshair
+    ReplaceMouseCrosshair(hero.crosshair);
 end

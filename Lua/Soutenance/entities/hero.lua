@@ -16,7 +16,10 @@ function Hero:New(x, y)
     tmpHero.pivotX = tmpHero.width*0.5;
     tmpHero.pivotY = tmpHero.height*0.5;
 
+    tmpHero.speed = 150;
+
     tmpHero.spritesheet = love.graphics.newImage("images/player/character.png");
+    tmpHero.crosshair = love.graphics.newImage("images/player/crosshair.png");
     tmpHero.anims = tmpHero:PopulateAnims();
     tmpHero.renderLayer = 1;
 
