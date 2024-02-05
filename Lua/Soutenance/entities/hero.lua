@@ -51,6 +51,8 @@ function Hero:UpdateCharacterDirectionByMousePos()
     end
 end
 
+    -- TO DO : Refaire avec des vecteurs
+    -- Besoin de les coder => https://www.gamecodeur.fr/atelier-les-vecteurs/
 function Hero:UpdateMovementDirectionByKeysPressed()
     if love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) and love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) then
         self.movementDirection = 2;

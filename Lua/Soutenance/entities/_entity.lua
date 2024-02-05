@@ -92,6 +92,10 @@ function _Entity:Replace(newPosX, newPosY)
 end
 
 function _Entity:Move(deltaTime)
+
+    -- TO DO : Refaire avec des vecteurs
+    -- Besoin de les coder => https://www.gamecodeur.fr/atelier-les-vecteurs/
+    
     if self.movementDirection == 1 then
         -- left
         self.posX = self.posX%screenWidth - self.speed * deltaTime;
