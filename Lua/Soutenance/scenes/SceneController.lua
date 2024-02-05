@@ -19,6 +19,8 @@ end
 sceneController.SetCurrentScene = function(sceneName)
     if sceneController.scenes[sceneName] ~= nil then
         sceneController.currentScene = sceneController.scenes[sceneName];
+    else
+        error("The scene does not exist.");
     end
 end
 
