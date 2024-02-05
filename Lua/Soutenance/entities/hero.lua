@@ -38,7 +38,7 @@ function Hero:Draw()
 end
 
 function Hero:UpdateCharacterDirectionByMousePos()
-    local angle = math.atan2(self.posY - GetMousePos()["y"], self.posX - GetMousePos()["x"]);
+    local angle = math.atan2(self.posY - GetMousePos().y, self.posX - GetMousePos().x);
     self.characterDirection = math.floor(((math.deg(angle)+360)%360)/45) + 1;
     
     if self.characterDirection >= 1 and self.characterDirection <= 4 then

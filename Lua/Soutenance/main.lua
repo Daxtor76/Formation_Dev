@@ -10,10 +10,14 @@ require("utils");
 require("entities/_entity");
 local Hero = require("entities/hero");
 local Weapon = require("entities/weapon");
+
 hero = Hero:New(screenWidth*0.5, screenHeight*0.5);
 weapon = Weapon:New(hero.posX, hero.posY);
 
-renderList = {};
+local scrollSpeed = 500;
+local scrollDist = 150;
+
+local renderList = {};
 renderList[0] = hero;
 renderList[1] = weapon;
 
@@ -31,11 +35,12 @@ function love.update(dt)
     -- Hero Controls
     hero:UpdateCharacterDirectionByMousePos();
     
+    -- Hero states machine
     if (love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) or 
         love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) or 
         love.keyboard.isDown("d") or 
         love.keyboard.isDown("s")) then 
-        hero:UpdateMovementDirectionByKeysPressed();
+        hero:UpdateMovementDirectionByKeysPressed(dt);
         if hero.state ~= 1 then
             hero:ChangeState("run");
         end
@@ -45,18 +50,18 @@ function love.update(dt)
         end
     end
 
-    -- Hero Movement
+    -- Hero Movement & Collision with camera bounds
     if hero.state == 1 then
-        if hero:IsCollidingOnWalls() == 1 and (hero.movementDirection == 8 or hero.movementDirection == 1 or hero.movementDirection == 2) then
-            bg.posX = bg.posX + 500 * dt;
-        elseif hero:IsCollidingOnWalls() == 2 and (hero.movementDirection == 2 or hero.movementDirection == 3 or hero.movementDirection == 4) then
-            bg.posY = bg.posY + 500 * dt;
-        elseif hero:IsCollidingOnWalls() == 3 and (hero.movementDirection == 4 or hero.movementDirection == 5 or hero.movementDirection == 6) then
-            bg.posX = bg.posX - 500 * dt;
-        elseif hero:IsCollidingOnWalls() == 4 and (hero.movementDirection == 6 or hero.movementDirection == 7 or hero.movementDirection == 8) then
-            bg.posY = bg.posY - 500 * dt;
-        else
-            hero:Move(dt);
+        hero:Move(dt);
+        if GetDistance(hero.posX, hero.posY, screenWidth*0.5, screenHeight*0.5) > scrollDist then
+            -- Move background so that the hero moves in the world
+            bg.posX = bg.posX - scrollSpeed * dt * math.cos(math.atan2(hero.posY - screenHeight*0.5, hero.posX - screenWidth*0.5));
+            bg.posY = bg.posY - scrollSpeed * dt * math.sin(math.atan2(hero.posY - screenHeight*0.5, hero.posX - screenWidth*0.5));
+            
+            -- Replace hero so that he cannot go outside of the camera bounds
+            local newHeroPosX = screenWidth*0.5 + (scrollDist) * math.cos(math.atan2(hero.posY - screenHeight*0.5, hero.posX - screenWidth*0.5));
+            local newHeroPosY = screenHeight*0.5 + (scrollDist) * math.sin(math.atan2(hero.posY - screenHeight*0.5, hero.posX - screenWidth*0.5));
+            hero:Replace(newHeroPosX, newHeroPosY);
         end
     end
 
@@ -66,7 +71,6 @@ function love.update(dt)
 end
 
 function love.draw()
-
     love.graphics.draw(bg.img, bg.posX, bg.posY, 0, 10, 10);
     -- Render entities layer by layer (0 = the deepest)
     for y = 0, 1 do

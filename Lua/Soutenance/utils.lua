@@ -3,8 +3,8 @@ screenHeight = love.graphics.getHeight();
 
 function GetMousePos()
     local mousePos = {};
-    mousePos["x"] = love.mouse.getX();
-    mousePos["y"] = love.mouse.getY();
+    mousePos.x = love.mouse.getX();
+    mousePos.y = love.mouse.getY();
     return mousePos;
 end
 

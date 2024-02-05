@@ -24,7 +24,7 @@ function Weapon:New(x, y)
 end
 
 function Weapon:Draw()
-    local angle = math.atan2(GetMousePos()["y"] - self.posY, GetMousePos()["x"] - self.posX) - math.pi*0.5;
+    local angle = math.atan2(GetMousePos().y - self.posY, GetMousePos().x - self.posX) - math.pi*0.5;
     love.graphics.draw(
         self.spritesheet,
         self:GetCurrentQuadToDisplay(self.anims[self.state][0]),

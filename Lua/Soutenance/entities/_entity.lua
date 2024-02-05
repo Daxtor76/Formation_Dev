@@ -73,8 +73,6 @@ function _Entity:IsCollidingOnWalls()
     local leftFacePosX = self.posX - self.width;
     local rightFacePosX = self.posX + self.width;
 
-    -- TO DO : Add Corners detection to make the background move diagonally
-
     if leftFacePosX < 100 then
         return 1;
     elseif upperFacePosY < 100 then
