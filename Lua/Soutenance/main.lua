@@ -34,8 +34,8 @@ function love.load()
 end
 
 function love.update(dt)
-    SceneController.SetCurrentScene("toto");
-    SceneController.UpdateCurrentScene();
+    -- TODO: clean and dispatch all this in scenes updates
+    
     -- Weapon Controls
     weapon:Replace(hero.posX, hero.posY);
 
