@@ -8,6 +8,7 @@ io.stdout:setvbuf("no")
 
 -- TO DO: Charger tous les require dans main car si existe à plusieurs endroits, ne sera chargé qu'une fois tout pareil
 require("utils");
+require("vector");
 SceneController = require("scenes/sceneController")
 require("scenes/menuScene")
 require("scenes/gameScene")
@@ -17,7 +18,7 @@ local Hero = require("entities/hero");
 local Weapon = require("entities/weapon");
 
 hero = Hero:New(screenWidth*0.5, screenHeight*0.5);
-weapon = Weapon:New(hero.posX, hero.posY);
+weapon = Weapon:New(hero.position.x, hero.position.y);
 
 local scrollSpeed = 350;
 local scrollDist = 150;
@@ -34,10 +35,10 @@ function love.load()
 end
 
 function love.update(dt)
-    -- TODO: clean and dispatch all this in scenes updates
-    
+    -- TODO: clean and dispatch all this in scenes updates & draws
+
     -- Weapon Controls
-    weapon:Replace(hero.posX, hero.posY);
+    weapon:Replace(hero.position.x, hero.position.y);
 
     -- Hero Controls
     hero:UpdateCharacterDirectionByMousePos();
@@ -47,7 +48,6 @@ function love.update(dt)
         love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) or 
         love.keyboard.isDown("d") or 
         love.keyboard.isDown("s")) then 
-        hero:UpdateMovementDirectionByKeysPressed(dt);
         if hero.state ~= 1 then
             hero:ChangeState("run");
         end
@@ -60,14 +60,14 @@ function love.update(dt)
     -- Hero Movement & Collision with camera bounds
     if hero.state == 1 then
         hero:Move(dt);
-        if GetDistance(hero.posX, hero.posY, screenWidth*0.5, screenHeight*0.5) > scrollDist then
+        if GetDistance(hero.position.x, hero.position.y, screenWidth*0.5, screenHeight*0.5) > scrollDist then
             -- Move background so that the hero moves in the world
-            bg.posX = bg.posX - scrollSpeed * dt * math.cos(math.atan2(hero.posY - screenHeight*0.5, hero.posX - screenWidth*0.5));
-            bg.posY = bg.posY - scrollSpeed * dt * math.sin(math.atan2(hero.posY - screenHeight*0.5, hero.posX - screenWidth*0.5));
+            bg.posX = bg.posX - scrollSpeed * dt * math.cos(math.atan2(hero.position.y - screenHeight*0.5, hero.position.x - screenWidth*0.5));
+            bg.posY = bg.posY - scrollSpeed * dt * math.sin(math.atan2(hero.position.y - screenHeight*0.5, hero.position.x - screenWidth*0.5));
             
             -- Replace hero so that he cannot go outside of the camera bounds
-            local newHeroPosX = screenWidth*0.5 + (scrollDist) * math.cos(math.atan2(hero.posY - screenHeight*0.5, hero.posX - screenWidth*0.5));
-            local newHeroPosY = screenHeight*0.5 + (scrollDist) * math.sin(math.atan2(hero.posY - screenHeight*0.5, hero.posX - screenWidth*0.5));
+            local newHeroPosX = screenWidth*0.5 + scrollDist * math.cos(math.atan2(hero.position.y - screenHeight*0.5, hero.position.x - screenWidth*0.5));
+            local newHeroPosY = screenHeight*0.5 + scrollDist * math.sin(math.atan2(hero.position.y - screenHeight*0.5, hero.position.x - screenWidth*0.5));
             hero:Replace(newHeroPosX, newHeroPosY);
         end
     end

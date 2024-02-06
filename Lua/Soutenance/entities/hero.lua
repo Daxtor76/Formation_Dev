@@ -9,8 +9,7 @@ function Hero:New(x, y)
     print("Création d'une instance de "..tmpHero.name);
     setmetatable(tmpHero, {__index = Hero});
 
-    tmpHero.posX = x;
-    tmpHero.posY = y;
+    tmpHero.position = Vector.New(x, y);
     tmpHero.width = 24;
     tmpHero.height = 24;
     tmpHero.pivotX = tmpHero.width*0.5;
@@ -30,8 +29,8 @@ function Hero:Draw()
     love.graphics.draw(
         self.spritesheet,
         self:GetCurrentQuadToDisplay(self.anims[self.state][math.floor((self.characterDirection)/2)%4]),
-        self.posX, 
-        self.posY, 
+        self.position.x, 
+        self.position.y, 
         self.rotation, 
         self.scaleX, 
         self.scaleY, 
@@ -41,7 +40,7 @@ function Hero:Draw()
 end
 
 function Hero:UpdateCharacterDirectionByMousePos()
-    local angle = math.atan2(self.posY - GetMousePos().y, self.posX - GetMousePos().x);
+    local angle = math.atan2(self.position.y - GetMousePos().y, self.position.x - GetMousePos().x);
     self.characterDirection = math.floor(((math.deg(angle)+360)%360)/45) + 1;
     
     if self.characterDirection >= 1 and self.characterDirection <= 4 then
@@ -51,26 +50,23 @@ function Hero:UpdateCharacterDirectionByMousePos()
     end
 end
 
-    -- TO DO : Refaire avec des vecteurs
-    -- Besoin de les coder => https://www.gamecodeur.fr/atelier-les-vecteurs/
-function Hero:UpdateMovementDirectionByKeysPressed()
-    if love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) and love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) then
-        self.movementDirection = 2;
-    elseif love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) and love.keyboard.isDown("d") then
-        self.movementDirection = 4;
-    elseif love.keyboard.isDown("d") and love.keyboard.isDown("s") then
-        self.movementDirection = 6;
-    elseif love.keyboard.isDown("s") and love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) then
-        self.movementDirection = 8;
-    elseif love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) then
-        self.movementDirection = 1;
-    elseif love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) then
-        self.movementDirection = 3;
-    elseif love.keyboard.isDown("d") then
-        self.movementDirection = 5;
+function Hero:Move(dt)
+    local directionV = Vector.New(0, 0);
+    local directionH = Vector.New(0, 0);
+    if love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) then
+        directionV = Vector.New(0, -1);
     elseif love.keyboard.isDown("s") then
-        self.movementDirection = 7;
+        directionV = Vector.New(0, 1);
     end
+
+    if love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) then
+        directionH = Vector.New(-1, 0);
+    elseif love.keyboard.isDown("d") then
+        directionH = Vector.New(1, 0);
+    end
+    local finalDirection = directionV + directionH;
+    Vector.Normalize(finalDirection);
+    self.position = self.position + dt * self.speed * finalDirection;
 end
 
 function Hero:PopulateAnims()

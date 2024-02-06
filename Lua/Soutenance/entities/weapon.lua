@@ -9,8 +9,7 @@ function Weapon:New(x, y)
     print("Création d'une instance de "..tmpWeapon.name);
     setmetatable(tmpWeapon, {__index = Weapon});
 
-    tmpWeapon.posX = x;
-    tmpWeapon.posY = y + 20;
+    tmpWeapon.position = Vector.New(x, y);
     tmpWeapon.width = 50;
     tmpWeapon.height = 50;
     tmpWeapon.pivotX = tmpWeapon.width*0.5;
@@ -24,12 +23,12 @@ function Weapon:New(x, y)
 end
 
 function Weapon:Draw()
-    local angle = math.atan2(GetMousePos().y - self.posY, GetMousePos().x - self.posX) - math.pi*0.5;
+    local angle = math.atan2(GetMousePos().y - self.position.y, GetMousePos().x - self.position.x) - math.pi*0.5;
     love.graphics.draw(
         self.spritesheet,
         self:GetCurrentQuadToDisplay(self.anims[self.state][0]),
-        self.posX,
-        self.posY,
+        hero.position.x,
+        hero.position.y,
         angle,
         self.scaleX,
         self.scaleY,

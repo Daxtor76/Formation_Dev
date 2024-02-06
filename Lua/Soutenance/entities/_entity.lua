@@ -1,4 +1,3 @@
-require("utils");
 local _Entity = {};
 Anim = require("animation/anim");
 
@@ -7,8 +6,7 @@ function _Entity:New(name)
     setmetatable(tmpEntity, _Entity);
 
     tmpEntity.name = name;
-    tmpEntity.posX = 10;
-    tmpEntity.posY = 10;
+    tmpEntity.position = Vector.New(10, 10);
     tmpEntity.width = 0;
     tmpEntity.height = 0;
     tmpEntity.rotation = 0;
@@ -87,8 +85,8 @@ function _Entity:IsCollidingOnWalls()
 end
 
 function _Entity:Replace(newPosX, newPosY)
-    self.posX = newPosX;
-    self.posY = newPosY;
+    self.position.x = newPosX;
+    self.position.y = newPosY;
 end
 
 function _Entity:Move(deltaTime)
