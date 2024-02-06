@@ -1,4 +1,3 @@
-require("utils");
 local _Entity = require("entities/_entity");
 
 local Weapon = {};

@@ -6,6 +6,9 @@ sceneController.NewScene = function(sceneName)
     local scene = {};
     scene.name = sceneName;
 
+    scene.Load = function()
+    end
+
     scene.Update = function()
     end;
 
@@ -24,8 +27,12 @@ sceneController.SetCurrentScene = function(sceneName)
     end
 end
 
-sceneController.UpdateCurrentScene = function()
-    sceneController.currentScene.Update();
+sceneController.LoadCurrentScene = function()
+    sceneController.currentScene.Load();
+end
+
+sceneController.UpdateCurrentScene = function(dt)
+    sceneController.currentScene.Update(dt);
 end
 
 sceneController.DrawCurrentScene = function()

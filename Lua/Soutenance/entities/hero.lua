@@ -1,7 +1,6 @@
-require("utils");
 local _Entity = require("entities/_entity");
 
-local Hero = {};
+Hero = {};
 setmetatable(Hero, {__index = _Entity});
 
 function Hero:New(x, y)

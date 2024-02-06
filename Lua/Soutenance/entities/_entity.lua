@@ -6,24 +6,16 @@ function _Entity:New(name)
     setmetatable(tmpEntity, _Entity);
 
     tmpEntity.name = name;
-    tmpEntity.position = Vector.New(10, 10);
-    tmpEntity.width = 0;
-    tmpEntity.height = 0;
     tmpEntity.rotation = 0;
     tmpEntity.scaleX = 2;
     tmpEntity.scaleY = 2;
-    tmpEntity.pivotX = 0;
-    tmpEntity.pivotY = 0;
 
     tmpEntity.movementDirection = 0;
     tmpEntity.characterDirection = 0;
-    tmpEntity.speed = 200;
 
-    tmpEntity.anims = nil;
     tmpEntity.state = 0;
     tmpEntity.frame = 0;
     tmpEntity.floatFrame = 0;
-    tmpEntity.renderLayer = 0;
 
     return tmpEntity;
 end

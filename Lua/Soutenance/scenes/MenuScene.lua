@@ -1,6 +1,6 @@
 local menuScene = SceneController.NewScene("Menu");
 
-menuScene.Update = function()
+menuScene.Update = function(dt)
     print(menuScene.name);
 end
 
