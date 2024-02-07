@@ -23,18 +23,14 @@ function Weapon:New(x, y)
     tmpWeapon.states["charge"] = 1;
     tmpWeapon.states["shoot"] = 2;
 
-    tmpWeapon.chargeTimer = 2;
-    tmpWeapon.chargeCurrentTimer = tmpWeapon.chargeTimer; 
+    tmpWeapon.chargeTimer = 0.4;
+    tmpWeapon.chargeCurrentTimer = tmpWeapon.chargeTimer;
+    tmpWeapon.canShoot = false;
 
     return tmpWeapon;
 end
 
 function Weapon:IsChargeOver(dt)
-    if self.chargeCurrentTimer > 0 then
-        self.chargeCurrentTimer = self.chargeCurrentTimer - dt;
-    else
-        return true;
-    end
     return false;
 end
 
@@ -44,27 +40,31 @@ function Weapon:Update(dt)
 
         -- Weapon states machine
     if love.mouse.isDown(1) then
-        if self.state ~= 1 then
+        if self.state == 0 then
             self:ChangeState("charge");
         end
     else
-        if self.state == 1 and self:IsChargeOver(dt) then
+        if self.state == 1 and self.canShoot then
+            self.chargeCurrentTimer = self.chargeTimer;
             self:ChangeState("shoot");
-        end
-        if self.state ~= 0 then
+        elseif self.state ~= 0 then
+            self.chargeCurrentTimer = self.chargeTimer;
             self:ChangeState("idle");
         end
     end 
 
-    -- Weapon Charge & Shoot
+    -- Weapon Charge timer
     if self.state == 0 then
         -- idle
     elseif self.state == 1 then
-        -- charge
-        if self:IsChargeOver(dt) then
+        if self.chargeCurrentTimer > 0 then
+            self.chargeCurrentTimer = self.chargeCurrentTimer - dt;
+        else
+            self.canShoot = true;
         end
     elseif self.state == 2 then
-        -- shoot
+        self.canShoot = false;
+        -- Add shoot behavior here
     end
 
     -- Animations
