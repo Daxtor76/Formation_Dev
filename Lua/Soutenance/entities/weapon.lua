@@ -47,6 +47,10 @@ function Weapon:Update(dt)
         if self.state == 1 and self.canShoot then
             self.chargeCurrentTimer = self.chargeTimer;
             self:ChangeState("shoot");
+        elseif self.state == 2 then
+            if self:IsAnimOver(dt, self.anims[self.state][0]) then
+                self:ChangeState("idle");
+            end
         elseif self.state ~= 0 then
             self.chargeCurrentTimer = self.chargeTimer;
             self:ChangeState("idle");
@@ -97,7 +101,7 @@ function Weapon:PopulateAnims()
 
     local idleAnim = Anim:New(self.width, self.height, 0, 0, 1, true);
     local chargeAnim = Anim:New(self.width, self.height, 1, 3, 5, false);
-    local shootAnims = Anim:New(self.width, self.height, 4, 5, 1, false);
+    local shootAnims = Anim:New(self.width, self.height, 4, 5, 5, false);
     anims[0][0] = idleAnim;
     anims[1][0] = chargeAnim;
     anims[2][0] = shootAnims;

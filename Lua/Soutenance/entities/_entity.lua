@@ -16,6 +16,7 @@ function _Entity:New(name)
     tmpEntity.state = 0;
     tmpEntity.frame = 0;
     tmpEntity.floatFrame = 0;
+    tmpEntity.animTimer = 0;
 
     return tmpEntity;
 end
@@ -37,7 +38,7 @@ function _Entity:UpdateAnim(deltaTime, animation)
     if animation.loop then
         self.floatFrame = (self.floatFrame + animation.speed * deltaTime)%(animation.to - animation.from + 1);
     else
-        if self.floatFrame < animation.to - 1 then
+        if self.floatFrame < animation.to - animation.from + 0.9 then
             self.floatFrame = self.floatFrame + animation.speed * deltaTime;
         else
             self.floatFrame = self.floatFrame;
@@ -47,9 +48,8 @@ function _Entity:UpdateAnim(deltaTime, animation)
 end
 
 function _Entity:IsAnimOver(deltaTime, animation)
-    local animId = animation;
-    local animTimer = (self.floatFrame + self.anims[self.state][animId].speed * deltaTime)
-    return math.ceil(animTimer) > (self.anims[self.state][animId].to - self.anims[self.state][animId].from + 1);
+    self.animTimer = self.animTimer + animation.speed * deltaTime;
+    return math.floor(self.animTimer) > (animation.to - animation.from + 0.9);
 end
 
 function _Entity:ChangeRenderLayer(newLayer)
@@ -57,6 +57,8 @@ function _Entity:ChangeRenderLayer(newLayer)
 end
 
 function _Entity:ChangeState(newState)
+    self.floatFrame = 0;
+    self.animTimer = 0;
     self.state = self.states[newState];
     print("Entity goes in state "..self.state);
 end
