@@ -28,6 +28,43 @@ function Hero:New(x, y)
     return tmpHero;
 end
 
+function Hero:Update(dt)
+    -- Hero Controls
+    hero:UpdateCharacterDirectionByMousePos();
+    
+        -- Hero states machine
+    if (love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) or 
+        love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) or 
+        love.keyboard.isDown("d") or 
+        love.keyboard.isDown("s")) then 
+        if self.state ~= 1 then
+            hero:ChangeState("run");
+        end
+    else
+        if self.state ~= 0 then
+            hero:ChangeState("idle");
+        end
+    end
+
+    -- Hero Movement & Collision with camera bounds
+    if self.state == 1 then
+        self:Move(dt);
+        if GetDistance(self.position.x, self.position.y, screenWidth*0.5, screenHeight*0.5) > scrollDist then
+            -- Move background so that the hero moves in the world
+            bg.posX = bg.posX - scrollSpeed * dt * math.cos(math.atan2(self.position.y - screenHeight*0.5, self.position.x - screenWidth*0.5));
+            bg.posY = bg.posY - scrollSpeed * dt * math.sin(math.atan2(self.position.y - screenHeight*0.5, self.position.x - screenWidth*0.5));
+            
+            -- Replace hero so that he cannot go outside of the camera bounds
+            local newPosX = screenWidth*0.5 + scrollDist * math.cos(math.atan2(self.position.y - screenHeight*0.5, self.position.x - screenWidth*0.5));
+            local newPosY = screenHeight*0.5 + scrollDist * math.sin(math.atan2(self.position.y - screenHeight*0.5, self.position.x - screenWidth*0.5));
+            hero:Replace(newPosX, newPosY);
+        end
+    end
+
+    -- Animations
+    self:UpdateAnim(dt, self.anims[self.state][math.floor((self.characterDirection)/2)%4], true);
+end
+
 function Hero:Draw()
     love.graphics.draw(
         self.spritesheet,

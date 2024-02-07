@@ -23,7 +23,52 @@ function Weapon:New(x, y)
     tmpWeapon.states["charge"] = 1;
     tmpWeapon.states["shoot"] = 2;
 
+    tmpWeapon.chargeTimer = 2;
+    tmpWeapon.chargeCurrentTimer = tmpWeapon.chargeTimer; 
+
     return tmpWeapon;
+end
+
+function Weapon:IsChargeOver(dt)
+    if self.chargeCurrentTimer > 0 then
+        self.chargeCurrentTimer = self.chargeCurrentTimer - dt;
+    else
+        return true;
+    end
+    return false;
+end
+
+function Weapon:Update(dt)
+    -- Weapon Controls
+    weapon:Replace(hero.position.x, hero.position.y);
+
+        -- Weapon states machine
+    if love.mouse.isDown(1) then
+        if self.state ~= 1 then
+            self:ChangeState("charge");
+        end
+    else
+        if self.state == 1 and self:IsChargeOver(dt) then
+            self:ChangeState("shoot");
+        end
+        if self.state ~= 0 then
+            self:ChangeState("idle");
+        end
+    end 
+
+    -- Weapon Charge & Shoot
+    if self.state == 0 then
+        -- idle
+    elseif self.state == 1 then
+        -- charge
+        if self:IsChargeOver(dt) then
+        end
+    elseif self.state == 2 then
+        -- shoot
+    end
+
+    -- Animations
+    self:UpdateAnim(dt, self.anims[self.state][0]);
 end
 
 function Weapon:Draw()
