@@ -27,10 +27,21 @@ gameScene.Update = function(dt)
     -- Weapon Controls
     weapon:Replace(hero.position.x, hero.position.y);
 
+        -- Weapon states machine
+    if love.mouse.isDown(1) then
+        if weapon.state ~= 2 then
+            weapon:ChangeState("charge");
+        end
+    else
+        if weapon.state ~= 0 then
+            weapon:ChangeState("idle");
+        end
+    end 
+
     -- Hero Controls
     hero:UpdateCharacterDirectionByMousePos();
     
-    -- Hero states machine
+        -- Hero states machine
     if (love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) or 
         love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) or 
         love.keyboard.isDown("d") or 

@@ -33,13 +33,14 @@ function _Entity:GetCurrentQuadToDisplay(animation)
     return love.graphics.newQuad((animation.width * animation.from) + (animation.width * self.frame), 0, animation.width, animation.height, self.spritesheet);
 end
 
+-- TO DO : Améliorer cette function pour gérer les anims loop et non loop
 function _Entity:UpdateAnim(deltaTime, animation)
     self.floatFrame = (self.floatFrame + animation.speed * deltaTime)%(animation.to - animation.from + 1);
     self.frame = math.floor(self.floatFrame);
 end
 
-function _Entity:IsAnimOver(deltaTime)
-    local animId = math.floor((self.characterDirection)/2)%4;
+function _Entity:IsAnimOver(deltaTime, animation)
+    local animId = animation;
     local animTimer = (self.floatFrame + self.anims[self.state][animId].speed * deltaTime)
     return math.ceil(animTimer) > (self.anims[self.state][animId].to - self.anims[self.state][animId].from + 1);
 end
@@ -49,11 +50,7 @@ function _Entity:ChangeRenderLayer(newLayer)
 end
 
 function _Entity:ChangeState(newState)
-    if newState == "idle" or newState == 0 then
-        self.state = 0;
-    elseif newState == "run" or newState == 1 then
-        self.state = 1;
-    end
+    self.state = self.states[newState];
     print("Entity goes in state "..self.state);
 end
 

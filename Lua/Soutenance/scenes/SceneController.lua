@@ -7,9 +7,9 @@ sceneController.NewScene = function(sceneName)
     scene.name = sceneName;
 
     scene.Load = function()
-    end
+    end;
 
-    scene.Update = function()
+    scene.Update = function(dt)
     end;
 
     scene.Draw = function()

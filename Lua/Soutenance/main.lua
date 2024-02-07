@@ -25,6 +25,3 @@ end
 function love.draw()
     SceneController.DrawCurrentScene();
 end
-
-function love.keypressed(key)
-end

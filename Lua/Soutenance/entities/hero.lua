@@ -20,6 +20,10 @@ function Hero:New(x, y)
     tmpHero.crosshair = love.graphics.newImage("images/player/crosshair.png");
     tmpHero.anims = tmpHero:PopulateAnims();
     tmpHero.renderLayer = 1;
+    
+    tmpHero.states = {};
+    tmpHero.states["idle"] = 0;
+    tmpHero.states["run"] = 1;
 
     return tmpHero;
 end

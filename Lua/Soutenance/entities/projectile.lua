@@ -9,19 +9,14 @@ function Weapon:New(x, y)
     setmetatable(tmpWeapon, {__index = Weapon});
 
     tmpWeapon.position = Vector.New(x, y);
-    tmpWeapon.width = 48;
-    tmpWeapon.height = 48;
+    tmpWeapon.width = 50;
+    tmpWeapon.height = 50;
     tmpWeapon.pivotX = tmpWeapon.width*0.5;
     tmpWeapon.pivotY = tmpWeapon.height*0.5;
 
     tmpWeapon.spritesheet = love.graphics.newImage("images/player/bow.png");
     tmpWeapon.anims = tmpWeapon:PopulateAnims();
     tmpWeapon.renderLayer = 0;
-    
-    tmpWeapon.states = {};
-    tmpWeapon.states["idle"] = 0;
-    tmpWeapon.states["charge"] = 1;
-    tmpWeapon.states["shoot"] = 2;
 
     return tmpWeapon;
 end
@@ -44,18 +39,10 @@ end
 function Weapon:PopulateAnims()
     local anims = {};
     local idleAnims = {};
-    local chargeAnims = {};
-    local shootAnims = {};
     anims[0] = idleAnims;
-    anims[1] = chargeAnims;
-    anims[2] = shootAnims;
 
     local idleAnim = Anim:New(self.width, self.height, 0, 0, 1);
-    local chargeAnim = Anim:New(self.width, self.height, 1, 3, 5);
-    local shootAnims = Anim:New(self.width, self.height, 4, 5, 1);
     anims[0][0] = idleAnim;
-    anims[1][0] = chargeAnim;
-    anims[2][0] = shootAnims;
 
     return anims;
 end
