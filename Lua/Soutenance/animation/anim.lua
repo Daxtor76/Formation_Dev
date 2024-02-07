@@ -1,6 +1,6 @@
 local Anim = {};
 
-function Anim:New(width, height, from, to, speed)
+function Anim:New(width, height, from, to, speed, loop)
     local tmpAnim = {};
     setmetatable(tmpAnim, {__index = Dino});
 
@@ -9,6 +9,7 @@ function Anim:New(width, height, from, to, speed)
     tmpAnim.from = from;
     tmpAnim.to = to;
     tmpAnim.speed = speed;
+    tmpAnim.loop = loop;
     return tmpAnim;
 end
 

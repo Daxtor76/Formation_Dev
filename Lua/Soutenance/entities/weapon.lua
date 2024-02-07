@@ -50,9 +50,9 @@ function Weapon:PopulateAnims()
     anims[1] = chargeAnims;
     anims[2] = shootAnims;
 
-    local idleAnim = Anim:New(self.width, self.height, 0, 0, 1);
-    local chargeAnim = Anim:New(self.width, self.height, 1, 3, 5);
-    local shootAnims = Anim:New(self.width, self.height, 4, 5, 1);
+    local idleAnim = Anim:New(self.width, self.height, 0, 0, 1, true);
+    local chargeAnim = Anim:New(self.width, self.height, 1, 3, 5, false);
+    local shootAnims = Anim:New(self.width, self.height, 4, 5, 1, false);
     anims[0][0] = idleAnim;
     anims[1][0] = chargeAnim;
     anims[2][0] = shootAnims;

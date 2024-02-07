@@ -33,9 +33,16 @@ function _Entity:GetCurrentQuadToDisplay(animation)
     return love.graphics.newQuad((animation.width * animation.from) + (animation.width * self.frame), 0, animation.width, animation.height, self.spritesheet);
 end
 
--- TO DO : Améliorer cette function pour gérer les anims loop et non loop
 function _Entity:UpdateAnim(deltaTime, animation)
-    self.floatFrame = (self.floatFrame + animation.speed * deltaTime)%(animation.to - animation.from + 1);
+    if animation.loop then
+        self.floatFrame = (self.floatFrame + animation.speed * deltaTime)%(animation.to - animation.from + 1);
+    else
+        if self.floatFrame < animation.to - 1 then
+            self.floatFrame = self.floatFrame + animation.speed * deltaTime;
+        else
+            self.floatFrame = self.floatFrame;
+        end
+    end
     self.frame = math.floor(self.floatFrame);
 end
 

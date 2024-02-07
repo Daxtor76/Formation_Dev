@@ -20,7 +20,7 @@ function Hero:New(x, y)
     tmpHero.crosshair = love.graphics.newImage("images/player/crosshair.png");
     tmpHero.anims = tmpHero:PopulateAnims();
     tmpHero.renderLayer = 1;
-    
+
     tmpHero.states = {};
     tmpHero.states["idle"] = 0;
     tmpHero.states["run"] = 1;
@@ -79,14 +79,14 @@ function Hero:PopulateAnims()
     anims[0] = idleAnims;
     anims[1] = runAnims;
 
-    local idleBottomAnim = Anim:New(self.width, self.height, 0, 3, 5);
-    local idleLeftAnim = Anim:New(self.width, self.height, 4, 7, 5);
-    local idleRightAnim = Anim:New(self.width, self.height, 8, 11, 5);
-    local idleTopAnim = Anim:New(self.width, self.height, 12, 15, 5);
-    local runBottomAnim = Anim:New(self.width, self.height, 16, 21, 8);
-    local runLeftAnim = Anim:New(self.width, self.height, 22, 27, 8);
-    local runRightAnim = Anim:New(self.width, self.height, 28, 33, 8);
-    local runTopAnim = Anim:New(self.width, self.height, 34, 39, 8);
+    local idleBottomAnim = Anim:New(self.width, self.height, 0, 3, 5, true);
+    local idleLeftAnim = Anim:New(self.width, self.height, 4, 7, 5, true);
+    local idleRightAnim = Anim:New(self.width, self.height, 8, 11, 5, true);
+    local idleTopAnim = Anim:New(self.width, self.height, 12, 15, 5, true);
+    local runBottomAnim = Anim:New(self.width, self.height, 16, 21, 8, true);
+    local runLeftAnim = Anim:New(self.width, self.height, 22, 27, 8, true);
+    local runRightAnim = Anim:New(self.width, self.height, 28, 33, 8, true);
+    local runTopAnim = Anim:New(self.width, self.height, 34, 39, 8, true);
     anims[0][0] = idleLeftAnim;
     anims[0][1] = idleTopAnim;
     anims[0][2] = idleRightAnim;

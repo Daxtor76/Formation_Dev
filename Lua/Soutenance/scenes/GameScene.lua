@@ -71,7 +71,7 @@ gameScene.Update = function(dt)
     end
 
     -- Animations
-    hero:UpdateAnim(dt, hero.anims[hero.state][math.floor((hero.characterDirection)/2)%4]);
+    hero:UpdateAnim(dt, hero.anims[hero.state][math.floor((hero.characterDirection)/2)%4], true);
     weapon:UpdateAnim(dt, weapon.anims[weapon.state][0]);
 end
 
