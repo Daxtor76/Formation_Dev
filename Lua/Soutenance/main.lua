@@ -25,3 +25,15 @@ end
 function love.draw()
     SceneController.DrawCurrentScene();
 end
+
+function love.keypressed(key)
+    SceneController.KeyPressedCurrentScene(key);
+end
+
+function love.mousepressed(x, y, button)
+    SceneController.MouseButtonPressedCurrentScene(button);
+end
+
+function love.mousereleased(x, y, button)
+    SceneController.MouseButtonReleasedCurrentScene(button);
+end

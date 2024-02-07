@@ -42,4 +42,16 @@ gameScene.Draw = function()
     ReplaceMouseCrosshair(hero.crosshair);
 end
 
+gameScene.KeyPressed = function(key)
+    --print(key.." pressed")
+end
+
+gameScene.MouseButtonPressed = function(button)
+    --print(button.." pressed")
+end
+
+gameScene.MouseButtonReleased = function(button)
+    --print(button.." released")
+end
+
 return gameScene;

@@ -49,6 +49,8 @@ end
 
 function _Entity:IsAnimOver(deltaTime, animation)
     self.animTimer = self.animTimer + animation.speed * deltaTime;
+    --print(self.animTimer);
+    --print(math.floor(self.animTimer) > (animation.to - animation.from + 0.9));
     return math.floor(self.animTimer) > (animation.to - animation.from + 0.9);
 end
 
