@@ -1,34 +1,48 @@
 local _Entity = require("entities/_entity");
 
-local Weapon = {};
-setmetatable(Weapon, {__index = _Entity});
+local Projectile = {};
+setmetatable(Projectile, {__index = _Entity});
 
-function Weapon:New(x, y)
-    local tmpWeapon = _Entity:New("Weapon");
-    print("Création d'une instance de "..tmpWeapon.name);
-    setmetatable(tmpWeapon, {__index = Weapon});
+function Projectile:New(x, y, img)
+    local tmpProjectile = _Entity:New("Weapon");
+    print("Création d'une instance de "..tmpProjectile.name);
+    setmetatable(tmpProjectile, {__index = Projectile});
 
-    tmpWeapon.position = Vector.New(x, y);
-    tmpWeapon.width = 50;
-    tmpWeapon.height = 50;
-    tmpWeapon.pivotX = tmpWeapon.width*0.5;
-    tmpWeapon.pivotY = tmpWeapon.height*0.5;
+    tmpProjectile.spritesheet = love.graphics.newImage(img);
+    tmpProjectile.renderLayer = 0;
 
-    tmpWeapon.spritesheet = love.graphics.newImage("images/player/bow.png");
-    tmpWeapon.anims = tmpWeapon:PopulateAnims();
-    tmpWeapon.renderLayer = 0;
+    tmpProjectile.position = Vector.New(x, y);
+    tmpProjectile.width = tmpProjectile.spritesheet:getWidth();
+    tmpProjectile.height = tmpProjectile.spritesheet:getHeight();
+    tmpProjectile.pivotX = tmpProjectile.width*0.5;
+    tmpProjectile.pivotY = tmpProjectile.height*0.5;
 
-    return tmpWeapon;
+    tmpProjectile.speed = 800;
+    tmpProjectile.rotation = math.atan2(GetMousePos().y - weapon.position.y, GetMousePos().x - weapon.position.x) - math.pi*0.5;
+    tmpProjectile.direction = math.atan2(GetMousePos().y - weapon.position.y, GetMousePos().x - weapon.position.x);
+
+    return tmpProjectile;
 end
 
-function Weapon:Draw()
-    local angle = math.atan2(GetMousePos().y - self.position.y, GetMousePos().x - self.position.x) - math.pi*0.5;
+function Projectile:Move(dt)
+    local directionV = math.sin(self.direction);
+    local directionH = math.cos(self.direction);
+
+    local finalDirection = Vector.New(directionH, directionV);
+    Vector.Normalize(finalDirection);
+    self.position = self.position + dt * self.speed * finalDirection;
+end
+
+function Projectile:Update(dt)
+    self:Move(dt);
+end
+
+function Projectile:Draw()
     love.graphics.draw(
         self.spritesheet,
-        self:GetCurrentQuadToDisplay(self.anims[self.state][0]),
-        hero.position.x,
-        hero.position.y,
-        angle,
+        self.position.x,
+        self.position.y,
+        self.rotation,
         self.scaleX,
         self.scaleY,
         self.pivotX,
@@ -36,15 +50,4 @@ function Weapon:Draw()
     );
 end
 
-function Weapon:PopulateAnims()
-    local anims = {};
-    local idleAnims = {};
-    anims[0] = idleAnims;
-
-    local idleAnim = Anim:New(self.width, self.height, 0, 0, 1);
-    anims[0][0] = idleAnim;
-
-    return anims;
-end
-
-return Weapon;
+return Projectile;

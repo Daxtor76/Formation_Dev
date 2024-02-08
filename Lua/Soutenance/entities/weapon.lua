@@ -1,4 +1,5 @@
 local _Entity = require("entities/_entity");
+local Projectile = require("entities/projectile");
 
 local Weapon = {};
 setmetatable(Weapon, {__index = _Entity});
@@ -26,6 +27,7 @@ function Weapon:New(x, y)
     tmpWeapon.chargeTimer = 0.4;
     tmpWeapon.chargeCurrentTimer = tmpWeapon.chargeTimer;
     tmpWeapon.canShoot = false;
+    tmpWeapon.projectiles = {};
 
     return tmpWeapon;
 end
@@ -56,12 +58,12 @@ function Weapon:Update(dt)
         end
     end 
 
-    -- Weapon Charge timer
+    -- Weapon Charge & Shoot
     if self.state == 1 then
         self.canShoot = self:CanShootTimer(dt);
     elseif self.state == 2 then
         self.canShoot = false;
-        -- Add shoot behavior here
+        table.insert(self.projectiles, Projectile:New(weapon.position.x, weapon.position.y, "images/player/arrow.png"));
         if self:IsAnimOver(dt, self.anims[self.state][0]) then
             self:ChangeState("idle");
         end
@@ -69,6 +71,11 @@ function Weapon:Update(dt)
 
     -- Animations
     self:UpdateAnim(dt, self.anims[self.state][0]);
+
+    -- Projectiles
+    for key, value in pairs(self.projectiles) do
+        value:Update(dt);
+    end
 end
 
 function Weapon:Draw()
@@ -84,6 +91,10 @@ function Weapon:Draw()
         self.pivotX,
         self.pivotY
     );
+
+    for key, value in pairs(self.projectiles) do
+        value:Draw();
+    end
 end
 
 function Weapon:PopulateAnims()
