@@ -30,6 +30,8 @@ function Weapon:New(x, y)
     tmpWeapon.canShoot = false;
     tmpWeapon.projectiles = {};
 
+    table.insert(renderList, tmpWeapon);
+
     return tmpWeapon;
 end
 

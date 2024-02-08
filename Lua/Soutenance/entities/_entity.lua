@@ -38,10 +38,12 @@ function _Entity:UpdateAnim(deltaTime, animation)
     if animation.loop then
         self.floatFrame = (self.floatFrame + animation.speed * deltaTime)%(animation.to - animation.from + 1);
     else
-        if self.floatFrame < animation.to - animation.from + 0.9 then
+        if self.floatFrame < animation.to - animation.from + 0.5 then
             self.floatFrame = self.floatFrame + animation.speed * deltaTime;
+            print(self.floatFrame);
         else
             self.floatFrame = self.floatFrame;
+            print(self.floatFrame);
         end
     end
     self.frame = math.floor(self.floatFrame);
@@ -51,7 +53,7 @@ function _Entity:IsAnimOver(deltaTime, animation)
     self.animTimer = self.animTimer + animation.speed * deltaTime;
     --print(self.animTimer);
     --print(math.floor(self.animTimer) > (animation.to - animation.from + 0.9));
-    return math.floor(self.animTimer) > (animation.to - animation.from + 0.9);
+    return math.floor(self.animTimer) > (animation.to - animation.from + 0.5);
 end
 
 function _Entity:ChangeRenderLayer(newLayer)

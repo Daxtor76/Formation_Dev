@@ -25,6 +25,8 @@ function Hero:New(x, y)
     tmpHero.states["idle"] = 0;
     tmpHero.states["run"] = 1;
 
+    table.insert(renderList, tmpHero);
+
     return tmpHero;
 end
 

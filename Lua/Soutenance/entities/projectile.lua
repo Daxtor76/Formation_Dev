@@ -21,6 +21,8 @@ function Projectile:New(x, y, img)
     tmpProjectile.rotation = math.atan2(GetMousePos().y - weapon.position.y, GetMousePos().x - weapon.position.x) - math.pi*0.5;
     tmpProjectile.direction = math.atan2(GetMousePos().y - weapon.position.y, GetMousePos().x - weapon.position.x);
 
+    table.insert(renderList, tmpProjectile);
+
     return tmpProjectile;
 end
 
