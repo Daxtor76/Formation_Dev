@@ -4,7 +4,7 @@ local Projectile = {};
 setmetatable(Projectile, {__index = _Entity});
 
 function Projectile:New(x, y, img)
-    local tmpProjectile = _Entity:New("Weapon");
+    local tmpProjectile = _Entity:New("Arrow");
     print("Création d'une instance de "..tmpProjectile.name);
     setmetatable(tmpProjectile, {__index = Projectile});
 

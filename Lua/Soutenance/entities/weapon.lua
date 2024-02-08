@@ -22,7 +22,8 @@ function Weapon:New(x, y)
     tmpWeapon.states = {};
     tmpWeapon.states["idle"] = 0;
     tmpWeapon.states["charge"] = 1;
-    tmpWeapon.states["shoot"] = 2;
+    tmpWeapon.states["reload"] = 2;
+    tmpWeapon.states["shoot"] = 3;
 
     tmpWeapon.chargeTimer = 0.4;
     tmpWeapon.chargeCurrentTimer = tmpWeapon.chargeTimer;
@@ -62,11 +63,13 @@ function Weapon:Update(dt)
     if self.state == 1 then
         self.canShoot = self:CanShootTimer(dt);
     elseif self.state == 2 then
-        self.canShoot = false;
-        table.insert(self.projectiles, Projectile:New(weapon.position.x, weapon.position.y, "images/player/arrow.png"));
         if self:IsAnimOver(dt, self.anims[self.state][0]) then
             self:ChangeState("idle");
         end
+    elseif self.state == 3 then
+        self.canShoot = false;
+        self:ChangeState("reload");
+        table.insert(self.projectiles, Projectile:New(weapon.position.x, weapon.position.y, "images/player/arrow.png"));
     end
 
     -- Animations
