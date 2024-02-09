@@ -6,12 +6,12 @@ end
 -- Cette ligne permet d'afficher des traces dans la console pendant l'éxécution
 io.stdout:setvbuf("no")
 
-require("utils/utils");
-require("utils/vector");
+require("utils/Utils");
+require("utils/Vector");
 
-SceneController = require("scenes/sceneController")
-require("scenes/menuScene")
-require("scenes/gameScene")
+SceneController = require("scenes/SceneController")
+require("scenes/MenuScene")
+require("scenes/GameScene")
 
 function love.load()
     SceneController.SetCurrentScene("Game");

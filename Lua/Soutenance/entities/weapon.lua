@@ -1,5 +1,5 @@
-local _Entity = require("entities/_entity");
-local Projectile = require("entities/projectile");
+local _Entity = require("entities/_Entity");
+local Projectile = require("entities/Projectile");
 
 local Weapon = {};
 setmetatable(Weapon, {__index = _Entity});

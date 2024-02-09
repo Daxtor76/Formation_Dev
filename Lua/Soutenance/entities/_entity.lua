@@ -1,5 +1,5 @@
 local _Entity = {};
-Anim = require("animation/anim");
+Anim = require("animation/Anim");
 
 function _Entity:New(name)
     local tmpEntity = {};
@@ -40,10 +40,10 @@ function _Entity:UpdateAnim(deltaTime, animation)
     else
         if self.floatFrame < animation.to - animation.from + 0.5 then
             self.floatFrame = self.floatFrame + animation.speed * deltaTime;
-            print(self.floatFrame);
+            --print(self.floatFrame);
         else
             self.floatFrame = self.floatFrame;
-            print(self.floatFrame);
+            --print(self.floatFrame);
         end
     end
     self.frame = math.floor(self.floatFrame);
@@ -89,42 +89,6 @@ end
 function _Entity:Replace(newPosX, newPosY)
     self.position.x = newPosX;
     self.position.y = newPosY;
-end
-
-function _Entity:Move(deltaTime)
-
-    -- TO DO : Refaire avec des vecteurs
-    -- Besoin de les coder => https://www.gamecodeur.fr/atelier-les-vecteurs/
-    
-    if self.movementDirection == 1 then
-        -- left
-        self.posX = self.posX%screenWidth - self.speed * deltaTime;
-    elseif self.movementDirection == 2 then
-        -- up left
-        self.posX = self.posX%screenWidth - self.speed * deltaTime;
-        self.posY = self.posY%screenHeight - self.speed * deltaTime;
-    elseif self.movementDirection == 3 then
-        -- up
-        self.posY = self.posY%screenHeight - self.speed * deltaTime;
-    elseif self.movementDirection == 4 then
-        -- up right
-        self.posX = self.posX%screenWidth + self.speed * deltaTime;
-        self.posY = self.posY%screenHeight - self.speed * deltaTime;
-    elseif self.movementDirection == 5 then
-        -- right
-        self.posX = self.posX%screenWidth + self.speed * deltaTime;
-    elseif self.movementDirection == 6 then
-        -- down right
-        self.posX = self.posX%screenWidth + self.speed * deltaTime;
-        self.posY = self.posY%screenHeight + self.speed * deltaTime;
-    elseif self.movementDirection == 7 then
-        -- down
-        self.posY = self.posY%screenHeight + self.speed * deltaTime;
-    elseif self.movementDirection == 8 then
-        -- down left
-        self.posX = self.posX%screenWidth - self.speed * deltaTime;
-        self.posY = self.posY%screenHeight + self.speed * deltaTime;
-    end
 end
 
 return _Entity;

@@ -2,15 +2,16 @@ local gameScene = SceneController.NewScene("Game");
     
 
 gameScene.Load = function()
-    local Hero = require("entities/hero");
-    local Weapon = require("entities/weapon");
-    --local Cyclope = require("entities/cyclope")
+    local Hero = require("entities/Hero");
+    local Weapon = require("entities/Weapon");
+    local Cyclope = require("entities/Cyclope")
     
     renderList = {};
 
     hero = Hero:New(screenWidth*0.5, screenHeight*0.5);
     weapon = Weapon:New(hero.position.x, hero.position.y);
     enemies = {};
+    enemies[0] = Cyclope:New(50, 50);
     
     scrollSpeed = 200;
     scrollDist = 150;
@@ -19,15 +20,14 @@ gameScene.Load = function()
     bg.img = love.graphics.newImage("images/background/Texture/TX Tileset Grass.png");
     bg.posX = 0;
     bg.posY = 0;
-
-    for key, value in pairs(renderList) do
-        print(key, value)
-    end
 end
 
 gameScene.Update = function(dt)
     hero:Update(dt);
     weapon:Update(dt);
+    for key, value in pairs(enemies) do
+        value:Update(dt);
+    end
 end
 
 gameScene.Draw = function()
