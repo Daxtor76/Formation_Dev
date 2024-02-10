@@ -1,5 +1,5 @@
 - Camera system based on bg, not on screen -> Seems ok
-- Enemy spritesheet -> à finir
+- Enemy spritesheet -> Manque Hit anim
 - Enemy states & range
 - Collisions controller
 - Hero and enemies life + damages

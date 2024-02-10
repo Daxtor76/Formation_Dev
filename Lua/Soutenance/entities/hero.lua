@@ -31,7 +31,7 @@ function Hero:New(x, y)
 end
 
 function Hero:Update(dt)
-    hero:UpdateCharacterDirectionByTarget(GetMousePos());
+    hero:UpdateCharacterDirectionByTarget(GetMousePos(), true);
     -- Hero states machine & controls
     if (love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) or 
         love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) or 

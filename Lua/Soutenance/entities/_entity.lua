@@ -60,8 +60,14 @@ function _Entity:ChangeRenderLayer(newLayer)
     self.renderLayer = newLayer;
 end
 
-function _Entity:UpdateCharacterDirectionByTarget(targetPosition)
-    local angle = math.atan2(targetPosition.y - self.position.y, targetPosition.x - self.position.x) + math.pi * 1.25;
+function _Entity:UpdateCharacterDirectionByTarget(targetPosition, useCameraOffset)
+    local angle = 0;
+    if useCameraOffset then
+        angle = math.atan2(targetPosition.y - self.position.y + cameraOffset.y, targetPosition.x - self.position.x + cameraOffset.x) + math.pi * 1.25;
+    else
+        angle = math.atan2(targetPosition.y - self.position.y, targetPosition.x - self.position.x) + math.pi * 1.25;
+    end
+
     self.characterDirection = math.floor(ConvertRadTo360Degrees(angle)/90);
     
     if self.characterDirection == 1 then
