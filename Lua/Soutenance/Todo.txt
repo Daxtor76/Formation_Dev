@@ -1,0 +1,7 @@
+- Camera system based on bg, not on screen
+- Enemy spritesheet
+- Collisions controller
+- Hero and enemies life + damages
+- Spawn controller + randomly chosen spawn points
+- Waves
+- Refacto

@@ -1,11 +1,18 @@
 screenWidth = love.graphics.getWidth();
 screenHeight = love.graphics.getHeight();
 
+cameraOffsetX = 0;
+cameraOffsetY = 0;
+
+function GetScreenCenterPosition()
+    local screenCenterX = screenWidth * 0.5 + cameraOffsetX;
+    local screenCenterY = screenHeight * 0.5 + cameraOffsetY;
+
+    return Vector.New(screenCenterX, screenCenterY);
+end
+
 function GetMousePos()
-    local mousePos = {};
-    mousePos.x = love.mouse.getX();
-    mousePos.y = love.mouse.getY();
-    return mousePos;
+    return Vector.New(love.mouse.getX(), love.mouse.getY());
 end
 
 function GetDistance(x1, y1, x2, y2)

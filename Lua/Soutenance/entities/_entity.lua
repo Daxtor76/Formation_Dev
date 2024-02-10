@@ -87,8 +87,7 @@ function _Entity:IsCollidingOnWalls()
 end
 
 function _Entity:Replace(newPosX, newPosY)
-    self.position.x = newPosX;
-    self.position.y = newPosY;
+    self.position = Vector.New(newPosX, newPosY);
 end
 
 return _Entity;

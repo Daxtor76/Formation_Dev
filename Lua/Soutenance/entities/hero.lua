@@ -51,14 +51,14 @@ function Hero:Update(dt)
     -- Hero Movement & Collision with camera bounds
     if self.state == 1 then
         self:Move(dt);
-        if GetDistance(self.position.x, self.position.y, screenWidth*0.5, screenHeight*0.5) > scrollDist then
-            -- Move background so that the hero moves in the world
-            bg.posX = bg.posX - scrollSpeed * dt * math.cos(math.atan2(self.position.y - screenHeight*0.5, self.position.x - screenWidth*0.5));
-            bg.posY = bg.posY - scrollSpeed * dt * math.sin(math.atan2(self.position.y - screenHeight*0.5, self.position.x - screenWidth*0.5));
+        if GetDistance(self.position.x, self.position.y, GetScreenCenterPosition().x, GetScreenCenterPosition().y) > scrollDist then
+            -- Move camera offset
+            cameraOffsetX = cameraOffsetX + scrollSpeed * dt * math.cos(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
+            cameraOffsetY = cameraOffsetY + scrollSpeed * dt * math.sin(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
             
             -- Replace hero so that he cannot go outside of the camera bounds
-            local newPosX = screenWidth*0.5 + scrollDist * math.cos(math.atan2(self.position.y - screenHeight*0.5, self.position.x - screenWidth*0.5));
-            local newPosY = screenHeight*0.5 + scrollDist * math.sin(math.atan2(self.position.y - screenHeight*0.5, self.position.x - screenWidth*0.5));
+            local newPosX = GetScreenCenterPosition().x + scrollDist * math.cos(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
+            local newPosY = GetScreenCenterPosition().y + scrollDist * math.sin(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
             hero:Replace(newPosX, newPosY);
         end
     end
@@ -82,7 +82,7 @@ function Hero:Draw()
 end
 
 function Hero:UpdateCharacterDirectionByMousePos()
-    local angle = math.atan2(self.position.y - GetMousePos().y, self.position.x - GetMousePos().x);
+    local angle = math.atan2(GetMousePos().y + cameraOffsetY - self.position.y, GetMousePos().x + cameraOffsetX - self.position.x);
     self.characterDirection = math.floor(((math.deg(angle)+360)%360)/45) + 1;
     
     if self.characterDirection >= 1 and self.characterDirection <= 4 then

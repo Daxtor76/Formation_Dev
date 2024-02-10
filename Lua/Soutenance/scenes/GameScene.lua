@@ -31,6 +31,8 @@ gameScene.Update = function(dt)
 end
 
 gameScene.Draw = function()
+    love.graphics.push()
+    love.graphics.translate(-cameraOffsetX, -cameraOffsetY);
     -- BG
     love.graphics.draw(bg.img, bg.posX, bg.posY, 0, 10, 10);
 
@@ -42,6 +44,8 @@ gameScene.Draw = function()
             end
         end
     end
+    love.graphics.circle("line", GetScreenCenterPosition().x, GetScreenCenterPosition().y, scrollDist);
+    love.graphics.pop();
 
     -- Crosshair
     ReplaceMouseCrosshair(hero.crosshair);
