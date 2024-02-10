@@ -8,7 +8,7 @@ gameScene.Load = function()
     
     renderList = {};
 
-    hero = Hero:New(screenWidth*0.5, screenHeight*0.5);
+    hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Weapon:New(hero.position.x, hero.position.y);
     enemies = {};
     enemies[0] = Cyclope:New(50, 50);
@@ -32,7 +32,7 @@ end
 
 gameScene.Draw = function()
     love.graphics.push()
-    love.graphics.translate(-cameraOffsetX, -cameraOffsetY);
+    love.graphics.translate(-cameraOffset.x, -cameraOffset.y);
     -- BG
     love.graphics.draw(bg.img, bg.posX, bg.posY, 0, 10, 10);
 

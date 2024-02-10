@@ -18,8 +18,8 @@ function Projectile:New(x, y, img)
     tmpProjectile.pivotY = tmpProjectile.height*0.5;
 
     tmpProjectile.speed = 800;
-    tmpProjectile.rotation = math.atan2(GetMousePos().y - weapon.position.y, GetMousePos().x - weapon.position.x) - math.pi*0.5;
-    tmpProjectile.direction = math.atan2(GetMousePos().y - weapon.position.y, GetMousePos().x - weapon.position.x);
+    tmpProjectile.rotation = math.atan2(GetMousePos().y - weapon.position.y + cameraOffset.y, GetMousePos().x - weapon.position.x + cameraOffset.x) - math.pi*0.5;
+    tmpProjectile.direction = math.atan2(GetMousePos().y - weapon.position.y + cameraOffset.y, GetMousePos().x - weapon.position.x + cameraOffset.x);
 
     table.insert(renderList, tmpProjectile);
 

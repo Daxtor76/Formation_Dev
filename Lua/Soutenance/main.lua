@@ -6,8 +6,8 @@ end
 -- Cette ligne permet d'afficher des traces dans la console pendant l'éxécution
 io.stdout:setvbuf("no")
 
-require("utils/Utils");
 require("utils/Vector");
+require("utils/Utils");
 
 SceneController = require("scenes/SceneController")
 require("scenes/MenuScene")

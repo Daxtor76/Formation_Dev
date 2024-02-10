@@ -1,5 +1,6 @@
-- Camera system based on bg, not on screen
-- Enemy spritesheet
+- Camera system based on bg, not on screen -> Seems ok
+- Enemy spritesheet -> à finir
+- Enemy states & range
 - Collisions controller
 - Hero and enemies life + damages
 - Spawn controller + randomly chosen spawn points

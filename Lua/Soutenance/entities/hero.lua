@@ -31,10 +31,8 @@ function Hero:New(x, y)
 end
 
 function Hero:Update(dt)
-    -- Hero Controls
-    hero:UpdateCharacterDirectionByMousePos();
-    
-        -- Hero states machine
+    hero:UpdateCharacterDirectionByTarget(GetMousePos());
+    -- Hero states machine & controls
     if (love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) or 
         love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) or 
         love.keyboard.isDown("d") or 
@@ -53,8 +51,8 @@ function Hero:Update(dt)
         self:Move(dt);
         if GetDistance(self.position.x, self.position.y, GetScreenCenterPosition().x, GetScreenCenterPosition().y) > scrollDist then
             -- Move camera offset
-            cameraOffsetX = cameraOffsetX + scrollSpeed * dt * math.cos(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
-            cameraOffsetY = cameraOffsetY + scrollSpeed * dt * math.sin(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
+            cameraOffset.x = cameraOffset.x + scrollSpeed * dt * math.cos(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
+            cameraOffset.y = cameraOffset.y + scrollSpeed * dt * math.sin(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
             
             -- Replace hero so that he cannot go outside of the camera bounds
             local newPosX = GetScreenCenterPosition().x + scrollDist * math.cos(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
@@ -64,13 +62,13 @@ function Hero:Update(dt)
     end
 
     -- Animations
-    self:UpdateAnim(dt, self.anims[self.state][math.floor((self.characterDirection)/2)%4], true);
+    self:UpdateAnim(dt, self.anims[self.state][self.characterDirection]);
 end
 
 function Hero:Draw()
     love.graphics.draw(
         self.spritesheet,
-        self:GetCurrentQuadToDisplay(self.anims[self.state][math.floor((self.characterDirection)/2)%4]),
+        self:GetCurrentQuadToDisplay(self.anims[self.state][self.characterDirection]),
         self.position.x, 
         self.position.y, 
         self.rotation, 
@@ -79,17 +77,6 @@ function Hero:Draw()
         self.pivotX, 
         self.pivotY
     );
-end
-
-function Hero:UpdateCharacterDirectionByMousePos()
-    local angle = math.atan2(GetMousePos().y + cameraOffsetY - self.position.y, GetMousePos().x + cameraOffsetX - self.position.x);
-    self.characterDirection = math.floor(((math.deg(angle)+360)%360)/45) + 1;
-    
-    if self.characterDirection >= 1 and self.characterDirection <= 4 then
-        self:ChangeRenderLayer(1);
-    else
-        self:ChangeRenderLayer(0);
-    end
 end
 
 function Hero:Move(dt)
@@ -109,6 +96,7 @@ function Hero:Move(dt)
     local finalDirection = directionV + directionH;
     Vector.Normalize(finalDirection);
     self.position = self.position + dt * self.speed * finalDirection;
+    print(self.position);
 end
 
 function Hero:PopulateAnims()

@@ -9,8 +9,8 @@ function Cyclope:New(x, y)
     setmetatable(tmpCyclope, {__index = Cyclope});
 
     tmpCyclope.position = Vector.New(x, y);
-    tmpCyclope.width = 24;
-    tmpCyclope.height = 24;
+    tmpCyclope.width = 25;
+    tmpCyclope.height = 26;
     tmpCyclope.pivotX = tmpCyclope.width*0.5;
     tmpCyclope.pivotY = tmpCyclope.height*0.5;
 
@@ -30,22 +30,21 @@ function Cyclope:New(x, y)
 end
 
 function Cyclope:Update(dt)
-
     -- Move
-    self:Move(dt, hero);
+    self:UpdateCharacterDirectionByTarget(hero.position);
+    self:Move(dt, hero.position);
     
     -- Animations
-    self:UpdateAnim(dt, self.anims[self.state][math.floor((self.characterDirection)/2)%4], true);
+    self:UpdateAnim(dt, self.anims[self.state][self.characterDirection]);
 end
 
 function Cyclope:Draw()
-    local angle = math.atan2(self.position.y - hero.position.y, self.position.x - hero.position.x) - math.pi*0.5;
     love.graphics.draw(
         self.spritesheet,
-        self:GetCurrentQuadToDisplay(self.anims[self.state][0]),
+        self:GetCurrentQuadToDisplay(self.anims[self.state][self.characterDirection]),
         self.position.x, 
         self.position.y, 
-        angle, 
+        self.rotation, 
         self.scaleX, 
         self.scaleY, 
         self.pivotX, 
@@ -53,13 +52,14 @@ function Cyclope:Draw()
     );
 end
 
-function Cyclope:Move(dt, target)
-    local direction = math.atan2(self.position.y - target.position.y, self.position.x - target.position.x);
-    local directionV = math.sin(direction);
-    local directionH = math.cos(direction);
-    local finalDirection = Vector.New(-directionH, -directionV);
+function Cyclope:Move(dt, targetPosition)
+    local angle = math.atan2(targetPosition.y - self.position.y, targetPosition.x - self.position.x);
+    local directionV = math.sin(angle);
+    local directionH = math.cos(angle);
+    local finalDirection = Vector.New(directionH, directionV);
     
     Vector.Normalize(finalDirection);
+    
     self.position = self.position + dt * self.speed * finalDirection;
 end
 
@@ -68,10 +68,10 @@ function Cyclope:PopulateAnims()
     local idleAnims = {};
     anims[0] = idleAnims;
 
-    local idleLeftAnim = Anim:New(self.width, self.height, 0, 3, 5, true);
-    local idleTopAnim = Anim:New(self.width, self.height, 0, 3, 5, true);
-    local idleRightAnim = Anim:New(self.width, self.height, 0, 3, 5, true);
-    local idleBottomAnim = Anim:New(self.width, self.height, 0, 3, 5, true);
+    local idleLeftAnim = Anim:New(self.width, self.height, 0, 5, 7, true);
+    local idleTopAnim = Anim:New(self.width, self.height, 6, 11, 7, true);
+    local idleRightAnim = Anim:New(self.width, self.height, 12, 17, 7, true);
+    local idleBottomAnim = Anim:New(self.width, self.height, 18, 23, 7, true);
     anims[0][0] = idleLeftAnim;
     anims[0][1] = idleTopAnim;
     anims[0][2] = idleRightAnim;

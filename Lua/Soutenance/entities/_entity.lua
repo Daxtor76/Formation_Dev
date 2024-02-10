@@ -10,13 +10,13 @@ function _Entity:New(name)
     tmpEntity.scaleX = 2;
     tmpEntity.scaleY = 2;
 
-    tmpEntity.movementDirection = 0;
     tmpEntity.characterDirection = 0;
 
     tmpEntity.state = 0;
     tmpEntity.frame = 0;
     tmpEntity.floatFrame = 0;
     tmpEntity.animTimer = 0;
+    tmpEntity.renderLayer = 0;
 
     return tmpEntity;
 end
@@ -58,6 +58,17 @@ end
 
 function _Entity:ChangeRenderLayer(newLayer)
     self.renderLayer = newLayer;
+end
+
+function _Entity:UpdateCharacterDirectionByTarget(targetPosition)
+    local angle = math.atan2(targetPosition.y - self.position.y, targetPosition.x - self.position.x) + math.pi * 1.25;
+    self.characterDirection = math.floor(ConvertRadTo360Degrees(angle)/90);
+    
+    if self.characterDirection == 1 then
+        self:ChangeRenderLayer(1);
+    else
+        self:ChangeRenderLayer(0);
+    end
 end
 
 function _Entity:ChangeState(newState)
