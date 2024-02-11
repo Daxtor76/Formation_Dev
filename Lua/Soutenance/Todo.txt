@@ -8,10 +8,16 @@
 - Enemy lifebar
 - Hero can be Hit
 - Hero can die
+- Reset game
 - Enemy end spritesheet
 - Rework hero and weapons states to be able to tweak all timings to shoot and not depend on animations
 - Spawn controller + randomly chosen spawn points
 - Waves
 - Hero can win
 - Background
+- Another enemy
 - Refacto (at least create functions with clear name so that the code is readable easily)
+
+-- If time --
+- XP & level up
+- Win perks
