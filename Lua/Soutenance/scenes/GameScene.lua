@@ -44,7 +44,7 @@ gameScene.Draw = function()
             end
         end
     end
-    love.graphics.circle("line", GetScreenCenterPosition().x, GetScreenCenterPosition().y, scrollDist);
+    --love.graphics.circle("line", GetScreenCenterPosition().x, GetScreenCenterPosition().y, scrollDist);
     love.graphics.pop();
 
     -- Crosshair

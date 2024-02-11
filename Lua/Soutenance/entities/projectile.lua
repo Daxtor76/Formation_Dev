@@ -8,16 +8,21 @@ function Projectile:New(x, y, img)
     print("Création d'une instance de "..tmpProjectile.name);
     setmetatable(tmpProjectile, {__index = Projectile});
 
+    -- Graph
     tmpProjectile.spritesheet = love.graphics.newImage(img);
     tmpProjectile.renderLayer = 0;
 
+    -- Inner
     tmpProjectile.position = Vector.New(x, y);
     tmpProjectile.width = tmpProjectile.spritesheet:getWidth();
     tmpProjectile.height = tmpProjectile.spritesheet:getHeight();
     tmpProjectile.pivotX = tmpProjectile.width*0.5;
     tmpProjectile.pivotY = tmpProjectile.height*0.5;
 
+    -- Behaviour
     tmpProjectile.speed = 800;
+
+    -- Graph
     tmpProjectile.rotation = math.atan2(GetMousePos().y - weapon.position.y + cameraOffset.y, GetMousePos().x - weapon.position.x + cameraOffset.x) - math.pi*0.5;
     tmpProjectile.direction = math.atan2(GetMousePos().y - weapon.position.y + cameraOffset.y, GetMousePos().x - weapon.position.x + cameraOffset.x);
 

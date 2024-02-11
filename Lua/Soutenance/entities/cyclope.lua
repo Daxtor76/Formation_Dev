@@ -8,17 +8,17 @@ function Cyclope:New(x, y)
     print("Création d'une instance de "..tmpCyclope.name);
     setmetatable(tmpCyclope, {__index = Cyclope});
 
+    -- Inner
     tmpCyclope.position = Vector.New(x, y);
     tmpCyclope.width = 25;
     tmpCyclope.height = 26;
     tmpCyclope.pivotX = tmpCyclope.width*0.5;
     tmpCyclope.pivotY = tmpCyclope.height*0.5;
 
+    -- Behaviour
     tmpCyclope.speed = 100;
-
-    tmpCyclope.spritesheet = love.graphics.newImage("images/enemies/Cyclope/CyclopeSpritesheet.png");
-    tmpCyclope.anims = tmpCyclope:PopulateAnims();
-    tmpCyclope.renderLayer = 0;
+    tmpCyclope.state = 1;
+    tmpCyclope.range = 100;
 
     tmpCyclope.states = {};
     tmpCyclope.states["idle"] = 0;
@@ -27,7 +27,10 @@ function Cyclope:New(x, y)
     tmpCyclope.states["die"] = 3;
     tmpCyclope.states["attack"] = 4;
 
-    tmpCyclope.state = 1;
+    -- Graph
+    tmpCyclope.spritesheet = love.graphics.newImage("images/enemies/Cyclope/CyclopeSpritesheet.png");
+    tmpCyclope.anims = tmpCyclope:PopulateAnims();
+    tmpCyclope.renderLayer = 0;
 
     table.insert(renderList, tmpCyclope);
 
@@ -35,9 +38,19 @@ function Cyclope:New(x, y)
 end
 
 function Cyclope:Update(dt)
-    -- Move
+    -- Behaviour
     self:UpdateCharacterDirectionByTarget(hero.position, false);
-    self:Move(dt, hero.position);
+    if self.state == 1 then
+        -- Move
+        self:Move(dt, hero.position);
+        if GetDistance(self.position, hero.position) <= self.range then
+            self.state = 4;
+        end
+    elseif self.state == 4 then
+        if GetDistance(self.position, hero.position) > self.range then
+            self.state = 1;
+        end
+    end
     
     -- Animations
     self:UpdateAnim(dt, self.anims[self.state][self.characterDirection]);
@@ -55,6 +68,10 @@ function Cyclope:Draw()
         self.pivotX, 
         self.pivotY
     );
+
+    love.graphics.setColor(255, 0, 0, 1);
+    love.graphics.circle("line", self.position.x, self.position.y, self.range);
+    love.graphics.setColor(255, 255, 255, 1);
 end
 
 function Cyclope:Move(dt, targetPosition)
@@ -103,10 +120,10 @@ function Cyclope:PopulateAnims()
     anims[3][2] = dieRightAnim;
     anims[3][3] = dieBottomAnim;
 
-    local attackLeftAnim = Anim:New(self.width, self.height, 48, 53, 7, false);
-    local attackTopAnim = Anim:New(self.width, self.height, 54, 59, 7, false);
-    local attackRightAnim = Anim:New(self.width, self.height, 60, 65, 7, false);
-    local attackBottomAnim = Anim:New(self.width, self.height, 66, 71, 7, false);
+    local attackLeftAnim = Anim:New(self.width, self.height, 48, 53, self.attackSpeed, true);
+    local attackTopAnim = Anim:New(self.width, self.height, 54, 59, self.attackSpeed, true);
+    local attackRightAnim = Anim:New(self.width, self.height, 60, 65, self.attackSpeed, true);
+    local attackBottomAnim = Anim:New(self.width, self.height, 66, 71, self.attackSpeed, true);
     anims[4][0] = attackLeftAnim;
     anims[4][1] = attackTopAnim;
     anims[4][2] = attackRightAnim;

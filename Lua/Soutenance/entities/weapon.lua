@@ -9,16 +9,14 @@ function Weapon:New(x, y)
     print("Création d'une instance de "..tmpWeapon.name);
     setmetatable(tmpWeapon, {__index = Weapon});
 
+    -- Inner
     tmpWeapon.position = Vector.New(x, y);
     tmpWeapon.width = 48;
     tmpWeapon.height = 48;
     tmpWeapon.pivotX = tmpWeapon.width*0.5;
     tmpWeapon.pivotY = tmpWeapon.height*0.5;
-
-    tmpWeapon.spritesheet = love.graphics.newImage("images/player/bow.png");
-    tmpWeapon.anims = tmpWeapon:PopulateAnims();
-    tmpWeapon.renderLayer = 0;
     
+    -- Behaviour
     tmpWeapon.states = {};
     tmpWeapon.states["idle"] = 0;
     tmpWeapon.states["charge"] = 1;
@@ -29,6 +27,11 @@ function Weapon:New(x, y)
     tmpWeapon.chargeCurrentTimer = tmpWeapon.chargeTimer;
     tmpWeapon.canShoot = false;
     tmpWeapon.projectiles = {};
+
+    -- Graph
+    tmpWeapon.spritesheet = love.graphics.newImage("images/player/bow.png");
+    tmpWeapon.anims = tmpWeapon:PopulateAnims();
+    tmpWeapon.renderLayer = 0;
 
     table.insert(renderList, tmpWeapon);
 
@@ -112,8 +115,8 @@ function Weapon:PopulateAnims()
     anims[2] = shootAnims;
 
     local idleAnim = Anim:New(self.width, self.height, 0, 0, 1, true);
-    local chargeAnim = Anim:New(self.width, self.height, 1, 3, 5, false);
-    local shootAnims = Anim:New(self.width, self.height, 4, 5, 5, false);
+    local chargeAnim = Anim:New(self.width, self.height, 1, 3, self.attackSpeed, false);
+    local shootAnims = Anim:New(self.width, self.height, 4, 5, self.attackSpeed, false);
     anims[0][0] = idleAnim;
     anims[1][0] = chargeAnim;
     anims[2][0] = shootAnims;

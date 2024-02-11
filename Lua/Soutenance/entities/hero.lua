@@ -8,22 +8,25 @@ function Hero:New(x, y)
     print("Création d'une instance de "..tmpHero.name);
     setmetatable(tmpHero, {__index = Hero});
 
+    -- Inner
     tmpHero.position = Vector.New(x, y);
     tmpHero.width = 24;
     tmpHero.height = 24;
     tmpHero.pivotX = tmpHero.width*0.5;
     tmpHero.pivotY = tmpHero.height*0.5;
 
+    -- Behaviour
     tmpHero.speed = 150;
-
-    tmpHero.spritesheet = love.graphics.newImage("images/player/character.png");
-    tmpHero.crosshair = love.graphics.newImage("images/player/crosshair.png");
-    tmpHero.anims = tmpHero:PopulateAnims();
-    tmpHero.renderLayer = 1;
 
     tmpHero.states = {};
     tmpHero.states["idle"] = 0;
     tmpHero.states["run"] = 1;
+
+    -- Graph
+    tmpHero.spritesheet = love.graphics.newImage("images/player/character.png");
+    tmpHero.crosshair = love.graphics.newImage("images/player/crosshair.png");
+    tmpHero.anims = tmpHero:PopulateAnims();
+    tmpHero.renderLayer = 1;
 
     table.insert(renderList, tmpHero);
 
@@ -49,7 +52,7 @@ function Hero:Update(dt)
     -- Hero Movement & Collision with camera bounds
     if self.state == 1 then
         self:Move(dt);
-        if GetDistance(self.position.x, self.position.y, GetScreenCenterPosition().x, GetScreenCenterPosition().y) > scrollDist then
+        if GetDistance(self.position, GetScreenCenterPosition()) > scrollDist then
             -- Move camera offset
             cameraOffset.x = cameraOffset.x + scrollSpeed * dt * math.cos(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
             cameraOffset.y = cameraOffset.y + scrollSpeed * dt * math.sin(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
@@ -96,7 +99,6 @@ function Hero:Move(dt)
     local finalDirection = directionV + directionH;
     Vector.Normalize(finalDirection);
     self.position = self.position + dt * self.speed * finalDirection;
-    print(self.position);
 end
 
 function Hero:PopulateAnims()

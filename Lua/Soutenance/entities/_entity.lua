@@ -5,14 +5,19 @@ function _Entity:New(name)
     local tmpEntity = {};
     setmetatable(tmpEntity, _Entity);
 
+    -- Inner
     tmpEntity.name = name;
     tmpEntity.rotation = 0;
     tmpEntity.scaleX = 2;
     tmpEntity.scaleY = 2;
 
-    tmpEntity.characterDirection = 0;
-
+    -- Behaviour
     tmpEntity.state = 0;
+    tmpEntity.range = 200;
+    tmpEntity.attackSpeed = 5;
+
+    -- Graph
+    tmpEntity.characterDirection = 0;
     tmpEntity.frame = 0;
     tmpEntity.floatFrame = 0;
     tmpEntity.animTimer = 0;

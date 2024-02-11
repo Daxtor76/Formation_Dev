@@ -14,8 +14,8 @@ function GetMousePos()
     return Vector.New(love.mouse.getX(), love.mouse.getY());
 end
 
-function GetDistance(x1, y1, x2, y2)
-    return math.sqrt((x1 - x2)^2 + (y1 - y2)^2);
+function GetDistance(pos1, pos2)
+    return math.sqrt((pos1.x - pos2.x)^2 + (pos1.y - pos2.y)^2);
 end
 
 function ReplaceMouseCrosshair(img)
@@ -23,7 +23,13 @@ function ReplaceMouseCrosshair(img)
     love.graphics.draw(img, GetMousePos().x, GetMousePos().y, 0, 0.75, 0.75, img:getWidth()*0.5, img:getHeight()*0.5);
 end
 
-function GetSign(n) return n>0 and 1 or n<0 and -1 or 0 end
+function GetSign(n) 
+    return n > 0 and 1 or n < 0 and -1 or 0;
+end
+
+function GetAngle(posObj1, posObj2)
+    return math.atan2(posObj1.y - posObj2.y, posObj1.x - posObj2.x);
+end
 
 function ConvertRadTo360Degrees(angle)
     return (math.deg(angle)+360)%360;
