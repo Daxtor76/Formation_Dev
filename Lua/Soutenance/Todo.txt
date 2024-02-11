@@ -14,6 +14,7 @@
 - Spawn controller + randomly chosen spawn points
 - Waves
 - Hero can win
+- Space partitionning : tu partage ton monde en sous-espaces, ça te permet de regarder les collisions qu'entre les objets qui sont "dans le même coin" (keywords: Binary Space Partitionning, Quadtree, Octree, Bucket Space Partitionning)
 - Background
 - Another enemy
 - Refacto (at least create functions with clear name so that the code is readable easily)
