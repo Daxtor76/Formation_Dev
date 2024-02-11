@@ -15,7 +15,18 @@ function Cyclope:New(x, y)
     tmpCyclope.pivotX = tmpCyclope.width*0.5;
     tmpCyclope.pivotY = tmpCyclope.height*0.5;
 
+    -- Graph
+    tmpCyclope.spritesheet = love.graphics.newImage("images/enemies/Cyclope/CyclopeSpritesheet.png");
+    tmpCyclope.anims = tmpCyclope:PopulateAnims();
+    tmpCyclope.renderLayer = 0;
+
     -- Behaviour
+    tmpCyclope.collider = CollisionController.NewCollider(
+        tmpCyclope.position.x + cameraOffset.x,
+        tmpCyclope.position.y + cameraOffset.y,
+        tmpCyclope.width,
+        tmpCyclope.height,
+        tmpCyclope);
     tmpCyclope.speed = 100;
     tmpCyclope.state = 1;
     tmpCyclope.range = 100;
@@ -27,10 +38,8 @@ function Cyclope:New(x, y)
     tmpCyclope.states["die"] = 3;
     tmpCyclope.states["attack"] = 4;
 
-    -- Graph
-    tmpCyclope.spritesheet = love.graphics.newImage("images/enemies/Cyclope/CyclopeSpritesheet.png");
-    tmpCyclope.anims = tmpCyclope:PopulateAnims();
-    tmpCyclope.renderLayer = 0;
+    tmpCyclope.invincibleTimer = 1;
+    tmpCyclope.currentInvincibleTimer = tmpCyclope.invincibleTimer;
 
     table.insert(renderList, tmpCyclope);
 
@@ -44,11 +53,11 @@ function Cyclope:Update(dt)
         -- Move
         self:Move(dt, hero.position);
         if GetDistance(self.position, hero.position) <= self.range then
-            self.state = 4;
+            self:ChangeState("attack");
         end
     elseif self.state == 4 then
         if GetDistance(self.position, hero.position) > self.range then
-            self.state = 1;
+            self:ChangeState("run");
         end
     end
     
@@ -74,6 +83,13 @@ function Cyclope:Draw()
     love.graphics.setColor(255, 255, 255, 1);
 end
 
+function Cyclope:CanTakeDamages(dt)
+    if self.currentInvincibleTimer > 0 then
+        self.currentInvincibleTimer = self.currentInvincibleTimer - dt;
+    end
+    return self.currentInvincibleTimer <= 0;
+end
+
 function Cyclope:Move(dt, targetPosition)
     local angle = math.atan2(targetPosition.y - self.position.y, targetPosition.x - self.position.x);
     local directionV = math.sin(angle);
@@ -83,6 +99,7 @@ function Cyclope:Move(dt, targetPosition)
     Vector.Normalize(finalDirection);
     
     self.position = self.position + dt * self.speed * finalDirection;
+    self.collider.position = self.position;
 end
 
 function Cyclope:PopulateAnims()

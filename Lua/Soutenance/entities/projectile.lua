@@ -19,16 +19,27 @@ function Projectile:New(x, y, img)
     tmpProjectile.pivotX = tmpProjectile.width*0.5;
     tmpProjectile.pivotY = tmpProjectile.height*0.5;
 
-    -- Behaviour
-    tmpProjectile.speed = 800;
-
     -- Graph
     tmpProjectile.rotation = math.atan2(GetMousePos().y - weapon.position.y + cameraOffset.y, GetMousePos().x - weapon.position.x + cameraOffset.x) - math.pi*0.5;
     tmpProjectile.direction = math.atan2(GetMousePos().y - weapon.position.y + cameraOffset.y, GetMousePos().x - weapon.position.x + cameraOffset.x);
 
+    -- Behaviour
+    tmpProjectile.speed = 800;
+    tmpProjectile.collider = CollisionController.NewCollider(
+        tmpProjectile.position.x + cameraOffset.x,
+        tmpProjectile.position.y - tmpProjectile.height * 0.5 + cameraOffset.y,
+        15,
+        15,
+        tmpProjectile,
+        Projectile.OnHit);
+
     table.insert(renderList, tmpProjectile);
 
     return tmpProjectile;
+end
+
+Projectile.OnHit = function(collider, other)
+    print(other.parent.speed);
 end
 
 function Projectile:Move(dt)
@@ -38,6 +49,7 @@ function Projectile:Move(dt)
     local finalDirection = Vector.New(directionH, directionV);
     Vector.Normalize(finalDirection);
     self.position = self.position + dt * self.speed * finalDirection;
+    self.collider.position = self.position;
 end
 
 function Projectile:Update(dt)

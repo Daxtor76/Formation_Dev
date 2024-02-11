@@ -86,7 +86,7 @@ function _Entity:ChangeState(newState)
     self.floatFrame = 0;
     self.animTimer = 0;
     self.state = self.states[newState];
-    print("Entity goes in state "..self.state);
+    --print("Entity goes in state "..self.state);
 end
 
 function _Entity:IsCollidingOnWalls()

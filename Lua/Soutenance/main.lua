@@ -9,6 +9,8 @@ io.stdout:setvbuf("no")
 require("utils/Vector");
 require("utils/Utils");
 
+CollisionController = require("collisions/CollisionController");
+
 SceneController = require("scenes/SceneController")
 require("scenes/MenuScene")
 require("scenes/GameScene")

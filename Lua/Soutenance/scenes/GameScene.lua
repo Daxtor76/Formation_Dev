@@ -1,6 +1,5 @@
 local gameScene = SceneController.NewScene("Game");
     
-
 gameScene.Load = function()
     local Hero = require("entities/Hero");
     local Weapon = require("entities/Weapon");
@@ -20,6 +19,8 @@ gameScene.Load = function()
     bg.img = love.graphics.newImage("images/background/Texture/TX Tileset Grass.png");
     bg.posX = 0;
     bg.posY = 0;
+
+    col1 = CollisionController.NewCollider(200, 200, 100, 100);
 end
 
 gameScene.Update = function(dt)
@@ -28,6 +29,7 @@ gameScene.Update = function(dt)
     for key, value in pairs(enemies) do
         value:Update(dt);
     end
+    CollisionController.CheckCollisions();
 end
 
 gameScene.Draw = function()
@@ -44,6 +46,7 @@ gameScene.Draw = function()
             end
         end
     end
+    CollisionController.DrawColliders();
     --love.graphics.circle("line", GetScreenCenterPosition().x, GetScreenCenterPosition().y, scrollDist);
     love.graphics.pop();
 
