@@ -1,7 +1,7 @@
 local _Entity = {};
 Anim = require("animation/Anim");
 
-function _Entity:New(name)
+function _Entity:New(name, tag)
     local tmpEntity = {};
     setmetatable(tmpEntity, _Entity);
 
@@ -10,6 +10,8 @@ function _Entity:New(name)
     tmpEntity.rotation = 0;
     tmpEntity.scaleX = 2;
     tmpEntity.scaleY = 2;
+    tmpEntity.enabled = true;
+    tmpEntity.tag = tag;
 
     -- Behaviour
     tmpEntity.state = 0;
@@ -86,7 +88,7 @@ function _Entity:ChangeState(newState)
     self.floatFrame = 0;
     self.animTimer = 0;
     self.state = self.states[newState];
-    --print("Entity goes in state "..self.state);
+    print("Entity goes in state "..self.state);
 end
 
 function _Entity:IsCollidingOnWalls()

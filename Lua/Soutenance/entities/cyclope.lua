@@ -4,7 +4,7 @@ Cyclope = {};
 setmetatable(Cyclope, {__index = _Entity});
 
 function Cyclope:New(x, y)
-    local tmpCyclope = _Entity:New("Cyclope");
+    local tmpCyclope = _Entity:New("Cyclope", "enemy");
     print("Création d'une instance de "..tmpCyclope.name);
     setmetatable(tmpCyclope, {__index = Cyclope});
 
@@ -22,11 +22,12 @@ function Cyclope:New(x, y)
 
     -- Behaviour
     tmpCyclope.collider = CollisionController.NewCollider(
-        tmpCyclope.position.x + cameraOffset.x,
-        tmpCyclope.position.y + cameraOffset.y,
+        tmpCyclope.position.x - tmpCyclope.width * 0.5 + cameraOffset.x,
+        tmpCyclope.position.y - tmpCyclope.height * 0.5 + cameraOffset.y,
         tmpCyclope.width,
         tmpCyclope.height,
-        tmpCyclope);
+        tmpCyclope,
+        tmpCyclope.tag);
     tmpCyclope.speed = 100;
     tmpCyclope.state = 1;
     tmpCyclope.range = 100;
@@ -35,13 +36,17 @@ function Cyclope:New(x, y)
     tmpCyclope.states["idle"] = 0;
     tmpCyclope.states["run"] = 1;
     tmpCyclope.states["hit"] = 2;
-    tmpCyclope.states["die"] = 3;
-    tmpCyclope.states["attack"] = 4;
+    tmpCyclope.states["recover"] = 3;
+    tmpCyclope.states["die"] = 4;
+    tmpCyclope.states["attack"] = 5;
 
     tmpCyclope.invincibleTimer = 1;
     tmpCyclope.currentInvincibleTimer = tmpCyclope.invincibleTimer;
+    tmpCyclope.canTakeDamages = true;
+    tmpCyclope.life = 5;
 
     table.insert(renderList, tmpCyclope);
+    table.insert(entities, tmpCyclope);
 
     return tmpCyclope;
 end
@@ -55,7 +60,25 @@ function Cyclope:Update(dt)
         if GetDistance(self.position, hero.position) <= self.range then
             self:ChangeState("attack");
         end
+    elseif self.state == 2 then
+        self.life = self.life - 1;
+        print(self.life);
+        if self.life <= 0 then
+            self:ChangeState("die");
+        else
+            self:ChangeState("recover");
+        end
+    elseif self.state == 3 then
+        if self:IsAnimOver(dt, self.anims[self.state][self.characterDirection]) then
+            self.currentInvincibleTimer = self.invincibleTimer;
+            self:ChangeState("run");
+        end
     elseif self.state == 4 then
+        self.collider.enabled = false;
+        if self:IsAnimOver(dt, self.anims[self.state][self.characterDirection]) then
+            self.enabled = false;
+        end
+    elseif self.state == 5 then
         if GetDistance(self.position, hero.position) > self.range then
             self:ChangeState("run");
         end
@@ -83,13 +106,6 @@ function Cyclope:Draw()
     love.graphics.setColor(255, 255, 255, 1);
 end
 
-function Cyclope:CanTakeDamages(dt)
-    if self.currentInvincibleTimer > 0 then
-        self.currentInvincibleTimer = self.currentInvincibleTimer - dt;
-    end
-    return self.currentInvincibleTimer <= 0;
-end
-
 function Cyclope:Move(dt, targetPosition)
     local angle = math.atan2(targetPosition.y - self.position.y, targetPosition.x - self.position.x);
     local directionV = math.sin(angle);
@@ -99,7 +115,8 @@ function Cyclope:Move(dt, targetPosition)
     Vector.Normalize(finalDirection);
     
     self.position = self.position + dt * self.speed * finalDirection;
-    self.collider.position = self.position;
+    self.collider.position.x = self.position.x - self.width * 0.5;
+    self.collider.position.y = self.position.y - self.height * 0.5;
 end
 
 function Cyclope:PopulateAnims()
@@ -109,11 +126,13 @@ function Cyclope:PopulateAnims()
     local hitAnims = {};
     local dieAnims = {};
     local attackAnims = {};
+    local recoverAnims = {};
     anims[0] = idleAnims;
     anims[1] = runAnims;
     anims[2] = hitAnims;
-    anims[3] = dieAnims;
-    anims[4] = attackAnims;
+    anims[3] = recoverAnims;
+    anims[4] = dieAnims;
+    anims[5] = attackAnims;
 
     local runLeftAnim = Anim:New(self.width, self.height, 0, 5, 7, true);
     local runTopAnim = Anim:New(self.width, self.height, 6, 11, 7, true);
@@ -127,24 +146,32 @@ function Cyclope:PopulateAnims()
     anims[1][1] = runTopAnim;
     anims[1][2] = runRightAnim;
     anims[1][3] = runBottomAnim;
+    anims[2][0] = runLeftAnim;
+    anims[2][1] = runTopAnim;
+    anims[2][2] = runRightAnim;
+    anims[2][3] = runBottomAnim;
+    anims[3][0] = runLeftAnim;
+    anims[3][1] = runTopAnim;
+    anims[3][2] = runRightAnim;
+    anims[3][3] = runBottomAnim;
 
     local dieLeftAnim = Anim:New(self.width, self.height, 24, 29, 7, false);
     local dieTopAnim = Anim:New(self.width, self.height, 30, 35, 7, false);
     local dieRightAnim = Anim:New(self.width, self.height, 36, 41, 7, false);
     local dieBottomAnim = Anim:New(self.width, self.height, 42, 47, 7, false);
-    anims[3][0] = dieLeftAnim;
-    anims[3][1] = dieTopAnim;
-    anims[3][2] = dieRightAnim;
-    anims[3][3] = dieBottomAnim;
+    anims[4][0] = dieLeftAnim;
+    anims[4][1] = dieTopAnim;
+    anims[4][2] = dieRightAnim;
+    anims[4][3] = dieBottomAnim;
 
     local attackLeftAnim = Anim:New(self.width, self.height, 48, 53, self.attackSpeed, true);
     local attackTopAnim = Anim:New(self.width, self.height, 54, 59, self.attackSpeed, true);
     local attackRightAnim = Anim:New(self.width, self.height, 60, 65, self.attackSpeed, true);
     local attackBottomAnim = Anim:New(self.width, self.height, 66, 71, self.attackSpeed, true);
-    anims[4][0] = attackLeftAnim;
-    anims[4][1] = attackTopAnim;
-    anims[4][2] = attackRightAnim;
-    anims[4][3] = attackBottomAnim;
+    anims[5][0] = attackLeftAnim;
+    anims[5][1] = attackTopAnim;
+    anims[5][2] = attackRightAnim;
+    anims[5][3] = attackBottomAnim;
 
     return anims;
 end

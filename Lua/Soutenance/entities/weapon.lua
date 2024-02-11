@@ -5,7 +5,7 @@ local Weapon = {};
 setmetatable(Weapon, {__index = _Entity});
 
 function Weapon:New(x, y)
-    local tmpWeapon = _Entity:New("Weapon");
+    local tmpWeapon = _Entity:New("Weapon", "weapon");
     print("Création d'une instance de "..tmpWeapon.name);
     setmetatable(tmpWeapon, {__index = Weapon});
 
@@ -26,7 +26,6 @@ function Weapon:New(x, y)
     tmpWeapon.chargeTimer = 0.4;
     tmpWeapon.chargeCurrentTimer = tmpWeapon.chargeTimer;
     tmpWeapon.canShoot = false;
-    tmpWeapon.projectiles = {};
 
     -- Graph
     tmpWeapon.spritesheet = love.graphics.newImage("images/player/bow.png");
@@ -74,16 +73,11 @@ function Weapon:Update(dt)
     elseif self.state == 3 then
         self.canShoot = false;
         self:ChangeState("reload");
-        table.insert(self.projectiles, Projectile:New(weapon.position.x, weapon.position.y, "images/player/arrow.png"));
+        proj = Projectile:New(weapon.position.x, weapon.position.y, "images/player/arrow.png");
     end
 
     -- Animations
     self:UpdateAnim(dt, self.anims[self.state][0]);
-
-    -- Projectiles
-    for key, value in pairs(self.projectiles) do
-        value:Update(dt);
-    end
 end
 
 function Weapon:Draw()
@@ -99,10 +93,6 @@ function Weapon:Draw()
         self.pivotX,
         self.pivotY
     );
-
-    for key, value in pairs(self.projectiles) do
-        value:Draw();
-    end
 end
 
 function Weapon:PopulateAnims()

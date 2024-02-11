@@ -4,7 +4,7 @@ local Projectile = {};
 setmetatable(Projectile, {__index = _Entity});
 
 function Projectile:New(x, y, img)
-    local tmpProjectile = _Entity:New("Arrow");
+    local tmpProjectile = _Entity:New("Arrow", "projectile");
     print("Création d'une instance de "..tmpProjectile.name);
     setmetatable(tmpProjectile, {__index = Projectile});
 
@@ -31,15 +31,24 @@ function Projectile:New(x, y, img)
         15,
         15,
         tmpProjectile,
+        tmpProjectile.tag,
         Projectile.OnHit);
 
+    table.insert(entities, tmpProjectile);
     table.insert(renderList, tmpProjectile);
 
     return tmpProjectile;
 end
 
 Projectile.OnHit = function(collider, other)
-    print(other.parent.speed);
+    if other.parent.tag == "enemy" then
+        other.parent:ChangeState("hit");
+        collider.enabled = false;
+        collider.parent.enabled = false;
+    elseif other.tag == "wall" then
+        print("arrow destroyed")
+        collider.enabled = false;
+    end
 end
 
 function Projectile:Move(dt)

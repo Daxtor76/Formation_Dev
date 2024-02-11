@@ -1,8 +1,17 @@
-- Camera system based on bg, not on screen -> Seems ok
+- Camera system based on bg, not on screen -> ok
 - Enemy spritesheet -> Manque Hit anim
-- Enemy states & range
-- Collisions controller
-- Hero and enemies life + damages
+- Enemy states & range -> ok
+- Collisions controller -> ok
+- Enemy life -> ok
+- Enemy death -> ok
+- Destroy projectiles on walls -> Not best way to do it (impossible to hit enemies from very far), but will serv on decor
+- Enemy lifebar
+- Hero can be Hit
+- Hero can die
+- Enemy end spritesheet
+- Rework hero and weapons states to be able to tweak all timings to shoot and not depend on animations
 - Spawn controller + randomly chosen spawn points
 - Waves
-- Refacto
+- Hero can win
+- Background
+- Refacto (at least create functions with clear name so that the code is readable easily)

@@ -9,8 +9,9 @@ gameScene.Load = function()
 
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Weapon:New(hero.position.x, hero.position.y);
-    enemies = {};
-    enemies[0] = Cyclope:New(50, 50);
+
+    entities = {};
+    entities[1] = Cyclope:New(50, 50);
     
     scrollSpeed = 200;
     scrollDist = 150;
@@ -20,16 +21,28 @@ gameScene.Load = function()
     bg.posX = 0;
     bg.posY = 0;
 
-    col1 = CollisionController.NewCollider(200, 200, 100, 100);
+    screenBounds = {};
+    screenBounds[0] = CollisionController.NewCollider(0, 0, screenWidth, 1, "", "wall");
+    screenBounds[1] = CollisionController.NewCollider(0, 0, screenWidth, 1, "", "wall");
+    screenBounds[2] = CollisionController.NewCollider(0, 0, 1, screenHeight, "", "wall");
+    screenBounds[3] = CollisionController.NewCollider(0, 0, 1, screenHeight, "", "wall");
 end
 
 gameScene.Update = function(dt)
     hero:Update(dt);
     weapon:Update(dt);
-    for key, value in pairs(enemies) do
+    -- Entities
+    for key, value in pairs(entities) do
         value:Update(dt);
     end
+
+    for key, value in pairs(screenBounds) do
+        value.Move()
+    end
+    gameScene.MoveScreenBounds();
     CollisionController.CheckCollisions();
+
+    gameScene.CleanLists();
 end
 
 gameScene.Draw = function()
@@ -64,6 +77,31 @@ end
 
 gameScene.MouseButtonReleased = function(button)
     --print(button.." released")
+end
+
+gameScene.CleanLists = function()
+    for i=#renderList, 1, -1 do
+        if renderList[i].enabled == false then
+            table.remove(renderList, i);
+        end
+    end
+    for i=#CollisionController.colliders, 1, -1 do
+        if CollisionController.colliders[i].enabled == false then
+            table.remove(CollisionController.colliders, i);
+        end
+    end
+    for i=#entities, 1, -1 do
+        if entities[i].enabled == false then
+            table.remove(entities, i);
+        end
+    end
+end
+
+gameScene.MoveScreenBounds = function()
+    screenBounds[0].Move(GetScreenCenterPosition().x - screenWidth * 0.5, GetScreenCenterPosition().y - screenHeight * 0.5);
+    screenBounds[1].Move(GetScreenCenterPosition().x - screenWidth * 0.5, GetScreenCenterPosition().y + screenHeight * 0.5);
+    screenBounds[2].Move(GetScreenCenterPosition().x - screenWidth * 0.5, GetScreenCenterPosition().y - screenHeight * 0.5);
+    screenBounds[3].Move(GetScreenCenterPosition().x + screenWidth * 0.5, GetScreenCenterPosition().y - screenHeight * 0.5);
 end
 
 return gameScene;
