@@ -43,7 +43,8 @@ function Cyclope:New(x, y)
     tmpCyclope.invincibleTimer = 1;
     tmpCyclope.currentInvincibleTimer = tmpCyclope.invincibleTimer;
     tmpCyclope.canTakeDamages = true;
-    tmpCyclope.life = 5;
+    tmpCyclope.maxlife = 5;
+    tmpCyclope.life = tmpCyclope.maxlife;
 
     table.insert(renderList, tmpCyclope);
     table.insert(entities, tmpCyclope);
@@ -89,6 +90,7 @@ function Cyclope:Update(dt)
 end
 
 function Cyclope:Draw()
+    -- Character
     love.graphics.draw(
         self.spritesheet,
         self:GetCurrentQuadToDisplay(self.anims[self.state][self.characterDirection]),
@@ -100,6 +102,15 @@ function Cyclope:Draw()
         self.pivotX, 
         self.pivotY
     );
+
+    -- Life gauge
+    if self.life > 0 then
+        love.graphics.setColor(255, 0, 0, 1);
+        love.graphics.rectangle("fill", self.position.x - self.width, self.position.y + self.height, 60, 10);
+        love.graphics.setColor(0, 255, 0, 1);
+        love.graphics.rectangle("fill", self.position.x - self.width, self.position.y + self.height, 60 * (self.life / self.maxlife), 10);
+        love.graphics.setColor(255, 255, 255, 1);
+    end
 
     love.graphics.setColor(255, 0, 0, 1);
     love.graphics.circle("line", self.position.x, self.position.y, self.range);

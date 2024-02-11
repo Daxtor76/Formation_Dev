@@ -12,6 +12,9 @@ gameScene.Load = function()
 
     entities = {};
     entities[1] = Cyclope:New(50, 50);
+    entities[2] = Cyclope:New(800, 50);
+    entities[3] = Cyclope:New(800, 800);
+    entities[4] = Cyclope:New(50, 800);
     
     scrollSpeed = 200;
     scrollDist = 150;

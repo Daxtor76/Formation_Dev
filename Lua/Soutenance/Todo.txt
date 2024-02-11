@@ -5,7 +5,7 @@
 - Enemy life -> ok
 - Enemy death -> ok
 - Destroy projectiles on walls -> Not best way to do it (impossible to hit enemies from very far), but will serv on decor
-- Enemy lifebar
+- Enemy lifebar -> ok
 - Hero can be Hit
 - Hero can die
 - Reset game
