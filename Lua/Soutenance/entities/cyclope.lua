@@ -24,9 +24,8 @@ function Cyclope:New(x, y)
         tmpCyclope,
         tmpCyclope.tag);
 
-    tmpCyclope.speed = 100;
+    tmpCyclope.speed = 200;
 
-    tmpCyclope.states = {};
     tmpCyclope.states["idle"] = 0;
     tmpCyclope.states["run"] = 1;
     tmpCyclope.states["hit"] = 2;
@@ -38,7 +37,7 @@ function Cyclope:New(x, y)
     
     tmpCyclope.range = 100;
 
-    tmpCyclope.attackSpeed = 3;
+    tmpCyclope.attackSpeed = 1.2;
     tmpCyclope.currentAttackTimer = tmpCyclope.attackSpeed;
 
     tmpCyclope.maxlife = 5;
@@ -101,9 +100,11 @@ function Cyclope:Update(dt)
         if GetDistance(self.position, hero.position) <= self.range then
             self.canAttack = self:CanAttack(dt);
             if self.canAttack then
-                print("Attack")
+                print("Attack");
             end
         else
+            self.currentAttackTimer = self.attackSpeed;
+            self.anims[self.state][self.characterDirection]:ResetTimer();
             self:ChangeState("run");
         end
     end
@@ -172,10 +173,10 @@ function Cyclope:PopulateAnims()
     anims[4] = dieAnims;
     anims[5] = attackAnims;
 
-    local runLeftAnim = Anim:New(self.width, self.height, 0, 5, 0.5, true);
-    local runTopAnim = Anim:New(self.width, self.height, 6, 11, 0.5, true);
-    local runRightAnim = Anim:New(self.width, self.height, 12, 17, 0.5, true);
-    local runBottomAnim = Anim:New(self.width, self.height, 18, 23, 0.5, true);
+    local runLeftAnim = Anim:New(self.width, self.height, 0, 5, 50/self.speed, true);
+    local runTopAnim = Anim:New(self.width, self.height, 6, 11, 50/self.speed, true);
+    local runRightAnim = Anim:New(self.width, self.height, 12, 17, 50/self.speed, true);
+    local runBottomAnim = Anim:New(self.width, self.height, 18, 23, 50/self.speed, true);
     anims[0][0] = runLeftAnim;
     anims[0][1] = runTopAnim;
     anims[0][2] = runRightAnim;

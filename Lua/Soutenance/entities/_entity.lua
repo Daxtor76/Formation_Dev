@@ -27,8 +27,8 @@ function _Entity:New(name, tag)
 
     -- Graph
     tmpEntity.characterDirection = 0;
-    tmpEntity.frame = 0;
-    tmpEntity.floatFrame = 0;
+    tmpEntity.frame = 1;
+    --tmpEntity.floatFrame = 0;
     tmpEntity.animUpdateTimer = 0;
     tmpEntity.animTimer = 0;
     tmpEntity.renderLayer = 0;
@@ -69,10 +69,14 @@ end
 
 function _Entity:UpdateAnim(deltaTime, animation)
     animation.currentTimer = animation.currentTimer - deltaTime;
-        if animation.currentTimer <= 0 then
+    if animation.currentTimer <= 0 then
+        if animation.loop then
             self.frame = (self.frame + 1)%animation.framesCount;
-            animation.currentTimer = animation.duration / animation.framesCount;
+        else
+            self.frame = (self.frame + 1);
         end
+        animation.currentTimer = animation.duration / animation.framesCount;
+    end
 end
 
 function _Entity:IsAnimOver(deltaTime, animation)
@@ -98,8 +102,9 @@ function _Entity:UpdateCharacterDirectionByTarget(targetPosition, useCameraOffse
 end
 
 function _Entity:ChangeState(newState)
-    self.floatFrame = 0;
     self.animTimer = 0;
+    self.frame = 0;
+    
     self.state = self.states[newState];
     print("Entity goes in state "..self.state);
 end

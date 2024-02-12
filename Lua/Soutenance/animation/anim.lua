@@ -2,6 +2,7 @@ local Anim = {};
 
 function Anim:New(width, height, from, to, duration, loop)
     local tmpAnim = {};
+    setmetatable(tmpAnim, {__index = Anim});
 
     tmpAnim.width = width;
     tmpAnim.height = height;
@@ -13,6 +14,10 @@ function Anim:New(width, height, from, to, duration, loop)
     tmpAnim.framesCount = tmpAnim.to - tmpAnim.from + 1;
     tmpAnim.currentTimer = tmpAnim.duration / tmpAnim.framesCount;
     return tmpAnim;
+end
+
+function Anim:ResetTimer()
+    self.currentTimer = self.duration / self.framesCount;
 end
 
 return Anim;
