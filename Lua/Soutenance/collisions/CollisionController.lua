@@ -11,10 +11,6 @@ collisionController.CheckCollisions = function()
     end
 end
 
-collisionController.OnHit = function(collider, other)
-    print(collider, other);
-end
-
 collisionController.DrawColliders = function()
     for __, collider in ipairs(collisionController.colliders) do
         collider.Draw();

@@ -15,11 +15,6 @@ function Cyclope:New(x, y)
     tmpCyclope.pivotX = tmpCyclope.width*0.5;
     tmpCyclope.pivotY = tmpCyclope.height*0.5;
 
-    -- Graph
-    tmpCyclope.spritesheet = love.graphics.newImage("images/enemies/Cyclope/CyclopeSpritesheet.png");
-    tmpCyclope.anims = tmpCyclope:PopulateAnims();
-    tmpCyclope.renderLayer = 0;
-
     -- Behaviour
     tmpCyclope.collider = CollisionController.NewCollider(
         tmpCyclope.position.x - tmpCyclope.width * 0.5 + cameraOffset.x,
@@ -28,9 +23,8 @@ function Cyclope:New(x, y)
         tmpCyclope.height,
         tmpCyclope,
         tmpCyclope.tag);
+
     tmpCyclope.speed = 100;
-    tmpCyclope.state = 1;
-    tmpCyclope.range = 100;
 
     tmpCyclope.states = {};
     tmpCyclope.states["idle"] = 0;
@@ -40,11 +34,23 @@ function Cyclope:New(x, y)
     tmpCyclope.states["die"] = 4;
     tmpCyclope.states["attack"] = 5;
 
-    tmpCyclope.invincibleTimer = 1;
-    tmpCyclope.currentInvincibleTimer = tmpCyclope.invincibleTimer;
-    tmpCyclope.canTakeDamages = true;
+    tmpCyclope.state = 1;
+    
+    tmpCyclope.range = 100;
+
+    tmpCyclope.attackSpeed = 3;
+    tmpCyclope.currentAttackTimer = tmpCyclope.attackSpeed;
+
     tmpCyclope.maxlife = 5;
     tmpCyclope.life = tmpCyclope.maxlife;
+
+    tmpCyclope.recoverTimer = 0.5;
+    tmpCyclope.currentRecoverTimer = tmpCyclope.recoverTimer;
+
+    -- Graph
+    tmpCyclope.spritesheet = love.graphics.newImage("images/enemies/Cyclope/CyclopeSpritesheet.png");
+    tmpCyclope.anims = tmpCyclope:PopulateAnims();
+    tmpCyclope.renderLayer = 0;
 
     table.insert(renderList, tmpCyclope);
     table.insert(entities, tmpCyclope);
@@ -69,8 +75,10 @@ function Cyclope:Update(dt)
             self:ChangeState("attack");
         end
     elseif self.state == 2 then
-        self.life = self.life - 1;
-        print(self.life);
+        if self.canTakeDamages then
+            self.life = self.life - 1;
+        end
+
         if self.life <= 0 then
             self:ChangeState("die");
         else
@@ -78,17 +86,24 @@ function Cyclope:Update(dt)
         end
     elseif self.state == 3 then
         self:Move(dt, hero.position);
-        if self:IsAnimOver(dt, self.anims[self.state][self.characterDirection]) then
-            self.currentInvincibleTimer = self.invincibleTimer;
+        self.canTakeDamages = self:CanTakeDamages(dt);
+
+        if self.canTakeDamages then
             self:ChangeState("run");
         end
     elseif self.state == 4 then
         self.collider.enabled = false;
+
         if self:IsAnimOver(dt, self.anims[self.state][self.characterDirection]) then
             self.enabled = false;
         end
     elseif self.state == 5 then
-        if GetDistance(self.position, hero.position) > self.range then
+        if GetDistance(self.position, hero.position) <= self.range then
+            self.canAttack = self:CanAttack(dt);
+            if self.canAttack then
+                print("Attack")
+            end
+        else
             self:ChangeState("run");
         end
     end
@@ -122,6 +137,7 @@ function Cyclope:Draw()
         self.pivotX, 
         self.pivotY
     );
+    love.graphics.setColor(255, 255, 255, 1);
 
     love.graphics.setColor(255, 0, 0, 1);
     love.graphics.circle("line", self.position.x, self.position.y, self.range);
@@ -156,10 +172,10 @@ function Cyclope:PopulateAnims()
     anims[4] = dieAnims;
     anims[5] = attackAnims;
 
-    local runLeftAnim = Anim:New(self.width, self.height, 0, 5, 7, true);
-    local runTopAnim = Anim:New(self.width, self.height, 6, 11, 7, true);
-    local runRightAnim = Anim:New(self.width, self.height, 12, 17, 7, true);
-    local runBottomAnim = Anim:New(self.width, self.height, 18, 23, 7, true);
+    local runLeftAnim = Anim:New(self.width, self.height, 0, 5, 0.5, true);
+    local runTopAnim = Anim:New(self.width, self.height, 6, 11, 0.5, true);
+    local runRightAnim = Anim:New(self.width, self.height, 12, 17, 0.5, true);
+    local runBottomAnim = Anim:New(self.width, self.height, 18, 23, 0.5, true);
     anims[0][0] = runLeftAnim;
     anims[0][1] = runTopAnim;
     anims[0][2] = runRightAnim;
@@ -177,10 +193,10 @@ function Cyclope:PopulateAnims()
     anims[3][2] = runRightAnim;
     anims[3][3] = runBottomAnim;
 
-    local dieLeftAnim = Anim:New(self.width, self.height, 24, 29, 7, false);
-    local dieTopAnim = Anim:New(self.width, self.height, 30, 35, 7, false);
-    local dieRightAnim = Anim:New(self.width, self.height, 36, 41, 7, false);
-    local dieBottomAnim = Anim:New(self.width, self.height, 42, 47, 7, false);
+    local dieLeftAnim = Anim:New(self.width, self.height, 24, 29, 2, false);
+    local dieTopAnim = Anim:New(self.width, self.height, 30, 35, 2, false);
+    local dieRightAnim = Anim:New(self.width, self.height, 36, 41, 2, false);
+    local dieBottomAnim = Anim:New(self.width, self.height, 42, 47, 2, false);
     anims[4][0] = dieLeftAnim;
     anims[4][1] = dieTopAnim;
     anims[4][2] = dieRightAnim;

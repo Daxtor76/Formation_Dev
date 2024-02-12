@@ -14,14 +14,22 @@ function _Entity:New(name, tag)
     tmpEntity.tag = tag;
 
     -- Behaviour
+    tmpEntity.states = {};
+
     tmpEntity.state = 0;
     tmpEntity.range = 200;
+
     tmpEntity.attackSpeed = 5;
+    tmpEntity.canAttack = false;
+
+    tmpEntity.recoverTimer = 5;
+    tmpEntity.canTakeDamages = true;
 
     -- Graph
     tmpEntity.characterDirection = 0;
     tmpEntity.frame = 0;
     tmpEntity.floatFrame = 0;
+    tmpEntity.animUpdateTimer = 0;
     tmpEntity.animTimer = 0;
     tmpEntity.renderLayer = 0;
 
@@ -37,27 +45,38 @@ end
 function _Entity:Draw()
 end
 
+function _Entity:CanTakeDamages(dt)
+    self.currentRecoverTimer = self.currentRecoverTimer - dt;
+    if self.currentRecoverTimer <= 0 then
+        self.currentRecoverTimer = self.recoverTimer;
+        return true;
+    end
+    return false;
+end
+
+function _Entity:CanAttack(dt)
+    self.currentAttackTimer = self.currentAttackTimer - dt;
+    if self.currentAttackTimer <= 0 then
+        self.currentAttackTimer = self.attackSpeed;
+        return true;
+    end
+    return false;
+end
+
 function _Entity:GetCurrentQuadToDisplay(animation)
     return love.graphics.newQuad((animation.width * animation.from) + (animation.width * self.frame), 0, animation.width, animation.height, self.spritesheet);
 end
 
 function _Entity:UpdateAnim(deltaTime, animation)
-    if animation.loop then
-        self.floatFrame = (self.floatFrame + animation.speed * deltaTime)%(animation.to - animation.from + 1);
-    else
-        if self.floatFrame < animation.to - animation.from + 0.5 then
-            self.floatFrame = self.floatFrame + animation.speed * deltaTime;
-            --print(self.floatFrame);
-        else
-            self.floatFrame = self.floatFrame;
-            --print(self.floatFrame);
+    animation.currentTimer = animation.currentTimer - deltaTime;
+        if animation.currentTimer <= 0 then
+            self.frame = (self.frame + 1)%animation.framesCount;
+            animation.currentTimer = animation.duration / animation.framesCount;
         end
-    end
-    self.frame = math.floor(self.floatFrame);
 end
 
 function _Entity:IsAnimOver(deltaTime, animation)
-    self.animTimer = self.animTimer + animation.speed * deltaTime;
+    self.animTimer = self.animTimer + animationSpeed * deltaTime;
     --print(self.animTimer);
     --print(math.floor(self.animTimer) > (animation.to - animation.from + 0.9));
     return math.floor(self.animTimer) > (animation.to - animation.from + 0.5);

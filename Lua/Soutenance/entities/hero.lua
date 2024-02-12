@@ -16,11 +16,20 @@ function Hero:New(x, y)
     tmpHero.pivotY = tmpHero.height*0.5;
 
     -- Behaviour
+    tmpHero.collider = CollisionController.NewCollider(
+        tmpHero.position.x - tmpHero.width * 0.5 + cameraOffset.x,
+        tmpHero.position.y - tmpHero.height * 0.5 + cameraOffset.y,
+        tmpHero.width,
+        tmpHero.height * 1.5,
+        tmpHero,
+        tmpHero.tag);
     tmpHero.speed = 150;
-
-    tmpHero.states = {};
     tmpHero.states["idle"] = 0;
     tmpHero.states["run"] = 1;
+    tmpHero.states["hit"] = 2;
+    tmpHero.states["recover"] = 3;
+    tmpHero.states["die"] = 4;
+    tmpHero.states["attack"] = 5;
 
     -- Graph
     tmpHero.spritesheet = love.graphics.newImage("images/player/character.png");
@@ -99,6 +108,8 @@ function Hero:Move(dt)
     local finalDirection = directionV + directionH;
     Vector.Normalize(finalDirection);
     self.position = self.position + dt * self.speed * finalDirection;
+    self.collider.position.x = self.position.x - self.width * 0.5;
+    self.collider.position.y = self.position.y - self.height * 0.5;
 end
 
 function Hero:PopulateAnims()

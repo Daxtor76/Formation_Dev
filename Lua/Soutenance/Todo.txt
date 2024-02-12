@@ -1,21 +1,22 @@
 - Camera system based on bg, not on screen -> ok
-- Enemy spritesheet -> Manque Hit anim
 - Enemy states & range -> ok
 - Collisions controller -> ok
 - Enemy life -> ok
 - Enemy death -> ok
 - Destroy projectiles on walls -> Not best way to do it (impossible to hit enemies from very far), but will serv on decor
 - Enemy lifebar -> ok
+- Enemy end spritesheet -> ok: replaced by red color when hit
 - Rework hero and weapons states to be able to tweak all timings to shoot and not depend on animations (more cut on states eg: enemy attack => enemy charging + enemy attack)
-- Enemy end spritesheet
 - Hero can be Hit
 - Hero -> Apply red color when hit
 - Hero can die
+- Display Hero life
 - Reset game
 - Spawn controller + randomly chosen spawn points
 - Waves
 - Hero can win
 - Collectibles
+- Display collectible counter in UI
 - Background
 - Space partitionning : tu partage ton monde en sous-espaces, ça te permet de regarder les collisions qu'entre les objets qui sont "dans le même coin" (keywords: Binary Space Partitionning, Quadtree, Octree, Bucket Space Partitionning)
 - Another enemy

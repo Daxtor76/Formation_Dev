@@ -42,7 +42,9 @@ end
 
 Projectile.OnHit = function(collider, other)
     if other.parent.tag == "enemy" then
-        other.parent:ChangeState("hit");
+        if other.parent.canTakeDamages then
+            other.parent:ChangeState("hit");
+        end
         collider.enabled = false;
         collider.parent.enabled = false;
     elseif other.tag == "wall" then

@@ -37,7 +37,7 @@ function Weapon:New(x, y)
     return tmpWeapon;
 end
 
-function Weapon:CanShootTimer(dt)
+function Weapon:CanShoot(dt)
     if self.chargeCurrentTimer > 0 then
         self.chargeCurrentTimer = self.chargeCurrentTimer - dt;
     end
@@ -71,7 +71,7 @@ function Weapon:Update(dt)
 
     -- Weapon Charge & Shoot
     if self.state == 1 then
-        self.canShoot = self:CanShootTimer(dt);
+        self.canShoot = self:CanShoot(dt);
     elseif self.state == 2 then
         if self:IsAnimOver(dt, self.anims[self.state][0]) then
             self:ChangeState("idle");
