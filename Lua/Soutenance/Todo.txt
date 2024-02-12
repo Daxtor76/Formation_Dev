@@ -6,12 +6,12 @@
 - Enemy death -> ok
 - Destroy projectiles on walls -> Not best way to do it (impossible to hit enemies from very far), but will serv on decor
 - Enemy lifebar -> ok
+- Rework hero and weapons states to be able to tweak all timings to shoot and not depend on animations (more cut on states eg: enemy attack => enemy charging + enemy attack)
+- Enemy end spritesheet
 - Hero can be Hit
+- Hero -> Apply red color when hit
 - Hero can die
 - Reset game
-- Hero end spritesheet
-- Enemy end spritesheet
-- Rework hero and weapons states to be able to tweak all timings to shoot and not depend on animations (more cut on states eg: enemy attack => enemy charging + enemy attack)
 - Spawn controller + randomly chosen spawn points
 - Waves
 - Hero can win

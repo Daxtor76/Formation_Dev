@@ -53,10 +53,17 @@ function Cyclope:New(x, y)
 end
 
 function Cyclope:Update(dt)
-    -- Behaviour
+    -- Graph behaviour
     self:UpdateCharacterDirectionByTarget(hero.position, false);
+
+    if self.position.y > hero.position.y then
+        self:ChangeRenderLayer(2);
+    else
+        self:ChangeRenderLayer(0);
+    end
+
+    -- Behaviour
     if self.state == 1 then
-        -- Move
         self:Move(dt, hero.position);
         if GetDistance(self.position, hero.position) <= self.range then
             self:ChangeState("attack");
@@ -70,6 +77,7 @@ function Cyclope:Update(dt)
             self:ChangeState("recover");
         end
     elseif self.state == 3 then
+        self:Move(dt, hero.position);
         if self:IsAnimOver(dt, self.anims[self.state][self.characterDirection]) then
             self.currentInvincibleTimer = self.invincibleTimer;
             self:ChangeState("run");
@@ -90,7 +98,19 @@ function Cyclope:Update(dt)
 end
 
 function Cyclope:Draw()
+    -- Life gauge
+    if self.life > 0 then
+        love.graphics.setColor(255, 0, 0, 1);
+        love.graphics.rectangle("fill", self.position.x - self.width, self.position.y + self.height, 60, 10);
+        love.graphics.setColor(0, 255, 0, 1);
+        love.graphics.rectangle("fill", self.position.x - self.width, self.position.y + self.height, 60 * (self.life / self.maxlife), 10);
+        love.graphics.setColor(255, 255, 255, 1);
+    end
+
     -- Character
+    if self.state == 3 then
+        love.graphics.setColor(255, 0, 0, 1);
+    end
     love.graphics.draw(
         self.spritesheet,
         self:GetCurrentQuadToDisplay(self.anims[self.state][self.characterDirection]),
@@ -102,15 +122,6 @@ function Cyclope:Draw()
         self.pivotX, 
         self.pivotY
     );
-
-    -- Life gauge
-    if self.life > 0 then
-        love.graphics.setColor(255, 0, 0, 1);
-        love.graphics.rectangle("fill", self.position.x - self.width, self.position.y + self.height, 60, 10);
-        love.graphics.setColor(0, 255, 0, 1);
-        love.graphics.rectangle("fill", self.position.x - self.width, self.position.y + self.height, 60 * (self.life / self.maxlife), 10);
-        love.graphics.setColor(255, 255, 255, 1);
-    end
 
     love.graphics.setColor(255, 0, 0, 1);
     love.graphics.circle("line", self.position.x, self.position.y, self.range);

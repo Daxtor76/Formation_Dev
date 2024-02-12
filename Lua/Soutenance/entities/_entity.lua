@@ -76,12 +76,6 @@ function _Entity:UpdateCharacterDirectionByTarget(targetPosition, useCameraOffse
     end
 
     self.characterDirection = math.floor(ConvertRadTo360Degrees(angle)/90);
-    
-    if self.characterDirection == 1 then
-        self:ChangeRenderLayer(1);
-    else
-        self:ChangeRenderLayer(0);
-    end
 end
 
 function _Entity:ChangeState(newState)

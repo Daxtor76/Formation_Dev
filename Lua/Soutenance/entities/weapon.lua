@@ -48,6 +48,12 @@ function Weapon:Update(dt)
     -- Weapon Controls
     weapon:Replace(hero.position.x, hero.position.y);
 
+    if GetMousePos().y + cameraOffset.y > hero.position.y then
+        self:ChangeRenderLayer(2);
+    else
+        self:ChangeRenderLayer(0);
+    end
+
         -- Weapon states machine
     if love.mouse.isDown(1) then
         if self.state == 0 then
