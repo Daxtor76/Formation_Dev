@@ -9,13 +9,15 @@
 - Hero can be Hit
 - Hero can die
 - Reset game
+- Hero end spritesheet
 - Enemy end spritesheet
-- Rework hero and weapons states to be able to tweak all timings to shoot and not depend on animations
+- Rework hero and weapons states to be able to tweak all timings to shoot and not depend on animations (more cut on states eg: enemy attack => enemy charging + enemy attack)
 - Spawn controller + randomly chosen spawn points
 - Waves
 - Hero can win
-- Space partitionning : tu partage ton monde en sous-espaces, ça te permet de regarder les collisions qu'entre les objets qui sont "dans le même coin" (keywords: Binary Space Partitionning, Quadtree, Octree, Bucket Space Partitionning)
+- Collectibles
 - Background
+- Space partitionning : tu partage ton monde en sous-espaces, ça te permet de regarder les collisions qu'entre les objets qui sont "dans le même coin" (keywords: Binary Space Partitionning, Quadtree, Octree, Bucket Space Partitionning)
 - Another enemy
 - Refacto (at least create functions with clear name so that the code is readable easily)
 
