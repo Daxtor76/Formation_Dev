@@ -25,10 +25,11 @@ function _Entity:New(name, tag)
     tmpEntity.recoverTimer = 5;
     tmpEntity.canTakeDamages = true;
 
+    tmpEntity.dyingSpeed = 2;
+
     -- Graph
     tmpEntity.characterDirection = 0;
     tmpEntity.frame = 1;
-    --tmpEntity.floatFrame = 0;
     tmpEntity.animUpdateTimer = 0;
     tmpEntity.animTimer = 0;
     tmpEntity.renderLayer = 0;
@@ -58,6 +59,15 @@ function _Entity:CanAttack(dt)
     self.currentAttackTimer = self.currentAttackTimer - dt;
     if self.currentAttackTimer <= 0 then
         self.currentAttackTimer = self.attackSpeed;
+        return true;
+    end
+    return false;
+end
+
+function _Entity:CanDie(dt)
+    self.currentDyingTimer = self.currentDyingTimer - dt;
+    if self.currentDyingTimer <= 0 then
+        self.currentDyingTimer = self.dyingTimer;
         return true;
     end
     return false;

@@ -24,8 +24,6 @@ function Cyclope:New(x, y)
         tmpCyclope,
         tmpCyclope.tag);
 
-    tmpCyclope.speed = 200;
-
     tmpCyclope.states["idle"] = 0;
     tmpCyclope.states["run"] = 1;
     tmpCyclope.states["hit"] = 2;
@@ -36,6 +34,7 @@ function Cyclope:New(x, y)
     tmpCyclope.state = 1;
     
     tmpCyclope.range = 100;
+    tmpCyclope.speed = 130;
 
     tmpCyclope.attackSpeed = 1.2;
     tmpCyclope.currentAttackTimer = tmpCyclope.attackSpeed;
@@ -45,6 +44,9 @@ function Cyclope:New(x, y)
 
     tmpCyclope.recoverTimer = 0.5;
     tmpCyclope.currentRecoverTimer = tmpCyclope.recoverTimer;
+
+    tmpCyclope.dyingSpeed = 2;
+    tmpCyclope.currentDyingTimer = tmpCyclope.dyingSpeed;
 
     -- Graph
     tmpCyclope.spritesheet = love.graphics.newImage("images/enemies/Cyclope/CyclopeSpritesheet.png");
@@ -93,7 +95,7 @@ function Cyclope:Update(dt)
     elseif self.state == 4 then
         self.collider.enabled = false;
 
-        if self:IsAnimOver(dt, self.anims[self.state][self.characterDirection]) then
+        if self:CanDie(dt) then
             self.enabled = false;
         end
     elseif self.state == 5 then
@@ -194,10 +196,10 @@ function Cyclope:PopulateAnims()
     anims[3][2] = runRightAnim;
     anims[3][3] = runBottomAnim;
 
-    local dieLeftAnim = Anim:New(self.width, self.height, 24, 29, 2, false);
-    local dieTopAnim = Anim:New(self.width, self.height, 30, 35, 2, false);
-    local dieRightAnim = Anim:New(self.width, self.height, 36, 41, 2, false);
-    local dieBottomAnim = Anim:New(self.width, self.height, 42, 47, 2, false);
+    local dieLeftAnim = Anim:New(self.width, self.height, 24, 29, self.dyingSpeed, false);
+    local dieTopAnim = Anim:New(self.width, self.height, 30, 35, self.dyingSpeed, false);
+    local dieRightAnim = Anim:New(self.width, self.height, 36, 41, self.dyingSpeed, false);
+    local dieBottomAnim = Anim:New(self.width, self.height, 42, 47, self.dyingSpeed, false);
     anims[4][0] = dieLeftAnim;
     anims[4][1] = dieTopAnim;
     anims[4][2] = dieRightAnim;
