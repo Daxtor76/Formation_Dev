@@ -7,20 +7,31 @@ function _Entity:New(name, tag)
 
     -- Inner
     tmpEntity.name = name;
+    tmpEntity.position = Vector.New(x, y);
+    tmpEntity.width = 25;
+    tmpEntity.height = 26;
     tmpEntity.rotation = 0;
+    tmpEntity.pivotX = tmpEntity.width*0.5;
+    tmpEntity.pivotY = tmpEntity.height*0.5;
     tmpEntity.scaleX = 2;
     tmpEntity.scaleY = 2;
     tmpEntity.enabled = true;
     tmpEntity.tag = tag;
 
     -- Behaviour
+    tmpEntity.collider = nil;
+
     tmpEntity.states = {};
 
     tmpEntity.state = 0;
     tmpEntity.range = 200;
+    tmpEntity.speed = 0;
 
     tmpEntity.attackSpeed = 5;
+    tmpEntity.currentAttackTimer = tmpEntity.attackSpeed;
     tmpEntity.canAttack = false;
+
+    tmpEntity.damages = 1;
 
     tmpEntity.maxlife = 2;
     tmpEntity.life = tmpEntity.maxlife;
@@ -29,8 +40,12 @@ function _Entity:New(name, tag)
     tmpEntity.canTakeDamages = true;
 
     tmpEntity.dyingSpeed = 2;
+    tmpEntity.currentDyingTimer = tmpEntity.dyingSpeed;
 
     -- Graph
+    tmpEntity.spritesheet = nil;
+    tmpEntity.anims = nil;
+    tmpEntity.renderLayer = 1;
     tmpEntity.characterDirection = 0;
     tmpEntity.frame = 0;
     tmpEntity.animUpdateTimer = 0;

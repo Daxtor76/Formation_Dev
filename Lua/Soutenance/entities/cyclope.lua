@@ -32,7 +32,6 @@ function Cyclope:New(x, y)
     tmpCyclope.states["attack"] = 5;
 
     tmpCyclope.state = 1;
-    
     tmpCyclope.range = 100;
     tmpCyclope.speed = 130;
 
@@ -62,51 +61,53 @@ function Cyclope:New(x, y)
 end
 
 function Cyclope:Update(dt)
-    -- Graph behaviour
-    self:UpdateCharacterDirectionByTarget(hero.position, false);
+    if hero:IsAlive() then
+        -- Graph behaviour
+        self:UpdateCharacterDirectionByTarget(hero.position, false);
 
-    if self.position.y > hero.position.y then
-        self:ChangeRenderLayer(2);
-    else
-        self:ChangeRenderLayer(0);
-    end
-
-    -- Behaviour
-    if self.state == 1 then
-        self:Move(dt, hero.position);
-        if GetDistance(self.position, hero.position) <= self.range then
-            self:ChangeState("attack");
-        end
-    elseif self.state == 2 then
-    elseif self.state == 3 then
-        self:Move(dt, hero.position);
-        self.canTakeDamages = self:CanTakeDamages(dt);
-
-        if self.canTakeDamages then
-            self:ChangeState("run");
-        end
-    elseif self.state == 4 then
-        self.collider.enabled = false;
-
-        if self:CanDie(dt) then
-            self.enabled = false;
-        end
-    elseif self.state == 5 then
-        if GetDistance(self.position, hero.position) <= self.range and hero:IsAlive() then
-            self.canAttack = self:CanAttack(dt);
-            if self.canAttack then
-                hero:ChangeState("hit");
-                self:ApplyDamages(self.damages, hero);
-            end
+        if self.position.y > hero.position.y then
+            self:ChangeRenderLayer(2);
         else
-            self.currentAttackTimer = self.attackSpeed;
-            self.anims[self.state][self.characterDirection]:ResetTimer();
-            self:ChangeState("run");
+            self:ChangeRenderLayer(0);
         end
-    end
+
+        -- Behaviour
+        if self.state == 1 then
+            self:Move(dt, hero.position);
+            if GetDistance(self.position, hero.position) <= self.range then
+                self:ChangeState("attack");
+            end
+        elseif self.state == 2 then
+        elseif self.state == 3 then
+            self:Move(dt, hero.position);
+            self.canTakeDamages = self:CanTakeDamages(dt);
+
+            if self.canTakeDamages then
+                self:ChangeState("run");
+            end
+        elseif self.state == 4 then
+            self.collider.enabled = false;
+
+            if self:CanDie(dt) then
+                self.enabled = false;
+            end
+        elseif self.state == 5 then
+            if GetDistance(self.position, hero.position) <= self.range and hero:IsAlive() then
+                self.canAttack = self:CanAttack(dt);
+                if self.canAttack then
+                    hero:ChangeState("hit");
+                    self:ApplyDamages(self.damages, hero);
+                end
+            else
+                self.currentAttackTimer = self.attackSpeed;
+                self.anims[self.state][self.characterDirection]:ResetTimer();
+                self:ChangeState("run");
+            end
+        end
     
-    -- Animations
-    self:UpdateAnim(dt, self.anims[self.state][self.characterDirection]);
+        -- Animations
+        self:UpdateAnim(dt, self.anims[self.state][self.characterDirection]);
+    end
 end
 
 function Cyclope:Draw()
