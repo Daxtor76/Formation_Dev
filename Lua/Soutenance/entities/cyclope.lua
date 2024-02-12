@@ -39,7 +39,9 @@ function Cyclope:New(x, y)
     tmpCyclope.attackSpeed = 1.2;
     tmpCyclope.currentAttackTimer = tmpCyclope.attackSpeed;
 
-    tmpCyclope.maxlife = 5;
+    tmpCyclope.damages = 1;
+
+    tmpCyclope.maxlife = 2;
     tmpCyclope.life = tmpCyclope.maxlife;
 
     tmpCyclope.recoverTimer = 0.5;
@@ -76,15 +78,6 @@ function Cyclope:Update(dt)
             self:ChangeState("attack");
         end
     elseif self.state == 2 then
-        if self.canTakeDamages then
-            self.life = self.life - 1;
-        end
-
-        if self.life <= 0 then
-            self:ChangeState("die");
-        else
-            self:ChangeState("recover");
-        end
     elseif self.state == 3 then
         self:Move(dt, hero.position);
         self.canTakeDamages = self:CanTakeDamages(dt);
@@ -99,10 +92,11 @@ function Cyclope:Update(dt)
             self.enabled = false;
         end
     elseif self.state == 5 then
-        if GetDistance(self.position, hero.position) <= self.range then
+        if GetDistance(self.position, hero.position) <= self.range and hero:IsAlive() then
             self.canAttack = self:CanAttack(dt);
             if self.canAttack then
-                print("Attack");
+                hero:ChangeState("hit");
+                self:ApplyDamages(self.damages, hero);
             end
         else
             self.currentAttackTimer = self.attackSpeed;
@@ -119,9 +113,9 @@ function Cyclope:Draw()
     -- Life gauge
     if self.life > 0 then
         love.graphics.setColor(255, 0, 0, 1);
-        love.graphics.rectangle("fill", self.position.x - self.width, self.position.y + self.height, 60, 10);
+        love.graphics.rectangle("fill", self.position.x - self.width - 5, self.position.y + self.height, 60, 7);
         love.graphics.setColor(0, 255, 0, 1);
-        love.graphics.rectangle("fill", self.position.x - self.width, self.position.y + self.height, 60 * (self.life / self.maxlife), 10);
+        love.graphics.rectangle("fill", self.position.x - self.width - 5, self.position.y + self.height, 60 * (self.life / self.maxlife), 7);
         love.graphics.setColor(255, 255, 255, 1);
     end
 

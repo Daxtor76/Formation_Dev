@@ -22,6 +22,9 @@ function _Entity:New(name, tag)
     tmpEntity.attackSpeed = 5;
     tmpEntity.canAttack = false;
 
+    tmpEntity.maxlife = 2;
+    tmpEntity.life = tmpEntity.maxlife;
+
     tmpEntity.recoverTimer = 5;
     tmpEntity.canTakeDamages = true;
 
@@ -29,7 +32,7 @@ function _Entity:New(name, tag)
 
     -- Graph
     tmpEntity.characterDirection = 0;
-    tmpEntity.frame = 1;
+    tmpEntity.frame = 0;
     tmpEntity.animUpdateTimer = 0;
     tmpEntity.animTimer = 0;
     tmpEntity.renderLayer = 0;
@@ -44,6 +47,34 @@ function _Entity:Update()
 end
 
 function _Entity:Draw()
+end
+
+function _Entity:IsAlive()
+    return self.life > 0;
+end
+
+function _Entity:TakeDamages(damages)
+    if self.canTakeDamages then
+        self.life = self.life - 1;
+    end
+
+    if self.life <= 0 then
+        self:ChangeState("die");
+    else
+        self:ChangeState("recover");
+    end
+end
+
+function _Entity:ApplyDamages(damages, target)
+    if target.canTakeDamages then
+        target.life = target.life - 1;
+    end
+
+    if target.life <= 0 then
+        target:ChangeState("die");
+    else
+        target:ChangeState("recover");
+    end
 end
 
 function _Entity:CanTakeDamages(dt)
@@ -83,7 +114,9 @@ function _Entity:UpdateAnim(deltaTime, animation)
         if animation.loop then
             self.frame = (self.frame + 1)%animation.framesCount;
         else
-            self.frame = (self.frame + 1);
+            if self.frame < animation.framesCount then
+                self.frame = self.frame + 1;
+            end
         end
         animation.currentTimer = animation.duration / animation.framesCount;
     end
