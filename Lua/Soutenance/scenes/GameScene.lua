@@ -5,16 +5,16 @@ gameScene.Load = function()
     local Bow = require("entities/Bow");
     local Cyclope = require("entities/Cyclope")
     
-    renderList = {};
-
-    hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
-    weapon = Bow:New(hero.position.x, hero.position.y);
+    --renderList = {};
 
     entities = {};
-    entities[1] = Cyclope:New(50, 50);
+    enemy = Cyclope:New(50, 50);
     --entities[2] = Cyclope:New(800, 50);
     --entities[3] = Cyclope:New(800, 800);
     --entities[4] = Cyclope:New(50, 800);
+
+    hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
+    weapon = Bow:New(hero.position.x, hero.position.y);
     
     scrollSpeed = 200;
     scrollDist = 150;
@@ -32,19 +32,14 @@ gameScene.Load = function()
 end
 
 gameScene.Update = function(dt)
-    hero:Update(dt);
-    weapon:Update(dt);
+
     -- Entities
     for key, value in pairs(entities) do
         value:Update(dt);
     end
 
-    for key, value in pairs(screenBounds) do
-        value.Move()
-    end
     gameScene.MoveScreenBounds();
     CollisionController.CheckCollisions();
-
     gameScene.CleanLists();
 end
 
@@ -56,38 +51,23 @@ gameScene.Draw = function()
 
     -- Render entities layer by layer (0 = the deepest)
     for y = 0, 10 do
-        for key, value in pairs(renderList) do
+        for key, value in pairs(entities) do
             if value.renderLayer == y then
                 value:Draw();
             end
         end
     end
-    CollisionController.DrawColliders();
-    --love.graphics.circle("line", GetScreenCenterPosition().x, GetScreenCenterPosition().y, scrollDist);
+    if debugMode then 
+        CollisionController.DrawColliders(); 
+        love.graphics.circle("line", GetScreenCenterPosition().x, GetScreenCenterPosition().y, scrollDist);
+    end
     love.graphics.pop();
 
     -- Crosshair
     ReplaceMouseCrosshair(hero.crosshair);
 end
 
-gameScene.KeyPressed = function(key)
-    --print(key.." pressed")
-end
-
-gameScene.MouseButtonPressed = function(button)
-    --print(button.." pressed")
-end
-
-gameScene.MouseButtonReleased = function(button)
-    --print(button.." released")
-end
-
 gameScene.CleanLists = function()
-    for i=#renderList, 1, -1 do
-        if renderList[i].enabled == false then
-            table.remove(renderList, i);
-        end
-    end
     for i=#CollisionController.colliders, 1, -1 do
         if CollisionController.colliders[i].enabled == false then
             table.remove(CollisionController.colliders, i);

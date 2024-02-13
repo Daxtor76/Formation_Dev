@@ -33,74 +33,70 @@ function Bow:New(x, y)
     tmpWeapon.anims = tmpWeapon:PopulateAnims();
     tmpWeapon.renderLayer = 0;
 
-    table.insert(renderList, tmpWeapon);
+    table.insert(entities, tmpWeapon);
 
     return tmpWeapon;
 end
 
 function Bow:Update(dt)
-    if hero:IsAlive() then
-        -- Weapon Controls
-        weapon:Replace(hero.position.x, hero.position.y);
+    -- Weapon Controls
+    weapon:Replace(hero.position.x, hero.position.y);
 
-        if GetMousePos().y + cameraOffset.y > hero.position.y then
-            self:ChangeRenderLayer(2);
-        else
-            self:ChangeRenderLayer(0);
-        end
-
-            -- Weapon states machine
-        if love.mouse.isDown(1) then
-            if self.state == 0 then
-                self:ChangeState("charge");
-            elseif self.state == 1 then
-                self.canShoot = self:CanShoot(dt);
-            elseif self.state == 3 then
-                self.canReload = self:CanReload(dt);
-                if self.canReload then
-                    self:ChangeState("idle");
-                end
-            end
-        else
-            if self.state == 1 and self.canShoot then
-                self:ResetChargeTimer();
-                proj = Projectile:New(weapon.position.x, weapon.position.y, "images/player/arrow.png");
-                self:ChangeState("shoot");
-            elseif self.state == 1 and self.canShoot == false then
-                self:ResetChargeTimer();
-                self:ChangeState("idle");
-            elseif self.state == 2 then
-                if self:IsWaiting(dt, 0.2) then
-                    self:ChangeState("reload");
-                end
-            elseif self.state == 3 then
-                self.canReload = self:CanReload(dt);
-                if self.canReload then
-                    self:ChangeState("idle");
-                end
-            end
-        end 
-
-        -- Animations
-        self:UpdateAnim(dt, self.anims[self.state][0]);
+    if GetMousePos().y + cameraOffset.y > hero.position.y then
+        self:ChangeRenderLayer(2);
+    else
+        self:ChangeRenderLayer(0);
     end
+
+        -- Weapon states machine
+    if love.mouse.isDown(1) then
+        if self.state == 0 then
+            self:ChangeState("charge");
+        elseif self.state == 1 then
+            self.canShoot = self:CanShoot(dt);
+        elseif self.state == 3 then
+            self.canReload = self:CanReload(dt);
+            if self.canReload then
+                self:ChangeState("idle");
+            end
+        end
+    else
+        if self.state == 1 and self.canShoot then
+            self:ResetChargeTimer();
+            proj = Projectile:New(weapon.position.x, weapon.position.y, "images/player/arrow.png");
+            self:ChangeState("shoot");
+        elseif self.state == 1 and self.canShoot == false then
+            self:ResetChargeTimer();
+            self:ChangeState("idle");
+        elseif self.state == 2 then
+            if self:IsWaiting(dt, 0.2) then
+                self:ChangeState("reload");
+            end
+        elseif self.state == 3 then
+            self.canReload = self:CanReload(dt);
+            if self.canReload then
+                self:ChangeState("idle");
+            end
+        end
+    end 
+
+    -- Animations
+    self:UpdateAnim(dt, self.anims[self.state][0]);
 end
 
 function Bow:Draw()
-    if hero:IsAlive() then
-        local angle = math.atan2(GetMousePos().y - self.position.y + cameraOffset.y, GetMousePos().x - self.position.x + cameraOffset.x) - math.pi*0.5;
-        love.graphics.draw(
-            self.spritesheet,
-            self:GetCurrentQuadToDisplay(self.anims[self.state][0]),
-            hero.position.x,
-            hero.position.y,
-            angle,
-            self.scaleX,
-            self.scaleY,
-            self.pivotX,
-            self.pivotY
-        );
-    end
+    local angle = math.atan2(GetMousePos().y - self.position.y + cameraOffset.y, GetMousePos().x - self.position.x + cameraOffset.x) - math.pi*0.5;
+    love.graphics.draw(
+        self.spritesheet,
+        self:GetCurrentQuadToDisplay(self.anims[self.state][0]),
+        hero.position.x,
+        hero.position.y,
+        angle,
+        self.scaleX,
+        self.scaleY,
+        self.pivotX,
+        self.pivotY
+    );
 end
 
 function Bow:CanShoot(dt)

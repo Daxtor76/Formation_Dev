@@ -47,7 +47,7 @@ function Hero:New(x, y)
     tmpHero.anims = tmpHero:PopulateAnims();
     tmpHero.renderLayer = 1;
 
-    table.insert(renderList, tmpHero);
+    table.insert(entities, tmpHero);
 
     return tmpHero;
 end
@@ -78,12 +78,6 @@ function Hero:Update(dt)
                 if self.canTakeDamages then
                     self:ChangeState("idle");
                 end
-            elseif self.state == 4 then
-                self.collider.enabled = false;
-
-                if self:CanDie(dt) then
-                    self.enabled = false;
-                end
             end
         else
             if self.state == 1 then
@@ -95,13 +89,14 @@ function Hero:Update(dt)
                 if self.canTakeDamages then
                     self:ChangeState("idle");
                 end
-            elseif self.state == 4 then
-                self.collider.enabled = false;
-
-                if self:CanDie(dt) then
-                    self.enabled = false;
-                end
             end
+        end
+    else
+        self.collider.enabled = false;
+        weapon.enabled = false;
+
+        if self:CanDie(dt) then
+            self.enabled = false;
         end
     end
     -- Animations
@@ -133,6 +128,7 @@ function Hero:Draw()
         self.pivotX, 
         self.pivotY
     );
+    love.graphics.setColor(255, 255, 255, 1);
 end
 
 function Hero:Move(dt)

@@ -3,6 +3,8 @@ screenHeight = love.graphics.getHeight();
 
 cameraOffset = Vector.New(0, 0);
 
+debugMode = true;
+
 function GetScreenCenterPosition()
     local screenCenterX = screenWidth * 0.5 + cameraOffset.x;
     local screenCenterY = screenHeight * 0.5 + cameraOffset.y;

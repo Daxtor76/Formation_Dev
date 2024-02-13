@@ -72,6 +72,12 @@ end
 function _Entity:Draw()
 end
 
+function _Entity:DrawRange()
+    love.graphics.setColor(255, 0, 0, 1);
+    love.graphics.circle("line", self.position.x, self.position.y, self.range);
+    love.graphics.setColor(255, 255, 255, 1);
+end
+
 function _Entity:IsAlive()
     return self.life > 0;
 end

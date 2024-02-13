@@ -15,15 +15,6 @@ sceneController.NewScene = function(sceneName)
     scene.Draw = function()
     end;
 
-    scene.KeyPressed = function(key)
-    end
-
-    scene.MouseButtonPressed = function(button)
-    end
-
-    scene.MouseButtonReleased = function(button)
-    end
-
     sceneController.scenes[sceneName] = scene;
     return scene;
 end
@@ -46,18 +37,6 @@ end
 
 sceneController.DrawCurrentScene = function()
     sceneController.currentScene.Draw();
-end
-
-sceneController.KeyPressedCurrentScene = function(key)
-    sceneController.currentScene.KeyPressed(key);
-end
-
-sceneController.MouseButtonPressedCurrentScene = function(button)
-    sceneController.currentScene.MouseButtonPressed(button);
-end
-
-sceneController.MouseButtonReleasedCurrentScene = function(button)
-    sceneController.currentScene.MouseButtonReleased(button);
 end
 
 return sceneController;

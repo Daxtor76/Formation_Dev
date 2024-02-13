@@ -35,7 +35,6 @@ function Projectile:New(x, y, img)
         Projectile.OnHit);
 
     table.insert(entities, tmpProjectile);
-    table.insert(renderList, tmpProjectile);
 
     return tmpProjectile;
 end

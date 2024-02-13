@@ -46,7 +46,7 @@ function Cyclope:New(x, y)
     tmpCyclope.recoverTimer = 0.5;
     tmpCyclope.currentRecoverTimer = tmpCyclope.recoverTimer;
 
-    tmpCyclope.dyingSpeed = 2;
+    tmpCyclope.dyingSpeed = 1;
     tmpCyclope.currentDyingTimer = tmpCyclope.dyingSpeed;
 
     -- Graph
@@ -54,7 +54,6 @@ function Cyclope:New(x, y)
     tmpCyclope.anims = tmpCyclope:PopulateAnims();
     tmpCyclope.renderLayer = 0;
 
-    table.insert(renderList, tmpCyclope);
     table.insert(entities, tmpCyclope);
 
     return tmpCyclope;
@@ -138,9 +137,7 @@ function Cyclope:Draw()
     );
     love.graphics.setColor(255, 255, 255, 1);
 
-    love.graphics.setColor(255, 0, 0, 1);
-    love.graphics.circle("line", self.position.x, self.position.y, self.range);
-    love.graphics.setColor(255, 255, 255, 1);
+    if debugMode then self:DrawRange() end
 end
 
 function Cyclope:Move(dt, targetPosition)
