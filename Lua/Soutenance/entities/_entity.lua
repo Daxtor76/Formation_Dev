@@ -97,7 +97,7 @@ end
 
 function _Entity:ApplyDamages(damages, target)
     if target.canTakeDamages then
-        target.life = target.life - 1;
+        target.life = target.life - damages;
     end
 
     if target.life <= 0 then
