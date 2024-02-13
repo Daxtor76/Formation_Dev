@@ -1,65 +1,68 @@
 local _Entity = require("entities/_Entity");
 
-Cyclope = {};
-setmetatable(Cyclope, {__index = _Entity});
+Sorceress = {};
+setmetatable(Sorceress, {__index = _Entity});
 
-function Cyclope:New(x, y)
-    local tmpCyclope = _Entity:New("Cyclope", "enemy");
-    print("Création d'une instance de "..tmpCyclope.name);
-    setmetatable(tmpCyclope, {__index = Cyclope});
+function Sorceress:New(x, y)
+    local tmpSorceress = _Entity:New("Cyclope", "enemy");
+    print("Création d'une instance de "..tmpSorceress.name);
+    setmetatable(tmpSorceress, {__index = Sorceress});
 
     -- Inner
-    tmpCyclope.position = Vector.New(x, y);
-    tmpCyclope.width = 25;
-    tmpCyclope.height = 26;
-    tmpCyclope.pivotX = tmpCyclope.width*0.5;
-    tmpCyclope.pivotY = tmpCyclope.height*0.5;
+    tmpSorceress.position = Vector.New(x, y);
+    tmpSorceress.width = 48;
+    tmpSorceress.height = 48;
+    tmpSorceress.scaleX = 1.5;
+    tmpSorceress.scaleY = 1.5;
+    tmpSorceress.pivotX = tmpSorceress.width*0.5;
+    tmpSorceress.pivotY = tmpSorceress.height*0.5;
 
     -- Behaviour
-    tmpCyclope.collider = CollisionController.NewCollider(
-        tmpCyclope.position.x - tmpCyclope.width * 0.5 + cameraOffset.x,
-        tmpCyclope.position.y - tmpCyclope.height * 0.5 + cameraOffset.y,
-        tmpCyclope.width,
-        tmpCyclope.height,
-        tmpCyclope,
-        tmpCyclope.tag);
+    tmpSorceress.collider = CollisionController.NewCollider(
+        tmpSorceress.position.x - tmpSorceress.width * 0.5 + cameraOffset.x,
+        tmpSorceress.position.y - tmpSorceress.height * 0.5 + cameraOffset.y,
+        tmpSorceress.width,
+        tmpSorceress.height,
+        tmpSorceress,
+        tmpSorceress.tag
+    );
 
-    tmpCyclope.states["idle"] = 0;
-    tmpCyclope.states["run"] = 1;
-    tmpCyclope.states["hit"] = 2;
-    tmpCyclope.states["recover"] = 3;
-    tmpCyclope.states["die"] = 4;
-    tmpCyclope.states["attack"] = 5;
+    tmpSorceress.states["idle"] = 0;
+    tmpSorceress.states["run"] = 1;
+    tmpSorceress.states["hit"] = 2;
+    tmpSorceress.states["recover"] = 3;
+    tmpSorceress.states["die"] = 4;
+    tmpSorceress.states["attack"] = 5;
 
-    tmpCyclope.state = 1;
-    tmpCyclope.range = 100;
-    tmpCyclope.speed = 130;
+    tmpSorceress.state = 1;
+    tmpSorceress.range = 300;
+    tmpSorceress.speed = 75;
 
-    tmpCyclope.attackSpeed = 1.2;
-    tmpCyclope.currentAttackTimer = tmpCyclope.attackSpeed;
+    tmpSorceress.attackSpeed = 1.2;
+    tmpSorceress.currentAttackTimer = tmpSorceress.attackSpeed;
 
-    tmpCyclope.damages = 1;
+    tmpSorceress.damages = 1;
 
-    tmpCyclope.maxlife = 2;
-    tmpCyclope.life = tmpCyclope.maxlife;
+    tmpSorceress.maxlife = 2;
+    tmpSorceress.life = tmpSorceress.maxlife;
 
-    tmpCyclope.recoverTimer = 0.5;
-    tmpCyclope.currentRecoverTimer = tmpCyclope.recoverTimer;
+    tmpSorceress.recoverTimer = 0.5;
+    tmpSorceress.currentRecoverTimer = tmpSorceress.recoverTimer;
 
-    tmpCyclope.dyingSpeed = 1;
-    tmpCyclope.currentDyingTimer = tmpCyclope.dyingSpeed;
+    tmpSorceress.dyingSpeed = 1;
+    tmpSorceress.currentDyingTimer = tmpSorceress.dyingSpeed;
 
     -- Graph
-    tmpCyclope.spritesheet = love.graphics.newImage("images/enemies/Cyclope/Cyclope_Spritesheet.png");
-    tmpCyclope.anims = tmpCyclope:PopulateAnims();
-    tmpCyclope.renderLayer = 0;
+    tmpSorceress.spritesheet = love.graphics.newImage("images/enemies/Sorceress/Sorceress_Spritesheet.png");
+    tmpSorceress.anims = tmpSorceress:PopulateAnims();
+    tmpSorceress.renderLayer = 0;
 
-    table.insert(entities, tmpCyclope);
+    table.insert(entities, tmpSorceress);
 
-    return tmpCyclope;
+    return tmpSorceress;
 end
 
-function Cyclope:Update(dt)
+function Sorceress:Update(dt)
     if hero:IsAlive() then
         -- Graph behaviour
         self:UpdateCharacterDirectionByTarget(hero.position, false);
@@ -110,13 +113,13 @@ function Cyclope:Update(dt)
     end
 end
 
-function Cyclope:Draw()
+function Sorceress:Draw()
     -- Life gauge
     if self.life > 0 then
         love.graphics.setColor(255, 0, 0, 1);
-        love.graphics.rectangle("fill", self.position.x - self.width - 5, self.position.y + self.height, 60, 7);
+        love.graphics.rectangle("fill", self.position.x - self.width * 0.7, self.position.y + self.height * 0.6, 60, 7);
         love.graphics.setColor(0, 255, 0, 1);
-        love.graphics.rectangle("fill", self.position.x - self.width - 5, self.position.y + self.height, 60 * (self.life / self.maxlife), 7);
+        love.graphics.rectangle("fill", self.position.x - self.width * 0.7, self.position.y + self.height * 0.6, 60 * (self.life / self.maxlife), 7);
         love.graphics.setColor(255, 255, 255, 1);
     end
 
@@ -140,7 +143,7 @@ function Cyclope:Draw()
     if debugMode then self:DrawRange() end
 end
 
-function Cyclope:Move(dt, targetPosition)
+function Sorceress:Move(dt, targetPosition)
     local angle = math.atan2(targetPosition.y - self.position.y, targetPosition.x - self.position.x);
     local directionV = math.sin(angle);
     local directionH = math.cos(angle);
@@ -153,7 +156,7 @@ function Cyclope:Move(dt, targetPosition)
     self.collider.position.y = self.position.y - self.height * 0.5;
 end
 
-function Cyclope:PopulateAnims()
+function Sorceress:PopulateAnims()
     local anims = {};
     local idleAnims = {};
     local runAnims = {};
@@ -168,14 +171,19 @@ function Cyclope:PopulateAnims()
     anims[4] = dieAnims;
     anims[5] = attackAnims;
 
-    local runLeftAnim = Anim:New(self.width, self.height, 0, 5, 50/self.speed, true);
-    local runTopAnim = Anim:New(self.width, self.height, 6, 11, 50/self.speed, true);
-    local runRightAnim = Anim:New(self.width, self.height, 12, 17, 50/self.speed, true);
-    local runBottomAnim = Anim:New(self.width, self.height, 18, 23, 50/self.speed, true);
-    anims[0][0] = runLeftAnim;
-    anims[0][1] = runTopAnim;
-    anims[0][2] = runRightAnim;
-    anims[0][3] = runBottomAnim;
+    local idleLeftAnim = Anim:New(self.width, self.height, 0, 5, 50/self.speed, true);
+    local idleTopAnim = Anim:New(self.width, self.height, 6, 11, 50/self.speed, true);
+    local idleRightAnim = Anim:New(self.width, self.height, 12, 17, 50/self.speed, true);
+    local idleBottomAnim = Anim:New(self.width, self.height, 18, 23, 50/self.speed, true);
+    anims[0][0] = idleLeftAnim;
+    anims[0][1] = idleTopAnim;
+    anims[0][2] = idleRightAnim;
+    anims[0][3] = idleBottomAnim;
+
+    local runLeftAnim = Anim:New(self.width, self.height, 24, 29, 50/self.speed, true);
+    local runTopAnim = Anim:New(self.width, self.height, 30, 35, 50/self.speed, true);
+    local runRightAnim = Anim:New(self.width, self.height, 36, 41, 50/self.speed, true);
+    local runBottomAnim = Anim:New(self.width, self.height, 42, 47, 50/self.speed, true);
     anims[1][0] = runLeftAnim;
     anims[1][1] = runTopAnim;
     anims[1][2] = runRightAnim;
@@ -189,19 +197,19 @@ function Cyclope:PopulateAnims()
     anims[3][2] = runRightAnim;
     anims[3][3] = runBottomAnim;
 
-    local dieLeftAnim = Anim:New(self.width, self.height, 24, 29, self.dyingSpeed, false);
-    local dieTopAnim = Anim:New(self.width, self.height, 30, 35, self.dyingSpeed, false);
-    local dieRightAnim = Anim:New(self.width, self.height, 36, 41, self.dyingSpeed, false);
-    local dieBottomAnim = Anim:New(self.width, self.height, 42, 47, self.dyingSpeed, false);
+    local dieLeftAnim = Anim:New(self.width, self.height, 48, 55, self.dyingSpeed, false);
+    local dieTopAnim = Anim:New(self.width, self.height, 56, 63, self.dyingSpeed, false);
+    local dieRightAnim = Anim:New(self.width, self.height, 64, 71, self.dyingSpeed, false);
+    local dieBottomAnim = Anim:New(self.width, self.height, 72, 79, self.dyingSpeed, false);
     anims[4][0] = dieLeftAnim;
     anims[4][1] = dieTopAnim;
     anims[4][2] = dieRightAnim;
     anims[4][3] = dieBottomAnim;
 
-    local attackLeftAnim = Anim:New(self.width, self.height, 48, 53, self.attackSpeed, true);
-    local attackTopAnim = Anim:New(self.width, self.height, 54, 59, self.attackSpeed, true);
-    local attackRightAnim = Anim:New(self.width, self.height, 60, 65, self.attackSpeed, true);
-    local attackBottomAnim = Anim:New(self.width, self.height, 66, 71, self.attackSpeed, true);
+    local attackLeftAnim = Anim:New(self.width, self.height, 80, 84, self.attackSpeed, true);
+    local attackTopAnim = Anim:New(self.width, self.height, 85, 89, self.attackSpeed, true);
+    local attackRightAnim = Anim:New(self.width, self.height, 90, 94, self.attackSpeed, true);
+    local attackBottomAnim = Anim:New(self.width, self.height, 95, 99, self.attackSpeed, true);
     anims[5][0] = attackLeftAnim;
     anims[5][1] = attackTopAnim;
     anims[5][2] = attackRightAnim;
@@ -210,4 +218,4 @@ function Cyclope:PopulateAnims()
     return anims;
 end
 
-return Cyclope;
+return Sorceress;

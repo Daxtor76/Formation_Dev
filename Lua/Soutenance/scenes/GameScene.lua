@@ -4,11 +4,13 @@ gameScene.Load = function()
     local Hero = require("entities/Hero");
     local Bow = require("entities/Bow");
     local Cyclope = require("entities/Cyclope")
+    local Sorceress = require("entities/Sorceress")
     
     --renderList = {};
 
     entities = {};
     enemy = Cyclope:New(50, 50);
+    enemy2 = Sorceress:New(500, 700);
     --entities[2] = Cyclope:New(800, 50);
     --entities[3] = Cyclope:New(800, 800);
     --entities[4] = Cyclope:New(50, 800);
