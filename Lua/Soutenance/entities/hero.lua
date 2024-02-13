@@ -17,8 +17,8 @@ function Hero:New(x, y)
 
     -- Behaviour
     tmpHero.collider = CollisionController.NewCollider(
-        tmpHero.position.x - tmpHero.width * 0.5 + cameraOffset.x,
-        tmpHero.position.y - tmpHero.height * 0.5 + cameraOffset.y,
+        tmpHero.position.x,
+        tmpHero.position.y,
         tmpHero.width,
         tmpHero.height * 1.5,
         tmpHero,

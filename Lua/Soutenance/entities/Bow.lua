@@ -25,6 +25,8 @@ function Bow:New(x, y)
     tmpWeapon.chargeTimer = 0.4;
     tmpWeapon.chargeCurrentTimer = tmpWeapon.chargeTimer;
 
+    tmpWeapon.damages = 1;
+
     tmpWeapon.reloadSpeed = 0.5;
     tmpWeapon.currentReloadTimer = tmpWeapon.reloadSpeed;
 
@@ -65,7 +67,7 @@ function Bow:Update(dt)
             self:ResetChargeTimer();
             local rot = math.atan2(GetMousePos().y - self.position.y + cameraOffset.y, GetMousePos().x - self.position.x + cameraOffset.x) - math.pi*0.5;
             local dir = math.atan2(GetMousePos().y - self.position.y + cameraOffset.y, GetMousePos().x - self.position.x + cameraOffset.x);
-            proj = Projectile:NewArrow(self.position.x, self.position.y, rot, dir, self.tag, self.target);
+            proj = Projectile:NewArrow(self.position.x, self.position.y, rot, dir, self.tag, self.target, self.damages);
             self:ChangeState("shoot");
         elseif self.state == 1 and self.canShoot == false then
             self:ResetChargeTimer();

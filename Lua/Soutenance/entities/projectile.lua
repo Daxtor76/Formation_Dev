@@ -3,7 +3,7 @@ local _Entity = require("entities/_Entity");
 local Projectile = {};
 setmetatable(Projectile, {__index = _Entity});
 
-function Projectile:NewArrow(x, y, rotation, direction, tag, target)
+function Projectile:NewArrow(x, y, rotation, direction, tag, target, damages)
     local tmpProjectile = _Entity:New("Arrow", tag, target);
     print("Création d'une instance de "..tmpProjectile.name);
     setmetatable(tmpProjectile, {__index = Projectile});
@@ -32,14 +32,16 @@ function Projectile:NewArrow(x, y, rotation, direction, tag, target)
         15,
         tmpProjectile,
         tmpProjectile.tag,
-        Projectile.OnHit);
+        Projectile.OnHit
+    );
+    tmpProjectile.damages = damages;
 
     table.insert(entities, tmpProjectile);
 
     return tmpProjectile;
 end
 
-function Projectile:NewFireBall(x, y, rotation, direction, tag, target)
+function Projectile:NewFireBall(x, y, rotation, direction, tag, target, damages)
     local tmpProjectile = _Entity:New("Fireball", tag, target);
     print("Création d'une instance de "..tmpProjectile.name);
     setmetatable(tmpProjectile, {__index = Projectile});
@@ -64,6 +66,7 @@ function Projectile:NewFireBall(x, y, rotation, direction, tag, target)
         tmpProjectile.tag,
         Projectile.OnHit
     );
+    tmpProjectile.damages = damages;
 
     -- Graph
     tmpProjectile.spritesheet = love.graphics.newImage("images/projectiles/fireball_Spritesheet.png");

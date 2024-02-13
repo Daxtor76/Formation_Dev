@@ -12,7 +12,7 @@
 - Hero can die -> ok
 - Display Hero life -> ok
 - Fix weapon charge/shoot/reload -> ok
-- Add sorceress
+- Add sorceress -> ok
 - Add slime (kamikaze)
 - Reset game
 - Spawn controller + randomly chosen spawn points

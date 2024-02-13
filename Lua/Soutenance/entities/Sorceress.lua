@@ -22,7 +22,7 @@ function Sorceress:New(x, y)
     tmpSorceress.collider = CollisionController.NewCollider(
         tmpSorceress.position.x - tmpSorceress.width * 0.5 + cameraOffset.x,
         tmpSorceress.position.y - tmpSorceress.height * 0.5 + cameraOffset.y,
-        tmpSorceress.width,
+        tmpSorceress.width * 0.75,
         tmpSorceress.height,
         tmpSorceress,
         tmpSorceress.tag
@@ -39,11 +39,11 @@ function Sorceress:New(x, y)
     tmpSorceress.range = 300;
     tmpSorceress.speed = 75;
 
-    tmpSorceress.attackSpeed = 1.2;
+    tmpSorceress.attackSpeed = 2.3;
     tmpSorceress.isCasting = false;
     tmpSorceress.currentAttackTimer = tmpSorceress.attackSpeed;
 
-    tmpSorceress.damages = 1;
+    tmpSorceress.damages = 3;
 
     tmpSorceress.maxlife = 2;
     tmpSorceress.life = tmpSorceress.maxlife;
@@ -103,7 +103,7 @@ function Sorceress:Update(dt)
                 if self.canAttack then
                     local rot = math.atan2(hero.position.y - self.position.y, hero.position.x - self.position.x);
                     local dir = math.atan2(hero.position.y - self.position.y, hero.position.x - self.position.x);
-                    proj = Projectile:NewFireBall(self.position.x, self.position.y, rot, dir, self.tag, self.target);
+                    proj = Projectile:NewFireBall(self.position.x, self.position.y, rot, dir, self.tag, self.target, self.damages);
                     self.isCasting = false;
                 end
             else
