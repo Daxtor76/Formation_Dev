@@ -43,7 +43,7 @@ end
 Projectile.OnHit = function(collider, other)
     if other.parent.tag == "enemy" then
         if other.parent.canTakeDamages then
-            other.parent:ChangeState("hit");
+            collider.parent:ApplyDamages(collider.parent.damages, other.parent);
         end
         collider.enabled = false;
         collider.parent.enabled = false;

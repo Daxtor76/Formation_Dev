@@ -2,13 +2,13 @@ local gameScene = SceneController.NewScene("Game");
     
 gameScene.Load = function()
     local Hero = require("entities/Hero");
-    local Weapon = require("entities/Weapon");
+    local Bow = require("entities/Bow");
     local Cyclope = require("entities/Cyclope")
     
     renderList = {};
 
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
-    weapon = Weapon:New(hero.position.x, hero.position.y);
+    weapon = Bow:New(hero.position.x, hero.position.y);
 
     entities = {};
     entities[1] = Cyclope:New(50, 50);

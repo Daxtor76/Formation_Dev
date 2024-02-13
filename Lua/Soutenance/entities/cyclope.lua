@@ -78,10 +78,11 @@ function Cyclope:Update(dt)
                 self:ChangeState("attack");
             end
         elseif self.state == 2 then
+            self:ChangeState("recover");
         elseif self.state == 3 then
             self:Move(dt, hero.position);
-            self.canTakeDamages = self:CanTakeDamages(dt);
 
+            self.canTakeDamages = self:CanTakeDamages(dt);
             if self.canTakeDamages then
                 self:ChangeState("run");
             end
@@ -92,7 +93,7 @@ function Cyclope:Update(dt)
                 self.enabled = false;
             end
         elseif self.state == 5 then
-            if GetDistance(self.position, hero.position) <= self.range and hero:IsAlive() then
+            if GetDistance(self.position, hero.position) <= self.range then
                 self.canAttack = self:CanAttack(dt);
                 if self.canAttack then
                     hero:ChangeState("hit");

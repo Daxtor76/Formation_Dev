@@ -29,6 +29,7 @@ function Hero:New(x, y)
     tmpHero.states["recover"] = 3;
     tmpHero.states["die"] = 4;
 
+    tmpHero.state = 0;
     tmpHero.speed = 150;
 
     tmpHero.maxlife = 5;
@@ -54,34 +55,58 @@ end
 function Hero:Update(dt)
     if self:IsAlive() then
         hero:UpdateCharacterDirectionByTarget(GetMousePos(), true);
+
         -- Hero Movement & Collision with camera bounds
-        if self.state == 0 then
-            self:Move(dt);
-            self:MoveCamera(dt);
-        elseif self.state == 1 then
-            self:Move(dt);
-            self:MoveCamera(dt);
-        elseif self.state == 2 then
-            self:Move(dt);
-            self:MoveCamera(dt);
-            self:ChangeState("recover");
-        elseif self.state == 3 then
-            self:Move(dt);
-            self:MoveCamera(dt);
-            self.canTakeDamages = self:CanTakeDamages(dt);
-
-            if self.canTakeDamages then
+        if love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) or 
+        love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) or 
+        love.keyboard.isDown("d") or 
+        love.keyboard.isDown("s") then
+            if self.state == 0 then
                 self:ChangeState("run");
+            elseif self.state == 1 then
+                self:Move(dt);
+                self:MoveCamera(dt);
+            elseif self.state == 2 then
+                self:Move(dt);
+                self:MoveCamera(dt);
+                self:ChangeState("recover");
+            elseif self.state == 3 then
+                self:Move(dt);
+                self:MoveCamera(dt);
+    
+                self.canTakeDamages = self:CanTakeDamages(dt);
+                if self.canTakeDamages then
+                    self:ChangeState("idle");
+                end
+            elseif self.state == 4 then
+                self.collider.enabled = false;
+    
+                if self:CanDie(dt) then
+                    self.enabled = false;
+                end
             end
-        elseif self.state == 4 then
-            self.collider.enabled = false;
-
-            if self:CanDie(dt) then
-                self.enabled = false;
+        else
+            if self.state == 1 then
+                self:ChangeState("idle");
+            elseif self.state == 2 then
+                self:ChangeState("recover");
+            elseif self.state == 3 then
+                self:Move(dt);
+                self:MoveCamera(dt);
+    
+                self.canTakeDamages = self:CanTakeDamages(dt);
+                if self.canTakeDamages then
+                    self:ChangeState("idle");
+                end
+            elseif self.state == 4 then
+                self.collider.enabled = false;
+    
+                if self:CanDie(dt) then
+                    self.enabled = false;
+                end
             end
         end
     end
-
     -- Animations
     self:UpdateAnim(dt, self.anims[self.state][self.characterDirection]);
 end
@@ -116,27 +141,22 @@ end
 function Hero:Move(dt)
     local directionV = Vector.New(0, 0);
     local directionH = Vector.New(0, 0);
-    if love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) or 
-        love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) or 
-        love.keyboard.isDown("d") or 
-        love.keyboard.isDown("s") then 
-            if love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) then
-                directionV = Vector.New(0, -1);
-            elseif love.keyboard.isDown("s") then
-                directionV = Vector.New(0, 1);
-            end
-
-            if love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) then
-                directionH = Vector.New(-1, 0);
-            elseif love.keyboard.isDown("d") then
-                directionH = Vector.New(1, 0);
-            end
-            local finalDirection = directionV + directionH;
-            Vector.Normalize(finalDirection);
-            self.position = self.position + dt * self.speed * finalDirection;
-            self.collider.position.x = self.position.x - self.width * 0.5;
-            self.collider.position.y = self.position.y - self.height * 0.5;
+    if love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) then
+        directionV = Vector.New(0, -1);
+    elseif love.keyboard.isDown("s") then
+        directionV = Vector.New(0, 1);
     end
+
+    if love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) then
+        directionH = Vector.New(-1, 0);
+    elseif love.keyboard.isDown("d") then
+        directionH = Vector.New(1, 0);
+    end
+    local finalDirection = directionV + directionH;
+    Vector.Normalize(finalDirection);
+    self.position = self.position + dt * self.speed * finalDirection;
+    self.collider.position.x = self.position.x - self.width * 0.5;
+    self.collider.position.y = self.position.y - self.height * 0.5;
 end
 
 function Hero:MoveCamera(dt)
@@ -165,19 +185,19 @@ function Hero:PopulateAnims()
     anims[3] = recoverAnims;
     anims[4] = dieAnims;
 
-    local idleBottomAnim = Anim:New(self.width, self.height, 0, 3, 5, true);
-    local idleLeftAnim = Anim:New(self.width, self.height, 4, 7, 5, true);
-    local idleRightAnim = Anim:New(self.width, self.height, 8, 11, 5, true);
-    local idleTopAnim = Anim:New(self.width, self.height, 12, 15, 5, true);
+    local idleBottomAnim = Anim:New(self.width, self.height, 0, 3, 0.5, true);
+    local idleLeftAnim = Anim:New(self.width, self.height, 4, 7, 0.5, true);
+    local idleRightAnim = Anim:New(self.width, self.height, 8, 11, 0.5, true);
+    local idleTopAnim = Anim:New(self.width, self.height, 12, 15, 0.5, true);
     anims[0][0] = idleLeftAnim;
     anims[0][1] = idleTopAnim;
     anims[0][2] = idleRightAnim;
     anims[0][3] = idleBottomAnim;
 
-    local runBottomAnim = Anim:New(self.width, self.height, 16, 21, 8, true);
-    local runLeftAnim = Anim:New(self.width, self.height, 22, 27, 8, true);
-    local runRightAnim = Anim:New(self.width, self.height, 28, 33, 8, true);
-    local runTopAnim = Anim:New(self.width, self.height, 34, 39, 8, true);
+    local runBottomAnim = Anim:New(self.width, self.height, 16, 21, 0.5, true);
+    local runLeftAnim = Anim:New(self.width, self.height, 22, 27, 0.5, true);
+    local runRightAnim = Anim:New(self.width, self.height, 28, 33, 0.5, true);
+    local runTopAnim = Anim:New(self.width, self.height, 34, 39, 0.5, true);
     anims[1][0] = runLeftAnim;
     anims[1][1] = runTopAnim;
     anims[1][2] = runRightAnim;
@@ -186,10 +206,10 @@ function Hero:PopulateAnims()
     anims[2][1] = runTopAnim;
     anims[2][2] = runRightAnim;
     anims[2][3] = runBottomAnim;
-    anims[3][0] = runLeftAnim;
-    anims[3][1] = runTopAnim;
-    anims[3][2] = runRightAnim;
-    anims[3][3] = runBottomAnim;
+    anims[3][0] = idleLeftAnim;
+    anims[3][1] = idleTopAnim;
+    anims[3][2] = idleRightAnim;
+    anims[3][3] = idleBottomAnim;
 
     local dieBottomAnim = Anim:New(self.width, self.height, 40, 42, 1, false);
     local dieLeftAnim = Anim:New(self.width, self.height, 40, 42, 1, false);

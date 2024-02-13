@@ -6,7 +6,7 @@
 - Destroy projectiles on walls -> Not best way to do it (impossible to hit enemies from very far), but will serv on decor
 - Enemy lifebar -> ok
 - Enemy end spritesheet -> ok: replaced by red color when hit
-- Rework hero and weapons states to be able to tweak all timings to shoot and not depend on animations (more cut on states eg: enemy attack => enemy charging + enemy attack)
+- Rework hero and weapons states to be able to tweak all timings to shoot and not depend on animations -> ok
 - Hero can be Hit -> ok
 - Hero -> ok: apply red color when hit
 - Hero can die -> ok

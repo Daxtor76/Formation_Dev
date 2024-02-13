@@ -19,7 +19,7 @@ function _Entity:New(name, tag)
     tmpEntity.tag = tag;
 
     -- Behaviour
-    tmpEntity.collider = nil;
+    --tmpEntity.collider = nil;
 
     tmpEntity.states = {};
 
@@ -31,6 +31,14 @@ function _Entity:New(name, tag)
     tmpEntity.currentAttackTimer = tmpEntity.attackSpeed;
     tmpEntity.canAttack = false;
 
+    tmpEntity.chargeTimer = 0.4;
+    tmpEntity.chargeCurrentTimer = tmpEntity.chargeTimer;
+    tmpEntity.canShoot = false;
+
+    tmpEntity.reloadSpeed = 1;
+    tmpEntity.currentReloadTimer = tmpEntity.reloadSpeed;
+    tmpEntity.canReload = false;
+
     tmpEntity.damages = 1;
 
     tmpEntity.maxlife = 2;
@@ -41,6 +49,8 @@ function _Entity:New(name, tag)
 
     tmpEntity.dyingSpeed = 2;
     tmpEntity.currentDyingTimer = tmpEntity.dyingSpeed;
+
+    tmpEntity.currentWaitTimer = 0;
 
     -- Graph
     tmpEntity.spritesheet = nil;
@@ -70,7 +80,7 @@ end
 
 function _Entity:TakeDamages(damages)
     if self.canTakeDamages then
-        self.life = self.life - 1;
+        self.life = self.life - damages;
     end
 
     if self.life <= 0 then
@@ -110,10 +120,28 @@ function _Entity:CanAttack(dt)
     return false;
 end
 
+function _Entity:CanReload(dt)
+    self.currentReloadTimer = self.currentReloadTimer - dt;
+    if self.currentReloadTimer <= 0 then
+        self.currentReloadTimer = self.reloadSpeed;
+        return true;
+    end
+    return false;
+end
+
 function _Entity:CanDie(dt)
     self.currentDyingTimer = self.currentDyingTimer - dt;
     if self.currentDyingTimer <= 0 then
         self.currentDyingTimer = self.dyingTimer;
+        return true;
+    end
+    return false;
+end
+
+function _Entity:IsWaiting(dt, duration)
+    self.currentWaitTimer = self.currentWaitTimer + dt;
+    if self.currentWaitTimer >= duration then
+        self.currentWaitTimer = 0;
         return true;
     end
     return false;
@@ -129,9 +157,10 @@ function _Entity:UpdateAnim(deltaTime, animation)
         if animation.loop then
             self.frame = (self.frame + 1)%animation.framesCount;
         else
-            if self.frame < animation.framesCount then
+            if self.frame < animation.framesCount - 1 then
                 self.frame = self.frame + 1;
             end
+            print(animation.currentTimer);
         end
         animation.currentTimer = animation.duration / animation.framesCount;
     end
@@ -162,7 +191,6 @@ end
 function _Entity:ChangeState(newState)
     self.animTimer = 0;
     self.frame = 0;
-    
     self.state = self.states[newState];
     print("Entity goes in state "..self.state);
 end
