@@ -11,7 +11,7 @@
 - Hero -> ok: apply red color when hit
 - Hero can die -> ok
 - Display Hero life -> ok
-- Fix weapon charge/shoot/reload
+- Fix weapon charge/shoot/reload -> ok
 - Another enemy
 - Reset game
 - Spawn controller + randomly chosen spawn points

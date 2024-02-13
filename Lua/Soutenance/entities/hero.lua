@@ -182,19 +182,19 @@ function Hero:PopulateAnims()
     anims[3] = recoverAnims;
     anims[4] = dieAnims;
 
-    local idleBottomAnim = Anim:New(self.width, self.height, 0, 3, 0.5, true);
-    local idleLeftAnim = Anim:New(self.width, self.height, 4, 7, 0.5, true);
-    local idleRightAnim = Anim:New(self.width, self.height, 8, 11, 0.5, true);
-    local idleTopAnim = Anim:New(self.width, self.height, 12, 15, 0.5, true);
+    local idleBottomAnim = Anim:New(self.width, self.height, 0, 3, 50/self.speed, true);
+    local idleLeftAnim = Anim:New(self.width, self.height, 4, 7, 50/self.speed, true);
+    local idleRightAnim = Anim:New(self.width, self.height, 8, 11, 50/self.speed, true);
+    local idleTopAnim = Anim:New(self.width, self.height, 12, 15, 50/self.speed, true);
     anims[0][0] = idleLeftAnim;
     anims[0][1] = idleTopAnim;
     anims[0][2] = idleRightAnim;
     anims[0][3] = idleBottomAnim;
 
-    local runBottomAnim = Anim:New(self.width, self.height, 16, 21, 0.5, true);
-    local runLeftAnim = Anim:New(self.width, self.height, 22, 27, 0.5, true);
-    local runRightAnim = Anim:New(self.width, self.height, 28, 33, 0.5, true);
-    local runTopAnim = Anim:New(self.width, self.height, 34, 39, 0.5, true);
+    local runBottomAnim = Anim:New(self.width, self.height, 16, 21, 50/self.speed, true);
+    local runLeftAnim = Anim:New(self.width, self.height, 22, 27, 50/self.speed, true);
+    local runRightAnim = Anim:New(self.width, self.height, 28, 33, 50/self.speed, true);
+    local runTopAnim = Anim:New(self.width, self.height, 34, 39, 50/self.speed, true);
     anims[1][0] = runLeftAnim;
     anims[1][1] = runTopAnim;
     anims[1][2] = runRightAnim;
