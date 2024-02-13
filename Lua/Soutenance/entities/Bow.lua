@@ -5,7 +5,7 @@ local Bow = {};
 setmetatable(Bow, {__index = _Entity});
 
 function Bow:New(x, y)
-    local tmpWeapon = _Entity:New("Weapon", "weapon");
+    local tmpWeapon = _Entity:New("Weapon", "player", "enemy");
     print("Création d'une instance de "..tmpWeapon.name);
     setmetatable(tmpWeapon, {__index = Bow});
 
@@ -63,7 +63,10 @@ function Bow:Update(dt)
     else
         if self.state == 1 and self.canShoot then
             self:ResetChargeTimer();
-            proj = Projectile:New(weapon.position.x, weapon.position.y, "images/player/arrow.png");
+            local rot = math.atan2(GetMousePos().y - self.position.y + cameraOffset.y, GetMousePos().x - self.position.x + cameraOffset.x) - math.pi*0.5;
+            local dir = math.atan2(GetMousePos().y - self.position.y + cameraOffset.y, GetMousePos().x - self.position.x + cameraOffset.x);
+            proj = Projectile:New(self.position.x, self.position.y, "images/player/arrow.png", rot, dir, self.tag, self.target);
+            print(proj.tag, proj.target)
             self:ChangeState("shoot");
         elseif self.state == 1 and self.canShoot == false then
             self:ResetChargeTimer();

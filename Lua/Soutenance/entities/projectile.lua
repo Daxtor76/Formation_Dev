@@ -3,8 +3,8 @@ local _Entity = require("entities/_Entity");
 local Projectile = {};
 setmetatable(Projectile, {__index = _Entity});
 
-function Projectile:New(x, y, img)
-    local tmpProjectile = _Entity:New("Arrow", "projectile");
+function Projectile:New(x, y, img, rotation, direction, tag, target)
+    local tmpProjectile = _Entity:New("Arrow", tag, target);
     print("Création d'une instance de "..tmpProjectile.name);
     setmetatable(tmpProjectile, {__index = Projectile});
 
@@ -20,8 +20,8 @@ function Projectile:New(x, y, img)
     tmpProjectile.pivotY = tmpProjectile.height*0.5;
 
     -- Graph
-    tmpProjectile.rotation = math.atan2(GetMousePos().y - weapon.position.y + cameraOffset.y, GetMousePos().x - weapon.position.x + cameraOffset.x) - math.pi*0.5;
-    tmpProjectile.direction = math.atan2(GetMousePos().y - weapon.position.y + cameraOffset.y, GetMousePos().x - weapon.position.x + cameraOffset.x);
+    tmpProjectile.rotation = rotation;
+    tmpProjectile.direction = direction;
 
     -- Behaviour
     tmpProjectile.speed = 800;
@@ -40,14 +40,13 @@ function Projectile:New(x, y, img)
 end
 
 Projectile.OnHit = function(collider, other)
-    if other.parent.tag == "enemy" then
+    if other.parent.tag == collider.parent.target then
         if other.parent.canTakeDamages then
             collider.parent:ApplyDamages(collider.parent.damages, other.parent);
         end
         collider.enabled = false;
         collider.parent.enabled = false;
     elseif other.tag == "wall" then
-        print("arrow destroyed")
         collider.enabled = false;
     end
 end
@@ -60,6 +59,19 @@ function Projectile:Move(dt)
     Vector.Normalize(finalDirection);
     self.position = self.position + dt * self.speed * finalDirection;
     self.collider.position = self.position;
+end
+
+function Projectile:MoveToTarget(dt, targetPosition)
+    local angle = math.atan2(targetPosition.y - self.position.y, targetPosition.x - self.position.x);
+    local directionV = math.sin(angle);
+    local directionH = math.cos(angle);
+    local finalDirection = Vector.New(directionH, directionV);
+    
+    Vector.Normalize(finalDirection);
+    
+    self.position = self.position + dt * self.speed * finalDirection;
+    self.collider.position.x = self.position.x - self.width * 0.5;
+    self.collider.position.y = self.position.y - self.height * 0.5;
 end
 
 function Projectile:Update(dt)

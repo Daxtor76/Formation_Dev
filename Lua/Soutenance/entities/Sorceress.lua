@@ -1,10 +1,11 @@
 local _Entity = require("entities/_Entity");
+local Projectile = require("entities/Projectile");
 
 Sorceress = {};
 setmetatable(Sorceress, {__index = _Entity});
 
 function Sorceress:New(x, y)
-    local tmpSorceress = _Entity:New("Cyclope", "enemy");
+    local tmpSorceress = _Entity:New("Cyclope", "enemy", "player");
     print("Création d'une instance de "..tmpSorceress.name);
     setmetatable(tmpSorceress, {__index = Sorceress});
 
@@ -98,8 +99,10 @@ function Sorceress:Update(dt)
             if GetDistance(self.position, hero.position) <= self.range then
                 self.canAttack = self:CanAttack(dt);
                 if self.canAttack then
-                    hero:ChangeState("hit");
-                    self:ApplyDamages(self.damages, hero);
+                    local rot = math.atan2(hero.position.y - self.position.y + cameraOffset.y, hero.position.x - self.position.x + cameraOffset.x) - math.pi*0.5;
+                    local dir = math.atan2(hero.position.y - self.position.y + cameraOffset.y, hero.position.x - self.position.x + cameraOffset.x);
+                    proj = Projectile:New(self.position.x, self.position.y, "images/player/arrow.png", rot, dir, self.tag, self.target);
+                    print(proj.tag, proj.target)
                 end
             else
                 self.currentAttackTimer = self.attackSpeed;

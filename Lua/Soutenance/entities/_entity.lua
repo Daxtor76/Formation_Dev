@@ -1,7 +1,7 @@
 local _Entity = {};
 Anim = require("animation/Anim");
 
-function _Entity:New(name, tag)
+function _Entity:New(name, tag, target)
     local tmpEntity = {};
     setmetatable(tmpEntity, _Entity);
 
@@ -17,9 +17,10 @@ function _Entity:New(name, tag)
     tmpEntity.scaleY = 2;
     tmpEntity.enabled = true;
     tmpEntity.tag = tag;
+    tmpEntity.target = target;
 
     -- Behaviour
-    --tmpEntity.collider = nil;
+    tmpEntity.collider = nil;
 
     tmpEntity.states = {};
 
