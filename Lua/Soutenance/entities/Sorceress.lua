@@ -99,8 +99,8 @@ function Sorceress:Update(dt)
             if GetDistance(self.position, hero.position) <= self.range then
                 self.canAttack = self:CanAttack(dt);
                 if self.canAttack then
-                    local rot = math.atan2(hero.position.y - self.position.y + cameraOffset.y, hero.position.x - self.position.x + cameraOffset.x) - math.pi*0.5;
-                    local dir = math.atan2(hero.position.y - self.position.y + cameraOffset.y, hero.position.x - self.position.x + cameraOffset.x);
+                    local rot = math.atan2(hero.position.y - self.position.y, hero.position.x - self.position.x) - math.pi*0.5;
+                    local dir = math.atan2(hero.position.y - self.position.y, hero.position.x - self.position.x);
                     proj = Projectile:New(self.position.x, self.position.y, "images/player/arrow.png", rot, dir, self.tag, self.target);
                     print(proj.tag, proj.target)
                 end
