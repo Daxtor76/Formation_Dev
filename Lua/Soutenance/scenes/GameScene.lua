@@ -34,7 +34,6 @@ gameScene.Load = function()
 end
 
 gameScene.Update = function(dt)
-
     -- Entities
     for key, value in pairs(entities) do
         value:Update(dt);

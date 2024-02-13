@@ -13,14 +13,15 @@
 - Display Hero life -> ok
 - Fix weapon charge/shoot/reload -> ok
 - Add sorceress -> ok
-- Add slime (kamikaze)
-- Reset game
+- Background
 - Spawn controller + randomly chosen spawn points
 - Waves
 - Hero can win
+- Reset game
+- Menu scene + Game over Scene
 - Collectibles
 - Display collectible counter in UI
-- Background
+- Add slime (kamikaze)
 - Space partitionning : tu partage ton monde en sous-espaces, ça te permet de regarder les collisions qu'entre les objets qui sont "dans le même coin" (keywords: Binary Space Partitionning, Quadtree, Octree, Bucket Space Partitionning)
 - Refacto (at least create functions with clear name so that the code is readable easily)
 

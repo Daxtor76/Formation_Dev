@@ -36,7 +36,7 @@ function Sorceress:New(x, y)
     tmpSorceress.states["attack"] = 5;
 
     tmpSorceress.state = 1;
-    tmpSorceress.range = 300;
+    tmpSorceress.range = 350;
     tmpSorceress.speed = 75;
 
     tmpSorceress.attackSpeed = 2.3;
