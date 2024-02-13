@@ -40,7 +40,13 @@ function Projectile:New(x, y, img, rotation, direction, tag, target)
 end
 
 Projectile.OnHit = function(collider, other)
-    if other.parent.tag == collider.parent.target then
+    if other.parent.name == collider.parent.name then
+        collider.enabled = false;
+        collider.parent.enabled = false;
+        other.enabled = false;
+        other.parent.enabled = false;
+        
+    elseif other.parent.tag == collider.parent.target then
         if other.parent.canTakeDamages then
             collider.parent:ApplyDamages(collider.parent.damages, other.parent);
         end
@@ -48,6 +54,7 @@ Projectile.OnHit = function(collider, other)
         collider.parent.enabled = false;
     elseif other.tag == "wall" then
         collider.enabled = false;
+        collider.parent.enabled = false;
     end
 end
 
