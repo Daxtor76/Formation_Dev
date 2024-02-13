@@ -209,10 +209,10 @@ function Sorceress:PopulateAnims()
     anims[4][2] = dieRightAnim;
     anims[4][3] = dieBottomAnim;
 
-    local attackLeftAnim = Anim:New(self.width, self.height, 80, 84, self.attackSpeed, true);
-    local attackTopAnim = Anim:New(self.width, self.height, 85, 89, self.attackSpeed, true);
-    local attackRightAnim = Anim:New(self.width, self.height, 90, 94, self.attackSpeed, true);
-    local attackBottomAnim = Anim:New(self.width, self.height, 95, 99, self.attackSpeed, true);
+    local attackLeftAnim = Anim:New(self.width, self.height, 80, 83, self.attackSpeed, true);
+    local attackTopAnim = Anim:New(self.width, self.height, 84, 87, self.attackSpeed, true);
+    local attackRightAnim = Anim:New(self.width, self.height, 88, 91, self.attackSpeed, true);
+    local attackBottomAnim = Anim:New(self.width, self.height, 92, 95, self.attackSpeed, true);
     anims[5][0] = attackLeftAnim;
     anims[5][1] = attackTopAnim;
     anims[5][2] = attackRightAnim;
