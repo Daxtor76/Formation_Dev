@@ -13,7 +13,8 @@
 - Display Hero life -> ok
 - Fix weapon charge/shoot/reload -> ok
 - Add sorceress -> ok
-- Background
+- Background -> ok
+- Background collision with camera
 - Spawn controller + randomly chosen spawn points
 - Waves
 - Hero can win

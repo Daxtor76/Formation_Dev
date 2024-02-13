@@ -25,6 +25,10 @@ gameScene.Load = function()
     bg.img = love.graphics.newImage("images/background/Texture/TX Tileset Grass.png");
     bg.posX = 0;
     bg.posY = 0;
+    bg.width = bg.img:getWidth();
+    bg.height = bg.img:getHeight();
+    bg.pivotX = bg.width * 0.5;
+    bg.pivotY = bg.height * 0.5;
 
     screenBounds = {};
     screenBounds[0] = CollisionController.NewCollider(0, 0, screenWidth, 1, "", "wall");
@@ -48,7 +52,7 @@ gameScene.Draw = function()
     love.graphics.push()
     love.graphics.translate(-cameraOffset.x, -cameraOffset.y);
     -- BG
-    love.graphics.draw(bg.img, bg.posX, bg.posY, 0, 10, 10);
+    love.graphics.draw(bg.img, bg.posX, bg.posY, 0, 10, 10, bg.pivotX, bg.pivotY);
 
     -- Render entities layer by layer (0 = the deepest)
     for y = 0, 10 do
