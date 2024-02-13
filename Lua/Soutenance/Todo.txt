@@ -12,7 +12,8 @@
 - Hero can die -> ok
 - Display Hero life -> ok
 - Fix weapon charge/shoot/reload -> ok
-- Another enemy
+- Add sorceress
+- Add slime (kamikaze)
 - Reset game
 - Spawn controller + randomly chosen spawn points
 - Waves
