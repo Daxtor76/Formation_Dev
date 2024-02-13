@@ -105,7 +105,7 @@ function Cyclope:Update(dt)
                 self:ChangeState("run");
             end
         end
-    
+
         -- Animations
         self:UpdateAnim(dt, self.anims[self.state][self.characterDirection]);
     end

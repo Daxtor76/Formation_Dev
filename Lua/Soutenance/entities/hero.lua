@@ -73,14 +73,14 @@ function Hero:Update(dt)
             elseif self.state == 3 then
                 self:Move(dt);
                 self:MoveCamera(dt);
-    
+
                 self.canTakeDamages = self:CanTakeDamages(dt);
                 if self.canTakeDamages then
                     self:ChangeState("idle");
                 end
             elseif self.state == 4 then
                 self.collider.enabled = false;
-    
+
                 if self:CanDie(dt) then
                     self.enabled = false;
                 end
@@ -91,16 +91,13 @@ function Hero:Update(dt)
             elseif self.state == 2 then
                 self:ChangeState("recover");
             elseif self.state == 3 then
-                self:Move(dt);
-                self:MoveCamera(dt);
-    
                 self.canTakeDamages = self:CanTakeDamages(dt);
                 if self.canTakeDamages then
                     self:ChangeState("idle");
                 end
             elseif self.state == 4 then
                 self.collider.enabled = false;
-    
+
                 if self:CanDie(dt) then
                     self.enabled = false;
                 end
@@ -211,14 +208,14 @@ function Hero:PopulateAnims()
     anims[3][2] = idleRightAnim;
     anims[3][3] = idleBottomAnim;
 
-    local dieBottomAnim = Anim:New(self.width, self.height, 40, 42, 1, false);
-    local dieLeftAnim = Anim:New(self.width, self.height, 40, 42, 1, false);
-    local dieRightAnim = Anim:New(self.width, self.height, 40, 42, 1, false);
-    local dieTopAnim = Anim:New(self.width, self.height, 40, 42, 1, false);
-    anims[4][0] = dieBottomAnim;
-    anims[4][1] = dieLeftAnim;
+    local dieBottomAnim = Anim:New(self.width, self.height, 40, 42, self.dyingSpeed, false);
+    local dieLeftAnim = Anim:New(self.width, self.height, 40, 42, self.dyingSpeed, false);
+    local dieRightAnim = Anim:New(self.width, self.height, 40, 42, self.dyingSpeed, false);
+    local dieTopAnim = Anim:New(self.width, self.height, 40, 42, self.dyingSpeed, false);
+    anims[4][0] = dieLeftAnim;
+    anims[4][1] = dieTopAnim;
     anims[4][2] = dieRightAnim;
-    anims[4][3] = dieTopAnim;
+    anims[4][3] = dieBottomAnim;
 
     return anims;
 end

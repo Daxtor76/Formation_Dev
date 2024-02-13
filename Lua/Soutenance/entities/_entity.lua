@@ -58,8 +58,6 @@ function _Entity:New(name, tag)
     tmpEntity.renderLayer = 1;
     tmpEntity.characterDirection = 0;
     tmpEntity.frame = 0;
-    tmpEntity.animUpdateTimer = 0;
-    tmpEntity.animTimer = 0;
     tmpEntity.renderLayer = 0;
 
     return tmpEntity;
@@ -160,17 +158,9 @@ function _Entity:UpdateAnim(deltaTime, animation)
             if self.frame < animation.framesCount - 1 then
                 self.frame = self.frame + 1;
             end
-            print(animation.currentTimer);
         end
         animation.currentTimer = animation.duration / animation.framesCount;
     end
-end
-
-function _Entity:IsAnimOver(deltaTime, animation)
-    self.animTimer = self.animTimer + animationSpeed * deltaTime;
-    --print(self.animTimer);
-    --print(math.floor(self.animTimer) > (animation.to - animation.from + 0.9));
-    return math.floor(self.animTimer) > (animation.to - animation.from + 0.5);
 end
 
 function _Entity:ChangeRenderLayer(newLayer)
@@ -179,17 +169,17 @@ end
 
 function _Entity:UpdateCharacterDirectionByTarget(targetPosition, useCameraOffset)
     local angle = 0;
-    if useCameraOffset then
-        angle = math.atan2(targetPosition.y - self.position.y + cameraOffset.y, targetPosition.x - self.position.x + cameraOffset.x) + math.pi * 1.25;
-    else
-        angle = math.atan2(targetPosition.y - self.position.y, targetPosition.x - self.position.x) + math.pi * 1.25;
+    if targetPosition ~= nil then
+        if useCameraOffset then
+            angle = math.atan2(targetPosition.y - self.position.y + cameraOffset.y, targetPosition.x - self.position.x + cameraOffset.x) + math.pi * 1.25;
+        else
+            angle = math.atan2(targetPosition.y - self.position.y, targetPosition.x - self.position.x) + math.pi * 1.25;
+        end
     end
-
     self.characterDirection = math.floor(ConvertRadTo360Degrees(angle)/90);
 end
 
 function _Entity:ChangeState(newState)
-    self.animTimer = 0;
     self.frame = 0;
     self.state = self.states[newState];
     print("Entity goes in state "..self.state);
