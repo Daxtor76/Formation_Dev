@@ -11,8 +11,8 @@ function _Entity:New(name, tag, target)
     tmpEntity.width = 25;
     tmpEntity.height = 26;
     tmpEntity.rotation = 0;
-    tmpEntity.pivotX = tmpEntity.width*0.5;
-    tmpEntity.pivotY = tmpEntity.height*0.5;
+    tmpEntity.pivotX = tmpEntity.width * 0.5;
+    tmpEntity.pivotY = tmpEntity.height * 0.5;
     tmpEntity.scaleX = 2;
     tmpEntity.scaleY = 2;
     tmpEntity.enabled = true;
@@ -190,6 +190,29 @@ function _Entity:ChangeState(newState)
     self.frame = 0;
     self.state = self.states[newState];
     print("Entity goes in state "..self.state);
+end
+
+function _Entity:Move(dt)
+    local directionV = math.sin(self.direction);
+    local directionH = math.cos(self.direction);
+
+    local finalDirection = Vector.New(directionH, directionV);
+    Vector.Normalize(finalDirection);
+    self.position = self.position + dt * self.speed * finalDirection;
+    self.collider.position = self.position;
+end
+
+function _Entity:MoveToTarget(dt, targetPosition)
+    local angle = math.atan2(targetPosition.y - self.position.y, targetPosition.x - self.position.x);
+    local directionV = math.sin(angle);
+    local directionH = math.cos(angle);
+    local finalDirection = Vector.New(directionH, directionV);
+    
+    Vector.Normalize(finalDirection);
+    
+    self.position = self.position + dt * self.speed * finalDirection;
+    self.collider.position.x = self.position.x - self.collider.width * 0.5;
+    self.collider.position.y = self.position.y - self.collider.height * 0.5;
 end
 
 function _Entity:IsCollidingOnWalls()

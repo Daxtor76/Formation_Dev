@@ -40,6 +40,7 @@ function Sorceress:New(x, y)
     tmpSorceress.speed = 75;
 
     tmpSorceress.attackSpeed = 1.2;
+    tmpSorceress.isCasting = false;
     tmpSorceress.currentAttackTimer = tmpSorceress.attackSpeed;
 
     tmpSorceress.damages = 1;
@@ -54,7 +55,7 @@ function Sorceress:New(x, y)
     tmpSorceress.currentDyingTimer = tmpSorceress.dyingSpeed;
 
     -- Graph
-    tmpSorceress.spritesheet = love.graphics.newImage("images/enemies/Sorceress/Sorceress_Spritesheet.png");
+    tmpSorceress.spritesheet = love.graphics.newImage("images/enemies/Sorceress/sorceress_Spritesheet.png");
     tmpSorceress.anims = tmpSorceress:PopulateAnims();
     tmpSorceress.renderLayer = 0;
 
@@ -76,14 +77,15 @@ function Sorceress:Update(dt)
 
         -- Behaviour
         if self.state == 1 then
-            self:Move(dt, hero.position);
+            self:MoveToTarget(dt, hero.position);
             if GetDistance(self.position, hero.position) <= self.range then
                 self:ChangeState("attack");
+                self.isCasting = true;
             end
         elseif self.state == 2 then
             self:ChangeState("recover");
         elseif self.state == 3 then
-            self:Move(dt, hero.position);
+            self:MoveToTarget(dt, hero.position);
 
             self.canTakeDamages = self:CanTakeDamages(dt);
             if self.canTakeDamages then
@@ -96,18 +98,22 @@ function Sorceress:Update(dt)
                 self.enabled = false;
             end
         elseif self.state == 5 then
-            if GetDistance(self.position, hero.position) <= self.range then
+            if self.isCasting then
                 self.canAttack = self:CanAttack(dt);
                 if self.canAttack then
-                    local rot = math.atan2(hero.position.y - self.position.y, hero.position.x - self.position.x) - math.pi*0.5;
+                    local rot = math.atan2(hero.position.y - self.position.y, hero.position.x - self.position.x);
                     local dir = math.atan2(hero.position.y - self.position.y, hero.position.x - self.position.x);
-                    proj = Projectile:New(self.position.x, self.position.y, "images/player/arrow.png", rot, dir, self.tag, self.target);
-                    print(proj.tag, proj.target)
+                    proj = Projectile:NewFireBall(self.position.x, self.position.y, rot, dir, self.tag, self.target);
+                    self.isCasting = false;
                 end
             else
-                self.currentAttackTimer = self.attackSpeed;
-                self.anims[self.state][self.characterDirection]:ResetTimer();
-                self:ChangeState("run");
+                if GetDistance(self.position, hero.position) <= self.range then
+                    self.isCasting = true;
+                else
+                    self.currentAttackTimer = self.attackSpeed;
+                    self.anims[self.state][self.characterDirection]:ResetTimer();
+                    self:ChangeState("run");
+                end
             end
         end
 

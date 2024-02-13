@@ -12,8 +12,8 @@ function Hero:New(x, y)
     tmpHero.position = Vector.New(x, y);
     tmpHero.width = 24;
     tmpHero.height = 24;
-    tmpHero.pivotX = tmpHero.width*0.5;
-    tmpHero.pivotY = tmpHero.height*0.5;
+    tmpHero.pivotX = tmpHero.width * 0.5;
+    tmpHero.pivotY = tmpHero.height * 0.5;
 
     -- Behaviour
     tmpHero.collider = CollisionController.NewCollider(

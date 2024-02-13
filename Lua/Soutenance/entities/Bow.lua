@@ -13,8 +13,8 @@ function Bow:New(x, y)
     tmpWeapon.position = Vector.New(x, y);
     tmpWeapon.width = 48;
     tmpWeapon.height = 48;
-    tmpWeapon.pivotX = tmpWeapon.width*0.5;
-    tmpWeapon.pivotY = tmpWeapon.height*0.5;
+    tmpWeapon.pivotX = tmpWeapon.width * 0.5;
+    tmpWeapon.pivotY = tmpWeapon.height * 0.5;
     
     -- Behaviour
     tmpWeapon.states["idle"] = 0;
@@ -65,8 +65,7 @@ function Bow:Update(dt)
             self:ResetChargeTimer();
             local rot = math.atan2(GetMousePos().y - self.position.y + cameraOffset.y, GetMousePos().x - self.position.x + cameraOffset.x) - math.pi*0.5;
             local dir = math.atan2(GetMousePos().y - self.position.y + cameraOffset.y, GetMousePos().x - self.position.x + cameraOffset.x);
-            proj = Projectile:New(self.position.x, self.position.y, "images/player/arrow.png", rot, dir, self.tag, self.target);
-            print(proj.tag, proj.target)
+            proj = Projectile:NewArrow(self.position.x, self.position.y, rot, dir, self.tag, self.target);
             self:ChangeState("shoot");
         elseif self.state == 1 and self.canShoot == false then
             self:ResetChargeTimer();

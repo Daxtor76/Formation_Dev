@@ -23,6 +23,8 @@ collisionController.NewCollider = function(x, y, w, h, parent, tag, event)
     tmpCollider.position = Vector.New(x, y);
     tmpCollider.width = w or 0;
     tmpCollider.height = h or 0;
+    tmpCollider.position.x = tmpCollider.position.x - w * 0.75;
+    tmpCollider.position.y = tmpCollider.position.y - h * 0.75;
 
     tmpCollider.parent = parent;
     tmpCollider.enabled = true;

@@ -12,8 +12,8 @@ function Cyclope:New(x, y)
     tmpCyclope.position = Vector.New(x, y);
     tmpCyclope.width = 25;
     tmpCyclope.height = 26;
-    tmpCyclope.pivotX = tmpCyclope.width*0.5;
-    tmpCyclope.pivotY = tmpCyclope.height*0.5;
+    tmpCyclope.pivotX = tmpCyclope.width * 0.5;
+    tmpCyclope.pivotY = tmpCyclope.height * 0.5;
 
     -- Behaviour
     tmpCyclope.collider = CollisionController.NewCollider(
@@ -50,7 +50,7 @@ function Cyclope:New(x, y)
     tmpCyclope.currentDyingTimer = tmpCyclope.dyingSpeed;
 
     -- Graph
-    tmpCyclope.spritesheet = love.graphics.newImage("images/enemies/Cyclope/Cyclope_Spritesheet.png");
+    tmpCyclope.spritesheet = love.graphics.newImage("images/enemies/Cyclope/cyclope_Spritesheet.png");
     tmpCyclope.anims = tmpCyclope:PopulateAnims();
     tmpCyclope.renderLayer = 0;
 
@@ -72,14 +72,14 @@ function Cyclope:Update(dt)
 
         -- Behaviour
         if self.state == 1 then
-            self:Move(dt, hero.position);
+            self:MoveToTarget(dt, hero.position);
             if GetDistance(self.position, hero.position) <= self.range then
                 self:ChangeState("attack");
             end
         elseif self.state == 2 then
             self:ChangeState("recover");
         elseif self.state == 3 then
-            self:Move(dt, hero.position);
+            self:MoveToTarget(dt, hero.position);
 
             self.canTakeDamages = self:CanTakeDamages(dt);
             if self.canTakeDamages then
@@ -138,19 +138,6 @@ function Cyclope:Draw()
     love.graphics.setColor(255, 255, 255, 1);
 
     if debugMode then self:DrawRange() end
-end
-
-function Cyclope:Move(dt, targetPosition)
-    local angle = math.atan2(targetPosition.y - self.position.y, targetPosition.x - self.position.x);
-    local directionV = math.sin(angle);
-    local directionH = math.cos(angle);
-    local finalDirection = Vector.New(directionH, directionV);
-    
-    Vector.Normalize(finalDirection);
-    
-    self.position = self.position + dt * self.speed * finalDirection;
-    self.collider.position.x = self.position.x - self.width * 0.5;
-    self.collider.position.y = self.position.y - self.height * 0.5;
 end
 
 function Cyclope:PopulateAnims()
