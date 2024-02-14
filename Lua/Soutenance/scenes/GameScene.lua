@@ -11,9 +11,9 @@ gameScene.Load = function()
     entities = {};
     --enemy = Cyclope:New(50, 50);
     enemy2 = Sorceress:New(500, 500);
-    --entities[2] = Cyclope:New(800, 50);
-    --entities[3] = Cyclope:New(800, 800);
-    --entities[4] = Cyclope:New(50, 800);
+    enemy3 = Sorceress:New(400, 500);
+    enemy4 = Sorceress:New(300, 500);
+    enemy5 = Sorceress:New(200, 500);
 
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Bow:New(hero.position.x, hero.position.y);

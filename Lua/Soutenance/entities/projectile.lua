@@ -79,21 +79,22 @@ function Projectile:NewFireBall(x, y, rotation, direction, tag, target, damages)
 end
 
 Projectile.OnHit = function(collider, other)
-    if other.parent.name == "Arrow" or other.parent.name == "Fireball" then
-        collider.enabled = false;
-        collider.parent.enabled = false;
-        other.enabled = false;
-        other.parent.enabled = false;
-        
-    elseif other.parent.tag == collider.parent.target then
-        if other.parent.canTakeDamages then
-            collider.parent:ApplyDamages(collider.parent.damages, other.parent);
+    if other.parent.tag ~= collider.parent.tag then
+        if other.parent.name == "Arrow" or other.parent.name == "Fireball" then
+            collider.enabled = false;
+            collider.parent.enabled = false;
+            other.enabled = false;
+            other.parent.enabled = false;
+        elseif other.parent.tag == collider.parent.target then
+            if other.parent.canTakeDamages then
+                collider.parent:ApplyDamages(collider.parent.damages, other.parent);
+            end
+            collider.enabled = false;
+            collider.parent.enabled = false;
+        elseif other.tag == "wall" then
+            collider.enabled = false;
+            collider.parent.enabled = false;
         end
-        collider.enabled = false;
-        collider.parent.enabled = false;
-    elseif other.tag == "wall" then
-        collider.enabled = false;
-        collider.parent.enabled = false;
     end
 end
 
