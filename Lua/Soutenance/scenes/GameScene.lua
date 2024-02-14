@@ -10,10 +10,10 @@ gameScene.Load = function()
 
     entities = {};
     --enemy = Cyclope:New(50, 50);
-    enemy2 = Sorceress:New(500, 500);
-    enemy3 = Sorceress:New(400, 500);
-    enemy4 = Sorceress:New(300, 500);
-    enemy5 = Sorceress:New(200, 500);
+    --enemy2 = Sorceress:New(500, 500);
+    --enemy3 = Sorceress:New(400, 500);
+    --enemy4 = Sorceress:New(300, 500);
+    --enemy5 = Sorceress:New(200, 500);
 
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Bow:New(hero.position.x, hero.position.y);
@@ -21,14 +21,7 @@ gameScene.Load = function()
     scrollSpeed = 200;
     scrollDist = 150;
 
-    bg = {};
-    bg.img = love.graphics.newImage("images/background/Texture/TX Tileset Grass.png");
-    bg.posX = 0;
-    bg.posY = 0;
-    bg.width = bg.img:getWidth();
-    bg.height = bg.img:getHeight();
-    bg.pivotX = bg.width * 0.5;
-    bg.pivotY = bg.height * 0.5;
+    bg = gameScene.GenerateBackground("images/background/Texture/TX Tileset Grass.png", 10, 10);
 
     screenBounds = {};
     screenBounds[0] = CollisionController.NewCollider(0, 0, screenWidth, 1, "", "wall");
@@ -52,7 +45,7 @@ gameScene.Draw = function()
     love.graphics.push()
     love.graphics.translate(-cameraOffset.x, -cameraOffset.y);
     -- BG
-    love.graphics.draw(bg.img, bg.posX, bg.posY, 0, 10, 10, bg.pivotX, bg.pivotY);
+    gameScene.DrawBackground(bg);
 
     -- Render entities layer by layer (0 = the deepest)
     for y = 0, 10 do
@@ -90,6 +83,37 @@ gameScene.MoveScreenBounds = function()
     screenBounds[1].Move(GetScreenCenterPosition().x - screenWidth * 0.5, GetScreenCenterPosition().y + screenHeight * 0.5);
     screenBounds[2].Move(GetScreenCenterPosition().x - screenWidth * 0.5, GetScreenCenterPosition().y - screenHeight * 0.5);
     screenBounds[3].Move(GetScreenCenterPosition().x + screenWidth * 0.5, GetScreenCenterPosition().y - screenHeight * 0.5);
+end
+
+-- BG functions
+gameScene.GenerateBackground = function(imgPath, gridWidth, gridHeight)
+    local image = love.graphics.newImage(imgPath);
+    local imageWidth = image:getWidth();
+    local imageHeight = image:getHeight();
+    local bg = {};
+        for i = 0, gridWidth * imageWidth, imageWidth do
+            for y = 0, gridHeight * imageHeight, imageHeight do
+                table.insert(bg, gameScene.NewBGTile(image, Vector.New(i, y)));
+            end
+        end
+    return bg;
+end
+
+gameScene.NewBGTile = function(img, pos)
+    local tile = {};
+    tile.img = img;
+    tile.position = pos;
+    tile.width = tile.img:getWidth();
+    tile.height = tile.img:getHeight();
+    tile.pivot = Vector.New(tile.width * 0.5, tile.height * 0.5);
+
+    return tile;
+end
+
+gameScene.DrawBackground = function(levelBG)
+    for key, value in pairs(levelBG) do
+        love.graphics.draw(value.img, value.position.x, value.position.y, 0, 1, 1, value.pivot.x, value.pivot.y);
+    end
 end
 
 return gameScene;

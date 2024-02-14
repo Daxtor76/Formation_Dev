@@ -22,7 +22,7 @@ end
 
 function ReplaceMouseCrosshair(img)
     love.mouse.setVisible(false);
-    love.graphics.draw(img, GetMousePos().x, GetMousePos().y, 0, 0.75, 0.75, img:getWidth()*0.5, img:getHeight()*0.5);
+    love.graphics.draw(img, GetMousePos().x, GetMousePos().y, 0, 0.5, 0.5, img:getWidth()*0.5, img:getHeight()*0.5);
 end
 
 function GetSign(n) 
