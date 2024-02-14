@@ -154,29 +154,28 @@ end
 
 function Hero:MoveCamera(dt)
     if GetDistance(self.position, GetScreenCenterPosition()) > scrollDist then
-        -- Replace hero so that he cannot go outside of the camera bounds
-        local newPosX = GetScreenCenterPosition().x + scrollDist * math.cos(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
-        local newPosY = GetScreenCenterPosition().y + scrollDist * math.sin(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
-
-        hero:Replace(newPosX, newPosY);
-
         if CheckCameraCollision() == "none" then
             -- Move camera offset
             cameraOffset.x = cameraOffset.x + scrollSpeed * dt * math.cos(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
             cameraOffset.y = cameraOffset.y + scrollSpeed * dt * math.sin(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
         end
-    end 
 
-    if CheckCameraCollision() == "left" then
-        cameraOffset.x = 0
-    elseif CheckCameraCollision() == "right" then
-        cameraOffset.x = bg.size.x - screenWidth;
-    end
-
-    if CheckCameraCollision() == "top" then
-        cameraOffset.y = 0;
-    elseif CheckCameraCollision() == "bottom" then
-        cameraOffset.y = bg.size.y - screenHeight;
+        if CheckCameraCollision() == "left" then
+            cameraOffset.x = 0
+        elseif CheckCameraCollision() == "right" then
+            cameraOffset.x = bg.size.x - screenWidth;
+        end
+    
+        if CheckCameraCollision() == "top" then
+            cameraOffset.y = 0;
+        elseif CheckCameraCollision() == "bottom" then
+            cameraOffset.y = bg.size.y - screenHeight;
+        end
+        
+        -- Replace hero so that he cannot go outside of the camera bounds
+        local newPosX = GetScreenCenterPosition().x + scrollDist * math.cos(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
+        local newPosY = GetScreenCenterPosition().y + scrollDist * math.sin(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
+        hero:Replace(newPosX, newPosY);
     end
 end
 

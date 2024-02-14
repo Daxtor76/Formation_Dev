@@ -14,7 +14,7 @@ gameScene.Load = function()
     --enemy5 = Sorceress:New(200, 500);
 
     bg = {};
-    bg.grid = Vector.New(4, 4);
+    bg.grid = Vector.New(5, 5);
     bg.tiles = gameScene.GenerateBackground("images/background/Texture/TX Tileset Grass.png", bg.grid.x, bg.grid.y);
     bg.size = Vector.New(bg.grid.x * bg.tiles[1].img:getWidth(), bg.grid.y * bg.tiles[1].img:getHeight());
 
