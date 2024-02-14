@@ -15,13 +15,18 @@ gameScene.Load = function()
     --enemy4 = Sorceress:New(300, 500);
     --enemy5 = Sorceress:New(200, 500);
 
+    bg = gameScene.GenerateBackground("images/background/Texture/TX Tileset Grass.png", 10, 10);
+
+    levelBGWidth = #bg/10 * bg[1].img:getWidth();
+    levelBGHeight = #bg/10 * bg[1].img:getHeight();
+
+    cameraOffset = Vector.New(levelBGWidth * 0.5 - screenWidth * 0.5, levelBGHeight * 0.5 - screenHeight * 0.5);
+
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Bow:New(hero.position.x, hero.position.y);
     
     scrollSpeed = 200;
     scrollDist = 150;
-
-    bg = gameScene.GenerateBackground("images/background/Texture/TX Tileset Grass.png", 10, 10);
 
     screenBounds = {};
     screenBounds[0] = CollisionController.NewCollider(0, 0, screenWidth, 1, "", "wall");
@@ -35,6 +40,8 @@ gameScene.Update = function(dt)
     for key, value in pairs(entities) do
         value:Update(dt);
     end
+
+    print(hero.position.x, hero.position.y)
 
     gameScene.MoveScreenBounds();
     CollisionController.CheckCollisions();
@@ -91,9 +98,11 @@ gameScene.GenerateBackground = function(imgPath, gridWidth, gridHeight)
     local imageWidth = image:getWidth();
     local imageHeight = image:getHeight();
     local bg = {};
-        for i = 0, gridWidth * imageWidth, imageWidth do
-            for y = 0, gridHeight * imageHeight, imageHeight do
-                table.insert(bg, gameScene.NewBGTile(image, Vector.New(i, y)));
+        for i = 0, gridWidth * imageWidth - 1, imageWidth do
+            for y = 0, gridHeight * imageHeight - 1, imageHeight do
+                local tile = gameScene.NewBGTile(image, Vector.New(i, y))
+                table.insert(bg, tile);
+                print(tile.position.x, tile.position.y)
             end
         end
     return bg;
