@@ -3,15 +3,9 @@ local gameScene = SceneController.NewScene("Game");
 gameScene.Load = function()
     local Hero = require("entities/Hero");
     local Bow = require("entities/Bow");
-    local Cyclope = require("entities/Cyclope")
-    local Sorceress = require("entities/Sorceress")
+    local WavesController = require("waves/WavesController");
 
     entities = {};
-    --enemy = Cyclope:New(50, 50);
-    --enemy2 = Sorceress:New(500, 500);
-    --enemy3 = Sorceress:New(400, 500);
-    --enemy4 = Sorceress:New(300, 500);
-    --enemy5 = Sorceress:New(200, 500);
 
     bg = {};
     bg.grid = Vector.New(5, 5);
@@ -32,6 +26,8 @@ gameScene.Load = function()
     screenBounds[1] = CollisionController.NewCollider(0, 0, screenWidth, 1, "", "wall");
     screenBounds[2] = CollisionController.NewCollider(0, 0, 1, screenHeight, "", "wall");
     screenBounds[3] = CollisionController.NewCollider(0, 0, 1, screenHeight, "", "wall");
+
+    WavesController.Begin();
 end
 
 gameScene.Update = function(dt)
