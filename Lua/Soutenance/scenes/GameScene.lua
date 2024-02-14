@@ -17,6 +17,7 @@ gameScene.Load = function()
     bg.grid = Vector.New(5, 5);
     bg.tiles = gameScene.GenerateBackground("images/background/Texture/TX Tileset Grass.png", bg.grid.x, bg.grid.y);
     bg.size = Vector.New(bg.grid.x * bg.tiles[1].img:getWidth(), bg.grid.y * bg.tiles[1].img:getHeight());
+    bg.spawnPoints = gameScene.GenerateSpawnPoints(6);
 
     cameraOffset = Vector.New(bg.size.x * 0.5 - screenWidth * 0.5, bg.size.y * 0.5 - screenHeight * 0.5);
 
@@ -61,6 +62,7 @@ gameScene.Draw = function()
     if debugMode then 
         CollisionController.DrawColliders(); 
         love.graphics.circle("line", GetScreenCenterPosition().x, GetScreenCenterPosition().y, scrollDist);
+        gameScene.DrawSpawnPoints();
     end
     love.graphics.pop();
 
@@ -89,6 +91,16 @@ gameScene.MoveScreenBounds = function()
 end
 
 -- BG functions
+gameScene.NewBGTile = function(img, pos)
+    local tile = {};
+    tile.img = img;
+    tile.position = pos;
+    tile.width = tile.img:getWidth();
+    tile.height = tile.img:getHeight();
+
+    return tile;
+end
+
 gameScene.GenerateBackground = function(imgPath, gridWidth, gridHeight)
     local image = love.graphics.newImage(imgPath);
     local imageWidth = image:getWidth();
@@ -103,19 +115,39 @@ gameScene.GenerateBackground = function(imgPath, gridWidth, gridHeight)
     return bg;
 end
 
-gameScene.NewBGTile = function(img, pos)
-    local tile = {};
-    tile.img = img;
-    tile.position = pos;
-    tile.width = tile.img:getWidth();
-    tile.height = tile.img:getHeight();
-
-    return tile;
-end
-
 gameScene.DrawBackground = function()
     for key, value in pairs(bg.tiles) do
         love.graphics.draw(value.img, value.position.x, value.position.y, 0, 1, 1, 0, 0);
+    end
+end
+
+-- SpawnPoints
+gameScene.NewSpawnPoint = function(pos)
+    local spawnPoint = {};
+    spawnPoint.position = pos;
+    spawnPoint.used = false;
+
+    return spawnPoint;
+end
+
+gameScene.GenerateSpawnPoints = function(amountPerTile)
+    local spawnPoints = {};
+
+    for key, value in pairs(bg.tiles) do
+        for i = 0, amountPerTile - 1 do
+            local sp = gameScene.NewSpawnPoint(Vector.New(love.math.random(value.position.x, value.width), love.math.random(value.position.y, value.height)));
+            table.insert(spawnPoints, sp);
+        end
+    end
+
+    return spawnPoints;
+end
+
+gameScene.DrawSpawnPoints = function()
+    for key, value in pairs(bg.spawnPoints) do
+        love.graphics.setColor(255, 0, 0, 1);
+        love.graphics.rectangle("fill", value.position.x, value.position.y, 5, 5);
+        love.graphics.setColor(255, 255, 255, 1);
     end
 end
 

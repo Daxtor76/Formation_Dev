@@ -41,6 +41,8 @@ function Hero:New(x, y)
     tmpHero.dyingSpeed = 2;
     tmpHero.currentDyingTimer = tmpHero.dyingSpeed;
 
+    tmpHero.level = 1;
+
     -- Graph
     tmpHero.spritesheet = love.graphics.newImage("images/player/character.png");
     tmpHero.crosshair = love.graphics.newImage("images/player/crosshair.png");

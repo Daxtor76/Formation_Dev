@@ -14,7 +14,7 @@
 - Fix weapon charge/shoot/reload -> ok
 - Add sorceress -> ok
 - Background -> ok
-- Background collision with camera
+- Background collision with camera -> ok
 - Spawn controller + randomly chosen spawn points
 - Waves
 - Hero can win
