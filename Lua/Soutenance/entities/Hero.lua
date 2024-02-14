@@ -154,15 +154,51 @@ end
 
 function Hero:MoveCamera(dt)
     if GetDistance(self.position, GetScreenCenterPosition()) > scrollDist then
-        -- Move camera offset
-        cameraOffset.x = cameraOffset.x + scrollSpeed * dt * math.cos(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
-        cameraOffset.y = cameraOffset.y + scrollSpeed * dt * math.sin(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
-        
         -- Replace hero so that he cannot go outside of the camera bounds
         local newPosX = GetScreenCenterPosition().x + scrollDist * math.cos(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
         local newPosY = GetScreenCenterPosition().y + scrollDist * math.sin(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
+
         hero:Replace(newPosX, newPosY);
+
+        if CheckCameraCollision() == "none" then
+            -- Move camera offset
+            cameraOffset.x = cameraOffset.x + scrollSpeed * dt * math.cos(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
+            cameraOffset.y = cameraOffset.y + scrollSpeed * dt * math.sin(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
+        end
+    end 
+
+    if CheckCameraCollision() == "left" then
+        cameraOffset.x = 0
+    elseif CheckCameraCollision() == "right" then
+        cameraOffset.x = bg.size.x - screenWidth;
     end
+
+    if CheckCameraCollision() == "top" then
+        cameraOffset.y = 0;
+    elseif CheckCameraCollision() == "bottom" then
+        cameraOffset.y = bg.size.y - screenHeight;
+    end
+end
+
+function CheckCameraCollision()
+    local leftPoint = GetScreenCenterPosition().x - screenWidth * 0.5;
+    local rightPoint = GetScreenCenterPosition().x + screenWidth * 0.5;
+    local topPoint = GetScreenCenterPosition().y - screenHeight * 0.5;
+    local bottomPoint = GetScreenCenterPosition().y + screenHeight * 0.5;
+
+    if leftPoint < 0 then
+        return "left";
+    elseif rightPoint > bg.size.x then
+        return "right";
+    end
+    
+    if topPoint < 0 then
+        return "top";
+    elseif bottomPoint > bg.size.y then
+        return "bottom";
+    end
+
+    return "none";
 end
 
 function Hero:PopulateAnims()

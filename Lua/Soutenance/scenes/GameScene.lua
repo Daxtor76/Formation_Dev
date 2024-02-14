@@ -5,8 +5,6 @@ gameScene.Load = function()
     local Bow = require("entities/Bow");
     local Cyclope = require("entities/Cyclope")
     local Sorceress = require("entities/Sorceress")
-    
-    --renderList = {};
 
     entities = {};
     --enemy = Cyclope:New(50, 50);
@@ -16,7 +14,7 @@ gameScene.Load = function()
     --enemy5 = Sorceress:New(200, 500);
 
     bg = {};
-    bg.grid = Vector.New(10, 10);
+    bg.grid = Vector.New(4, 4);
     bg.tiles = gameScene.GenerateBackground("images/background/Texture/TX Tileset Grass.png", bg.grid.x, bg.grid.y);
     bg.size = Vector.New(bg.grid.x * bg.tiles[1].img:getWidth(), bg.grid.y * bg.tiles[1].img:getHeight());
 
