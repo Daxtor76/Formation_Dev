@@ -15,12 +15,12 @@ gameScene.Load = function()
     --enemy4 = Sorceress:New(300, 500);
     --enemy5 = Sorceress:New(200, 500);
 
-    bg = gameScene.GenerateBackground("images/background/Texture/TX Tileset Grass.png", 10, 10);
+    bg = {};
+    bg.grid = Vector.New(10, 10);
+    bg.tiles = gameScene.GenerateBackground("images/background/Texture/TX Tileset Grass.png", bg.grid.x, bg.grid.y);
+    bg.size = Vector.New(bg.grid.x * bg.tiles[1].img:getWidth(), bg.grid.y * bg.tiles[1].img:getHeight());
 
-    levelBGWidth = #bg/10 * bg[1].img:getWidth();
-    levelBGHeight = #bg/10 * bg[1].img:getHeight();
-
-    cameraOffset = Vector.New(levelBGWidth * 0.5 - screenWidth * 0.5, levelBGHeight * 0.5 - screenHeight * 0.5);
+    cameraOffset = Vector.New(bg.size.x * 0.5 - screenWidth * 0.5, bg.size.y * 0.5 - screenHeight * 0.5);
 
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Bow:New(hero.position.x, hero.position.y);
@@ -41,8 +41,6 @@ gameScene.Update = function(dt)
         value:Update(dt);
     end
 
-    print(hero.position.x, hero.position.y)
-
     gameScene.MoveScreenBounds();
     CollisionController.CheckCollisions();
     gameScene.CleanLists();
@@ -52,7 +50,7 @@ gameScene.Draw = function()
     love.graphics.push()
     love.graphics.translate(-cameraOffset.x, -cameraOffset.y);
     -- BG
-    gameScene.DrawBackground(bg);
+    gameScene.DrawBackground();
 
     -- Render entities layer by layer (0 = the deepest)
     for y = 0, 10 do
@@ -102,7 +100,6 @@ gameScene.GenerateBackground = function(imgPath, gridWidth, gridHeight)
             for y = 0, gridHeight * imageHeight - 1, imageHeight do
                 local tile = gameScene.NewBGTile(image, Vector.New(i, y))
                 table.insert(bg, tile);
-                print(tile.position.x, tile.position.y)
             end
         end
     return bg;
@@ -114,14 +111,13 @@ gameScene.NewBGTile = function(img, pos)
     tile.position = pos;
     tile.width = tile.img:getWidth();
     tile.height = tile.img:getHeight();
-    tile.pivot = Vector.New(tile.width * 0.5, tile.height * 0.5);
 
     return tile;
 end
 
-gameScene.DrawBackground = function(levelBG)
-    for key, value in pairs(levelBG) do
-        love.graphics.draw(value.img, value.position.x, value.position.y, 0, 1, 1, value.pivot.x, value.pivot.y);
+gameScene.DrawBackground = function()
+    for key, value in pairs(bg.tiles) do
+        love.graphics.draw(value.img, value.position.x, value.position.y, 0, 1, 1, 0, 0);
     end
 end
 
