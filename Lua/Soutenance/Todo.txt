@@ -15,7 +15,7 @@
 - Add sorceress -> ok
 - Background -> ok
 - Background collision with camera -> ok
-- Spawn controller + randomly chosen spawn points
+- Spawn controller + randomly chosen spawn points -> ok
 - Waves
 - Hero can win
 - Menu scene + Game over Scene

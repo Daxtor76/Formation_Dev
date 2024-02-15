@@ -3,7 +3,6 @@ local gameScene = SceneController.NewScene("Game");
 gameScene.Load = function()
     local Hero = require("entities/Hero");
     local Bow = require("entities/Bow");
-    local WavesController = require("waves/WavesController");
 
     entities = {};
 
@@ -27,10 +26,12 @@ gameScene.Load = function()
     screenBounds[2] = CollisionController.NewCollider(0, 0, 1, screenHeight, "", "wall");
     screenBounds[3] = CollisionController.NewCollider(0, 0, 1, screenHeight, "", "wall");
 
-    WavesController.Begin();
+    WavesController.Init();
 end
 
 gameScene.Update = function(dt)
+    WavesController.UpdateWave(dt);
+    
     -- Entities
     for key, value in pairs(entities) do
         value:Update(dt);

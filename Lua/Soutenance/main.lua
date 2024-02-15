@@ -10,10 +10,11 @@ require("utils/Vector");
 require("utils/Utils");
 
 CollisionController = require("collisions/CollisionController");
+WavesController = require("waves/WavesController");
 
-SceneController = require("scenes/SceneController")
-require("scenes/MenuScene")
-require("scenes/GameScene")
+SceneController = require("scenes/SceneController");
+require("scenes/MenuScene");
+require("scenes/GameScene");
 
 function love.load()
     SceneController.SetCurrentScene("Game");

@@ -9,20 +9,36 @@ local Sorceress = require("entities/Sorceress");
 
 local wavesController = {};
 wavesController.waves = {};
-wavesController.currentWave = 0;
-wavesController.currentSubWave = 0;
+wavesController.waveCounter = 0;
+wavesController.currentWave = nil;
+wavesController.timer = 0;
 
-wavesController.Begin = function()
-    wavesController.waves[0] = wavesController.NewWave(0);
-    wavesController.waves[0].subWaves[0].SpawnEnemies();
+wavesController.Init = function()
+    wavesController.waves = wavesController.PopulateWaves();
+    wavesController.currentWave = wavesController.waves[wavesController.waveCounter];
+    wavesController.timer = wavesController.currentWave.duration;
 end
 
-wavesController.NewWave = function(frequency)
+wavesController.UpdateWave = function(dt)
+    -- toutes les X secondes, spawn les enemy de la currentsubwave puis passer à la suivante
+    wavesController.timer = wavesController.timer - dt;
+    if wavesController.timer%wavesController.currentWave.frequency <= 0.005 then
+        -- Spawn enemies here
+    end
+
+    if wavesController.timer <= 0 then
+        wavesController.waveCounter = wavesController.waveCounter + 1;
+        wavesController.currentWave = wavesController.waves[wavesController.waveCounter];
+    end
+end
+
+wavesController.NewWave = function(frequency, duration)
     local wave = {};
     wave.subWaves = {};
-    wave.spawnFrequency = frequency;
-
     wave.subWaves[0] = wavesController.NewSubWave(15);
+    wave.currentSubWave = wave.subWaves[0];
+    wave.frequency = frequency;
+    wave.duration = duration;
 
     return wave;
 end
@@ -43,6 +59,15 @@ wavesController.NewSubWave = function(enemiesAmount)
     end
 
     return subWave;
+end
+
+wavesController.PopulateWaves = function()
+    local waves = {};
+
+    waves[0] = wavesController.NewWave(3, 9);
+    waves[1] = wavesController.NewWave(4, 12);
+
+    return waves;
 end
 
 return wavesController;
