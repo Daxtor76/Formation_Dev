@@ -19,7 +19,7 @@ function Projectile:NewArrow(x, y, tag, target, damages)
     tmpProjectile.pivotX = tmpProjectile.width * 0.5;
     tmpProjectile.pivotY = tmpProjectile.height * 0.5;
 
-    local delta = Vector.New(GetMousePos().x - tmpProjectile.position.x + cameraOffset.x, GetMousePos().y - tmpProjectile.position.y + cameraOffset.y);
+    local delta = GetMousePos() - tmpProjectile.position + cameraOffset;
     tmpProjectile.rotation = Vector.GetAngle(delta) - math.pi*0.5;
     tmpProjectile.direction = delta:Normalize();
 
@@ -53,7 +53,7 @@ function Projectile:NewFireBall(x, y, tag, target, damages)
     tmpProjectile.pivotX = tmpProjectile.width * 0.5;
     tmpProjectile.pivotY = tmpProjectile.height * 0.5;
 
-    local delta = Vector.New(hero.position.x - tmpProjectile.position.x, hero.position.y - tmpProjectile.position.y);
+    local delta = hero.position - tmpProjectile.position;
     tmpProjectile.rotation = Vector.GetAngle(delta);
     tmpProjectile.direction = delta:Normalize();
 

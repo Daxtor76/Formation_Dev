@@ -87,7 +87,7 @@ function Bow:Update(dt)
 end
 
 function Bow:Draw()
-    local delta = Vector.New(GetMousePos().x - self.position.x + cameraOffset.x, GetMousePos().y - self.position.y + cameraOffset.y);
+    local delta = GetMousePos() - self.position + cameraOffset;
     local angle = delta:GetAngle() - math.pi*0.5;
     love.graphics.draw(
         self.spritesheet,

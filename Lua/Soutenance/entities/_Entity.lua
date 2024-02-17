@@ -179,10 +179,10 @@ function _Entity:UpdateCharacterDirectionByTarget(targetPosition, useCameraOffse
     local angle = 0;
     if targetPosition ~= nil then
         if useCameraOffset then
-            local delta = Vector.New(targetPosition.x - self.position.x + cameraOffset.x, targetPosition.y - self.position.y + cameraOffset.y);
+            local delta = targetPosition - self.position + cameraOffset;
             angle = delta:GetAngle() + math.pi * 1.25;
         else
-            local delta = Vector.New(targetPosition.x - self.position.x, targetPosition.y - self.position.y);
+            local delta = targetPosition - self.position;
             angle = delta:GetAngle() + math.pi * 1.25;
         end
     end
@@ -201,7 +201,7 @@ function _Entity:Move(dt)
 end
 
 function _Entity:MoveToTarget(dt, targetPosition)
-    local delta = Vector.New(targetPosition.x - self.position.x, targetPosition.y - self.position.y);
+    local delta = targetPosition - self.position;
     local angle = delta:GetAngle();
     self.direction = delta:Normalize();
     
