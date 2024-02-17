@@ -154,7 +154,7 @@ function Hero:Move(dt)
     self.collider.position.x = self.position.x - self.width * 0.5;
     self.collider.position.y = self.position.y - self.height * 0.5;
 
-    local delta = self.position - GetScreenCenterPosition();
+    local delta = GetScreenCenterPosition() - self.position;
     if delta:GetMagnitude() > scrollDist then 
         self:MoveCamera(dt, delta); 
     end
@@ -163,7 +163,8 @@ end
 function Hero:MoveCamera(dt, delta)
     if CheckCameraCollision() == "none" then
         local direction = delta:Normalize();
-        cameraOffset = cameraOffset + dt * direction * scrollSpeed;
+        cameraOffset.x = cameraOffset.x - scrollDist * direction.x;
+        cameraOffset.y = cameraOffset.y - scrollDist * direction.y;
     end
 
     if CheckCameraCollision() == "left" then

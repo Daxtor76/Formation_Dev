@@ -16,18 +16,18 @@ gameScene.Load = function()
 
     cameraOffset = Vector.New(bg.size.x * 0.5 - screenWidth * 0.5, bg.size.y * 0.5 - screenHeight * 0.5);
 
-    enemy2 = Sorceress:New(600, 300);
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Bow:New(hero.position.x, hero.position.y);
+    enemy = Sorceress:New(600, 300);
     
     scrollSpeed = hero.speed;
     scrollDist = 150;
 
-    screenBounds = {};
-    screenBounds[0] = CollisionController.NewCollider(0, 0, screenWidth, 1, "", "wall");
-    screenBounds[1] = CollisionController.NewCollider(0, 0, screenWidth, 1, "", "wall");
-    screenBounds[2] = CollisionController.NewCollider(0, 0, 1, screenHeight, "", "wall");
-    screenBounds[3] = CollisionController.NewCollider(0, 0, 1, screenHeight, "", "wall");
+    arenaBounds = {};
+    arenaBounds[0] = CollisionController.NewCollider(0, 0, bg.size.x * bg.grid.x, 1, "", "wall");
+    arenaBounds[1] = CollisionController.NewCollider(0, bg.size.y, bg.size.x * bg.grid.x, 1, "", "wall");
+    arenaBounds[0] = CollisionController.NewCollider(0, 0, 1, bg.size.y * bg.grid.y, "", "wall");
+    arenaBounds[0] = CollisionController.NewCollider(bg.size.x, 0, 1, bg.size.y * bg.grid.y, "", "wall");
 
     --WavesController.Init();
 end
@@ -40,7 +40,7 @@ gameScene.Update = function(dt)
         value:Update(dt);
     end
 
-    gameScene.MoveScreenBounds();
+    --gameScene.MoveScreenBounds();
     CollisionController.CheckCollisions();
     gameScene.CleanLists();
 end
@@ -61,7 +61,7 @@ gameScene.Draw = function()
     end
     if debugMode then 
         CollisionController.DrawColliders(); 
-        love.graphics.circle("line", GetScreenCenterPosition().x, GetScreenCenterPosition().y, scrollDist);
+        love.graphics.circle("line", hero.position.x, hero.position.y, scrollDist);
         gameScene.DrawSpawnPoints();
     end
     love.graphics.pop();
@@ -84,10 +84,10 @@ gameScene.CleanLists = function()
 end
 
 gameScene.MoveScreenBounds = function()
-    screenBounds[0].Move(GetScreenCenterPosition().x - screenWidth * 0.5, GetScreenCenterPosition().y - screenHeight * 0.5);
-    screenBounds[1].Move(GetScreenCenterPosition().x - screenWidth * 0.5, GetScreenCenterPosition().y + screenHeight * 0.5);
-    screenBounds[2].Move(GetScreenCenterPosition().x - screenWidth * 0.5, GetScreenCenterPosition().y - screenHeight * 0.5);
-    screenBounds[3].Move(GetScreenCenterPosition().x + screenWidth * 0.5, GetScreenCenterPosition().y - screenHeight * 0.5);
+    arenaBounds[0].Move(GetScreenCenterPosition().x - screenWidth * 0.5, GetScreenCenterPosition().y - screenHeight * 0.5);
+    arenaBounds[1].Move(GetScreenCenterPosition().x - screenWidth * 0.5, GetScreenCenterPosition().y + screenHeight * 0.5);
+    arenaBounds[2].Move(GetScreenCenterPosition().x - screenWidth * 0.5, GetScreenCenterPosition().y - screenHeight * 0.5);
+    arenaBounds[3].Move(GetScreenCenterPosition().x + screenWidth * 0.5, GetScreenCenterPosition().y - screenHeight * 0.5);
 end
 
 -- BG functions
