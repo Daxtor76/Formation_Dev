@@ -61,6 +61,7 @@ gameScene.Draw = function()
     end
     if debugMode then 
         CollisionController.DrawColliders(); 
+        love.graphics.rectangle("fill", GetScreenCenterPosition().x, GetScreenCenterPosition().y, 5, 5);
         love.graphics.circle("line", hero.position.x, hero.position.y, scrollDist);
         gameScene.DrawSpawnPoints();
     end

@@ -154,21 +154,23 @@ function Hero:Move(dt)
     self.collider.position.x = self.position.x - self.width * 0.5;
     self.collider.position.y = self.position.y - self.height * 0.5;
 
-    local delta = GetScreenCenterPosition() - self.position;
+    local delta = self.position - GetScreenCenterPosition();
     if delta:GetMagnitude() > scrollDist then 
-        self:MoveCamera(dt, delta); 
+        self:MoveCamera(dt, delta, scrollDist); 
     end
 end
 
-function Hero:MoveCamera(dt, delta)
+function Hero:MoveCamera(dt, cameraToHeroVec, radius)
     if CheckCameraCollision() == "none" then
-        local direction = delta:Normalize();
-        cameraOffset.x = cameraOffset.x - scrollDist * direction.x;
-        cameraOffset.y = cameraOffset.y - scrollDist * direction.y;
+        local cameraToHeroDirection = cameraToHeroVec:Normalize();
+        local cameraToHeroLongueur = cameraToHeroVec:GetMagnitude();
+        local distanceAParcourir = cameraToHeroLongueur - radius;
+
+        cameraOffset = cameraOffset + cameraToHeroDirection * distanceAParcourir;
     end
 
     if CheckCameraCollision() == "left" then
-        cameraOffset.x = 0
+        cameraOffset.x = 0;
     elseif CheckCameraCollision() == "right" then
         cameraOffset.x = bg.size.x - screenWidth;
     end
