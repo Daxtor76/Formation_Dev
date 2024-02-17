@@ -17,7 +17,7 @@ gameScene.Load = function()
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Bow:New(hero.position.x, hero.position.y);
     
-    scrollSpeed = 200;
+    scrollSpeed = hero.speed;
     scrollDist = 150;
 
     screenBounds = {};
