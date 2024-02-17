@@ -12,6 +12,8 @@ gameScene.Load = function()
     bg.size = Vector.New(bg.grid.x * bg.tiles[1].img:getWidth(), bg.grid.y * bg.tiles[1].img:getHeight());
     bg.spawnPoints = gameScene.GenerateSpawnPoints(6);
 
+    print(bg.size);
+
     cameraOffset = Vector.New(bg.size.x * 0.5 - screenWidth * 0.5, bg.size.y * 0.5 - screenHeight * 0.5);
 
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
@@ -30,6 +32,8 @@ gameScene.Load = function()
 end
 
 gameScene.Update = function(dt)
+
+    print(hero.position);
     --WavesController.UpdateWave(dt);
     
     -- Entities

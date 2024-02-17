@@ -148,24 +148,20 @@ function Hero:Move(dt)
         directionH = Vector.New(1, 0);
     end
     local finalDirection = Vector.Normalize(directionV + directionH);
-    self.position = self.position + dt * finalDirection * self.speed;
+    self.position = Vector.New(
+        Clamp(self.position.x, 0 + self.width, bg.size.x - self.width), 
+        Clamp(self.position.y, 0 + self.height, bg.size.y - self.height)) + dt * finalDirection * self.speed;
     self.collider.position.x = self.position.x - self.width * 0.5;
     self.collider.position.y = self.position.y - self.height * 0.5;
 
--- TO DO : Bloquer hero aux bords du terrain
--- TO DO : Eviter le flicking
-
     local delta = self.position - GetScreenCenterPosition();
     if delta:GetMagnitude() > scrollDist then 
-        --local angle = Vector.GetAngle(delta)
-        --self:Replace(GetScreenCenterPosition().x + scrollDist * math.cos(angle), GetScreenCenterPosition().y + scrollDist * math.sin(angle));
         self:MoveCamera(dt, delta); 
     end
 end
 
 function Hero:MoveCamera(dt, delta)
     if CheckCameraCollision() == "none" then
-        -- Move camera offset
         local direction = delta:Normalize();
         cameraOffset = cameraOffset + dt * direction * scrollSpeed;
     end
