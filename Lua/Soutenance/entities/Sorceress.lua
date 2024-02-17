@@ -101,9 +101,7 @@ function Sorceress:Update(dt)
             if self.isCasting then
                 self.canAttack = self:CanAttack(dt);
                 if self.canAttack then
-                    local rot = math.atan2(hero.position.y - self.position.y, hero.position.x - self.position.x);
-                    local dir = math.atan2(hero.position.y - self.position.y, hero.position.x - self.position.x);
-                    proj = Projectile:NewFireBall(self.position.x, self.position.y, rot, dir, self.tag, self.target, self.damages);
+                    proj = Projectile:NewFireBall(self.position.x, self.position.y, self.tag, self.target, self.damages);
                     self.isCasting = false;
                 end
             else
@@ -150,19 +148,6 @@ function Sorceress:Draw()
     love.graphics.setColor(255, 255, 255, 1);
 
     if debugMode then self:DrawRange() end
-end
-
-function Sorceress:Move(dt, targetPosition)
-    local angle = math.atan2(targetPosition.y - self.position.y, targetPosition.x - self.position.x);
-    local directionV = math.sin(angle);
-    local directionH = math.cos(angle);
-    local finalDirection = Vector.New(directionH, directionV);
-    
-    Vector.Normalize(finalDirection);
-    
-    self.position = self.position + dt * self.speed * finalDirection;
-    self.collider.position.x = self.position.x - self.width * 0.5;
-    self.collider.position.y = self.position.y - self.height * 0.5;
 end
 
 function Sorceress:PopulateAnims()

@@ -3,7 +3,7 @@ local _Entity = require("entities/_Entity");
 local Projectile = {};
 setmetatable(Projectile, {__index = _Entity});
 
-function Projectile:NewArrow(x, y, rotation, direction, tag, target, damages)
+function Projectile:NewArrow(x, y, tag, target, damages)
     local tmpProjectile = _Entity:New("Arrow", tag, target);
     print("Création d'une instance de "..tmpProjectile.name);
     setmetatable(tmpProjectile, {__index = Projectile});
@@ -19,9 +19,9 @@ function Projectile:NewArrow(x, y, rotation, direction, tag, target, damages)
     tmpProjectile.pivotX = tmpProjectile.width * 0.5;
     tmpProjectile.pivotY = tmpProjectile.height * 0.5;
 
-    -- Graph
-    tmpProjectile.rotation = rotation;
-    tmpProjectile.direction = direction;
+    local delta = Vector.New(GetMousePos().x - tmpProjectile.position.x + cameraOffset.x, GetMousePos().y - tmpProjectile.position.y + cameraOffset.y);
+    tmpProjectile.rotation = Vector.GetAngle(delta) - math.pi*0.5;
+    tmpProjectile.direction = delta:Normalize();
 
     -- Behaviour
     tmpProjectile.speed = 800;
@@ -41,7 +41,7 @@ function Projectile:NewArrow(x, y, rotation, direction, tag, target, damages)
     return tmpProjectile;
 end
 
-function Projectile:NewFireBall(x, y, rotation, direction, tag, target, damages)
+function Projectile:NewFireBall(x, y, tag, target, damages)
     local tmpProjectile = _Entity:New("Fireball", tag, target);
     print("Création d'une instance de "..tmpProjectile.name);
     setmetatable(tmpProjectile, {__index = Projectile});
@@ -52,8 +52,10 @@ function Projectile:NewFireBall(x, y, rotation, direction, tag, target, damages)
     tmpProjectile.height = 17;
     tmpProjectile.pivotX = tmpProjectile.width * 0.5;
     tmpProjectile.pivotY = tmpProjectile.height * 0.5;
-    tmpProjectile.rotation = rotation;
-    tmpProjectile.direction = direction;
+
+    local delta = Vector.New(hero.position.x - tmpProjectile.position.x, hero.position.y - tmpProjectile.position.y);
+    tmpProjectile.rotation = Vector.GetAngle(delta);
+    tmpProjectile.direction = delta:Normalize();
 
     -- Behaviour
     tmpProjectile.speed = 400;

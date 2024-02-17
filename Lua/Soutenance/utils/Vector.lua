@@ -79,6 +79,11 @@ function Vector.GetAngle(a)
     return math.atan2(a.y, a.x); 
 end
 
+-- Position
+function Vector.GetNewFromAngle(angle)
+  return Vector.New(math.cos(angle), math.sin(angle));
+end
+
 -- Normalize vector
 function Vector.Normalize(a)
     local N = Vector.GetMagnitude(a);

@@ -65,9 +65,8 @@ function Bow:Update(dt)
     else
         if self.state == 1 and self.canShoot then
             self:ResetChargeTimer();
-            local rot = math.atan2(GetMousePos().y - self.position.y + cameraOffset.y, GetMousePos().x - self.position.x + cameraOffset.x) - math.pi*0.5;
-            local dir = math.atan2(GetMousePos().y - self.position.y + cameraOffset.y, GetMousePos().x - self.position.x + cameraOffset.x);
-            proj = Projectile:NewArrow(self.position.x, self.position.y, rot, dir, self.tag, self.target, self.damages);
+            local delta = Vector.New(GetMousePos().x - self.position.x + cameraOffset.x, GetMousePos().y - self.position.y + cameraOffset.y);
+            proj = Projectile:NewArrow(self.position.x, self.position.y, self.tag, self.target, self.damages);
             self:ChangeState("shoot");
         elseif self.state == 1 and self.canShoot == false then
             self:ResetChargeTimer();
@@ -89,7 +88,8 @@ function Bow:Update(dt)
 end
 
 function Bow:Draw()
-    local angle = math.atan2(GetMousePos().y - self.position.y + cameraOffset.y, GetMousePos().x - self.position.x + cameraOffset.x) - math.pi*0.5;
+    local delta = Vector.New(GetMousePos().x - self.position.x + cameraOffset.x, GetMousePos().y - self.position.y + cameraOffset.y)
+    local angle = delta:GetAngle() - math.pi*0.5;
     love.graphics.draw(
         self.spritesheet,
         self:GetCurrentQuadToDisplay(self.anims[self.state][0]),

@@ -18,6 +18,7 @@ function _Entity:New(name, tag, target)
     tmpEntity.enabled = true;
     tmpEntity.tag = tag;
     tmpEntity.target = target;
+    tmpEntity.direction = nil;
 
     -- Behaviour
     tmpEntity.collider = nil;
@@ -193,24 +194,16 @@ function _Entity:ChangeState(newState)
 end
 
 function _Entity:Move(dt)
-    local directionV = math.sin(self.direction);
-    local directionH = math.cos(self.direction);
-
-    local finalDirection = Vector.New(directionH, directionV);
-    Vector.Normalize(finalDirection);
-    self.position = self.position + dt * self.speed * finalDirection;
+    self.position = self.position + dt * self.speed * self.direction;
     self.collider.position = self.position;
 end
 
 function _Entity:MoveToTarget(dt, targetPosition)
-    local angle = math.atan2(targetPosition.y - self.position.y, targetPosition.x - self.position.x);
-    local directionV = math.sin(angle);
-    local directionH = math.cos(angle);
-    local finalDirection = Vector.New(directionH, directionV);
+    local delta = Vector.New(targetPosition.x - self.position.x, targetPosition.y - self.position.y);
+    local angle = delta:GetAngle();
+    self.direction = delta:Normalize();
     
-    Vector.Normalize(finalDirection);
-    
-    self.position = self.position + dt * self.speed * finalDirection;
+    self.position = self.position + dt * self.speed * self.direction;
     self.collider.position.x = self.position.x - self.collider.width * 0.5;
     self.collider.position.y = self.position.y - self.collider.height * 0.5;
 end

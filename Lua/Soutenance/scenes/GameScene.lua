@@ -4,6 +4,8 @@ gameScene.Load = function()
     local Hero = require("entities/Hero");
     local Bow = require("entities/Bow");
 
+    local Cyclope = require("entities/Cyclope");
+    local Sorceress = require("entities/Sorceress");
     entities = {};
 
     bg = {};
@@ -12,10 +14,9 @@ gameScene.Load = function()
     bg.size = Vector.New(bg.grid.x * bg.tiles[1].img:getWidth(), bg.grid.y * bg.tiles[1].img:getHeight());
     bg.spawnPoints = gameScene.GenerateSpawnPoints(6);
 
-    print(bg.size);
-
     cameraOffset = Vector.New(bg.size.x * 0.5 - screenWidth * 0.5, bg.size.y * 0.5 - screenHeight * 0.5);
 
+    enemy2 = Sorceress:New(600, 300);
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Bow:New(hero.position.x, hero.position.y);
     
@@ -32,8 +33,6 @@ gameScene.Load = function()
 end
 
 gameScene.Update = function(dt)
-
-    print(hero.position);
     --WavesController.UpdateWave(dt);
     
     -- Entities
