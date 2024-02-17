@@ -101,7 +101,7 @@ function Sorceress:Update(dt)
             if self.isCasting then
                 self.canAttack = self:CanAttack(dt);
                 if self.canAttack then
-                    proj = Projectile:NewFireBall(self.position.x, self.position.y, self.tag, self.target, self.damages);
+                    Projectile:NewFireBall(self.position.x, self.position.y, self.tag, self.target, self.damages);
                     self.isCasting = false;
                 end
             else

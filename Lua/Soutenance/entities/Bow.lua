@@ -65,8 +65,7 @@ function Bow:Update(dt)
     else
         if self.state == 1 and self.canShoot then
             self:ResetChargeTimer();
-            local delta = Vector.New(GetMousePos().x - self.position.x + cameraOffset.x, GetMousePos().y - self.position.y + cameraOffset.y);
-            proj = Projectile:NewArrow(self.position.x, self.position.y, self.tag, self.target, self.damages);
+            Projectile:NewArrow(self.position.x, self.position.y, self.tag, self.target, self.damages);
             self:ChangeState("shoot");
         elseif self.state == 1 and self.canShoot == false then
             self:ResetChargeTimer();
@@ -88,7 +87,7 @@ function Bow:Update(dt)
 end
 
 function Bow:Draw()
-    local delta = Vector.New(GetMousePos().x - self.position.x + cameraOffset.x, GetMousePos().y - self.position.y + cameraOffset.y)
+    local delta = Vector.New(GetMousePos().x - self.position.x + cameraOffset.x, GetMousePos().y - self.position.y + cameraOffset.y);
     local angle = delta:GetAngle() - math.pi*0.5;
     love.graphics.draw(
         self.spritesheet,
