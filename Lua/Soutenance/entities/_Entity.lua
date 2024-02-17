@@ -179,9 +179,11 @@ function _Entity:UpdateCharacterDirectionByTarget(targetPosition, useCameraOffse
     local angle = 0;
     if targetPosition ~= nil then
         if useCameraOffset then
-            angle = math.atan2(targetPosition.y - self.position.y + cameraOffset.y, targetPosition.x - self.position.x + cameraOffset.x) + math.pi * 1.25;
+            local delta = Vector.New(targetPosition.x - self.position.x + cameraOffset.x, targetPosition.y - self.position.y + cameraOffset.y);
+            angle = delta:GetAngle() + math.pi * 1.25;
         else
-            angle = math.atan2(targetPosition.y - self.position.y, targetPosition.x - self.position.x) + math.pi * 1.25;
+            local delta = Vector.New(targetPosition.x - self.position.x, targetPosition.y - self.position.y);
+            angle = delta:GetAngle() + math.pi * 1.25;
         end
     end
     self.characterDirection = math.floor(ConvertRadTo360Degrees(angle)/90);
