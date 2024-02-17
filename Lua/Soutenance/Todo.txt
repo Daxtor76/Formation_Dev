@@ -16,6 +16,7 @@
 - Background -> ok
 - Background collision with camera -> ok
 - Spawn controller + randomly chosen spawn points -> ok
+- Fix flicking + replace bow & enemies positions by vectors
 - Waves
 - Hero can win
 - Menu scene + Game over Scene

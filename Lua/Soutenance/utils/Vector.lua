@@ -69,15 +69,23 @@ function Vector.__tostring(v)
 	 return "(" .. v.x .. ", " .. v.y .. ")"
 end
 
-function Vector.GetNorm(a)
+-- Norm = Magnitude = Longueur
+function Vector.GetMagnitude(a)
     return math.sqrt(a.x^2 + a.y^2);
+end
+
+-- Angle d'un vecteur
+function Vector.GetAngle(a)
+    return math.atan2(a.y, a.x); 
 end
 
 -- Normalize vector
 function Vector.Normalize(a)
-    local N = Vector.GetNorm(a);
-    a.x = a.x / N;
-    a.y = a.y / N;
+    local N = Vector.GetMagnitude(a);
+    if N == Vector.New(0, 0) then N = Vector.New(1, 1) end
+
+    local newVector = Vector.New(a.x / N, a.y / N);
+    return newVector;
 end
 
 return Vector;

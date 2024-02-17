@@ -67,14 +67,14 @@ function Hero:Update(dt)
                 self:ChangeState("run");
             elseif self.state == 1 then
                 self:Move(dt);
-                self:MoveCamera(dt);
+                --self:MoveCamera(dt);
             elseif self.state == 2 then
                 self:Move(dt);
-                self:MoveCamera(dt);
+                --self:MoveCamera(dt);
                 self:ChangeState("recover");
             elseif self.state == 3 then
                 self:Move(dt);
-                self:MoveCamera(dt);
+                --self:MoveCamera(dt);
 
                 self.canTakeDamages = self:CanTakeDamages(dt);
                 if self.canTakeDamages then
@@ -147,37 +147,39 @@ function Hero:Move(dt)
     elseif love.keyboard.isDown("d") then
         directionH = Vector.New(1, 0);
     end
-    local finalDirection = directionV + directionH;
-    Vector.Normalize(finalDirection);
-    self.position = self.position + dt * self.speed * finalDirection;
+    local finalDirection = Vector.Normalize(directionV + directionH);
+    self.position = self.position + dt * finalDirection * self.speed;
     self.collider.position.x = self.position.x - self.width * 0.5;
     self.collider.position.y = self.position.y - self.height * 0.5;
+
+-- TO DO : Bloquer hero aux bords du terrain
+-- TO DO : Eviter le flicking
+
+    local delta = self.position - GetScreenCenterPosition();
+    if delta:GetMagnitude() > scrollDist then 
+        --local angle = Vector.GetAngle(delta)
+        --self:Replace(GetScreenCenterPosition().x + scrollDist * math.cos(angle), GetScreenCenterPosition().y + scrollDist * math.sin(angle));
+        self:MoveCamera(dt, delta); 
+    end
 end
 
-function Hero:MoveCamera(dt)
-    if GetDistance(self.position, GetScreenCenterPosition()) > scrollDist then
-        if CheckCameraCollision() == "none" then
-            -- Move camera offset
-            cameraOffset.x = cameraOffset.x + scrollSpeed * dt * math.cos(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
-            cameraOffset.y = cameraOffset.y + scrollSpeed * dt * math.sin(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
-        end
+function Hero:MoveCamera(dt, delta)
+    if CheckCameraCollision() == "none" then
+        -- Move camera offset
+        local direction = delta:Normalize();
+        cameraOffset = cameraOffset + dt * direction * scrollSpeed;
+    end
 
-        if CheckCameraCollision() == "left" then
-            cameraOffset.x = 0
-        elseif CheckCameraCollision() == "right" then
-            cameraOffset.x = bg.size.x - screenWidth;
-        end
-    
-        if CheckCameraCollision() == "top" then
-            cameraOffset.y = 0;
-        elseif CheckCameraCollision() == "bottom" then
-            cameraOffset.y = bg.size.y - screenHeight;
-        end
-        
-        -- Replace hero so that he cannot go outside of the camera bounds
-        local newPosX = GetScreenCenterPosition().x + scrollDist * math.cos(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
-        local newPosY = GetScreenCenterPosition().y + scrollDist * math.sin(math.atan2(self.position.y - GetScreenCenterPosition().y, self.position.x - GetScreenCenterPosition().x));
-        hero:Replace(newPosX, newPosY);
+    if CheckCameraCollision() == "left" then
+        cameraOffset.x = 0
+    elseif CheckCameraCollision() == "right" then
+        cameraOffset.x = bg.size.x - screenWidth;
+    end
+
+    if CheckCameraCollision() == "top" then
+        cameraOffset.y = 0;
+    elseif CheckCameraCollision() == "bottom" then
+        cameraOffset.y = bg.size.y - screenHeight;
     end
 end
 

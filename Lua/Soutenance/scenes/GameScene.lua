@@ -26,11 +26,11 @@ gameScene.Load = function()
     screenBounds[2] = CollisionController.NewCollider(0, 0, 1, screenHeight, "", "wall");
     screenBounds[3] = CollisionController.NewCollider(0, 0, 1, screenHeight, "", "wall");
 
-    WavesController.Init();
+    --WavesController.Init();
 end
 
 gameScene.Update = function(dt)
-    WavesController.UpdateWave(dt);
+    --WavesController.UpdateWave(dt);
     
     -- Entities
     for key, value in pairs(entities) do

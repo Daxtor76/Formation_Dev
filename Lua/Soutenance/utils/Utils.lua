@@ -27,8 +27,13 @@ function GetSign(n)
     return n > 0 and 1 or n < 0 and -1 or 0;
 end
 
-function GetAngle(posObj1, posObj2)
-    return math.atan2(posObj1.y - posObj2.y, posObj1.x - posObj2.x);
+function Clamp(value, min, max)
+    if value < min then
+        return min;
+    elseif value > max then
+        return max;
+    end
+    return value;
 end
 
 function ConvertRadTo360Degrees(angle)
