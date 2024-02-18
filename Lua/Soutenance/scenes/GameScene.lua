@@ -13,7 +13,7 @@ gameScene.Load = function()
 
     bg = {};
     bg.grid = Vector.New(5, 5);
-    bg.tiles = gameScene.GenerateBackground("images/background/Texture/TX Tileset Grass.png", bg.grid.x, bg.grid.y);
+    bg.tiles = gameScene.GenerateBackground("images/background/TX Tileset Grass.png", bg.grid.x, bg.grid.y);
     bg.size = Vector.New(bg.grid.x * bg.tiles[1].img:getWidth(), bg.grid.y * bg.tiles[1].img:getHeight());
     bg.spawnPoints = gameScene.GenerateSpawnPoints(6);
 

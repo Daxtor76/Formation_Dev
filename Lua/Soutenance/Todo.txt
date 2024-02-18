@@ -19,8 +19,8 @@
 - Fix flicking + replace bow & enemies positions by vectors -> ok
 - Waves -> ok
 - Hero can win -> ok
-- Menu scene + Game over Scene
-- Reset game -> unload + reload scene
+- Menu scene + Game over Scene -> ok
+- Reset game (unload + reload scene)
 - Collectibles
 - Display collectible counter in UI
 - Add slime (kamikaze)
