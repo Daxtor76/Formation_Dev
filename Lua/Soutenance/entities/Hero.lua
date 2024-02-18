@@ -67,14 +67,11 @@ function Hero:Update(dt)
                 self:ChangeState("run");
             elseif self.state == 1 then
                 self:Move(dt);
-                --self:MoveCamera(dt);
             elseif self.state == 2 then
                 self:Move(dt);
-                --self:MoveCamera(dt);
                 self:ChangeState("recover");
             elseif self.state == 3 then
                 self:Move(dt);
-                --self:MoveCamera(dt);
 
                 self.canTakeDamages = self:CanTakeDamages(dt);
                 if self.canTakeDamages then
@@ -99,6 +96,7 @@ function Hero:Update(dt)
 
         if self:CanDie(dt) then
             self.enabled = false;
+            defeat = true;
         end
     end
     -- Animations

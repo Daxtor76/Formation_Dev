@@ -15,9 +15,10 @@ WavesController = require("waves/WavesController");
 SceneController = require("scenes/SceneController");
 require("scenes/MenuScene");
 require("scenes/GameScene");
+require("scenes/GameOverScene");
 
 function love.load()
-    SceneController.SetCurrentScene("Game");
+    SceneController.SetCurrentScene("GameOver");
     SceneController.LoadCurrentScene();
 end
 

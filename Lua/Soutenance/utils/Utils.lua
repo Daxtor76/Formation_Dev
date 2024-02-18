@@ -18,9 +18,11 @@ function GetDistance(pos1, pos2)
     return math.sqrt((pos1.x - pos2.x)^2 + (pos1.y - pos2.y)^2);
 end
 
-function ReplaceMouseCrosshair(img)
-    love.mouse.setVisible(false);
-    love.graphics.draw(img, GetMousePos().x, GetMousePos().y, 0, 0.5, 0.5, img:getWidth()*0.5, img:getHeight()*0.5);
+function ReplaceMouseCrosshair(value, img)
+    love.mouse.setVisible(value);
+    if value == false then
+        love.graphics.draw(img, GetMousePos().x, GetMousePos().y, 0, 0.5, 0.5, img:getWidth()*0.5, img:getHeight()*0.5);
+    end
 end
 
 function GetSign(n) 

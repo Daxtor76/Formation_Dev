@@ -17,8 +17,8 @@
 - Background collision with camera -> ok
 - Spawn controller + randomly chosen spawn points -> ok
 - Fix flicking + replace bow & enemies positions by vectors -> ok
-- Waves
-- Hero can win
+- Waves -> ok
+- Hero can win -> ok
 - Menu scene + Game over Scene
 - Reset game -> unload + reload scene
 - Collectibles

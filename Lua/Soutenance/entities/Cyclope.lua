@@ -55,6 +55,7 @@ function Cyclope:New(x, y)
     tmpCyclope.renderLayer = 0;
 
     table.insert(entities, tmpCyclope);
+    enemiesCount = enemiesCount + 1;
 
     return tmpCyclope;
 end
@@ -90,6 +91,8 @@ function Cyclope:Update(dt)
 
             if self:CanDie(dt) then
                 self.enabled = false;
+                enemiesCount = enemiesCount - 1;
+                enemiesKilled = enemiesKilled + 1;
             end
         elseif self.state == 5 then
             if GetDistance(self.position, hero.position) <= self.range then

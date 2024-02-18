@@ -5,7 +5,7 @@ Sorceress = {};
 setmetatable(Sorceress, {__index = _Entity});
 
 function Sorceress:New(x, y)
-    local tmpSorceress = _Entity:New("Cyclope", "enemy", "player");
+    local tmpSorceress = _Entity:New("Sorceress", "enemy", "player");
     --print("Création d'une instance de "..tmpSorceress.name);
     setmetatable(tmpSorceress, {__index = Sorceress});
 
@@ -60,6 +60,7 @@ function Sorceress:New(x, y)
     tmpSorceress.renderLayer = 0;
 
     table.insert(entities, tmpSorceress);
+    enemiesCount = enemiesCount + 1;
 
     return tmpSorceress;
 end
@@ -96,6 +97,8 @@ function Sorceress:Update(dt)
 
             if self:CanDie(dt) then
                 self.enabled = false;
+                enemiesCount = enemiesCount - 1;
+                enemiesKilled = enemiesKilled + 1;
             end
         elseif self.state == 5 then
             if self.isCasting then

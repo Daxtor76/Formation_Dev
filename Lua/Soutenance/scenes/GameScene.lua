@@ -3,8 +3,13 @@ local gameScene = SceneController.NewScene("Game");
 gameScene.Load = function()
     local Hero = require("entities/Hero");
     local Bow = require("entities/Bow");
+
+    defeat = false;
+    gameTime = 0;
+    enemiesKilled = 0;
     
     entities = {};
+    enemiesCount = 0;
 
     bg = {};
     bg.grid = Vector.New(5, 5);
@@ -17,7 +22,6 @@ gameScene.Load = function()
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Bow:New(hero.position.x, hero.position.y);
     
-    scrollSpeed = hero.speed;
     scrollDist = 150;
 
     arenaBounds = {};
@@ -30,15 +34,20 @@ gameScene.Load = function()
 end
 
 gameScene.Update = function(dt)
-    WavesController.UpdateWave(dt);
-    
     -- Entities
     for key, value in pairs(entities) do
         value:Update(dt);
     end
-
-    CollisionController.CheckCollisions();
     gameScene.CleanLists();
+
+    if gameScene.CheckVictory() == false and gameScene.CheckDefeat() == false then
+        WavesController.UpdateWave(dt);
+        CollisionController.CheckCollisions();
+        gameScene.UpdateGameTime(dt);
+    elseif gameScene.CheckVictory() or gameScene.CheckDefeat() then
+        SceneController.LoadSceneAdditive("GameOver");
+        SceneController.SetCurrentScene("GameOver");
+    end
 end
 
 gameScene.Draw = function()
@@ -64,7 +73,40 @@ gameScene.Draw = function()
     love.graphics.pop();
 
     -- Crosshair
-    ReplaceMouseCrosshair(hero.crosshair);
+    ReplaceMouseCrosshair(false, hero.crosshair);
+
+    if debugMode then 
+        love.graphics.print("Wave: "..WavesController.waveCounter);
+        love.graphics.print("Enemies alive: "..enemiesCount, 0, 10);
+    end
+end
+
+gameScene.Unload = function()
+    hero = nil;
+    weapon = nil;
+    bg = nil;
+    cameraOffset = nil;
+    arenaBounds = nil;
+    enemiesCount = nil;
+
+    for key, value in pairs(entities) do
+        value.collider.enabled = false;
+        value.enabled = false;
+    end
+    gameScene.CleanLists();
+    entities = nil;
+end
+
+gameScene.UpdateGameTime = function(dt)
+    gameTime = gameTime + dt;
+end
+
+gameScene.CheckVictory = function()
+    return WavesController.isOver and enemiesCount == 0;
+end
+
+gameScene.CheckDefeat = function()
+    return defeat;
 end
 
 gameScene.CleanLists = function()

@@ -6,6 +6,7 @@ wavesController.waves = {};
 wavesController.waveCounter = 0;
 wavesController.currentWave = wavesController.waves[0];
 wavesController.timer = 0;
+wavesController.isOver = false;
 
 wavesController.NewWave = function(frequency, duration, enemiesAmount)
     local wave = {};
@@ -37,16 +38,17 @@ wavesController.InitWave = function(waveId)
 end
 
 wavesController.UpdateWave = function(dt)
-    -- toutes les X secondes, spawn les enemy de la currentsubwave puis passer à la suivante
-    wavesController.timer = wavesController.timer - dt;
-    wavesController.currentWave.UpdateSubWave(dt);
-    if wavesController.timer <= 0 then
-        wavesController.waveCounter = wavesController.waveCounter + 1;
-        if wavesController.waves[wavesController.waveCounter] ~= nil then
-            wavesController.InitWave(wavesController.waveCounter);
-        else
-            print("no more wave")
+    if wavesController.isOver == false then
+        wavesController.timer = wavesController.timer - dt;
+        if wavesController.timer <= 0 then
+            wavesController.waveCounter = wavesController.waveCounter + 1;
+            if wavesController.waves[wavesController.waveCounter] ~= nil then
+                wavesController.InitWave(wavesController.waveCounter);
+            else
+                wavesController.isOver = true;
+            end
         end
+        wavesController.currentWave.UpdateSubWave(dt);
     end
 end
 
