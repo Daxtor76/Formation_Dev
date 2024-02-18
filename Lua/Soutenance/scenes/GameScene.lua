@@ -3,9 +3,7 @@ local gameScene = SceneController.NewScene("Game");
 gameScene.Load = function()
     local Hero = require("entities/Hero");
     local Bow = require("entities/Bow");
-
-    local Cyclope = require("entities/Cyclope");
-    local Sorceress = require("entities/Sorceress");
+    
     entities = {};
 
     bg = {};
@@ -18,7 +16,6 @@ gameScene.Load = function()
 
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Bow:New(hero.position.x, hero.position.y);
-    enemy = Sorceress:New(600, 300);
     
     scrollSpeed = hero.speed;
     scrollDist = 150;
@@ -29,18 +26,17 @@ gameScene.Load = function()
     arenaBounds[0] = CollisionController.NewCollider(0, 0, 1, bg.size.y * bg.grid.y, "", "wall");
     arenaBounds[0] = CollisionController.NewCollider(bg.size.x, 0, 1, bg.size.y * bg.grid.y, "", "wall");
 
-    --WavesController.Init();
+    WavesController.InitWave(0);
 end
 
 gameScene.Update = function(dt)
-    --WavesController.UpdateWave(dt);
+    WavesController.UpdateWave(dt);
     
     -- Entities
     for key, value in pairs(entities) do
         value:Update(dt);
     end
 
-    --gameScene.MoveScreenBounds();
     CollisionController.CheckCollisions();
     gameScene.CleanLists();
 end

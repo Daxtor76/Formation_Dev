@@ -6,7 +6,7 @@ setmetatable(Sorceress, {__index = _Entity});
 
 function Sorceress:New(x, y)
     local tmpSorceress = _Entity:New("Cyclope", "enemy", "player");
-    print("Création d'une instance de "..tmpSorceress.name);
+    --print("Création d'une instance de "..tmpSorceress.name);
     setmetatable(tmpSorceress, {__index = Sorceress});
 
     -- Inner

@@ -5,7 +5,7 @@ setmetatable(Cyclope, {__index = _Entity});
 
 function Cyclope:New(x, y)
     local tmpCyclope = _Entity:New("Cyclope", "enemy", "player");
-    print("Création d'une instance de "..tmpCyclope.name);
+    --print("Création d'une instance de "..tmpCyclope.name);
     setmetatable(tmpCyclope, {__index = Cyclope});
 
     -- Inner

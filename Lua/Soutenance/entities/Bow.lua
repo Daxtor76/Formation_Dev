@@ -6,7 +6,7 @@ setmetatable(Bow, {__index = _Entity});
 
 function Bow:New(x, y)
     local tmpWeapon = _Entity:New("Weapon", "player", "enemy");
-    print("Création d'une instance de "..tmpWeapon.name);
+    --print("Création d'une instance de "..tmpWeapon.name);
     setmetatable(tmpWeapon, {__index = Bow});
 
     -- Inner

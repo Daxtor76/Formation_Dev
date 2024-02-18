@@ -5,7 +5,7 @@ setmetatable(Projectile, {__index = _Entity});
 
 function Projectile:NewArrow(x, y, tag, target, damages)
     local tmpProjectile = _Entity:New("Arrow", tag, target);
-    print("Création d'une instance de "..tmpProjectile.name);
+    --print("Création d'une instance de "..tmpProjectile.name);
     setmetatable(tmpProjectile, {__index = Projectile});
 
     -- Graph
@@ -43,7 +43,7 @@ end
 
 function Projectile:NewFireBall(x, y, tag, target, damages)
     local tmpProjectile = _Entity:New("Fireball", tag, target);
-    print("Création d'une instance de "..tmpProjectile.name);
+    --print("Création d'une instance de "..tmpProjectile.name);
     setmetatable(tmpProjectile, {__index = Projectile});
 
     -- Inner

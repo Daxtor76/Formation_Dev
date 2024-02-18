@@ -5,7 +5,7 @@ setmetatable(Hero, {__index = _Entity});
 
 function Hero:New(x, y)
     local tmpHero = _Entity:New("Hero", "player", "enemy");
-    print("Création d'une instance de "..tmpHero.name);
+    --print("Création d'une instance de "..tmpHero.name);
     setmetatable(tmpHero, {__index = Hero});
 
     -- Inner

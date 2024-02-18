@@ -192,7 +192,7 @@ end
 function _Entity:ChangeState(newState)
     self.frame = 0;
     self.state = self.states[newState];
-    print("Entity goes in state "..self.state);
+    --print("Entity goes in state "..self.state);
 end
 
 function _Entity:Move(dt)
