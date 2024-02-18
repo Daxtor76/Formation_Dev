@@ -1,15 +1,26 @@
 local gameOverScene = SceneController.NewScene("GameOver");
 local Button = require("UI/Button");
+local Text = require("UI/Text");
 
 local Buttons = {};
+local Texts = {};
 
 gameOverScene.Load = function(test)
-    --victory = SceneController.scenes["Game"].CheckVictory();
-    --enemiesKilleddeze = enemiesKilled;
-    --gameTimevrbvte = math.ceil(gameTime);
+    Victory = function()
+        if SceneController.scenes["Game"].CheckVictory() then
+            return "Congratulations !";
+        end
+        return "Defeat :'("
+    end
+    enemiesDead = enemiesKilled or 0;
+    timePlayed = gameTime or 0;
+    
+    Texts[0] = Text:NewTitle(screenWidth * 0.5, 50, Victory());
+    Texts[1] = Text:NewMiddle(screenWidth * 0.5, 100, "Enemies killed: "..enemiesDead);
+    Texts[2] = Text:NewMiddle(screenWidth * 0.5, 130, "Time played: "..math.ceil(timePlayed).."s");
 
-    Buttons[0] = Button:New(200, 200, 100, 50, "Main menu", gameOverScene.OnMenuButtonClicked);
-    Buttons[1] = Button:New(400, 200, 100, 50, "Reload", gameOverScene.OnReloadButtonClicked);
+    Buttons[0] = Button:New(screenWidth * 0.25, screenHeight * 0.5, 100, 50, "Main menu", gameOverScene.OnMenuButtonClicked);
+    Buttons[1] = Button:New(screenWidth * 0.75 - 100, screenHeight * 0.5, 100, 50, "Reload", gameOverScene.OnReloadButtonClicked);
 end
 
 gameOverScene.Update = function(dt)
@@ -17,21 +28,29 @@ gameOverScene.Update = function(dt)
 end
 
 gameOverScene.Draw = function()
-    --ReplaceMouseCrosshair(true);
-    --if victory then
-    --    love.graphics.print("Victory!", 0, 0);
-    --else
-    --    love.graphics.print("Defeat :(", 0, 0);
-    --end
-    --love.graphics.print("Enemies killed: "..enemiesKilled, 0, 15);
-    --love.graphics.print("Time played: "..gameTimevrbvte.."s", 0, 30);
+    ReplaceMouseCrosshair(true);
 
-    for key, value in pairs(Buttons) do
-        value:Draw();
-    end
+    gameOverScene.DrawUI();
 end
 
 gameOverScene.Unload = function()
+    Victory = nil;
+    enemiesDead = nil;
+    timePlayed = nil;
+    normalFont = nil;
+    middleFont = nil;
+    bigFont = nil;
+    Texts = nil;
+    Buttons = nil;
+end
+
+gameOverScene.DrawUI = function()
+    for key, value in pairs(Buttons) do
+        value:Draw();
+    end
+    for key, value in pairs(Texts) do
+        value:Draw();
+    end
 end
 
 gameOverScene.CheckButtons = function()
@@ -45,7 +64,8 @@ gameOverScene.CheckButtons = function()
 end
 
 gameOverScene.OnMenuButtonClicked = function()
-    print("load menu scene")
+    SceneController.SetCurrentScene("Menu");
+    SceneController.LoadCurrentScene();
 end
 
 gameOverScene.OnReloadButtonClicked = function()

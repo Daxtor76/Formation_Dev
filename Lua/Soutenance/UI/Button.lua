@@ -1,5 +1,4 @@
 local Button = {};
-love.graphics.setFont(love.graphics.newFont(12))
 
 function Button:New(x, y, w, h, label, event)
     local tmpButton = {};
@@ -9,6 +8,7 @@ function Button:New(x, y, w, h, label, event)
     tmpButton.baseSize = Vector.New(w, h);
     tmpButton.size = tmpButton.baseSize;
 
+    love.graphics.setFont(normalFont);
     tmpButton.font = love.graphics.getFont();
     tmpButton.text = love.graphics.newText(tmpButton.font, label);
 
@@ -29,6 +29,7 @@ function Button:New(x, y, w, h, label, event)
 end
 
 function Button:Draw()
+    love.graphics.setFont(normalFont)
     love.graphics.setColor(love.math.colorFromBytes(self.currentColor));
     love.graphics.rectangle("fill", self.position.x, self.position.y, self.size.x, self.size.y);
     love.graphics.setColor(0, 0, 0, 1);

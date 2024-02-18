@@ -23,10 +23,10 @@ sceneController.NewScene = function(sceneName)
 end
 
 sceneController.SetCurrentScene = function(sceneName)
-    if sceneController.currentScene ~= nil then
-        sceneController.currentScene.Unload();
-    end
     if sceneController.scenes[sceneName] ~= nil then
+        if sceneController.currentScene ~= nil then
+            sceneController.currentScene.Unload();
+        end
         sceneController.currentScene = sceneController.scenes[sceneName];
     else
         error("The scene does not exist.");

@@ -17,8 +17,12 @@ require("scenes/MenuScene");
 require("scenes/GameScene");
 require("scenes/GameOverScene");
 
+normalFont = love.graphics.newFont(12);
+middleFont = love.graphics.newFont(18);
+bigFont = love.graphics.newFont(40);
+
 function love.load()
-    SceneController.SetCurrentScene("GameOver");
+    SceneController.SetCurrentScene("Menu");
     SceneController.LoadCurrentScene();
 end
 
