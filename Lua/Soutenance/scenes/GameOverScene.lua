@@ -2,10 +2,12 @@ local gameOverScene = SceneController.NewScene("GameOver");
 local Button = require("UI/Button");
 local Text = require("UI/Text");
 
-local Buttons = {};
-local Texts = {};
+local Buttons = nil;
+local Texts = nil;
 
 gameOverScene.Load = function(test)
+    Buttons = {};
+    Texts = {};
     Victory = function()
         if SceneController.scenes["Game"].CheckVictory() then
             return "Congratulations !";
@@ -37,9 +39,6 @@ gameOverScene.Unload = function()
     Victory = nil;
     enemiesDead = nil;
     timePlayed = nil;
-    normalFont = nil;
-    middleFont = nil;
-    bigFont = nil;
     Texts = nil;
     Buttons = nil;
 end
@@ -69,7 +68,8 @@ gameOverScene.OnMenuButtonClicked = function()
 end
 
 gameOverScene.OnReloadButtonClicked = function()
-    print("new game")
+    SceneController.SetCurrentScene("Game");
+    SceneController.LoadCurrentScene();
 end
 
 return gameOverScene;

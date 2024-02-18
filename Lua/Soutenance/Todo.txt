@@ -20,7 +20,7 @@
 - Waves -> ok
 - Hero can win -> ok
 - Menu scene + Game over Scene -> ok
-- Reset game (unload + reload scene)
+- Reset game (unload + reload scene) -> ok
 - Collectibles
 - Display collectible counter in UI
 - Add slime (kamikaze)

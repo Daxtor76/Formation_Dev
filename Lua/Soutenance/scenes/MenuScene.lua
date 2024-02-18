@@ -2,10 +2,13 @@ local menuScene = SceneController.NewScene("Menu");
 local Button = require("UI/Button");
 local Text = require("UI/Text");
 
-local Buttons = {};
-local Texts = {};
+local Buttons = nil;
+local Texts = nil;
 
 menuScene.Load = function()
+    Texts = {};
+    Buttons = {};
+
     Texts[0] = Text:NewTitle(screenWidth * 0.5, 50, "Soutenance Lua");
     Buttons[0] = Button:New(screenWidth * 0.5 - 50, screenHeight * 0.5, 100, 50, "Launch Game", menuScene.OnGameButtonClicked);
 end

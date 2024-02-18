@@ -3,6 +3,10 @@ screenHeight = love.graphics.getHeight();
 
 debugMode = true;
 
+normalFont = love.graphics.newFont(12);
+middleFont = love.graphics.newFont(18);
+bigFont = love.graphics.newFont(40);
+
 function GetScreenCenterPosition()
     local screenCenterX = screenWidth * 0.5 + cameraOffset.x;
     local screenCenterY = screenHeight * 0.5 + cameraOffset.y;
