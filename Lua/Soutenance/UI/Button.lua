@@ -22,6 +22,9 @@ function Button:New(x, y, w, h, label, event)
     tmpButton.onNotHover = Button.NotHover;
     tmpButton.applyButtonEffect = event;
 
+    tmpButton.isHover = false;
+    tmpButton.isClicked = false;
+
     return tmpButton;
 end
 
@@ -38,38 +41,52 @@ function Button:CheckHover()
     GetMousePos().x > self.position.x and
     GetMousePos().y < self.position.y + self.size.y and
     GetMousePos().y > self.position.y then
-        self:onHover();
+        if self.isHover == false then
+            self:onHover();
+        end
         return true;
     else
-        self:onNotHover();
+        if self.isHover then
+            self:onNotHover();
+        end
+        return false;
     end
     return false;
 end
 
 function Button:CheckClick()
     if love.mouse.isDown(1) then
-        self:onClick()
-        return true;
+        if self.isClicked == false then
+            self:onClick()
+            return true;
+        end
+        return false;
     else
-        self:onNotClick();
+        if self.isClicked then
+            self:onNotClick();
+        end
     end
     return false;
 end
 
 function Button.OnClick(self)
     self.size = self.baseSize * 0.95;
+    self.isClicked = true;
 end
 
 function Button.NotClick(self)
     self.size = self.baseSize;
+    self.isClicked = false;
 end
 
 function Button.OnHover(self)
     self.currentColor = self.hoverColor;
+    self.isHover = true;
 end
 
 function Button.NotHover(self)
     self.currentColor = self.baseColor;
+    self.isHover = false;
 end
 
 return Button;
