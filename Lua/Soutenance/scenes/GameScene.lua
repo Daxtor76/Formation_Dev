@@ -30,10 +30,10 @@ gameScene.Load = function()
     arenaBounds = {};
     arenaBounds[0] = CollisionController.NewCollider(0, 0, bg.size.x * bg.grid.x, 1, "", "wall");
     arenaBounds[1] = CollisionController.NewCollider(0, bg.size.y, bg.size.x * bg.grid.x, 1, "", "wall");
-    arenaBounds[0] = CollisionController.NewCollider(0, 0, 1, bg.size.y * bg.grid.y, "", "wall");
-    arenaBounds[0] = CollisionController.NewCollider(bg.size.x, 0, 1, bg.size.y * bg.grid.y, "", "wall");
+    arenaBounds[2] = CollisionController.NewCollider(0, 0, 1, bg.size.y * bg.grid.y, "", "wall");
+    arenaBounds[3] = CollisionController.NewCollider(bg.size.x, 0, 1, bg.size.y * bg.grid.y, "", "wall");
 
-   --WavesController.InitWave(0);
+   WavesController.InitWave(0);
 end
 
 gameScene.Update = function(dt)
@@ -44,7 +44,7 @@ gameScene.Update = function(dt)
     gameScene.CleanLists();
 
     if gameScene.CheckVictory() == false and gameScene.CheckDefeat() == false then
-        --WavesController.UpdateWave(dt);
+        WavesController.UpdateWave(dt);
         CollisionController.CheckCollisions();
         gameScene.UpdateGameTime(dt);
     elseif gameScene.CheckVictory() or gameScene.CheckDefeat() then
@@ -94,7 +94,9 @@ gameScene.Unload = function()
     enemiesCount = nil;
 
     for key, value in pairs(entities) do
-        value.collider.enabled = false;
+        if value.collider ~= nil then
+            value.collider.enabled = false;
+        end
         value.enabled = false;
     end
     gameScene.CleanLists();
