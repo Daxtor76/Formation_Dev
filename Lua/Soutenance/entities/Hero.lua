@@ -33,7 +33,7 @@ function Hero:New(x, y)
     tmpHero.speed = 150;
 
     tmpHero.maxlife = 5;
-    tmpHero.life = 4;
+    tmpHero.life = tmpHero.maxlife;
 
     tmpHero.recoverTimer = 0.5;
     tmpHero.currentRecoverTimer = tmpHero.recoverTimer;
@@ -92,13 +92,7 @@ function Hero:Update(dt)
             end
         end
     else
-        self.collider.enabled = false;
-        weapon.enabled = false;
-
-        if self:CanDie(dt) then
-            self.enabled = false;
-            defeat = true;
-        end
+        self:Die(dt);
     end
     -- Animations
     self:UpdateAnim(dt, self.anims[self.state][self.characterDirection]);
@@ -130,6 +124,16 @@ function Hero:Draw()
         self.pivotY
     );
     love.graphics.setColor(255, 255, 255, 1);
+end
+
+function Hero:Die(dt)
+    self.collider.enabled = false;
+    weapon.enabled = false;
+
+    if self:CanDie(dt) then
+        self.enabled = false;
+        defeat = true;
+    end
 end
 
 function Hero:Move(dt)

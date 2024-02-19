@@ -22,7 +22,7 @@
 - Menu scene + Game over Scene -> ok
 - Reset game (unload + reload scene) -> ok
 - Collectibles (XP) -> ok
-- Collectible (Life pot)
+- Collectible (Life pot) -> ok
 - Level up
 - Display collectible counter in UI
 - Add slime (kamikaze)

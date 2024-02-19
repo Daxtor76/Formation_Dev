@@ -1,10 +1,10 @@
 local gameScene = SceneController.NewScene("Game");
+XP = require("collectibles/XP");
+LP = require("collectibles/LifePot");
     
 gameScene.Load = function()
     local Hero = require("entities/Hero");
     local Bow = require("entities/Bow");
-    local XP = require("collectibles/XP");
-    local LP = require("collectibles/LifePot");
 
     defeat = false;
     gameTime = 0;
@@ -23,8 +23,6 @@ gameScene.Load = function()
 
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Bow:New(hero.position.x, hero.position.y);
-
-    star = LP:New(200, 200);
     
     scrollDist = 150;
 

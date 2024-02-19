@@ -70,7 +70,7 @@ function LP:Draw()
 end
 
 LP.OnHit = function(collider, other)
-    if other.parent.tag == "player" then
+    if other.parent == hero then
         collider.enabled = false;
         collider.parent.enabled = false;
         other.parent:WinLife(2);

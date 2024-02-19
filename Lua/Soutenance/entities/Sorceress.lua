@@ -93,13 +93,7 @@ function Sorceress:Update(dt)
                 self:ChangeState("run");
             end
         elseif self.state == 4 then
-            self.collider.enabled = false;
-
-            if self:CanDie(dt) then
-                self.enabled = false;
-                enemiesCount = enemiesCount - 1;
-                enemiesKilled = enemiesKilled + 1;
-            end
+            self:Die(dt);
         elseif self.state == 5 then
             if self.isCasting then
                 self.canAttack = self:CanAttack(dt);

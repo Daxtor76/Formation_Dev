@@ -32,7 +32,7 @@ function XP:New(x, y)
 
     tmpXP.state = 0;
     tmpXP.range = 150;
-    tmpXP.speed = 200;
+    tmpXP.speed = 250;
 
     -- Graph
     tmpXP.spritesheet = love.graphics.newImage("images/collectibles/star_Spritesheet.png");
@@ -70,7 +70,7 @@ function XP:Draw()
 end
 
 XP.OnHit = function(collider, other)
-    if other.parent.tag == "player" then
+    if other.parent == hero then
         collider.enabled = false;
         collider.parent.enabled = false;
         other.parent:WinXP(1);
