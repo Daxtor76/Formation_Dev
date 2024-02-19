@@ -42,6 +42,7 @@ function Hero:New(x, y)
     tmpHero.currentDyingTimer = tmpHero.dyingSpeed;
 
     tmpHero.level = 1;
+    tmpHero.xp = 0;
 
     -- Graph
     tmpHero.spritesheet = love.graphics.newImage("images/player/character.png");

@@ -84,6 +84,11 @@ function _Entity:IsAlive()
     return self.life > 0;
 end
 
+function _Entity:WinXP(amount)
+    self.xp = self.xp + amount;
+    -- TO DO: Check lvl up ici
+end
+
 function _Entity:TakeDamages(damages)
     if self.canTakeDamages then
         self.life = self.life - damages;

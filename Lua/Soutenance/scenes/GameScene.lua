@@ -3,6 +3,7 @@ local gameScene = SceneController.NewScene("Game");
 gameScene.Load = function()
     local Hero = require("entities/Hero");
     local Bow = require("entities/Bow");
+    local XP = require("entities/XP");
 
     defeat = false;
     gameTime = 0;
@@ -21,6 +22,8 @@ gameScene.Load = function()
 
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Bow:New(hero.position.x, hero.position.y);
+
+    star = XP:New(200, 200);
     
     scrollDist = 150;
 
@@ -30,7 +33,7 @@ gameScene.Load = function()
     arenaBounds[0] = CollisionController.NewCollider(0, 0, 1, bg.size.y * bg.grid.y, "", "wall");
     arenaBounds[0] = CollisionController.NewCollider(bg.size.x, 0, 1, bg.size.y * bg.grid.y, "", "wall");
 
-    WavesController.InitWave(0);
+   --WavesController.InitWave(0);
 end
 
 gameScene.Update = function(dt)
@@ -41,7 +44,7 @@ gameScene.Update = function(dt)
     gameScene.CleanLists();
 
     if gameScene.CheckVictory() == false and gameScene.CheckDefeat() == false then
-        WavesController.UpdateWave(dt);
+        --WavesController.UpdateWave(dt);
         CollisionController.CheckCollisions();
         gameScene.UpdateGameTime(dt);
     elseif gameScene.CheckVictory() or gameScene.CheckDefeat() then
@@ -78,6 +81,7 @@ gameScene.Draw = function()
     if debugMode then 
         love.graphics.print("Wave: "..WavesController.waveCounter);
         love.graphics.print("Enemies alive: "..enemiesCount, 0, 10);
+        love.graphics.print("XP: "..hero.xp, 0, 20);
     end
 end
 

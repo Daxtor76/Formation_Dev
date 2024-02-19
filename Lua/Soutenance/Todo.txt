@@ -21,12 +21,13 @@
 - Hero can win -> ok
 - Menu scene + Game over Scene -> ok
 - Reset game (unload + reload scene) -> ok
-- Collectibles
+- Collectibles (XP) -> ok
+- Collectible (Life pot)
+- Level up
 - Display collectible counter in UI
 - Add slime (kamikaze)
 - Space partitionning : tu partage ton monde en sous-espaces, ça te permet de regarder les collisions qu'entre les objets qui sont "dans le même coin" (keywords: Binary Space Partitionning, Quadtree, Octree, Bucket Space Partitionning)
 - Refacto (at least create functions with clear name so that the code is readable easily)
 
 -- If time --
-- XP & level up
 - Win perks
