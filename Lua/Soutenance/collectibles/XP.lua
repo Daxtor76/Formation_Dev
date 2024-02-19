@@ -5,7 +5,7 @@ setmetatable(XP, {__index = _Entity});
 
 function XP:New(x, y)
     local tmpXP = _Entity:New("XP", "", "");
-    --print("Création d'une instance de "..tmpSorceress.name);
+    --print("Création d'une instance de "..tmpXP.name);
     setmetatable(tmpXP, {__index = XP});
 
     -- Inner
@@ -56,7 +56,7 @@ end
 function XP:Draw()
     love.graphics.draw(
         self.spritesheet,
-        self:GetCurrentQuadToDisplay(self.anims[self.state][self.characterDirection]),
+        self:GetCurrentQuadToDisplay(self.anims[self.state][0]),
         self.position.x, 
         self.position.y, 
         self.rotation, 

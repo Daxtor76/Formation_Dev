@@ -89,6 +89,10 @@ function _Entity:WinXP(amount)
     -- TO DO: Check lvl up ici
 end
 
+function _Entity:WinLife(amount)
+    self.life = Clamp((self.life + amount), 0, self.maxlife);
+end
+
 function _Entity:TakeDamages(damages)
     if self.canTakeDamages then
         self.life = self.life - damages;

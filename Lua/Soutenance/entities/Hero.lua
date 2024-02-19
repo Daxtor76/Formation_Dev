@@ -33,7 +33,7 @@ function Hero:New(x, y)
     tmpHero.speed = 150;
 
     tmpHero.maxlife = 5;
-    tmpHero.life = tmpHero.maxlife;
+    tmpHero.life = 4;
 
     tmpHero.recoverTimer = 0.5;
     tmpHero.currentRecoverTimer = tmpHero.recoverTimer;
