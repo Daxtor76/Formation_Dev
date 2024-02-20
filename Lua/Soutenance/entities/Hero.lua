@@ -93,6 +93,7 @@ function Hero:Update(dt)
         end
     else
         self:Die(dt);
+        weapon:DisableChargeFX();
     end
     -- Animations
     self:UpdateAnim(dt, self.anims[self.state][self.characterDirection]);

@@ -1,5 +1,6 @@
 local _Entity = require("entities/_Entity");
 local Projectile = require("entities/Projectile");
+local SorceressCharge = require("FXs/SorceressCharge");
 
 Sorceress = {};
 setmetatable(Sorceress, {__index = _Entity});
@@ -53,14 +54,16 @@ function Sorceress:New(x, y)
 
     tmpSorceress.dyingSpeed = 1;
     tmpSorceress.currentDyingTimer = tmpSorceress.dyingSpeed;
+    enemiesCount = enemiesCount + 1;
 
     -- Graph
     tmpSorceress.spritesheet = love.graphics.newImage("images/enemies/Sorceress/sorceress_Spritesheet.png");
     tmpSorceress.anims = tmpSorceress:PopulateAnims();
     tmpSorceress.renderLayer = 7;
 
+    tmpSorceress.chargeFX = SorceressCharge:New(tmpSorceress.position.x, tmpSorceress.position.y);
+
     table.insert(entities, tmpSorceress);
-    enemiesCount = enemiesCount + 1;
 
     return tmpSorceress;
 end
@@ -94,14 +97,17 @@ function Sorceress:Update(dt)
             end
         elseif self.state == 4 then
             self:Die(dt);
+            self:DisableChargeFX();
         elseif self.state == 5 then
             if self.isCasting then
+                self:EnableChargeFX(dt, self.position);
                 self.canAttack = self:CanAttack(dt);
                 if self.canAttack then
                     Projectile:NewFireBall(self.position.x, self.position.y, self.tag, self.target, self.damages);
                     self.isCasting = false;
                 end
             else
+                self:DisableChargeFX();
                 if GetDistance(self.position, hero.position) <= self.range then
                     self.isCasting = true;
                 else
@@ -145,6 +151,16 @@ function Sorceress:Draw()
     love.graphics.setColor(255, 255, 255, 1);
 
     if debugMode then self:DrawRange() end
+end
+
+function Sorceress:EnableChargeFX(dt, position)
+    self.chargeFX.active = true;
+    self.chargeFX.position = position;
+end
+
+function Sorceress:DisableChargeFX()
+    self.chargeFX.active = false;
+    self.chargeFX:ResetAnim(self.chargeFX.anims[self.chargeFX.state][0]);
 end
 
 function Sorceress:PopulateAnims()
