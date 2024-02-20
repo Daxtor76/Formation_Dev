@@ -33,7 +33,7 @@
 - Sign & feedbacks
     - Add charge feedback -> ok
     - Add charge feedback on sorceress -> ok
-    - Add charge ready feedback
+    - Add charge ready feedback -> ok
     - Screenshake on hit -> ok
     - Screenshake on fire
 - Add slime (kamikaze)

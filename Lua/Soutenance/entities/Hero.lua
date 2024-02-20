@@ -48,7 +48,7 @@ function Hero:New(x, y)
     tmpHero.spritesheet = love.graphics.newImage("images/player/character.png");
     tmpHero.crosshair = love.graphics.newImage("images/player/crosshair.png");
     tmpHero.anims = tmpHero:PopulateAnims();
-    tmpHero.renderLayer = 9;
+    tmpHero.renderLayer = 8;
 
     table.insert(entities, tmpHero);
 

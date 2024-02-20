@@ -24,7 +24,6 @@ gameScene.Load = function()
 
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Bow:New(hero.position.x, hero.position.y);
-    enemy = Sorceress:New(400, 400);
     
     scrollDist = 150;
 

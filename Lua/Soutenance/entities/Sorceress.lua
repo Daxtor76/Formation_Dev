@@ -59,7 +59,7 @@ function Sorceress:New(x, y)
     -- Graph
     tmpSorceress.spritesheet = love.graphics.newImage("images/enemies/Sorceress/sorceress_Spritesheet.png");
     tmpSorceress.anims = tmpSorceress:PopulateAnims();
-    tmpSorceress.renderLayer = 7;
+    tmpSorceress.renderLayer = 6;
 
     tmpSorceress.chargeFX = SorceressCharge:New(tmpSorceress.position.x, tmpSorceress.position.y);
 
@@ -74,9 +74,9 @@ function Sorceress:Update(dt)
         self:UpdateCharacterDirectionByTarget(hero.position, false);
 
         if self.position.y > hero.position.y then
-            self:ChangeRenderLayer(10);
+            self:ChangeRenderLayer(9);
         else
-            self:ChangeRenderLayer(7);
+            self:ChangeRenderLayer(6);
         end
 
         -- Behaviour
