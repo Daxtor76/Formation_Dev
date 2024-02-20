@@ -1,11 +1,13 @@
 screenWidth = love.graphics.getWidth();
 screenHeight = love.graphics.getHeight();
 
-debugMode = true;
+debugMode = false;
 
 normalFont = love.graphics.newFont(12);
 middleFont = love.graphics.newFont(18);
 bigFont = love.graphics.newFont(40);
+
+screenShakeTimer = 0;
 
 function GetScreenCenterPosition()
     local screenCenterX = screenWidth * 0.5 + cameraOffset.x;
@@ -44,4 +46,12 @@ end
 
 function ConvertRadTo360Degrees(angle)
     return (math.deg(angle)+360)%360;
+end
+
+function StartScreenShake(duration)
+    screenShakeTimer = duration;
+end
+
+function ScreenShake(magnitude)
+    shake = Vector.New(love.math.random(-magnitude, magnitude), love.math.random(-magnitude, magnitude));
 end

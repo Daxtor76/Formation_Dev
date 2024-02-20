@@ -9,9 +9,9 @@ gameScene.Load = function()
     defeat = false;
     gameTime = 0;
     enemiesKilled = 0;
+    enemiesCount = 0;
     
     entities = {};
-    enemiesCount = 0;
 
     bg = {};
     bg.grid = Vector.New(5, 5);
@@ -20,6 +20,7 @@ gameScene.Load = function()
     bg.spawnPoints = gameScene.GenerateSpawnPoints(6);
 
     cameraOffset = Vector.New(bg.size.x * 0.5 - screenWidth * 0.5, bg.size.y * 0.5 - screenHeight * 0.5);
+    shake = Vector.New(0, 0);
 
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Bow:New(hero.position.x, hero.position.y);
@@ -46,6 +47,8 @@ gameScene.Update = function(dt)
         WavesController.UpdateWave(dt);
         CollisionController.CheckCollisions();
         gameScene.UpdateGameTime(dt);
+
+        gameScene.UpdateScreenShakeTimer(dt);
     elseif gameScene.CheckVictory() or gameScene.CheckDefeat() then
         SceneController.LoadSceneAdditive("GameOver");
         SceneController.SetCurrentScene("GameOver");
@@ -54,7 +57,7 @@ end
 
 gameScene.Draw = function()
     love.graphics.push()
-    love.graphics.translate(-cameraOffset.x, -cameraOffset.y);
+    love.graphics.translate(-cameraOffset.x + shake.x, -cameraOffset.y + shake.y);
     -- BG
     gameScene.DrawBackground();
 
@@ -100,6 +103,13 @@ gameScene.Unload = function()
     end
     gameScene.CleanLists();
     entities = nil;
+end
+
+gameScene.UpdateScreenShakeTimer = function(dt)
+    if screenShakeTimer > 0 then
+        ScreenShake(3);
+    end
+    screenShakeTimer = Clamp(screenShakeTimer, 0, 100) - dt;
 end
 
 gameScene.UpdateGameTime = function(dt)

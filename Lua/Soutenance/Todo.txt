@@ -23,11 +23,17 @@
 - Reset game (unload + reload scene) -> ok
 - Collectibles (XP) -> ok
 - Collectible (Life pot) -> ok
+- Refacto (at least create functions with clear name so that the code is readable easily) -> ok
 - Level up
-- Display collectible counter in UI
+- Upgrade: Arrow goes through enemies
+- Upgrade: Shield around hero
+- Upgrade: Fire rate ++
+- Upgrade: +1 lp
+- Upgrade: +1 dmg
+- Sign & feedbacks
+    - Add charge feedback
+    - Add charge ready feedback
+    - Add casting bar feedback on enemies
+    - Screenshake on hit -> ok
+    - Screenshake on fire
 - Add slime (kamikaze)
-- Space partitionning : tu partage ton monde en sous-espaces, ça te permet de regarder les collisions qu'entre les objets qui sont "dans le même coin" (keywords: Binary Space Partitionning, Quadtree, Octree, Bucket Space Partitionning)
-- Refacto (at least create functions with clear name so that the code is readable easily)
-
--- If time --
-- Win perks

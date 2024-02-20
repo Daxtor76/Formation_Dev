@@ -90,6 +90,7 @@ Projectile.OnHit = function(collider, other)
         elseif other.parent.tag == collider.parent.target then
             if other.parent.canTakeDamages then
                 collider.parent:ApplyDamages(collider.parent.damages, other.parent);
+                StartScreenShake(0.2);
             end
             collider.enabled = false;
             collider.parent.enabled = false;
