@@ -1,6 +1,6 @@
 local gameScene = SceneController.NewScene("Game");
-XP = require("collectibles/XP");
-LP = require("collectibles/LifePot");
+local XP = require("collectibles/XP");
+local LP = require("collectibles/LifePot");
     
 gameScene.Load = function()
     local Hero = require("entities/Hero");
@@ -33,21 +33,22 @@ gameScene.Load = function()
     arenaBounds[2] = CollisionController.NewCollider(0, 0, 1, bg.size.y * bg.grid.y, "", "wall");
     arenaBounds[3] = CollisionController.NewCollider(bg.size.x, 0, 1, bg.size.y * bg.grid.y, "", "wall");
 
-   WavesController.InitWave(0);
+   --WavesController.InitWave(0);
 end
 
 gameScene.Update = function(dt)
     -- Entities
     for key, value in pairs(entities) do
-        value:Update(dt);
+        if value.active then
+            value:Update(dt);
+        end
     end
     gameScene.CleanLists();
 
     if gameScene.CheckVictory() == false and gameScene.CheckDefeat() == false then
-        WavesController.UpdateWave(dt);
+        --WavesController.UpdateWave(dt);
         CollisionController.CheckCollisions();
         gameScene.UpdateGameTime(dt);
-
         gameScene.UpdateScreenShakeTimer(dt);
     elseif gameScene.CheckVictory() or gameScene.CheckDefeat() then
         SceneController.LoadSceneAdditive("GameOver");
@@ -65,7 +66,9 @@ gameScene.Draw = function()
     for y = 0, 10 do
         for key, value in pairs(entities) do
             if value.renderLayer == y then
-                value:Draw();
+                if value.active then
+                    value:Draw();
+                end
             end
         end
     end

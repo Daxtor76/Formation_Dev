@@ -57,7 +57,7 @@ function Sorceress:New(x, y)
     -- Graph
     tmpSorceress.spritesheet = love.graphics.newImage("images/enemies/Sorceress/sorceress_Spritesheet.png");
     tmpSorceress.anims = tmpSorceress:PopulateAnims();
-    tmpSorceress.renderLayer = 0;
+    tmpSorceress.renderLayer = 7;
 
     table.insert(entities, tmpSorceress);
     enemiesCount = enemiesCount + 1;
@@ -71,9 +71,9 @@ function Sorceress:Update(dt)
         self:UpdateCharacterDirectionByTarget(hero.position, false);
 
         if self.position.y > hero.position.y then
-            self:ChangeRenderLayer(2);
+            self:ChangeRenderLayer(10);
         else
-            self:ChangeRenderLayer(0);
+            self:ChangeRenderLayer(7);
         end
 
         -- Behaviour

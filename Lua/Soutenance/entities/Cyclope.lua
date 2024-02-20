@@ -52,7 +52,7 @@ function Cyclope:New(x, y)
     -- Graph
     tmpCyclope.spritesheet = love.graphics.newImage("images/enemies/Cyclope/cyclope_Spritesheet.png");
     tmpCyclope.anims = tmpCyclope:PopulateAnims();
-    tmpCyclope.renderLayer = 0;
+    tmpCyclope.renderLayer = 7;
 
     table.insert(entities, tmpCyclope);
     enemiesCount = enemiesCount + 1;
@@ -66,9 +66,9 @@ function Cyclope:Update(dt)
         self:UpdateCharacterDirectionByTarget(hero.position, false);
 
         if self.position.y > hero.position.y then
-            self:ChangeRenderLayer(2);
+            self:ChangeRenderLayer(10);
         else
-            self:ChangeRenderLayer(0);
+            self:ChangeRenderLayer(7);
         end
 
         -- Behaviour

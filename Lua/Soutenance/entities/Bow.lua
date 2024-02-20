@@ -1,5 +1,6 @@
 local _Entity = require("entities/_Entity");
 local Projectile = require("entities/Projectile");
+local HeroCharge = require("FXs/HeroCharge");
 
 local Bow = {};
 setmetatable(Bow, {__index = _Entity});
@@ -33,7 +34,9 @@ function Bow:New(x, y)
     -- Graph
     tmpWeapon.spritesheet = love.graphics.newImage("images/player/bow.png");
     tmpWeapon.anims = tmpWeapon:PopulateAnims();
-    tmpWeapon.renderLayer = 0;
+    tmpWeapon.renderLayer = 8;
+
+    tmpWeapon.chargeFX = HeroCharge:New(hero.position.x, hero.position.y + hero.height * 0.5);
 
     table.insert(entities, tmpWeapon);
 
@@ -45,9 +48,9 @@ function Bow:Update(dt)
     weapon:Replace(hero.position.x, hero.position.y);
 
     if GetMousePos().y + cameraOffset.y > hero.position.y then
-        self:ChangeRenderLayer(2);
+        self:ChangeRenderLayer(10);
     else
-        self:ChangeRenderLayer(0);
+        self:ChangeRenderLayer(8);
     end
 
         -- Weapon states machine
@@ -56,6 +59,7 @@ function Bow:Update(dt)
             self:ChangeState("charge");
         elseif self.state == 1 then
             self.canShoot = self:CanShoot(dt);
+            self:EnableChargeFX(dt);
         elseif self.state == 3 then
             self.canReload = self:CanReload(dt);
             if self.canReload then
@@ -67,9 +71,11 @@ function Bow:Update(dt)
             self:ResetChargeTimer();
             Projectile:NewArrow(self.position.x, self.position.y, self.tag, self.target, self.damages);
             self:ChangeState("shoot");
+            self:DisableChargeFX();
         elseif self.state == 1 and self.canShoot == false then
             self:ResetChargeTimer();
             self:ChangeState("idle");
+            self:DisableChargeFX();
         elseif self.state == 2 then
             if self:IsWaiting(dt, 0.2) then
                 self:ChangeState("reload");
@@ -100,6 +106,16 @@ function Bow:Draw()
         self.pivotX,
         self.pivotY
     );
+end
+
+function Bow:EnableChargeFX(dt)
+    self.chargeFX.active = true;
+    self.chargeFX:UpdateAnim(dt, self.chargeFX.anims[self.chargeFX.state][0]);
+end
+
+function Bow:DisableChargeFX()
+    self.chargeFX.active = false;
+    self.chargeFX:ResetAnim(self.chargeFX.anims[self.chargeFX.state][0]);
 end
 
 function Bow:CanShoot(dt)

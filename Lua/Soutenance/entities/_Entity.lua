@@ -63,6 +63,7 @@ function _Entity:New(name, tag, target)
     tmpEntity.characterDirection = 0;
     tmpEntity.frame = 0;
     tmpEntity.renderLayer = 0;
+    tmpEntity.active = true;
 
     return tmpEntity;
 end
@@ -184,6 +185,11 @@ end
 
 function _Entity:GetCurrentQuadToDisplay(animation)
     return love.graphics.newQuad((animation.width * animation.from) + (animation.width * self.frame), 0, animation.width, animation.height, self.spritesheet);
+end
+
+function _Entity:ResetAnim(animation)
+    animation:ResetTimer();
+    self.frame = 0;
 end
 
 function _Entity:UpdateAnim(deltaTime, animation)
