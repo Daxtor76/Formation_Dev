@@ -30,6 +30,13 @@ wavesController.NewWave = function(frequency, duration, enemiesAmount)
     return wave;
 end
 
+wavesController.ResetWaves = function()
+    wavesController.waveCounter = 0;
+    wavesController.currentWave = wavesController.waves[0];
+    wavesController.timer = 0;
+    wavesController.isOver = false;
+end
+
 wavesController.InitWave = function(waveId)
     print("new wave")
     wavesController.currentWave = wavesController.waves[waveId];

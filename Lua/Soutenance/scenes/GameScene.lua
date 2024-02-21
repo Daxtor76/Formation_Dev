@@ -41,10 +41,20 @@ end
 
 gameScene.Update = function(dt)
     if isPaused == false then
-    -- Entities
-    for key, value in pairs(entities) do
-        if value.active then
-            value:Update(dt);
+        -- Entities
+        for key, value in pairs(entities) do
+            if value.active then
+                value:Update(dt);
+            end
+        end
+    else
+        if #Buttons == 0 then
+            for i = 0, 2 do
+                local upgrade = hero.upgrades[love.math.random(0, #hero.upgrades)];
+                Buttons[i] = Button:New(screenWidth * 0.25 * (i+1), screenHeight * 0.5, 100, 50, upgrade.label, upgrade.onSelect);
+            end
+        else
+            gameScene.CheckButtons();
         end
     end
 
@@ -58,16 +68,6 @@ gameScene.Update = function(dt)
     elseif gameScene.CheckVictory() or gameScene.CheckDefeat() then
         SceneController.LoadSceneAdditive("GameOver");
         SceneController.SetCurrentScene("GameOver");
-    end
-    else
-        if #Buttons == 0 then
-            for i = 0, 2 do
-                local upgrade = hero.upgrades[love.math.random(0, #hero.upgrades)];
-                Buttons[i] = Button:New(screenWidth * 0.25 * (i+1), screenHeight * 0.5, 100, 50, upgrade.label, upgrade.onSelect);
-            end
-        else
-            gameScene.CheckButtons();
-        end
     end
 end
 
@@ -107,10 +107,10 @@ gameScene.Draw = function()
     end
 
     if debugMode then 
-        love.graphics.print("Wave: "..WavesController.waveCounter);
-        love.graphics.print("Enemies alive: "..enemiesCount, 0, 10);
         love.graphics.print("XP: "..hero.xp, 0, 20);
     end
+    love.graphics.print("Wave: "..WavesController.waveCounter);
+    love.graphics.print("Enemies alive: "..enemiesCount, 0, 10);
 end
 
 gameScene.Unload = function()
@@ -129,6 +129,7 @@ gameScene.Unload = function()
     end
     gameScene.CleanLists();
     entities = nil;
+    WavesController.ResetWaves();
 end
 
 gameScene.CheckButtons = function()
