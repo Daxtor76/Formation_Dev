@@ -28,6 +28,7 @@ function Bow:New(x, y)
     tmpWeapon.chargeCurrentTimer = tmpWeapon.chargeTimer;
 
     tmpWeapon.damages = 1;
+    tmpWeapon.arrowsUpgraded = false;
 
     tmpWeapon.reloadSpeed = 0.5;
     tmpWeapon.currentReloadTimer = tmpWeapon.reloadSpeed;
@@ -74,7 +75,7 @@ function Bow:Update(dt)
     else
         if self.state == 1 and self.canShoot then
             self:ResetChargeTimer();
-            Projectile:NewArrow(self.position.x, self.position.y, self.tag, self.target, self.damages);
+            Projectile:NewArrow(self.position.x, self.position.y, self.tag, self.target, self.damages, self.arrowsUpgraded);
             self:ChangeState("shoot");
             self:DisableChargeFX();
             self:DisableChargeReadyFX();
@@ -100,19 +101,33 @@ function Bow:Update(dt)
 end
 
 function Bow:Draw()
-    local delta = GetMousePos() - self.position + cameraOffset;
-    local angle = delta:GetAngle() - math.pi*0.5;
-    love.graphics.draw(
-        self.spritesheet,
-        self:GetCurrentQuadToDisplay(self.anims[self.state][0]),
-        hero.position.x,
-        hero.position.y,
-        angle,
-        self.scaleX,
-        self.scaleY,
-        self.pivotX,
-        self.pivotY
-    );
+    if isPaused == false then
+        local delta = GetMousePos() - self.position + cameraOffset;
+        local angle = delta:GetAngle() - math.pi*0.5;
+        love.graphics.draw(
+            self.spritesheet,
+            self:GetCurrentQuadToDisplay(self.anims[self.state][0]),
+            hero.position.x,
+            hero.position.y,
+            angle,
+            self.scaleX,
+            self.scaleY,
+            self.pivotX,
+            self.pivotY
+        );
+    else
+        love.graphics.draw(
+            self.spritesheet,
+            self:GetCurrentQuadToDisplay(self.anims[self.state][0]),
+            hero.position.x,
+            hero.position.y,
+            angle,
+            self.scaleX,
+            self.scaleY,
+            self.pivotX,
+            self.pivotY
+        );
+    end
 end
 
 function Bow:EnableChargeReadyFX(dt)

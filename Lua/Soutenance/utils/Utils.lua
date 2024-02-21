@@ -7,6 +7,8 @@ normalFont = love.graphics.newFont(12);
 middleFont = love.graphics.newFont(18);
 bigFont = love.graphics.newFont(40);
 
+goldColor = {255, 215, 0, 255};
+
 screenShakeTimer = 0;
 
 function GetScreenCenterPosition()

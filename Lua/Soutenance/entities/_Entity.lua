@@ -105,11 +105,6 @@ function _Entity:IsAlive()
     return self.life > 0;
 end
 
-function _Entity:WinXP(amount)
-    self.xp = self.xp + amount;
-    -- TO DO: Check lvl up ici
-end
-
 function _Entity:WinLife(amount)
     self.life = Clamp((self.life + amount), 0, self.maxlife);
 end

@@ -6,7 +6,10 @@ gameScene.Load = function()
     local Hero = require("entities/Hero");
     local Bow = require("entities/Bow");
 
+    Buttons = {};
+
     defeat = false;
+    isPaused = false;
     gameTime = 0;
     enemiesKilled = 0;
     enemiesCount = 0;
@@ -37,12 +40,14 @@ gameScene.Load = function()
 end
 
 gameScene.Update = function(dt)
+    if isPaused == false then
     -- Entities
     for key, value in pairs(entities) do
         if value.active then
             value:Update(dt);
         end
     end
+
     gameScene.CleanLists();
 
     if gameScene.CheckVictory() == false and gameScene.CheckDefeat() == false then
@@ -54,11 +59,22 @@ gameScene.Update = function(dt)
         SceneController.LoadSceneAdditive("GameOver");
         SceneController.SetCurrentScene("GameOver");
     end
+    else
+        if #Buttons == 0 then
+            for i = 0, 2 do
+                local upgrade = hero.upgrades[love.math.random(0, #hero.upgrades)];
+                Buttons[i] = Button:New(screenWidth * 0.25 * (i+1), screenHeight * 0.5, 100, 50, upgrade.label, upgrade.onSelect);
+            end
+        else
+            gameScene.CheckButtons();
+        end
+    end
 end
 
 gameScene.Draw = function()
     love.graphics.push()
     love.graphics.translate(-cameraOffset.x + shake.x, -cameraOffset.y + shake.y);
+    -- Draw in World position
     -- BG
     gameScene.DrawBackground();
 
@@ -80,8 +96,15 @@ gameScene.Draw = function()
     end
     love.graphics.pop();
 
-    -- Crosshair
-    ReplaceMouseCrosshair(false, hero.crosshair);
+    -- Draw in Screen position
+    hero:DrawOnScreen();
+
+    if isPaused then
+        gameScene.DrawButtons();
+        ReplaceMouseCrosshair(true);
+    else
+        ReplaceMouseCrosshair(false, hero.crosshair);
+    end
 
     if debugMode then 
         love.graphics.print("Wave: "..WavesController.waveCounter);
@@ -106,6 +129,22 @@ gameScene.Unload = function()
     end
     gameScene.CleanLists();
     entities = nil;
+end
+
+gameScene.CheckButtons = function()
+    for key, value in pairs(Buttons) do
+        if value:CheckHover() then
+            if value:CheckClick() then
+                value:applyButtonEffect();
+            end
+        end
+    end
+end
+
+gameScene.DrawButtons = function()
+    for key, value in pairs(Buttons) do
+        value:Draw();
+    end
 end
 
 gameScene.UpdateScreenShakeTimer = function(dt)

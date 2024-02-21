@@ -1,6 +1,4 @@
 local gameOverScene = SceneController.NewScene("GameOver");
-local Button = require("UI/Button");
-local Text = require("UI/Text");
 
 local Buttons = nil;
 local Texts = nil;
@@ -22,7 +20,7 @@ gameOverScene.Load = function(test)
     Texts[2] = Text:NewMiddle(screenWidth * 0.5, 130, "Time played: "..math.ceil(timePlayed).."s");
 
     Buttons[0] = Button:New(screenWidth * 0.25, screenHeight * 0.5, 100, 50, "Main menu", gameOverScene.OnMenuButtonClicked);
-    Buttons[1] = Button:New(screenWidth * 0.75 - 100, screenHeight * 0.5, 100, 50, "Reload", gameOverScene.OnReloadButtonClicked);
+    Buttons[1] = Button:New(screenWidth * 0.75, screenHeight * 0.5, 100, 50, "Reload", gameOverScene.OnReloadButtonClicked);
 end
 
 gameOverScene.Update = function(dt)

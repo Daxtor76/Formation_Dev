@@ -103,7 +103,7 @@ function Sorceress:Update(dt)
                 self:EnableChargeFX(dt, self.position);
                 self.canAttack = self:CanAttack(dt);
                 if self.canAttack then
-                    Projectile:NewFireBall(self.position.x, self.position.y, self.tag, self.target, self.damages);
+                    Projectile:NewFireBall(self.position.x, self.position.y, self.tag, self.target, self.damages, false);
                     self.isCasting = false;
                 end
             else

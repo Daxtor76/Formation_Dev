@@ -31,17 +31,17 @@ end
 function Button:Draw()
     love.graphics.setFont(normalFont)
     love.graphics.setColor(love.math.colorFromBytes(self.currentColor));
-    love.graphics.rectangle("fill", self.position.x, self.position.y, self.size.x, self.size.y);
+    love.graphics.rectangle("fill", self.position.x - self.baseSize.x * 0.5, self.position.y - self.baseSize.y * 0.5, self.size.x, self.size.y);
     love.graphics.setColor(0, 0, 0, 1);
-    love.graphics.draw(self.text, self.position.x + self.size.x * 0.5 - self.text:getWidth() * 0.5, self.position.y + self.size.y * 0.5 - self.text:getHeight() * 0.5);
+    love.graphics.draw(self.text, self.position.x - self.text:getWidth() * 0.5, self.position.y - self.text:getHeight() * 0.5);
     love.graphics.setColor(255, 255, 255, 1);
 end
 
 function Button:CheckHover()
-    if GetMousePos().x < self.position.x + self.size.x and
-    GetMousePos().x > self.position.x and
-    GetMousePos().y < self.position.y + self.size.y and
-    GetMousePos().y > self.position.y then
+    if GetMousePos().x < self.position.x + self.baseSize.x * 0.5 and
+    GetMousePos().x > self.position.x - self.baseSize.x * 0.5 and
+    GetMousePos().y < self.position.y + self.size.y * 0.5 and
+    GetMousePos().y > self.position.y - self.baseSize.y * 0.5 then
         if self.isHover == false then
             self:onHover();
         end

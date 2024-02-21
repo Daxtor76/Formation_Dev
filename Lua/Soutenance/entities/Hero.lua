@@ -1,4 +1,5 @@
 local _Entity = require("entities/_Entity");
+local Upgrade = require("upgrades/Upgrade");
 
 Hero = {};
 setmetatable(Hero, {__index = _Entity});
@@ -43,6 +44,18 @@ function Hero:New(x, y)
 
     tmpHero.level = 1;
     tmpHero.xp = 0;
+
+    tmpHero.xpThresholds = {};
+    tmpHero.xpThresholds["1"] = 3;
+    tmpHero.xpThresholds["2"] = 10;
+    tmpHero.xpThresholds["3"] = 20;
+    tmpHero.xpThresholds["4"] = 30;
+
+    tmpHero.upgrades = {};
+    tmpHero.upgrades[0] = Upgrade:New("Upgrade arrows", Upgrade.OnArrowUpgradeSelected);
+    tmpHero.upgrades[1] = Upgrade:New("Shoot faster", Upgrade.OnFireRateUpgrade);
+    tmpHero.upgrades[2] = Upgrade:New("1 more life", Upgrade.OnLifeUpgrade);
+    tmpHero.upgrades[3] = Upgrade:New("1 more damage", Upgrade.OnDamageUpgrade);
 
     -- Graph
     tmpHero.spritesheet = love.graphics.newImage("images/player/character.png");
@@ -125,6 +138,34 @@ function Hero:Draw()
         self.pivotY
     );
     love.graphics.setColor(255, 255, 255, 1);
+end
+
+function Hero:DrawOnScreen()
+    -- xp gauge
+    if self.life > 0 then
+        love.graphics.setColor(love.math.colorFromBytes(goldColor));
+        love.graphics.rectangle("fill", 0, 0, screenWidth * (self.xp / self.xpThresholds[tostring(self.level)]), 7);
+        love.graphics.setColor(255, 255, 255, 1);
+    end
+end
+
+function Hero:LevelUp()
+        self.xp = self.xp - self.xpThresholds[tostring(self.level)];
+        self.level = self.level + 1;
+        isPaused = true;
+end
+
+function Hero:CheckLevelUp()
+    if self.xpThresholds[tostring(self.level + 1)] ~= nil then
+        if self.xp >= self.xpThresholds[tostring(self.level)] then
+            self:LevelUp();
+        end
+    end
+end
+
+function Hero:WinXP(amount)
+    self.xp = self.xp + amount;
+    self:CheckLevelUp();
 end
 
 function Hero:Die(dt)

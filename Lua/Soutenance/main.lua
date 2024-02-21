@@ -13,6 +13,8 @@ CollisionController = require("collisions/CollisionController");
 WavesController = require("waves/WavesController");
 
 SceneController = require("scenes/SceneController");
+Button = require("UI/Button");
+Text = require("UI/Text");
 require("scenes/MenuScene");
 require("scenes/GameScene");
 require("scenes/GameOverScene");

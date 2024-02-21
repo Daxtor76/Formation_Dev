@@ -24,12 +24,12 @@
 - Collectibles (XP) -> ok
 - Collectible (Life pot) -> ok
 - Refacto (at least create functions with clear name so that the code is readable easily) -> ok
-- Level up
-- Upgrade: Arrow goes through enemies
+- Level up -> ok
+- Upgrade: Arrow goes through enemies -> ok
+- Upgrade: Fire rate ++ -> ok
+- Upgrade: +1 lp -> ok
+- Upgrade: +1 dmg -> ok
 - Upgrade: Shield around hero
-- Upgrade: Fire rate ++
-- Upgrade: +1 lp
-- Upgrade: +1 dmg
 - Sign & feedbacks
     - Add charge feedback -> ok
     - Add charge feedback on sorceress -> ok

@@ -3,7 +3,7 @@ local _Entity = require("entities/_Entity");
 local Projectile = {};
 setmetatable(Projectile, {__index = _Entity});
 
-function Projectile:NewArrow(x, y, tag, target, damages)
+function Projectile:NewArrow(x, y, tag, target, damages, upgraded)
     local tmpProjectile = _Entity:New("Arrow", tag, target);
     --print("Création d'une instance de "..tmpProjectile.name);
     setmetatable(tmpProjectile, {__index = Projectile});
@@ -35,13 +35,14 @@ function Projectile:NewArrow(x, y, tag, target, damages)
         Projectile.OnHit
     );
     tmpProjectile.damages = damages;
+    tmpProjectile.isUpgraded = upgraded;
 
     table.insert(entities, tmpProjectile);
 
     return tmpProjectile;
 end
 
-function Projectile:NewFireBall(x, y, tag, target, damages)
+function Projectile:NewFireBall(x, y, tag, target, damages, upgraded)
     local tmpProjectile = _Entity:New("Fireball", tag, target);
     --print("Création d'une instance de "..tmpProjectile.name);
     setmetatable(tmpProjectile, {__index = Projectile});
@@ -69,6 +70,7 @@ function Projectile:NewFireBall(x, y, tag, target, damages)
         Projectile.OnHit
     );
     tmpProjectile.damages = damages;
+    tmpProjectile.isUpgraded = upgraded;
 
     -- Graph
     tmpProjectile.spritesheet = love.graphics.newImage("images/projectiles/fireball_Spritesheet.png");
@@ -92,8 +94,10 @@ Projectile.OnHit = function(collider, other)
                 collider.parent:ApplyDamages(collider.parent.damages, other.parent);
                 StartScreenShake(0.2);
             end
-            collider.enabled = false;
-            collider.parent.enabled = false;
+            if collider.parent.isUpgraded == false then
+                collider.enabled = false;
+                collider.parent.enabled = false;
+            end
         elseif other.tag == "wall" then
             collider.enabled = false;
             collider.parent.enabled = false;
