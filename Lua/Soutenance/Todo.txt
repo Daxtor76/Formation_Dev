@@ -29,11 +29,11 @@
 - Upgrade: Fire rate ++ -> ok
 - Upgrade: +1 lp -> ok
 - Upgrade: +1 dmg -> ok
-- Upgrade: Shield around hero
+- Upgrade: Shield around hero (asset tornado)
 - Sign & feedbacks
     - Add charge feedback -> ok
     - Add charge feedback on sorceress -> ok
     - Add charge ready feedback -> ok
     - Screenshake on hit -> ok
-    - Screenshake on fire
-- Add slime (kamikaze)
+    - Blood on hit
+- LD & balancing
