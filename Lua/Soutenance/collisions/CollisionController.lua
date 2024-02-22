@@ -21,10 +21,8 @@ collisionController.NewCollider = function(x, y, w, h, parent, tag, event)
     local tmpCollider = {};
 
     tmpCollider.position = Vector.New(x, y);
-    tmpCollider.width = w or 0;
-    tmpCollider.height = h or 0;
-    tmpCollider.position.x = tmpCollider.position.x - w * 0.5;
-    tmpCollider.position.y = tmpCollider.position.y - h * 0.5;
+    tmpCollider.size = Vector.New(w, h);
+    tmpCollider.position = tmpCollider.position - tmpCollider.size * 0.5;
 
     tmpCollider.parent = parent;
     tmpCollider.enabled = true;
@@ -33,10 +31,10 @@ collisionController.NewCollider = function(x, y, w, h, parent, tag, event)
     tmpCollider.callback = event;
 
     tmpCollider.CheckCollision = function(other)
-        if tmpCollider.position.x < other.position.x + other.width and
-        tmpCollider.position.x + tmpCollider.width > other.position.x and
-        tmpCollider.position.y < other.position.y + other.height and
-        tmpCollider.position.y + tmpCollider.height > other.position.y then
+        if tmpCollider.position.x < other.position.x + other.size.x and
+        tmpCollider.position.x + tmpCollider.size.x > other.position.x and
+        tmpCollider.position.y < other.position.y + other.size.y and
+        tmpCollider.position.y + tmpCollider.size.y > other.position.y then
             if tmpCollider.callback ~= nil then 
                 tmpCollider.callback(tmpCollider, other);
             end
@@ -49,7 +47,7 @@ collisionController.NewCollider = function(x, y, w, h, parent, tag, event)
     
     tmpCollider.Draw = function()
         love.graphics.setColor(0,1,0,1)
-        love.graphics.rectangle("line", tmpCollider.position.x, tmpCollider.position.y, tmpCollider.width, tmpCollider.height)
+        love.graphics.rectangle("line", tmpCollider.position.x, tmpCollider.position.y, tmpCollider.size.x, tmpCollider.size.y)
         love.graphics.setColor(1,1,1,1)
     end
 

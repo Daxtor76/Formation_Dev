@@ -5,6 +5,7 @@ local LP = require("collectibles/LifePot");
 gameScene.Load = function()
     local Hero = require("entities/Hero");
     local Bow = require("entities/Bow");
+    local Tornado = require("entities/Tornado");
 
     Buttons = {};
 
@@ -27,6 +28,11 @@ gameScene.Load = function()
 
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Bow:New(hero.position.x, hero.position.y);
+
+    tornado = Tornado:New(hero.position.x, hero.position.y, "tornado", "enemy", 2, 0)
+    tornado1 = Tornado:New(hero.position.x, hero.position.y, "tornado", "enemy", 2, 90)
+    tornado2 = Tornado:New(hero.position.x, hero.position.y, "tornado", "enemy", 2, 180)
+    tornado3 = Tornado:New(hero.position.x, hero.position.y, "tornado", "enemy", 2, 270)
     
     scrollDist = 150;
 
@@ -105,12 +111,12 @@ gameScene.Draw = function()
     else
         ReplaceMouseCrosshair(false, hero.crosshair);
     end
+    love.graphics.print("Wave: "..WavesController.waveCounter);
+    love.graphics.print("Enemies alive: "..enemiesCount, 0, 10);
 
     if debugMode then 
         love.graphics.print("XP: "..hero.xp, 0, 20);
     end
-    love.graphics.print("Wave: "..WavesController.waveCounter);
-    love.graphics.print("Enemies alive: "..enemiesCount, 0, 10);
 end
 
 gameScene.Unload = function()

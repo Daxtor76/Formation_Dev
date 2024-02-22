@@ -19,6 +19,7 @@ function _Entity:New(name, tag, target)
     tmpEntity.tag = tag;
     tmpEntity.target = target;
     tmpEntity.direction = nil;
+    tmpEntity.angle = 0;
 
     -- Behaviour
     tmpEntity.collider = nil;
@@ -227,7 +228,7 @@ end
 
 function _Entity:Move(dt)
     self.position = self.position + dt * self.speed * self.direction;
-    self.collider.position = self.position;
+    self.collider.position = self.position - self.collider.size * 0.5;
 end
 
 function _Entity:MoveToTarget(dt, targetPosition)
@@ -236,8 +237,14 @@ function _Entity:MoveToTarget(dt, targetPosition)
     self.direction = delta:Normalize();
     
     self.position = self.position + dt * self.speed * self.direction;
-    self.collider.position.x = self.position.x - self.collider.width * 0.5;
-    self.collider.position.y = self.position.y - self.collider.height * 0.5;
+    self.collider.position = self.position - self.collider.size * 0.5;
+end
+
+function _Entity:MoveAroundTarget(dt, targetPosition, range)
+    self.angle = (self.angle + dt * self.speed)%360;
+    local direction = Vector.New(math.cos(math.rad(self.angle)), math.sin(math.rad(self.angle)));
+    self.position = hero.position + direction * range;
+    self.collider.position = self.position - self.collider.size * 0.5;
 end
 
 function _Entity:IsCollidingOnWalls()

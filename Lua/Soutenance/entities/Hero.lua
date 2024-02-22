@@ -196,8 +196,7 @@ function Hero:Move(dt)
     self.position = Vector.New(
         Clamp(self.position.x, 0 + self.width, bg.size.x - self.width), 
         Clamp(self.position.y, 0 + self.height, bg.size.y - self.height)) + dt * self.direction * self.speed;
-    self.collider.position.x = self.position.x - self.width * 0.5;
-    self.collider.position.y = self.position.y - self.height * 0.5;
+    self.collider.position = self.position - self.collider.size * 0.5;
 
     local delta = self.position - GetScreenCenterPosition();
     if delta:GetMagnitude() > scrollDist then 
