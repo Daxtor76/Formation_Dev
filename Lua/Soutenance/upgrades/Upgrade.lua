@@ -1,4 +1,5 @@
 local Upgrade = {};
+local Tornado = require("entities/Tornado");
 
 function Upgrade:New(label, event)
     local tmpUpgrade = {};
@@ -36,7 +37,8 @@ function Upgrade.OnDamageUpgrade()
     isPaused = false;
 end
 
-function Upgrade.OnShieldUpgradeSelected(self)
+function Upgrade.OnTornadoSelected()
+    table.insert(hero.tornados, Tornado:New(hero.position.x, hero.position.y, "tornado", 2, #hero.tornados * 90));
     Buttons = {};
     isPaused = false;
 end

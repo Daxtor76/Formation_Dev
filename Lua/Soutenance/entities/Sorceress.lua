@@ -6,7 +6,7 @@ Sorceress = {};
 setmetatable(Sorceress, {__index = _Entity});
 
 function Sorceress:New(x, y)
-    local tmpSorceress = _Entity:New("Sorceress", "enemy", "player");
+    local tmpSorceress = _Entity:New("Sorceress", "enemy");
     --print("Création d'une instance de "..tmpSorceress.name);
     setmetatable(tmpSorceress, {__index = Sorceress});
 
@@ -25,8 +25,7 @@ function Sorceress:New(x, y)
         tmpSorceress.position.y - tmpSorceress.height * 0.5 + cameraOffset.y,
         tmpSorceress.width * 0.75,
         tmpSorceress.height,
-        tmpSorceress,
-        tmpSorceress.tag
+        tmpSorceress
     );
 
     tmpSorceress.states["idle"] = 0;
@@ -103,7 +102,7 @@ function Sorceress:Update(dt)
                 self:EnableChargeFX(dt, self.position);
                 self.canAttack = self:CanAttack(dt);
                 if self.canAttack then
-                    Projectile:NewFireBall(self.position.x, self.position.y, self.tag, self.target, self.damages, false);
+                    Projectile:NewFireBall(self.position.x, self.position.y, self.tag, self.damages, false);
                     self.isCasting = false;
                 end
             else

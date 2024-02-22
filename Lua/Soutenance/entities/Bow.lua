@@ -7,7 +7,7 @@ local Bow = {};
 setmetatable(Bow, {__index = _Entity});
 
 function Bow:New(x, y)
-    local tmpWeapon = _Entity:New("Weapon", "player", "enemy");
+    local tmpWeapon = _Entity:New("Weapon", "player");
     --print("Création d'une instance de "..tmpWeapon.name);
     setmetatable(tmpWeapon, {__index = Bow});
 
@@ -75,7 +75,7 @@ function Bow:Update(dt)
     else
         if self.state == 1 and self.canShoot then
             self:ResetChargeTimer();
-            Projectile:NewArrow(self.position.x, self.position.y, self.tag, self.target, self.damages, self.arrowsUpgraded);
+            Projectile:NewArrow(self.position.x, self.position.y, self.tag, self.damages, self.arrowsUpgraded);
             self:ChangeState("shoot");
             self:DisableChargeFX();
             self:DisableChargeReadyFX();

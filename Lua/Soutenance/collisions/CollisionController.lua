@@ -17,7 +17,7 @@ collisionController.DrawColliders = function()
     end
 end
 
-collisionController.NewCollider = function(x, y, w, h, parent, tag, event)
+collisionController.NewCollider = function(x, y, w, h, parent, event)
     local tmpCollider = {};
 
     tmpCollider.position = Vector.New(x, y);
@@ -26,7 +26,6 @@ collisionController.NewCollider = function(x, y, w, h, parent, tag, event)
 
     tmpCollider.parent = parent;
     tmpCollider.enabled = true;
-    tmpCollider.tag = tag;
 
     tmpCollider.callback = event;
 

@@ -3,9 +3,9 @@ local _Entity = require("entities/_Entity");
 local Tornado = {};
 setmetatable(Tornado, {__index = _Entity});
 
-function Tornado:New(x, y, tag, target, damages, initialAngle)
-    local tmpTornado = _Entity:New("Tornado", tag, target);
-    --print("Création d'une instance de "..tmpProjectile.name);
+function Tornado:New(x, y, tag, damages, initialAngle)
+    local tmpTornado = _Entity:New("Tornado", tag);
+    --print("Création d'une instance de "..tmpTornado.name);
     setmetatable(tmpTornado, {__index = Tornado});
 
     -- Inner
@@ -25,7 +25,6 @@ function Tornado:New(x, y, tag, target, damages, initialAngle)
         tmpTornado.width * tmpTornado.scaleX,
         tmpTornado.height * tmpTornado.scaleY,
         tmpTornado,
-        tmpTornado.tag,
         tmpTornado.OnHit
     );
     tmpTornado.damages = damages;
@@ -37,18 +36,23 @@ function Tornado:New(x, y, tag, target, damages, initialAngle)
 
     table.insert(entities, tmpTornado);
 
-    return tmpProjectile;
+    return tmpTornado;
 end
 
 Tornado.OnHit = function(collider, other)
-    if other.parent.tag ~= collider.parent.tag then
-        if other.parent.tag == collider.parent.target then
-            if other.parent.canTakeDamages then
-                collider.parent:ApplyDamages(collider.parent.damages, other.parent);
-                StartScreenShake(0.2);
-            end
-        end
-    end
+    -- if the other thing still exists in case of double collision test
+    -- if other ~= nil or other.enabled then
+    --     -- if the other thing isn't the same type of object (in this case, another tornado)
+    --     if other.parent.tag ~= collider.parent.tag then
+    --         -- if the other thing is what tornado is supposed to hit
+    --         if other.parent.tag == collider.parent.target then
+    --             if other.parent.canTakeDamages then
+    --                 collider.parent:ApplyDamages(collider.parent.damages, other.parent);
+    --                 StartScreenShake(0.2);
+    --             end
+    --         end
+    --     end
+    -- end
 end
 
 function Tornado:Update(dt)

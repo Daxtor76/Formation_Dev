@@ -4,7 +4,7 @@ Blood = {};
 setmetatable(Blood, {__index = _Entity});
 
 function Blood:New(x, y)
-    local tmpBlood = _Entity:New("Blood", "", "");
+    local tmpBlood = _Entity:New("Blood", "");
     --print("Création d'une instance de "..tmpBlood.name);
     setmetatable(tmpBlood, {__index = Blood});
 

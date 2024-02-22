@@ -4,7 +4,7 @@ HeroChargeReady = {};
 setmetatable(HeroChargeReady, {__index = _Entity});
 
 function HeroChargeReady:New(x, y)
-    local tmpHeroChargeReady = _Entity:New("HeroCharge", "", "");
+    local tmpHeroChargeReady = _Entity:New("HeroCharge", "");
     --print("Création d'une instance de "..tmpHeroChargeReady.name);
     setmetatable(tmpHeroChargeReady, {__index = HeroChargeReady});
 

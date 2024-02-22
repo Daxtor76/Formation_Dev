@@ -29,6 +29,7 @@
 - Upgrade: Fire rate ++ -> ok
 - Upgrade: +1 lp -> ok
 - Upgrade: +1 dmg -> ok
+- REFAIRE TOUTES LES COLLISIONS :)
 - Upgrade: Shield around hero (asset tornado)
 - Sign & feedbacks
     - Add charge feedback -> ok

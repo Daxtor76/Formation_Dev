@@ -4,7 +4,7 @@ LP = {};
 setmetatable(LP, {__index = _Entity});
 
 function LP:New(x, y)
-    local tmpLP = _Entity:New("LP", "", "");
+    local tmpLP = _Entity:New("LP", "");
     --print("Création d'une instance de "..tmpLP.name);
     setmetatable(tmpLP, {__index = LP});
 
@@ -24,7 +24,6 @@ function LP:New(x, y)
         tmpLP.width,
         tmpLP.height,
         tmpLP,
-        tmpLP.tag,
         LP.OnHit
     );
 

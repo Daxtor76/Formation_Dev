@@ -1,7 +1,7 @@
 local _Entity = {};
 Anim = require("animation/Anim");
 
-function _Entity:New(name, tag, target)
+function _Entity:New(name, tag)
     local tmpEntity = {};
     setmetatable(tmpEntity, _Entity);
 
@@ -17,7 +17,6 @@ function _Entity:New(name, tag, target)
     tmpEntity.scaleY = 2;
     tmpEntity.enabled = true;
     tmpEntity.tag = tag;
-    tmpEntity.target = target;
     tmpEntity.direction = nil;
     tmpEntity.angle = 0;
 

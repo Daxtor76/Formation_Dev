@@ -4,7 +4,7 @@ XP = {};
 setmetatable(XP, {__index = _Entity});
 
 function XP:New(x, y)
-    local tmpXP = _Entity:New("XP", "", "");
+    local tmpXP = _Entity:New("XP", "");
     --print("Création d'une instance de "..tmpXP.name);
     setmetatable(tmpXP, {__index = XP});
 
@@ -24,7 +24,6 @@ function XP:New(x, y)
         tmpXP.width,
         tmpXP.height,
         tmpXP,
-        tmpXP.tag,
         XP.OnHit
     );
 

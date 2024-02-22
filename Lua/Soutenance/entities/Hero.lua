@@ -5,7 +5,7 @@ Hero = {};
 setmetatable(Hero, {__index = _Entity});
 
 function Hero:New(x, y)
-    local tmpHero = _Entity:New("Hero", "player", "enemy");
+    local tmpHero = _Entity:New("Hero", "player");
     --print("Création d'une instance de "..tmpHero.name);
     setmetatable(tmpHero, {__index = Hero});
 
@@ -22,13 +22,15 @@ function Hero:New(x, y)
         tmpHero.position.y,
         tmpHero.width,
         tmpHero.height * 1.5,
-        tmpHero,
-        tmpHero.tag);
+        tmpHero
+    );
     tmpHero.states["idle"] = 0;
     tmpHero.states["run"] = 1;
     tmpHero.states["hit"] = 2;
     tmpHero.states["recover"] = 3;
     tmpHero.states["die"] = 4;
+
+    tmpHero.tornados = {};
 
     tmpHero.state = 0;
     tmpHero.speed = 150;
@@ -52,10 +54,11 @@ function Hero:New(x, y)
     tmpHero.xpThresholds["4"] = 30;
 
     tmpHero.upgrades = {};
-    tmpHero.upgrades[0] = Upgrade:New("Upgrade arrows", Upgrade.OnArrowUpgradeSelected);
-    tmpHero.upgrades[1] = Upgrade:New("Shoot faster", Upgrade.OnFireRateUpgrade);
-    tmpHero.upgrades[2] = Upgrade:New("1 more life", Upgrade.OnLifeUpgrade);
-    tmpHero.upgrades[3] = Upgrade:New("1 more damage", Upgrade.OnDamageUpgrade);
+    --tmpHero.upgrades[0] = Upgrade:New("Upgrade arrows", Upgrade.OnArrowUpgradeSelected);
+    --tmpHero.upgrades[1] = Upgrade:New("Shoot faster", Upgrade.OnFireRateUpgrade);
+    --tmpHero.upgrades[2] = Upgrade:New("1 more life", Upgrade.OnLifeUpgrade);
+    --tmpHero.upgrades[3] = Upgrade:New("1 more damage", Upgrade.OnDamageUpgrade);
+    tmpHero.upgrades[0] = Upgrade:New("1 tornado", Upgrade.OnTornadoSelected);
 
     -- Graph
     tmpHero.spritesheet = love.graphics.newImage("images/player/character.png");

@@ -5,7 +5,6 @@ local LP = require("collectibles/LifePot");
 gameScene.Load = function()
     local Hero = require("entities/Hero");
     local Bow = require("entities/Bow");
-    local Tornado = require("entities/Tornado");
 
     Buttons = {};
 
@@ -28,19 +27,14 @@ gameScene.Load = function()
 
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Bow:New(hero.position.x, hero.position.y);
-
-    tornado = Tornado:New(hero.position.x, hero.position.y, "tornado", "enemy", 2, 0)
-    tornado1 = Tornado:New(hero.position.x, hero.position.y, "tornado", "enemy", 2, 90)
-    tornado2 = Tornado:New(hero.position.x, hero.position.y, "tornado", "enemy", 2, 180)
-    tornado3 = Tornado:New(hero.position.x, hero.position.y, "tornado", "enemy", 2, 270)
     
     scrollDist = 150;
 
     arenaBounds = {};
-    arenaBounds[0] = CollisionController.NewCollider(0, 0, bg.size.x * bg.grid.x, 1, "", "wall");
-    arenaBounds[1] = CollisionController.NewCollider(0, bg.size.y, bg.size.x * bg.grid.x, 1, "", "wall");
-    arenaBounds[2] = CollisionController.NewCollider(0, 0, 1, bg.size.y * bg.grid.y, "", "wall");
-    arenaBounds[3] = CollisionController.NewCollider(bg.size.x, 0, 1, bg.size.y * bg.grid.y, "", "wall");
+    arenaBounds[0] = CollisionController.NewCollider(0, 0, bg.size.x * bg.grid.x, 1, "wall");
+    arenaBounds[1] = CollisionController.NewCollider(0, bg.size.y, bg.size.x * bg.grid.x, 1, "wall");
+    arenaBounds[2] = CollisionController.NewCollider(0, 0, 1, bg.size.y * bg.grid.y, "wall");
+    arenaBounds[3] = CollisionController.NewCollider(bg.size.x, 0, 1, bg.size.y * bg.grid.y, "wall");
 
    WavesController.InitWave(0);
 end

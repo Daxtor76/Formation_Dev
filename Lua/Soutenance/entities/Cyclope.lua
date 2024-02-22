@@ -4,7 +4,7 @@ Cyclope = {};
 setmetatable(Cyclope, {__index = _Entity});
 
 function Cyclope:New(x, y)
-    local tmpCyclope = _Entity:New("Cyclope", "enemy", "player");
+    local tmpCyclope = _Entity:New("Cyclope", "enemy");
     --print("Création d'une instance de "..tmpCyclope.name);
     setmetatable(tmpCyclope, {__index = Cyclope});
 
@@ -21,8 +21,8 @@ function Cyclope:New(x, y)
         tmpCyclope.position.y - tmpCyclope.height * 0.5 + cameraOffset.y,
         tmpCyclope.width,
         tmpCyclope.height,
-        tmpCyclope,
-        tmpCyclope.tag);
+        tmpCyclope
+    );
 
     tmpCyclope.states["idle"] = 0;
     tmpCyclope.states["run"] = 1;

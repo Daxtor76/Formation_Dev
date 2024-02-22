@@ -4,7 +4,7 @@ SorceressCharge = {};
 setmetatable(SorceressCharge, {__index = _Entity});
 
 function SorceressCharge:New(x, y)
-    local tmpSorceressCharge = _Entity:New("SorceressCharge", "", "");
+    local tmpSorceressCharge = _Entity:New("SorceressCharge", "");
     --print("Création d'une instance de "..tmpSorceressCharge.name);
     setmetatable(tmpSorceressCharge, {__index = SorceressCharge});
 
