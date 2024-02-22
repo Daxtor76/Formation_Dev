@@ -81,6 +81,28 @@ function Projectile:NewFireBall(x, y, damages, upgraded)
 end
 
 Projectile.OnHit = function(collider, other)
+    if collider.parent.tag == "playerProjectile" then
+        if other.parent.tag == "enemyProjectile" then
+            collider.enabled = false;
+            collider.parent.enabled = false;
+            other.enabled = false;
+            other.parent.enabled = false;
+        elseif other.parent.tag == "playerProjectile" then
+            collider.enabled = false;
+            collider.parent.enabled = false;
+        elseif other.parent.tag == "enemy" then
+            other.parent:ApplyDamages(collider.parent.damages, other.parent);
+            StartScreenShake(0.2);
+            if collider.parent.isUpgraded == false then
+                collider.enabled = false;
+                collider.parent.enabled = false;
+            end
+        end
+    elseif collider.parent.name == "enemyProjectile" then
+        if other.parent.tag == "playerProjectile" then
+        elseif other.parent.tag == "player" then
+        end
+    end
     -- if other.parent.tag ~= collider.parent.tag then
     --     if other.parent.name == "Arrow" or other.parent.name == "Fireball" then
     --         collider.enabled = false;

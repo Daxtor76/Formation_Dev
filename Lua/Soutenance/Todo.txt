@@ -30,6 +30,7 @@
 - Upgrade: +1 lp -> ok
 - Upgrade: +1 dmg -> ok
 - REFAIRE TOUTES LES COLLISIONS :)
+- Revoir les différents paramètres local + les require
 - Upgrade: Shield around hero (asset tornado)
 - Sign & feedbacks
     - Add charge feedback -> ok

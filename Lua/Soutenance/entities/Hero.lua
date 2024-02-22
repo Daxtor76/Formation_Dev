@@ -1,7 +1,7 @@
 local _Entity = require("entities/_Entity");
 local Upgrade = require("upgrades/Upgrade");
 
-Hero = {};
+local Hero = {};
 setmetatable(Hero, {__index = _Entity});
 
 function Hero:New(x, y)
@@ -54,11 +54,11 @@ function Hero:New(x, y)
     tmpHero.xpThresholds["4"] = 30;
 
     tmpHero.upgrades = {};
-    --tmpHero.upgrades[0] = Upgrade:New("Upgrade arrows", Upgrade.OnArrowUpgradeSelected);
-    --tmpHero.upgrades[1] = Upgrade:New("Shoot faster", Upgrade.OnFireRateUpgrade);
-    --tmpHero.upgrades[2] = Upgrade:New("1 more life", Upgrade.OnLifeUpgrade);
-    --tmpHero.upgrades[3] = Upgrade:New("1 more damage", Upgrade.OnDamageUpgrade);
-    tmpHero.upgrades[0] = Upgrade:New("1 tornado", Upgrade.OnTornadoSelected);
+    tmpHero.upgrades[0] = Upgrade:New("Upgrade arrows", Upgrade.OnArrowUpgradeSelected);
+    tmpHero.upgrades[1] = Upgrade:New("Shoot faster", Upgrade.OnFireRateUpgrade);
+    tmpHero.upgrades[2] = Upgrade:New("1 more life", Upgrade.OnLifeUpgrade);
+    tmpHero.upgrades[3] = Upgrade:New("1 more damage", Upgrade.OnDamageUpgrade);
+    tmpHero.upgrades[4] = Upgrade:New("1 tornado", Upgrade.OnTornadoSelected);
 
     -- Graph
     tmpHero.spritesheet = love.graphics.newImage("images/player/character.png");

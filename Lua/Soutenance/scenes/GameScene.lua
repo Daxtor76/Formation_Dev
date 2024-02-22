@@ -50,7 +50,7 @@ gameScene.Update = function(dt)
     else
         if #Buttons == 0 then
             for i = 0, 2 do
-                local upgrade = hero.upgrades[love.math.random(0, #hero.upgrades)];
+                local upgrade = hero.upgrades[love.math.random(0, #hero.upgrades - 1)];
                 Buttons[i] = Button:New(screenWidth * 0.25 * (i+1), screenHeight * 0.5, 100, 50, upgrade.label, upgrade.onSelect);
             end
         else
