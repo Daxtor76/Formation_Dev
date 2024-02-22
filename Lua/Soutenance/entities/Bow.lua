@@ -75,7 +75,7 @@ function Bow:Update(dt)
     else
         if self.state == 1 and self.canShoot then
             self:ResetChargeTimer();
-            Projectile:NewArrow(self.position.x, self.position.y, self.tag, self.damages, self.arrowsUpgraded);
+            Projectile:NewArrow(self.position.x, self.position.y, self.damages, self.arrowsUpgraded);
             self:ChangeState("shoot");
             self:DisableChargeFX();
             self:DisableChargeReadyFX();

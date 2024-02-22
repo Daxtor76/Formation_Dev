@@ -38,7 +38,7 @@ function Upgrade.OnDamageUpgrade()
 end
 
 function Upgrade.OnTornadoSelected()
-    table.insert(hero.tornados, Tornado:New(hero.position.x, hero.position.y, "tornado", 2, #hero.tornados * 90));
+    table.insert(hero.tornados, Tornado:New(hero.position.x, hero.position.y, 2, #hero.tornados * 90));
     Buttons = {};
     isPaused = false;
 end

@@ -3,8 +3,8 @@ local _Entity = require("entities/_Entity");
 local Tornado = {};
 setmetatable(Tornado, {__index = _Entity});
 
-function Tornado:New(x, y, tag, damages, initialAngle)
-    local tmpTornado = _Entity:New("Tornado", tag);
+function Tornado:New(x, y, damages, initialAngle)
+    local tmpTornado = _Entity:New("Tornado", "playerProjectile");
     --print("Création d'une instance de "..tmpTornado.name);
     setmetatable(tmpTornado, {__index = Tornado});
 

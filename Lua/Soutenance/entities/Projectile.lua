@@ -3,8 +3,8 @@ local _Entity = require("entities/_Entity");
 local Projectile = {};
 setmetatable(Projectile, {__index = _Entity});
 
-function Projectile:NewArrow(x, y, tag, damages, upgraded)
-    local tmpProjectile = _Entity:New("Arrow", tag);
+function Projectile:NewArrow(x, y, damages, upgraded)
+    local tmpProjectile = _Entity:New("Arrow", "playerProjectile");
     --print("Création d'une instance de "..tmpProjectile.name);
     setmetatable(tmpProjectile, {__index = Projectile});
 
@@ -41,8 +41,8 @@ function Projectile:NewArrow(x, y, tag, damages, upgraded)
     return tmpProjectile;
 end
 
-function Projectile:NewFireBall(x, y, tag, damages, upgraded)
-    local tmpProjectile = _Entity:New("Fireball", tag);
+function Projectile:NewFireBall(x, y, damages, upgraded)
+    local tmpProjectile = _Entity:New("Fireball", "enemyProjectile");
     --print("Création d'une instance de "..tmpProjectile.name);
     setmetatable(tmpProjectile, {__index = Projectile});
 
