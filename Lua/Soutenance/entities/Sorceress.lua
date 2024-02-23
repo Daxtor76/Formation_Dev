@@ -1,6 +1,7 @@
 local _Entity = require("entities/_Entity");
 local Projectile = require("entities/Projectile");
-local SorceressCharge = require("FXs/SorceressCharge");
+local SorceressChargeFX = require("FXs/SorceressCharge");
+local BloodFX = require("FXs/Blood");
 
 Sorceress = {};
 setmetatable(Sorceress, {__index = _Entity});
@@ -53,14 +54,14 @@ function Sorceress:New(x, y)
 
     tmpSorceress.dyingSpeed = 1;
     tmpSorceress.currentDyingTimer = tmpSorceress.dyingSpeed;
-    enemiesCount = enemiesCount + 1;
 
     -- Graph
     tmpSorceress.spritesheet = love.graphics.newImage("images/enemies/Sorceress/sorceress_Spritesheet.png");
     tmpSorceress.anims = tmpSorceress:PopulateAnims();
     tmpSorceress.renderLayer = 6;
 
-    tmpSorceress.chargeFX = SorceressCharge:New(tmpSorceress.position.x, tmpSorceress.position.y);
+    tmpSorceress.chargeFX = SorceressChargeFX:New(tmpSorceress.position.x, tmpSorceress.position.y);
+    tmpSorceress.bloodFX = BloodFX:New(tmpSorceress.position.x, tmpSorceress.position.y);
 
     table.insert(entities, tmpSorceress);
 
@@ -89,7 +90,6 @@ function Sorceress:Update(dt)
             self:ChangeState("recover");
         elseif self.state == 3 then
             self:MoveToTarget(dt, hero.position);
-
             self.canTakeDamages = self:CanTakeDamages(dt);
             if self.canTakeDamages then
                 self:ChangeState("run");
@@ -99,9 +99,10 @@ function Sorceress:Update(dt)
             self:DisableChargeFX();
         elseif self.state == 5 then
             if self.isCasting then
-                self:EnableChargeFX(dt, self.position);
+                self:EnableChargeFX(self.position)
                 self.canAttack = self:CanAttack(dt);
                 if self.canAttack then
+                    self:DisableChargeFX();
                     Projectile:NewFireBall(self.position.x, self.position.y, self.damages, false);
                     self.isCasting = false;
                 end
@@ -152,7 +153,13 @@ function Sorceress:Draw()
     if debugMode then self:DrawRange() end
 end
 
-function Sorceress:EnableChargeFX(dt, position)
+function Sorceress:EnableBloodFX(position)
+    self.bloodFX.active = true;
+    self.bloodFX.position.x = position.x;
+    self.bloodFX.position.y = position.y - self.height;
+end
+
+function Sorceress:EnableChargeFX(position)
     self.chargeFX.active = true;
     self.chargeFX.position = position;
 end

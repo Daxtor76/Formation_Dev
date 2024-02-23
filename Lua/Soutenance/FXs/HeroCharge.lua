@@ -33,7 +33,6 @@ function HeroCharge:New(x, y)
 end
 
 function HeroCharge:Update(dt)
-    -- Animations
 end
 
 function HeroCharge:Draw()

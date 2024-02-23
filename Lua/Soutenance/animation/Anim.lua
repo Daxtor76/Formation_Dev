@@ -13,6 +13,7 @@ function Anim:New(width, height, from, to, duration, loop)
     
     tmpAnim.framesCount = tmpAnim.to - tmpAnim.from + 1;
     tmpAnim.currentTimer = tmpAnim.duration / tmpAnim.framesCount;
+    tmpAnim.isOver = false;
     return tmpAnim;
 end
 

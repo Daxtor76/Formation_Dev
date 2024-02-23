@@ -1,5 +1,6 @@
 local _Entity = require("entities/_Entity");
 local Upgrade = require("upgrades/Upgrade");
+local BloodFX = require("FXs/Blood");
 
 local Hero = {};
 setmetatable(Hero, {__index = _Entity});
@@ -67,6 +68,8 @@ function Hero:New(x, y)
     tmpHero.anims = tmpHero:PopulateAnims();
     tmpHero.renderLayer = 8;
 
+    tmpHero.bloodFX = BloodFX:New(tmpHero.position.x, tmpHero.position.y);
+
     table.insert(entities, tmpHero);
 
     return tmpHero;
@@ -90,7 +93,6 @@ function Hero:Update(dt)
                 self:ChangeState("recover");
             elseif self.state == 3 then
                 self:Move(dt);
-
                 self.canTakeDamages = self:CanTakeDamages(dt);
                 if self.canTakeDamages then
                     self:ChangeState("idle");
@@ -152,6 +154,12 @@ function Hero:DrawOnScreen()
         love.graphics.rectangle("fill", 0, 0, screenWidth * (self.xp / self.xpThresholds[tostring(self.level)]), 7);
         love.graphics.setColor(255, 255, 255, 1);
     end
+end
+
+function Hero:EnableBloodFX(position)
+    self.bloodFX.active = true;
+    self.bloodFX.position.x = position.x;
+    self.bloodFX.position.y = position.y - self.height;
 end
 
 function Hero:LevelUp()

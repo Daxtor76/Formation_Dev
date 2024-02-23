@@ -1,6 +1,6 @@
 local _Entity = require("entities/_Entity");
 
-Blood = {};
+local Blood = {};
 setmetatable(Blood, {__index = _Entity});
 
 function Blood:New(x, y)
@@ -10,8 +10,8 @@ function Blood:New(x, y)
 
     -- Inner
     tmpBlood.position = Vector.New(x, y);
-    tmpBlood.width = 47;
-    tmpBlood.height = 48;
+    tmpBlood.width = 100;
+    tmpBlood.height = 100;
     tmpBlood.scaleX = 1;
     tmpBlood.scaleY = 1;
     tmpBlood.pivotX = tmpBlood.width*0.5;
@@ -24,7 +24,7 @@ function Blood:New(x, y)
     -- Graph
     tmpBlood.spritesheet = love.graphics.newImage("images/blood_Spritesheet.png");
     tmpBlood.anims = tmpBlood:PopulateAnims();
-    tmpBlood.renderLayer = 0;
+    tmpBlood.renderLayer = 10;
     tmpBlood.active = false;
 
     table.insert(entities, tmpBlood);
@@ -33,28 +33,31 @@ function Blood:New(x, y)
 end
 
 function Blood:Update(dt)
-    self:Replace(hero.position.x, hero.position.y);
-    if GetMousePos().y + cameraOffset.y > hero.position.y then
-        self:ChangeRenderLayer(10);
-    else
-        self:ChangeRenderLayer(8);
+    -- Animations
+    self:UpdateAnim(dt, self.anims[self.state][0]);
+    if self.anims[self.state][0].isOver then
+        self:DisableBloodFX();
     end
 end
 
 function Blood:Draw()
-    local delta = GetMousePos() - self.position + cameraOffset;
-    local angle = delta:GetAngle() - math.pi*0.5;
     love.graphics.draw(
         self.spritesheet,
         self:GetCurrentQuadToDisplay(self.anims[self.state][0]),
-        hero.position.x, 
-        hero.position.y, 
-        angle, 
+        self.position.x, 
+        self.position.y, 
+        self.rotation, 
         self.scaleX, 
         self.scaleY, 
-        self.pivotX, 
+        self.pivotX,
         self.pivotY
     );
+end
+
+function Blood:DisableBloodFX()
+    self.active = false;
+    self.anims[self.state][0].isOver = false;
+    self:ResetAnim(self.anims[self.state][0]);
 end
 
 function Blood:PopulateAnims()
@@ -62,7 +65,7 @@ function Blood:PopulateAnims()
     local idleAnims = {};
     anims[0] = idleAnims;
 
-    local idleAnim = Anim:New(self.width, self.height, 0, 2, 1, true);
+    local idleAnim = Anim:New(self.width, self.height, 0, 17, 0.2, false);
     anims[0][0] = idleAnim;
 
     return anims;

@@ -65,6 +65,7 @@ wavesController.NewSubWave = function(enemiesAmount)
         for i = 0, enemiesAmount - 1 do
             local randEnemyType = love.math.random(0, 1);
             local randSpawnPoint = love.math.random(1, #bg.spawnPoints);
+            enemiesCount = enemiesCount + 1;
             if randEnemyType == 0 then
                 Cyclope:New(bg.spawnPoints[randSpawnPoint].position.x, bg.spawnPoints[randSpawnPoint].position.y);
             else

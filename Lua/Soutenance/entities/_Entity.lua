@@ -1,5 +1,4 @@
 local _Entity = {};
-Anim = require("animation/Anim");
 
 function _Entity:New(name, tag)
     local tmpEntity = {};
@@ -195,6 +194,8 @@ function _Entity:UpdateAnim(deltaTime, animation)
         else
             if self.frame < animation.framesCount - 1 then
                 self.frame = self.frame + 1;
+            else
+                animation.isOver = true;
             end
         end
         animation.currentTimer = animation.duration / animation.framesCount;

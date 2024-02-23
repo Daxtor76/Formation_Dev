@@ -93,6 +93,7 @@ Projectile.OnHit = function(collider, other)
             collider.parent.enabled = false;
         elseif other.parent.tag == "enemy" then
             other.parent:ApplyDamages(collider.parent.damages, other.parent);
+            other.parent:EnableBloodFX(other.parent.position);
             StartScreenShake(0.2);
             if collider.parent.isUpgraded == false then
                 collider.enabled = false;
@@ -107,6 +108,7 @@ Projectile.OnHit = function(collider, other)
             collider.enabled = false;
             collider.parent.enabled = false;
             other.parent:ApplyDamages(collider.parent.damages, other.parent);
+            other.parent:EnableBloodFX(other.parent.position);
             StartScreenShake(0.2);
         end
     end

@@ -1,6 +1,7 @@
 local gameScene = SceneController.NewScene("Game");
 local XP = require("collectibles/XP");
 local LP = require("collectibles/LifePot");
+Anim = require("animation/Anim");
     
 gameScene.Load = function()
     local Hero = require("entities/Hero");
@@ -17,7 +18,7 @@ gameScene.Load = function()
     entities = {};
 
     bg = {};
-    bg.grid = Vector.New(5, 5);
+    bg.grid = Vector.New(6, 6);
     bg.tiles = gameScene.GenerateBackground("images/background/TX Tileset Grass.png", bg.grid.x, bg.grid.y);
     bg.size = Vector.New(bg.grid.x * bg.tiles[1].img:getWidth(), bg.grid.y * bg.tiles[1].img:getHeight());
     bg.spawnPoints = gameScene.GenerateSpawnPoints(6);

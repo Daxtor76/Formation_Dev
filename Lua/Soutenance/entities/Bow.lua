@@ -1,7 +1,7 @@
 local _Entity = require("entities/_Entity");
 local Projectile = require("entities/Projectile");
-local HeroCharge = require("FXs/HeroCharge");
-local HeroChargeReady = require("FXs/HeroChargeReady");
+local HeroChargeFX = require("FXs/HeroCharge");
+local HeroChargeReadyFX = require("FXs/HeroChargeReady");
 
 local Bow = {};
 setmetatable(Bow, {__index = _Entity});
@@ -38,8 +38,8 @@ function Bow:New(x, y)
     tmpWeapon.anims = tmpWeapon:PopulateAnims();
     tmpWeapon.renderLayer = 7;
 
-    tmpWeapon.chargeFX = HeroCharge:New(hero.position.x, hero.position.y + hero.height * 0.5);
-    tmpWeapon.chargeReadyFX = HeroChargeReady:New(hero.position.x, hero.position.y);
+    tmpWeapon.chargeFX = HeroChargeFX:New(hero.position.x, hero.position.y + hero.height * 0.5);
+    tmpWeapon.chargeReadyFX = HeroChargeReadyFX:New(hero.position.x, hero.position.y);
 
     table.insert(entities, tmpWeapon);
 

@@ -1,4 +1,5 @@
 local _Entity = require("entities/_Entity");
+local BloodFX = require("FXs/Blood");
 
 Cyclope = {};
 setmetatable(Cyclope, {__index = _Entity});
@@ -54,8 +55,9 @@ function Cyclope:New(x, y)
     tmpCyclope.anims = tmpCyclope:PopulateAnims();
     tmpCyclope.renderLayer = 6;
 
+    tmpCyclope.bloodFX = BloodFX:New(tmpCyclope.position.x, tmpCyclope.position.y);
+
     table.insert(entities, tmpCyclope);
-    enemiesCount = enemiesCount + 1;
 
     return tmpCyclope;
 end
@@ -81,7 +83,6 @@ function Cyclope:Update(dt)
             self:ChangeState("recover");
         elseif self.state == 3 then
             self:MoveToTarget(dt, hero.position);
-
             self.canTakeDamages = self:CanTakeDamages(dt);
             if self.canTakeDamages then
                 self:ChangeState("run");
@@ -94,6 +95,7 @@ function Cyclope:Update(dt)
                 if self.canAttack then
                     hero:ChangeState("hit");
                     self:ApplyDamages(self.damages, hero);
+                    hero:EnableBloodFX(hero.position);
                 end
             else
                 self.currentAttackTimer = self.attackSpeed;
@@ -135,6 +137,12 @@ function Cyclope:Draw()
     love.graphics.setColor(255, 255, 255, 1);
 
     if debugMode then self:DrawRange() end
+end
+
+function Cyclope:EnableBloodFX(position)
+    self.bloodFX.active = true;
+    self.bloodFX.position.x = position.x;
+    self.bloodFX.position.y = position.y - self.height;
 end
 
 function Cyclope:PopulateAnims()
