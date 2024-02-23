@@ -81,13 +81,14 @@ function Projectile:NewFireBall(x, y, damages, upgraded)
 end
 
 Projectile.OnHit = function(collider, other)
+    -- If the projectile touches a wall
+    if other.parent == "wall" then
+        collider.enabled = false;
+        collider.parent.enabled = false;
+    end
+    -- If the projectile touches something else
     if collider.parent.tag == "playerProjectile" then
         if other.parent.tag == "enemyProjectile" then
-            collider.enabled = false;
-            collider.parent.enabled = false;
-            other.enabled = false;
-            other.parent.enabled = false;
-        elseif other.parent.tag == "playerProjectile" then
             collider.enabled = false;
             collider.parent.enabled = false;
         elseif other.parent.tag == "enemy" then
@@ -98,34 +99,15 @@ Projectile.OnHit = function(collider, other)
                 collider.parent.enabled = false;
             end
         end
-    elseif collider.parent.name == "enemyProjectile" then
+    elseif collider.parent.tag == "enemyProjectile" then
         if other.parent.tag == "playerProjectile" then
+            collider.enabled = false;
+            collider.parent.enabled = false;
         elseif other.parent.tag == "player" then
+            other.parent:ApplyDamages(collider.parent.damages, other.parent);
+            StartScreenShake(0.2);
         end
     end
-    -- if other.parent.tag ~= collider.parent.tag then
-    --     if other.parent.name == "Arrow" or other.parent.name == "Fireball" then
-    --         collider.enabled = false;
-    --         collider.parent.enabled = false;
-    --         other.enabled = false;
-    --         other.parent.enabled = false;
-    --     elseif other.parent.name == "Tornado" then
-    --         collider.enabled = false;
-    --         collider.parent.enabled = false;
-    --     elseif other.parent.tag == collider.parent.target then
-    --         if other.parent.canTakeDamages then
-    --             collider.parent:ApplyDamages(collider.parent.damages, other.parent);
-    --             StartScreenShake(0.2);
-    --         end
-    --         if collider.parent.isUpgraded == false then
-    --             collider.enabled = false;
-    --             collider.parent.enabled = false;
-    --         end
-    --     elseif other.tag == "wall" then
-    --         collider.enabled = false;
-    --         collider.parent.enabled = false;
-    --     end
-    -- end
 end
 
 function Projectile:Update(dt)

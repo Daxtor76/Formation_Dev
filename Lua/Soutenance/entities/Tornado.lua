@@ -40,19 +40,10 @@ function Tornado:New(x, y, damages, initialAngle)
 end
 
 Tornado.OnHit = function(collider, other)
-    -- if the other thing still exists in case of double collision test
-    -- if other ~= nil or other.enabled then
-    --     -- if the other thing isn't the same type of object (in this case, another tornado)
-    --     if other.parent.tag ~= collider.parent.tag then
-    --         -- if the other thing is what tornado is supposed to hit
-    --         if other.parent.tag == collider.parent.target then
-    --             if other.parent.canTakeDamages then
-    --                 collider.parent:ApplyDamages(collider.parent.damages, other.parent);
-    --                 StartScreenShake(0.2);
-    --             end
-    --         end
-    --     end
-    -- end
+    if other.parent.tag == "enemy" then
+        other.parent:ApplyDamages(collider.parent.damages, other.parent);
+        StartScreenShake(0.2);
+    end
 end
 
 function Tornado:Update(dt)
