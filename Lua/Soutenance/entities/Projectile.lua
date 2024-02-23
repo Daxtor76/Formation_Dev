@@ -104,6 +104,8 @@ Projectile.OnHit = function(collider, other)
             collider.enabled = false;
             collider.parent.enabled = false;
         elseif other.parent.tag == "player" then
+            collider.enabled = false;
+            collider.parent.enabled = false;
             other.parent:ApplyDamages(collider.parent.damages, other.parent);
             StartScreenShake(0.2);
         end

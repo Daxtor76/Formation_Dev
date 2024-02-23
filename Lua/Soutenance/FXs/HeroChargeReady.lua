@@ -42,19 +42,33 @@ function HeroChargeReady:Update(dt)
 end
 
 function HeroChargeReady:Draw()
-    local delta = GetMousePos() - self.position + cameraOffset;
-    local angle = delta:GetAngle() - math.pi*0.5;
-    love.graphics.draw(
-        self.spritesheet,
-        self:GetCurrentQuadToDisplay(self.anims[self.state][0]),
-        hero.position.x, 
-        hero.position.y, 
-        angle, 
-        self.scaleX, 
-        self.scaleY, 
-        self.pivotX, 
-        self.pivotY
-    );
+    if isPaused == false then
+        local delta = GetMousePos() - self.position + cameraOffset;
+        local angle = delta:GetAngle() - math.pi*0.5;
+        love.graphics.draw(
+            self.spritesheet,
+            self:GetCurrentQuadToDisplay(self.anims[self.state][0]),
+            hero.position.x, 
+            hero.position.y, 
+            angle, 
+            self.scaleX, 
+            self.scaleY, 
+            self.pivotX, 
+            self.pivotY
+        );
+    else
+        love.graphics.draw(
+            self.spritesheet,
+            self:GetCurrentQuadToDisplay(self.anims[self.state][0]),
+            hero.position.x, 
+            hero.position.y, 
+            angle, 
+            self.scaleX, 
+            self.scaleY, 
+            self.pivotX, 
+            self.pivotY
+        );
+    end
 end
 
 function HeroChargeReady:PopulateAnims()
