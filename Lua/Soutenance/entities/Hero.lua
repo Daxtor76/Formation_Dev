@@ -49,9 +49,10 @@ function Hero:New(x, y)
 
     tmpHero.xpThresholds = {};
     tmpHero.xpThresholds["1"] = 3;
-    tmpHero.xpThresholds["2"] = 10;
-    tmpHero.xpThresholds["3"] = 20;
-    tmpHero.xpThresholds["4"] = 30;
+    tmpHero.xpThresholds["2"] = 6;
+    tmpHero.xpThresholds["3"] = 6;
+    tmpHero.xpThresholds["4"] = 6;
+    tmpHero.xpThresholds["5"] = 30;
 
     tmpHero.upgrades = {};
     tmpHero.upgrades[0] = Upgrade:New("Upgrade arrows", Upgrade.OnArrowUpgradeSelected);
@@ -108,8 +109,9 @@ function Hero:Update(dt)
             end
         end
     else
-        self:Die(dt);
         weapon:DisableChargeFX();
+        weapon:DisableChargeReadyFX();
+        self:Die(dt);
     end
     -- Animations
     self:UpdateAnim(dt, self.anims[self.state][self.characterDirection]);
@@ -175,10 +177,21 @@ function Hero:Die(dt)
     self.collider.enabled = false;
     weapon.enabled = false;
 
+    self:DisableTornados();
+
     if self:CanDie(dt) then
         self.enabled = false;
         defeat = true;
     end
+end
+
+function Hero:DisableTornados()
+    for key, value in pairs(self.tornados) do
+        value.enabled = false;
+        value.collider.enabled = false;
+    end
+
+    self.tornados = {};
 end
 
 function Hero:Move(dt)

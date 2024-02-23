@@ -40,12 +40,23 @@ gameScene.Load = function()
 end
 
 gameScene.Update = function(dt)
+    gameScene.CleanLists();
     if isPaused == false then
         -- Entities
         for key, value in pairs(entities) do
             if value.active then
                 value:Update(dt);
             end
+        end
+    
+        if gameScene.CheckVictory() == false and gameScene.CheckDefeat() == false then
+            WavesController.UpdateWave(dt);
+            CollisionController.CheckCollisions();
+            gameScene.UpdateGameTime(dt);
+            gameScene.UpdateScreenShakeTimer(dt);
+        elseif gameScene.CheckVictory() or gameScene.CheckDefeat() then
+            SceneController.LoadSceneAdditive("GameOver");
+            SceneController.SetCurrentScene("GameOver");
         end
     else
         if #Buttons == 0 then
@@ -56,18 +67,6 @@ gameScene.Update = function(dt)
         else
             gameScene.CheckButtons();
         end
-    end
-
-    gameScene.CleanLists();
-
-    if gameScene.CheckVictory() == false and gameScene.CheckDefeat() == false then
-        WavesController.UpdateWave(dt);
-        CollisionController.CheckCollisions();
-        gameScene.UpdateGameTime(dt);
-        gameScene.UpdateScreenShakeTimer(dt);
-    elseif gameScene.CheckVictory() or gameScene.CheckDefeat() then
-        SceneController.LoadSceneAdditive("GameOver");
-        SceneController.SetCurrentScene("GameOver");
     end
 end
 

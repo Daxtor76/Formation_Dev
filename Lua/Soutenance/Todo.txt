@@ -30,12 +30,12 @@
 - Upgrade: +1 lp -> ok
 - Upgrade: +1 dmg -> ok
 - REFAIRE TOUTES LES COLLISIONS :) -> ok
-- Upgrade: Shield around hero (asset tornado)
-- Revoir les différents paramètres local + les require
+- Upgrade: Shield around hero (asset tornado) -> ok
 - Sign & feedbacks
     - Add charge feedback -> ok
     - Add charge feedback on sorceress -> ok
     - Add charge ready feedback -> ok
     - Screenshake on hit -> ok
     - Blood on hit
+- Revoir les différents paramètres local + les require
 - LD & balancing

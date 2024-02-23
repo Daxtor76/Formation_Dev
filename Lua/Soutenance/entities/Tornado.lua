@@ -41,6 +41,7 @@ end
 
 Tornado.OnHit = function(collider, other)
     if other.parent.tag == "enemy" then
+        print("coucou")
         other.parent:ApplyDamages(collider.parent.damages, other.parent);
         StartScreenShake(0.2);
     end

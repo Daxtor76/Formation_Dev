@@ -1,6 +1,8 @@
 local Upgrade = {};
 local Tornado = require("entities/Tornado");
 
+local tornadoCount = 0;
+
 function Upgrade:New(label, event)
     local tmpUpgrade = {};
     setmetatable(tmpUpgrade, {__index = Upgrade});
@@ -38,7 +40,15 @@ function Upgrade.OnDamageUpgrade()
 end
 
 function Upgrade.OnTornadoSelected()
-    table.insert(hero.tornados, Tornado:New(hero.position.x, hero.position.y, 2, #hero.tornados * 90));
+    tornadoCount = tornadoCount + 1;
+
+    hero:DisableTornados();
+
+    for i = 0, tornadoCount - 1 do
+        local angle = 360/(tornadoCount / (tornadoCount - i));
+        table.insert(hero.tornados, Tornado:New(hero.position.x, hero.position.y, 1, angle));
+    end
+
     Buttons = {};
     isPaused = false;
 end
