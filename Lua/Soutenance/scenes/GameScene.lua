@@ -35,6 +35,8 @@ gameScene.Load = function()
     arenaBounds[1] = CollisionController.NewCollider(Vector.New(0, bg.size.y), Vector.New(bg.size.x * bg.grid.x, 1), "wall");
     arenaBounds[2] = CollisionController.NewCollider(Vector.New(0, 0), Vector.New(1, bg.size.y * bg.grid.y), "wall");
     arenaBounds[3] = CollisionController.NewCollider(Vector.New(bg.size.x, 0), Vector.New(1, bg.size.y * bg.grid.y), "wall");
+
+    WavesController.InitWave(0);
 end
 
 gameScene.Update = function(dt)
