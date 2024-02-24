@@ -40,12 +40,12 @@ function Upgrade.OnDamageUpgrade()
 end
 
 function Upgrade.OnTornadoSelected()
-    tornadoCount = tornadoCount + 1;
+    hero.tornadoCount = hero.tornadoCount + 1;
 
     hero:DisableTornados();
 
-    for i = 0, tornadoCount - 1 do
-        local angle = 360/(tornadoCount / (tornadoCount - i));
+    for i = 0, hero.tornadoCount - 1 do
+        local angle = 360/(hero.tornadoCount / (hero.tornadoCount - i));
         table.insert(hero.tornados, Tornado:New(hero.position.x, hero.position.y, 1, angle));
     end
 

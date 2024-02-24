@@ -19,11 +19,11 @@ wavesController.NewWave = function(frequency, duration, enemiesAmount)
     local wave = {};
     wave.frequency = frequency;
     wave.duration = duration;
-    wave.timer = 0;
+    wave.timer = wave.frequency;
 
     wave.InitSubWave = function()
         print("new sub wave")
-        wave.timer = frequency;
+        wave.timer = wave.frequency;
         local subwave = wavesController.NewSubWave(enemiesAmount);
         subwave.SpawnEnemies();
     end
@@ -42,11 +42,12 @@ wavesController.InitWave = function(waveId)
     print("new wave")
     wavesController.currentWave = wavesController.waves[waveId];
     wavesController.timer = wavesController.currentWave.duration;
-    --wavesController.currentWave.InitSubWave(waveId);
+    wavesController.currentWave.InitSubWave(waveId);
 end
 
 wavesController.UpdateWave = function(dt)
     if wavesController.isOver == false then
+        wavesController.currentWave.UpdateSubWave(dt); 
         wavesController.timer = wavesController.timer - dt;
         if wavesController.timer <= 0 then
             wavesController.waveCounter = wavesController.waveCounter + 1;
@@ -56,7 +57,6 @@ wavesController.UpdateWave = function(dt)
                 wavesController.isOver = true;
             end
         end
-        wavesController.currentWave.UpdateSubWave(dt);
     end
 end
 
@@ -80,6 +80,9 @@ end
 
 wavesController.waves[0] = wavesController.NewWave(20, 20, 3);
 wavesController.waves[1] = wavesController.NewWave(15, 45, 3);
-wavesController.waves[2] = wavesController.NewWave(8, 62, 10);
+wavesController.waves[2] = wavesController.NewWave(8, 40, 5);
+wavesController.waves[3] = wavesController.NewWave(7, 42, 6);
+wavesController.waves[4] = wavesController.NewWave(7, 42, 7);
+wavesController.waves[5] = wavesController.NewWave(7, 42, 8);
 
 return wavesController;

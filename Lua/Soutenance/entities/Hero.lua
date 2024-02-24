@@ -30,6 +30,7 @@ function Hero:New(x, y)
     tmpHero.states["die"] = 4;
 
     tmpHero.tornados = {};
+    tmpHero.tornadoCount = 0;
 
     tmpHero.state = 0;
     tmpHero.speed = 150;
@@ -49,11 +50,11 @@ function Hero:New(x, y)
     tmpHero.xp = 0;
 
     tmpHero.xpThresholds = {};
-    tmpHero.xpThresholds["1"] = 3;
-    tmpHero.xpThresholds["2"] = 6;
-    tmpHero.xpThresholds["3"] = 6;
-    tmpHero.xpThresholds["4"] = 6;
-    tmpHero.xpThresholds["5"] = 30;
+    tmpHero.xpThresholds["1"] = 9;
+    tmpHero.xpThresholds["2"] = 27;
+    tmpHero.xpThresholds["3"] = 60;
+    tmpHero.xpThresholds["4"] = 60;
+    tmpHero.xpThresholds["5"] = 60;
 
     tmpHero.upgrades = {};
     tmpHero.upgrades[0] = Upgrade:New("Upgrade arrows", Upgrade.OnArrowUpgradeSelected);
