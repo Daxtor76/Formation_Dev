@@ -1,14 +1,14 @@
 local menuScene = SceneController.NewScene("Menu");
 
-local Buttons = nil;
-local Texts = nil;
+local buttons = nil;
+local texts = nil;
 
 menuScene.Load = function()
-    Texts = {};
-    Buttons = {};
+    texts = {};
+    buttons = {};
 
-    Texts[0] = Text:NewTitle(screenWidth * 0.5, 50, "Soutenance Lua");
-    Buttons[0] = Button:New(screenWidth * 0.5, screenHeight * 0.5, 100, 50, "Launch Game", menuScene.OnGameButtonClicked);
+    texts[0] = Text:NewTitle(screenWidth * 0.5, 50, "Soutenance Lua");
+    buttons[0] = Button:New(screenWidth * 0.5, screenHeight * 0.5, 100, 50, "Launch Game", menuScene.OnGameButtonClicked);
 end
 
 menuScene.Update = function(dt)
@@ -20,21 +20,21 @@ menuScene.Draw = function()
 end
 
 menuScene.Unload = function()
-    Buttons = nil;
-    Texts = nil;
+    buttons = nil;
+    texts = nil;
 end
 
 menuScene.DrawUI = function()
-    for key, value in pairs(Buttons) do
+    for key, value in pairs(buttons) do
         value:Draw();
     end
-    for key, value in pairs(Texts) do
+    for key, value in pairs(texts) do
         value:Draw();
     end
 end
 
 menuScene.CheckButtons = function()
-    for key, value in pairs(Buttons) do
+    for key, value in pairs(buttons) do
         if value:CheckHover() then
             if value:CheckClick() then
                 value:applyButtonEffect();

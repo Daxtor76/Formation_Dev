@@ -1,6 +1,7 @@
 local _Entity = require("entities/_Entity");
+local Anim = require("animation/Anim");
 
-HeroChargeReady = {};
+local HeroChargeReady = {};
 setmetatable(HeroChargeReady, {__index = _Entity});
 
 function HeroChargeReady:New(x, y)

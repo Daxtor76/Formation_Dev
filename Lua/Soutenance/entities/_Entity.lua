@@ -87,16 +87,6 @@ function _Entity:Die(dt)
 
     if self:CanDie(dt) then
         self.enabled = false;
-        enemiesCount = enemiesCount - 1;
-        enemiesKilled = enemiesKilled + 1;
-
-        local rand = love.math.random(0, 100);
-        if rand < 10 then
-            LP:New(self.position.x, self.position.y);
-        end
-        for i = 0, self.xpDropped - 1 do
-            XP:New(self.position.x + love.math.random(20, 70), self.position.y + love.math.random(20, 70));
-        end
     end
 end
 

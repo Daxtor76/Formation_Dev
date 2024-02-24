@@ -1,7 +1,7 @@
 screenWidth = love.graphics.getWidth();
 screenHeight = love.graphics.getHeight();
 
-debugMode = false;
+debugMode = true;
 
 normalFont = love.graphics.newFont(12);
 middleFont = love.graphics.newFont(18);

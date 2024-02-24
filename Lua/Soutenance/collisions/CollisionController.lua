@@ -50,7 +50,7 @@ collisionController.NewCollider = function(x, y, w, h, parent, event)
         love.graphics.setColor(1,1,1,1)
     end
 
-    table.insert(CollisionController.colliders, tmpCollider);
+    table.insert(collisionController.colliders, tmpCollider);
 
     return tmpCollider;
 end

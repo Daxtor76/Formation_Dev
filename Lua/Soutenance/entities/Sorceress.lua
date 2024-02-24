@@ -2,8 +2,12 @@ local _Entity = require("entities/_Entity");
 local Projectile = require("entities/Projectile");
 local SorceressChargeFX = require("FXs/SorceressCharge");
 local BloodFX = require("FXs/Blood");
+local XP = require("collectibles/XP");
+local LP = require("collectibles/LifePot");
+local CollisionController = require("collisions/CollisionController");
+local Anim = require("animation/Anim");
 
-Sorceress = {};
+local Sorceress = {};
 setmetatable(Sorceress, {__index = _Entity});
 
 function Sorceress:New(x, y)
@@ -167,6 +171,24 @@ end
 function Sorceress:DisableChargeFX()
     self.chargeFX.active = false;
     self.chargeFX:ResetAnim(self.chargeFX.anims[self.chargeFX.state][0]);
+end
+
+function Sorceress:Die(dt)
+    self.collider.enabled = false;
+
+    if self:CanDie(dt) then
+        self.enabled = false;
+        enemiesCount = enemiesCount - 1;
+        enemiesKilled = enemiesKilled + 1;
+
+        local rand = love.math.random(0, 100);
+        if rand < 10 then
+            LP:New(self.position.x, self.position.y);
+        end
+        for i = 0, self.xpDropped - 1 do
+            XP:New(self.position.x + love.math.random(40, 100), self.position.y + love.math.random(40, 100));
+        end
+    end
 end
 
 function Sorceress:PopulateAnims()

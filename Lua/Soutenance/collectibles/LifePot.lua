@@ -1,6 +1,8 @@
 local _Entity = require("entities/_Entity");
+local CollisionController = require("collisions/CollisionController");
+local Anim = require("animation/Anim");
 
-LP = {};
+local LP = {};
 setmetatable(LP, {__index = _Entity});
 
 function LP:New(x, y)

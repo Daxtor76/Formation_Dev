@@ -1,4 +1,6 @@
 local _Entity = require("entities/_Entity");
+local CollisionController = require("collisions/CollisionController");
+local Anim = require("animation/Anim");
 
 local Tornado = {};
 setmetatable(Tornado, {__index = _Entity});
@@ -41,8 +43,8 @@ end
 
 Tornado.OnHit = function(collider, other)
     if other.parent.tag == "enemy" then
-        print("coucou")
         other.parent:ApplyDamages(collider.parent.damages, other.parent);
+        other.parent:EnableBloodFX(other.parent.position);
         StartScreenShake(0.2);
     end
 end

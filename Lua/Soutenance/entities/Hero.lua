@@ -1,6 +1,8 @@
 local _Entity = require("entities/_Entity");
 local Upgrade = require("upgrades/Upgrade");
 local BloodFX = require("FXs/Blood");
+local CollisionController = require("collisions/CollisionController");
+local Anim = require("animation/Anim");
 
 local Hero = {};
 setmetatable(Hero, {__index = _Entity});
@@ -35,6 +37,8 @@ function Hero:New(x, y)
 
     tmpHero.state = 0;
     tmpHero.speed = 150;
+    
+    tmpHero.scrollDist = 150;
 
     tmpHero.maxlife = 5;
     tmpHero.life = tmpHero.maxlife;
@@ -223,8 +227,8 @@ function Hero:Move(dt)
     self.collider.position = self.position - self.collider.size * 0.5;
 
     local delta = self.position - GetScreenCenterPosition();
-    if delta:GetMagnitude() > scrollDist then 
-        self:MoveCamera(dt, delta, scrollDist); 
+    if delta:GetMagnitude() > self.scrollDist then 
+        self:MoveCamera(dt, delta, self.scrollDist); 
     end
 end
 

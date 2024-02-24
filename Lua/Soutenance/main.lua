@@ -9,9 +9,6 @@ io.stdout:setvbuf("no")
 require("utils/Vector");
 require("utils/Utils");
 
-CollisionController = require("collisions/CollisionController");
-WavesController = require("waves/WavesController");
-
 SceneController = require("scenes/SceneController");
 Button = require("UI/Button");
 Text = require("UI/Text");

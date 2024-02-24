@@ -1,13 +1,14 @@
 local gameScene = SceneController.NewScene("Game");
-local XP = require("collectibles/XP");
-local LP = require("collectibles/LifePot");
-Anim = require("animation/Anim");
+local CollisionController = require("collisions/CollisionController");
+local WavesController = require("waves/WavesController");
+
+local Hero = require("entities/Hero");
+local Bow = require("entities/Bow");
+
+local arenaBounds = nil;
     
 gameScene.Load = function()
-    local Hero = require("entities/Hero");
-    local Bow = require("entities/Bow");
-
-    Buttons = {};
+    buttons = {};
 
     defeat = false;
     isPaused = false;
@@ -18,7 +19,7 @@ gameScene.Load = function()
     entities = {};
 
     bg = {};
-    bg.grid = Vector.New(6, 6);
+    bg.grid = Vector.New(5, 5);
     bg.tiles = gameScene.GenerateBackground("images/background/TX Tileset Grass.png", bg.grid.x, bg.grid.y);
     bg.size = Vector.New(bg.grid.x * bg.tiles[1].img:getWidth(), bg.grid.y * bg.tiles[1].img:getHeight());
     bg.spawnPoints = gameScene.GenerateSpawnPoints(6);
@@ -28,8 +29,6 @@ gameScene.Load = function()
 
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Bow:New(hero.position.x, hero.position.y);
-    
-    scrollDist = 150;
 
     arenaBounds = {};
     arenaBounds[0] = CollisionController.NewCollider(0, 0, bg.size.x * bg.grid.x, 1, "wall");
@@ -37,7 +36,7 @@ gameScene.Load = function()
     arenaBounds[2] = CollisionController.NewCollider(0, 0, 1, bg.size.y * bg.grid.y, "wall");
     arenaBounds[3] = CollisionController.NewCollider(bg.size.x, 0, 1, bg.size.y * bg.grid.y, "wall");
 
-   WavesController.InitWave(0);
+    WavesController.InitWave(0);
 end
 
 gameScene.Update = function(dt)
@@ -60,13 +59,13 @@ gameScene.Update = function(dt)
             SceneController.SetCurrentScene("GameOver");
         end
     else
-        if #Buttons == 0 then
+        if #buttons == 0 then
             for i = 0, 2 do
-                local upgrade = hero.upgrades[love.math.random(0, #hero.upgrades - 1)];
-                Buttons[i] = Button:New(screenWidth * 0.25 * (i+1), screenHeight * 0.5, 100, 50, upgrade.label, upgrade.onSelect);
+                local upgrade = hero.upgrades[love.math.random(0, #hero.upgrades)];
+                buttons[i] = Button:New(screenWidth * 0.25 * (i+1), screenHeight * 0.5, 100, 50, upgrade.label, upgrade.onSelect);
             end
         else
-            gameScene.CheckButtons();
+            gameScene.Checkbuttons();
         end
     end
 end
@@ -91,7 +90,7 @@ gameScene.Draw = function()
     if debugMode then 
         CollisionController.DrawColliders(); 
         love.graphics.rectangle("fill", GetScreenCenterPosition().x, GetScreenCenterPosition().y, 5, 5);
-        love.graphics.circle("line", hero.position.x, hero.position.y, scrollDist);
+        love.graphics.circle("line", hero.position.x, hero.position.y, hero.scrollDist);
         gameScene.DrawSpawnPoints();
     end
     love.graphics.pop();
@@ -100,7 +99,7 @@ gameScene.Draw = function()
     hero:DrawOnScreen();
 
     if isPaused then
-        gameScene.DrawButtons();
+        gameScene.Drawbuttons();
         ReplaceMouseCrosshair(true);
     else
         ReplaceMouseCrosshair(false, hero.crosshair);
@@ -114,6 +113,7 @@ gameScene.Draw = function()
 end
 
 gameScene.Unload = function()
+    buttons = nil;
     hero = nil;
     weapon = nil;
     bg = nil;
@@ -132,8 +132,8 @@ gameScene.Unload = function()
     WavesController.ResetWaves();
 end
 
-gameScene.CheckButtons = function()
-    for key, value in pairs(Buttons) do
+gameScene.Checkbuttons = function()
+    for key, value in pairs(buttons) do
         if value:CheckHover() then
             if value:CheckClick() then
                 value:applyButtonEffect();
@@ -142,8 +142,8 @@ gameScene.CheckButtons = function()
     end
 end
 
-gameScene.DrawButtons = function()
-    for key, value in pairs(Buttons) do
+gameScene.Drawbuttons = function()
+    for key, value in pairs(buttons) do
         value:Draw();
     end
 end
@@ -178,13 +178,6 @@ gameScene.CleanLists = function()
             table.remove(entities, i);
         end
     end
-end
-
-gameScene.MoveScreenBounds = function()
-    arenaBounds[0].Move(GetScreenCenterPosition().x - screenWidth * 0.5, GetScreenCenterPosition().y - screenHeight * 0.5);
-    arenaBounds[1].Move(GetScreenCenterPosition().x - screenWidth * 0.5, GetScreenCenterPosition().y + screenHeight * 0.5);
-    arenaBounds[2].Move(GetScreenCenterPosition().x - screenWidth * 0.5, GetScreenCenterPosition().y - screenHeight * 0.5);
-    arenaBounds[3].Move(GetScreenCenterPosition().x + screenWidth * 0.5, GetScreenCenterPosition().y - screenHeight * 0.5);
 end
 
 -- BG functions
@@ -222,7 +215,6 @@ end
 gameScene.NewSpawnPoint = function(pos)
     local spawnPoint = {};
     spawnPoint.position = pos;
-    spawnPoint.used = false;
 
     return spawnPoint;
 end

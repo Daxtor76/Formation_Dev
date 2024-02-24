@@ -1,11 +1,11 @@
 local gameOverScene = SceneController.NewScene("GameOver");
 
-local Buttons = nil;
-local Texts = nil;
+local buttons = nil;
+local texts = nil;
 
 gameOverScene.Load = function(test)
-    Buttons = {};
-    Texts = {};
+    buttons = {};
+    texts = {};
     Victory = function()
         if SceneController.scenes["Game"].CheckVictory() then
             return "Congratulations !";
@@ -15,16 +15,16 @@ gameOverScene.Load = function(test)
     enemiesDead = enemiesKilled or 0;
     timePlayed = gameTime or 0;
     
-    Texts[0] = Text:NewTitle(screenWidth * 0.5, 50, Victory());
-    Texts[1] = Text:NewMiddle(screenWidth * 0.5, 100, "Enemies killed: "..enemiesDead);
-    Texts[2] = Text:NewMiddle(screenWidth * 0.5, 130, "Time played: "..math.ceil(timePlayed).."s");
+    texts[0] = Text:NewTitle(screenWidth * 0.5, 50, Victory());
+    texts[1] = Text:NewMiddle(screenWidth * 0.5, 100, "Enemies killed: "..enemiesDead);
+    texts[2] = Text:NewMiddle(screenWidth * 0.5, 130, "Time played: "..math.ceil(timePlayed).."s");
 
-    Buttons[0] = Button:New(screenWidth * 0.25, screenHeight * 0.5, 100, 50, "Main menu", gameOverScene.OnMenuButtonClicked);
-    Buttons[1] = Button:New(screenWidth * 0.75, screenHeight * 0.5, 100, 50, "Reload", gameOverScene.OnReloadButtonClicked);
+    buttons[0] = Button:New(screenWidth * 0.25, screenHeight * 0.5, 100, 50, "Main menu", gameOverScene.OnMenuButtonClicked);
+    buttons[1] = Button:New(screenWidth * 0.75, screenHeight * 0.5, 100, 50, "Reload", gameOverScene.OnReloadButtonClicked);
 end
 
 gameOverScene.Update = function(dt)
-    gameOverScene.CheckButtons();
+    gameOverScene.Checkbuttons();
 end
 
 gameOverScene.Draw = function()
@@ -37,21 +37,21 @@ gameOverScene.Unload = function()
     Victory = nil;
     enemiesDead = nil;
     timePlayed = nil;
-    Texts = nil;
-    Buttons = nil;
+    texts = nil;
+    buttons = nil;
 end
 
 gameOverScene.DrawUI = function()
-    for key, value in pairs(Buttons) do
+    for key, value in pairs(buttons) do
         value:Draw();
     end
-    for key, value in pairs(Texts) do
+    for key, value in pairs(texts) do
         value:Draw();
     end
 end
 
-gameOverScene.CheckButtons = function()
-    for key, value in pairs(Buttons) do
+gameOverScene.Checkbuttons = function()
+    for key, value in pairs(buttons) do
         if value:CheckHover() then
             if value:CheckClick() then
                 value:applyButtonEffect();

@@ -1,6 +1,7 @@
 local _Entity = require("entities/_Entity");
+local Anim = require("animation/Anim");
 
-SorceressCharge = {};
+local SorceressCharge = {};
 setmetatable(SorceressCharge, {__index = _Entity});
 
 function SorceressCharge:New(x, y)
