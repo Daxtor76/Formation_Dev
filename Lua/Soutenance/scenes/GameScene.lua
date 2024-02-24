@@ -35,8 +35,6 @@ gameScene.Load = function()
     arenaBounds[1] = CollisionController.NewCollider(Vector.New(0, bg.size.y), Vector.New(bg.size.x * bg.grid.x, 1), "wall");
     arenaBounds[2] = CollisionController.NewCollider(Vector.New(0, 0), Vector.New(1, bg.size.y * bg.grid.y), "wall");
     arenaBounds[3] = CollisionController.NewCollider(Vector.New(bg.size.x, 0), Vector.New(1, bg.size.y * bg.grid.y), "wall");
-
-    WavesController.InitWave(0);
 end
 
 gameScene.Update = function(dt)
@@ -62,14 +60,19 @@ gameScene.Update = function(dt)
         if #buttons == 0 then
             for i = 0, 2 do
                 local rand = love.math.random(0, #hero.upgrades);
-                print(rand)
                 local upgrade = hero.upgrades[rand];
                 buttons[i] = Button:New(screenWidth * 0.25 * (i + 1), screenHeight * 0.5, 110, 50, upgrade.label, upgrade.onSelect);
             end
         else
             gameScene.Checkbuttons();
         end
-    end 
+    end
+
+    if love.keyboard.isDown(love.keyboard.getScancodeFromKey("space")) then
+        debugMode = true;
+    else
+        debugMode = false;
+    end
 end
 
 gameScene.Draw = function()

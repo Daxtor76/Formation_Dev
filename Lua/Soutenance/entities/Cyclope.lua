@@ -34,14 +34,14 @@ function Cyclope:New(x, y)
 
     tmpCyclope.state = 1;
     tmpCyclope.range = 100;
-    tmpCyclope.speed = 130;
+    tmpCyclope.speed = 80;
 
     tmpCyclope.attackSpeed = 1.2;
     tmpCyclope.currentAttackTimer = tmpCyclope.attackSpeed;
 
     tmpCyclope.damages = 1;
 
-    tmpCyclope.maxlife = 2;
+    tmpCyclope.maxlife = 3;
     tmpCyclope.life = tmpCyclope.maxlife;
 
     tmpCyclope.recoverTimer = 0.5;

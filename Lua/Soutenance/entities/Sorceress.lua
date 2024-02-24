@@ -43,9 +43,9 @@ function Sorceress:New(x, y)
     tmpSorceress.isCasting = false;
     tmpSorceress.currentAttackTimer = tmpSorceress.attackSpeed;
 
-    tmpSorceress.damages = 3;
+    tmpSorceress.damages = 2;
 
-    tmpSorceress.maxlife = 2;
+    tmpSorceress.maxlife = 3;
     tmpSorceress.life = tmpSorceress.maxlife;
 
     tmpSorceress.recoverTimer = 0.5;

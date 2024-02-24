@@ -42,3 +42,8 @@
 - Replace all colliders -> ok
 - Add biggest combo (max enemies killed in one arrow)
 - LD & balancing
+    - Enemies win life every Waves
+    - Enemies win damages every Waves
+    - Enemies win speed every Waves
+    - Make many levels
+    - Make many Waves

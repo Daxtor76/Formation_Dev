@@ -36,7 +36,7 @@ function Hero:New(x, y)
     
     tmpHero.scrollDist = 150;
 
-    tmpHero.maxlife = 5;
+    tmpHero.maxlife = 3;
     tmpHero.life = tmpHero.maxlife;
 
     tmpHero.recoverTimer = 0.5;
