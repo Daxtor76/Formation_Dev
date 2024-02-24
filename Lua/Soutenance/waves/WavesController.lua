@@ -47,7 +47,6 @@ end
 
 wavesController.UpdateWave = function(dt)
     if wavesController.isOver == false then
-        wavesController.currentWave.UpdateSubWave(dt); 
         wavesController.timer = wavesController.timer - dt;
         if wavesController.timer <= 0 then
             wavesController.waveCounter = wavesController.waveCounter + 1;
@@ -57,6 +56,7 @@ wavesController.UpdateWave = function(dt)
                 wavesController.isOver = true;
             end
         end
+        wavesController.currentWave.UpdateSubWave(dt); 
     end
 end
 

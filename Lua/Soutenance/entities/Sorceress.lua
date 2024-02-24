@@ -80,18 +80,23 @@ function Sorceress:Update(dt)
 
         -- Behaviour
         if self.state == 1 then
-            self:MoveToTarget(dt, hero.position);
             if GetDistance(self.position, hero.position) <= self.range then
                 self:ChangeState("attack");
                 self.isCasting = true;
+            else
+                self:MoveToTarget(dt, hero.position);
             end
         elseif self.state == 2 then
             self:ChangeState("recover");
         elseif self.state == 3 then
-            self:MoveToTarget(dt, hero.position);
+            --self:MoveToTarget(dt, hero.position);
             self.canTakeDamages = self:CanTakeDamages(dt);
             if self.canTakeDamages then
-                self:ChangeState("run");
+                if self.isCasting then
+                    self:ChangeState("attack");
+                else
+                    self:ChangeState("run");
+                end
             end
         elseif self.state == 4 then
             self:Die(dt);
