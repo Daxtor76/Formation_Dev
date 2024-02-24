@@ -12,19 +12,14 @@ function XP:New(x, y)
 
     -- Inner
     tmpXP.position = Vector.New(x, y);
-    tmpXP.width = 32;
-    tmpXP.height = 32;
-    tmpXP.scaleX = 1;
-    tmpXP.scaleY = 1;
-    tmpXP.pivotX = tmpXP.width*0.5;
-    tmpXP.pivotY = tmpXP.height*0.5;
+    tmpXP.size = Vector.New(32, 32);
+    tmpXP.scale = Vector.New(1, 1);
+    tmpXP.pivot = Vector.New(tmpXP.size.x * 0.5, tmpXP.size.y * 0.5);
 
     -- Behaviour
     tmpXP.collider = CollisionController.NewCollider(
-        tmpXP.position.x,
-        tmpXP.position.y,
-        tmpXP.width,
-        tmpXP.height,
+        tmpXP.position - Vector.New(tmpXP.pivot.x * tmpXP.scale.x, tmpXP.pivot.y * tmpXP.scale.y),
+        Vector.New(tmpXP.size.x * tmpXP.scale.x, tmpXP.size.y * tmpXP.scale.y),
         tmpXP,
         XP.OnHit
     );
@@ -61,10 +56,10 @@ function XP:Draw()
         self.position.x, 
         self.position.y, 
         self.rotation, 
-        self.scaleX, 
-        self.scaleY, 
-        self.pivotX, 
-        self.pivotY
+        self.scale.x, 
+        self.scale.y, 
+        self.pivot.x, 
+        self.pivot.y
     );
 
     if debugMode then self:DrawRange() end
@@ -83,7 +78,7 @@ function XP:PopulateAnims()
     local idleAnims = {};
     anims[0] = idleAnims;
 
-    local idleAnim = Anim:New(self.width, self.height, 0, 12, 50/self.speed, true);
+    local idleAnim = Anim:New(self.size.x, self.size.y, 0, 12, 50/self.speed, true);
     anims[0][0] = idleAnim;
 
     return anims;

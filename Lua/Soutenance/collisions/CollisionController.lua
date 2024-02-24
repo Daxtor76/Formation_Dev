@@ -17,13 +17,11 @@ collisionController.DrawColliders = function()
     end
 end
 
-collisionController.NewCollider = function(x, y, w, h, parent, event)
+collisionController.NewCollider = function(position, size, parent, event)
     local tmpCollider = {};
 
-    tmpCollider.position = Vector.New(x, y);
-    tmpCollider.size = Vector.New(w, h);
-    tmpCollider.position = tmpCollider.position - tmpCollider.size * 0.5;
-
+    tmpCollider.position = position;
+    tmpCollider.size = size;
     tmpCollider.parent = parent;
     tmpCollider.enabled = true;
 

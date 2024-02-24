@@ -38,6 +38,7 @@
     - Screenshake on hit -> ok
     - Blood on hit -> ok
 - Revoir les différents paramètres local + les require -> ok ?
-- Change all x & y variables to vectors
+- Change all x & y variables to vectors -> ok
+- Replace all colliders -> ok
 - Add biggest combo (max enemies killed in one arrow)
 - LD & balancing

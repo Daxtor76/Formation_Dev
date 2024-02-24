@@ -14,10 +14,8 @@ function Bow:New(x, y)
 
     -- Inner
     tmpWeapon.position = Vector.New(x, y);
-    tmpWeapon.width = 48;
-    tmpWeapon.height = 48;
-    tmpWeapon.pivotX = tmpWeapon.width * 0.5;
-    tmpWeapon.pivotY = tmpWeapon.height * 0.5;
+    tmpWeapon.size = Vector.New(48, 48);
+    tmpWeapon.pivot = Vector.New(tmpWeapon.size.x * 0.5, tmpWeapon.size.y * 0.5);
     
     -- Behaviour
     tmpWeapon.states["idle"] = 0;
@@ -39,8 +37,8 @@ function Bow:New(x, y)
     tmpWeapon.anims = tmpWeapon:PopulateAnims();
     tmpWeapon.renderLayer = 7;
 
-    tmpWeapon.chargeFX = HeroChargeFX:New(hero.position.x, hero.position.y + hero.height * 0.5);
-    tmpWeapon.chargeReadyFX = HeroChargeReadyFX:New(hero.position.x, hero.position.y);
+    tmpWeapon.chargeFX = HeroChargeFX:New(hero.position);
+    tmpWeapon.chargeReadyFX = HeroChargeReadyFX:New(hero.position);
 
     table.insert(entities, tmpWeapon);
 
@@ -49,7 +47,7 @@ end
 
 function Bow:Update(dt)
     -- Weapon Controls
-    self:Replace(hero.position.x, hero.position.y);
+    self.position = Vector.New(hero.position.x, hero.position.y)
 
     if GetMousePos().y + cameraOffset.y > hero.position.y then
         self:ChangeRenderLayer(9);
@@ -102,31 +100,32 @@ function Bow:Update(dt)
 end
 
 function Bow:Draw()
+    local angle;
     if isPaused == false then
         local delta = GetMousePos() - self.position + cameraOffset;
-        local angle = delta:GetAngle() - math.pi*0.5;
+        angle = delta:GetAngle() - math.pi*0.5;
         love.graphics.draw(
             self.spritesheet,
             self:GetCurrentQuadToDisplay(self.anims[self.state][0]),
-            hero.position.x,
-            hero.position.y,
+            self.position.x,
+            self.position.y,
             angle,
-            self.scaleX,
-            self.scaleY,
-            self.pivotX,
-            self.pivotY
+            self.scale.x,
+            self.scale.y,
+            self.pivot.x,
+            self.pivot.y
         );
     else
         love.graphics.draw(
             self.spritesheet,
             self:GetCurrentQuadToDisplay(self.anims[self.state][0]),
-            hero.position.x,
-            hero.position.y,
+            self.position.x,
+            self.position.y,
             angle,
-            self.scaleX,
-            self.scaleY,
-            self.pivotX,
-            self.pivotY
+            self.scale.x,
+            self.scale.y,
+            self.pivot.x,
+            self.pivot.y
         );
     end
 end
@@ -173,10 +172,10 @@ function Bow:PopulateAnims()
     anims[2] = shootAnims;
     anims[3] = reloadAnims;
 
-    local idleAnim = Anim:New(self.width, self.height, 0, 0, 1, true);
-    local chargeAnim = Anim:New(self.width, self.height, 1, 3, self.chargeTimer, false);
-    local shootAnim = Anim:New(self.width, self.height, 4, 4, 2, false);
-    local reloadAnim = Anim:New(self.width, self.height, 5, 5, self.reloadSpeed, false);
+    local idleAnim = Anim:New(self.size.x, self.size.y, 0, 0, 1, true);
+    local chargeAnim = Anim:New(self.size.x, self.size.y, 1, 3, self.chargeTimer, false);
+    local shootAnim = Anim:New(self.size.x, self.size.y, 4, 4, 2, false);
+    local reloadAnim = Anim:New(self.size.x, self.size.y, 5, 5, self.reloadSpeed, false);
     anims[0][0] = idleAnim;
     anims[1][0] = chargeAnim;
     anims[2][0] = shootAnim;

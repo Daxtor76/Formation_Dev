@@ -31,10 +31,10 @@ gameScene.Load = function()
     weapon = Bow:New(hero.position.x, hero.position.y);
 
     arenaBounds = {};
-    arenaBounds[0] = CollisionController.NewCollider(0, 0, bg.size.x * bg.grid.x, 1, "wall");
-    arenaBounds[1] = CollisionController.NewCollider(0, bg.size.y, bg.size.x * bg.grid.x, 1, "wall");
-    arenaBounds[2] = CollisionController.NewCollider(0, 0, 1, bg.size.y * bg.grid.y, "wall");
-    arenaBounds[3] = CollisionController.NewCollider(bg.size.x, 0, 1, bg.size.y * bg.grid.y, "wall");
+    arenaBounds[0] = CollisionController.NewCollider(Vector.New(0, 0), Vector.New(bg.size.x * bg.grid.x, 1), "wall");
+    arenaBounds[1] = CollisionController.NewCollider(Vector.New(0, bg.size.y), Vector.New(bg.size.x * bg.grid.x, 1), "wall");
+    arenaBounds[2] = CollisionController.NewCollider(Vector.New(0, 0), Vector.New(1, bg.size.y * bg.grid.y), "wall");
+    arenaBounds[3] = CollisionController.NewCollider(Vector.New(bg.size.x, 0), Vector.New(1, bg.size.y * bg.grid.y), "wall");
 
     WavesController.InitWave(0);
 end
@@ -62,12 +62,12 @@ gameScene.Update = function(dt)
         if #buttons == 0 then
             for i = 0, 2 do
                 local upgrade = hero.upgrades[love.math.random(0, #hero.upgrades)];
-                buttons[i] = Button:New(screenWidth * 0.25 * (i+1), screenHeight * 0.5, 100, 50, upgrade.label, upgrade.onSelect);
+                buttons[i] = Button:New(screenWidth * 0.25 * (i + 1), screenHeight * 0.5, 110, 50, upgrade.label, upgrade.onSelect);
             end
         else
             gameScene.Checkbuttons();
         end
-    end
+    end 
 end
 
 gameScene.Draw = function()
@@ -181,12 +181,11 @@ gameScene.CleanLists = function()
 end
 
 -- BG functions
-gameScene.NewBGTile = function(img, pos)
+gameScene.NewBGTile = function(img, position, size)
     local tile = {};
     tile.img = img;
-    tile.position = pos;
-    tile.width = tile.img:getWidth();
-    tile.height = tile.img:getHeight();
+    tile.position = position;
+    tile.size = size;
 
     return tile;
 end
@@ -196,9 +195,10 @@ gameScene.GenerateBackground = function(imgPath, gridWidth, gridHeight)
     local imageWidth = image:getWidth();
     local imageHeight = image:getHeight();
     local bg = {};
+
         for i = 0, gridWidth * imageWidth - 1, imageWidth do
             for y = 0, gridHeight * imageHeight - 1, imageHeight do
-                local tile = gameScene.NewBGTile(image, Vector.New(i, y))
+                local tile = gameScene.NewBGTile(image, Vector.New(i, y), Vector.New(imageWidth, imageHeight))
                 table.insert(bg, tile);
             end
         end
@@ -212,9 +212,9 @@ gameScene.DrawBackground = function()
 end
 
 -- SpawnPoints
-gameScene.NewSpawnPoint = function(pos)
+gameScene.NewSpawnPoint = function(position)
     local spawnPoint = {};
-    spawnPoint.position = pos;
+    spawnPoint.position = position;
 
     return spawnPoint;
 end
@@ -224,7 +224,7 @@ gameScene.GenerateSpawnPoints = function(amountPerTile)
 
     for key, value in pairs(bg.tiles) do
         for i = 0, amountPerTile - 1 do
-            local sp = gameScene.NewSpawnPoint(Vector.New(love.math.random(value.position.x, value.width), love.math.random(value.position.y, value.height)));
+            local sp = gameScene.NewSpawnPoint(Vector.New(love.math.random(value.position.x, value.position.x + value.size.x), love.math.random(value.position.y, value.position.y + value.size.y)));
             table.insert(spawnPoints, sp);
         end
     end

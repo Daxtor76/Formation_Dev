@@ -17,19 +17,14 @@ function Sorceress:New(x, y)
 
     -- Inner
     tmpSorceress.position = Vector.New(x, y);
-    tmpSorceress.width = 48;
-    tmpSorceress.height = 48;
-    tmpSorceress.scaleX = 1.5;
-    tmpSorceress.scaleY = 1.5;
-    tmpSorceress.pivotX = tmpSorceress.width*0.5;
-    tmpSorceress.pivotY = tmpSorceress.height*0.5;
+    tmpSorceress.size = Vector.New(48, 48);
+    tmpSorceress.scale = Vector.New(1.5, 1.5);
+    tmpSorceress.pivot = Vector.New(tmpSorceress.size.x * 0.5, tmpSorceress.size.y * 0.5);
 
     -- Behaviour
     tmpSorceress.collider = CollisionController.NewCollider(
-        tmpSorceress.position.x - tmpSorceress.width * 0.5 + cameraOffset.x,
-        tmpSorceress.position.y - tmpSorceress.height * 0.5 + cameraOffset.y,
-        tmpSorceress.width * 0.75,
-        tmpSorceress.height,
+        tmpSorceress.position - Vector.New(tmpSorceress.pivot.x * tmpSorceress.scale.x, tmpSorceress.pivot.y * tmpSorceress.scale.y),
+        Vector.New(tmpSorceress.size.x * tmpSorceress.scale.x * 0.5, tmpSorceress.size.y * tmpSorceress.scale.y * 0.75),
         tmpSorceress
     );
 
@@ -64,8 +59,8 @@ function Sorceress:New(x, y)
     tmpSorceress.anims = tmpSorceress:PopulateAnims();
     tmpSorceress.renderLayer = 6;
 
-    tmpSorceress.chargeFX = SorceressChargeFX:New(tmpSorceress.position.x, tmpSorceress.position.y);
-    tmpSorceress.bloodFX = BloodFX:New(tmpSorceress.position.x, tmpSorceress.position.y);
+    tmpSorceress.chargeFX = SorceressChargeFX:New(tmpSorceress.position);
+    tmpSorceress.bloodFX = BloodFX:New(tmpSorceress.position);
 
     table.insert(entities, tmpSorceress);
 
@@ -131,9 +126,9 @@ function Sorceress:Draw()
     -- Life gauge
     if self.life > 0 then
         love.graphics.setColor(255, 0, 0, 1);
-        love.graphics.rectangle("fill", self.position.x - self.width * 0.7, self.position.y + self.height * 0.6, 60, 7);
+        love.graphics.rectangle("fill", self.position.x - self.size.x * 0.7, self.position.y + self.size.y * 0.6, 60, 7);
         love.graphics.setColor(0, 255, 0, 1);
-        love.graphics.rectangle("fill", self.position.x - self.width * 0.7, self.position.y + self.height * 0.6, 60 * (self.life / self.maxlife), 7);
+        love.graphics.rectangle("fill", self.position.x - self.size.x * 0.7, self.position.y + self.size.y * 0.6, 60 * (self.life / self.maxlife), 7);
         love.graphics.setColor(255, 255, 255, 1);
     end
 
@@ -147,30 +142,14 @@ function Sorceress:Draw()
         self.position.x, 
         self.position.y, 
         self.rotation, 
-        self.scaleX, 
-        self.scaleY, 
-        self.pivotX, 
-        self.pivotY
+        self.scale.x, 
+        self.scale.y, 
+        self.pivot.x, 
+        self.pivot.y
     );
     love.graphics.setColor(255, 255, 255, 1);
 
     if debugMode then self:DrawRange() end
-end
-
-function Sorceress:EnableBloodFX(position)
-    self.bloodFX.active = true;
-    self.bloodFX.position.x = position.x;
-    self.bloodFX.position.y = position.y - self.height;
-end
-
-function Sorceress:EnableChargeFX(position)
-    self.chargeFX.active = true;
-    self.chargeFX.position = position;
-end
-
-function Sorceress:DisableChargeFX()
-    self.chargeFX.active = false;
-    self.chargeFX:ResetAnim(self.chargeFX.anims[self.chargeFX.state][0]);
 end
 
 function Sorceress:Die(dt)
@@ -206,19 +185,19 @@ function Sorceress:PopulateAnims()
     anims[4] = dieAnims;
     anims[5] = attackAnims;
 
-    local idleLeftAnim = Anim:New(self.width, self.height, 0, 5, 50/self.speed, true);
-    local idleTopAnim = Anim:New(self.width, self.height, 6, 11, 50/self.speed, true);
-    local idleRightAnim = Anim:New(self.width, self.height, 12, 17, 50/self.speed, true);
-    local idleBottomAnim = Anim:New(self.width, self.height, 18, 23, 50/self.speed, true);
+    local idleLeftAnim = Anim:New(self.size.x, self.size.y, 0, 5, 50/self.speed, true);
+    local idleTopAnim = Anim:New(self.size.x, self.size.y, 6, 11, 50/self.speed, true);
+    local idleRightAnim = Anim:New(self.size.x, self.size.y, 12, 17, 50/self.speed, true);
+    local idleBottomAnim = Anim:New(self.size.x, self.size.y, 18, 23, 50/self.speed, true);
     anims[0][0] = idleLeftAnim;
     anims[0][1] = idleTopAnim;
     anims[0][2] = idleRightAnim;
     anims[0][3] = idleBottomAnim;
 
-    local runLeftAnim = Anim:New(self.width, self.height, 24, 29, 50/self.speed, true);
-    local runTopAnim = Anim:New(self.width, self.height, 30, 35, 50/self.speed, true);
-    local runRightAnim = Anim:New(self.width, self.height, 36, 41, 50/self.speed, true);
-    local runBottomAnim = Anim:New(self.width, self.height, 42, 47, 50/self.speed, true);
+    local runLeftAnim = Anim:New(self.size.x, self.size.y, 24, 29, 50/self.speed, true);
+    local runTopAnim = Anim:New(self.size.x, self.size.y, 30, 35, 50/self.speed, true);
+    local runRightAnim = Anim:New(self.size.x, self.size.y, 36, 41, 50/self.speed, true);
+    local runBottomAnim = Anim:New(self.size.x, self.size.y, 42, 47, 50/self.speed, true);
     anims[1][0] = runLeftAnim;
     anims[1][1] = runTopAnim;
     anims[1][2] = runRightAnim;
@@ -232,19 +211,19 @@ function Sorceress:PopulateAnims()
     anims[3][2] = runRightAnim;
     anims[3][3] = runBottomAnim;
 
-    local dieLeftAnim = Anim:New(self.width, self.height, 48, 55, self.dyingSpeed, false);
-    local dieTopAnim = Anim:New(self.width, self.height, 56, 63, self.dyingSpeed, false);
-    local dieRightAnim = Anim:New(self.width, self.height, 64, 71, self.dyingSpeed, false);
-    local dieBottomAnim = Anim:New(self.width, self.height, 72, 79, self.dyingSpeed, false);
+    local dieLeftAnim = Anim:New(self.size.x, self.size.y, 48, 55, self.dyingSpeed, false);
+    local dieTopAnim = Anim:New(self.size.x, self.size.y, 56, 63, self.dyingSpeed, false);
+    local dieRightAnim = Anim:New(self.size.x, self.size.y, 64, 71, self.dyingSpeed, false);
+    local dieBottomAnim = Anim:New(self.size.x, self.size.y, 72, 79, self.dyingSpeed, false);
     anims[4][0] = dieLeftAnim;
     anims[4][1] = dieTopAnim;
     anims[4][2] = dieRightAnim;
     anims[4][3] = dieBottomAnim;
 
-    local attackLeftAnim = Anim:New(self.width, self.height, 80, 83, self.attackSpeed, true);
-    local attackTopAnim = Anim:New(self.width, self.height, 84, 87, self.attackSpeed, true);
-    local attackRightAnim = Anim:New(self.width, self.height, 88, 91, self.attackSpeed, true);
-    local attackBottomAnim = Anim:New(self.width, self.height, 92, 95, self.attackSpeed, true);
+    local attackLeftAnim = Anim:New(self.size.x, self.size.y, 80, 83, self.attackSpeed, true);
+    local attackTopAnim = Anim:New(self.size.x, self.size.y, 84, 87, self.attackSpeed, true);
+    local attackRightAnim = Anim:New(self.size.x, self.size.y, 88, 91, self.attackSpeed, true);
+    local attackBottomAnim = Anim:New(self.size.x, self.size.y, 92, 95, self.attackSpeed, true);
     anims[5][0] = attackLeftAnim;
     anims[5][1] = attackTopAnim;
     anims[5][2] = attackRightAnim;

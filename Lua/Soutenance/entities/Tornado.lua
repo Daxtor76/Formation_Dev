@@ -12,20 +12,16 @@ function Tornado:New(x, y, damages, initialAngle)
 
     -- Inner
     tmpTornado.position = Vector.New(x, y);
-    tmpTornado.width = 32;
-    tmpTornado.height = 30;
-    tmpTornado.pivotX = tmpTornado.width * 0.5;
-    tmpTornado.pivotY = tmpTornado.height * 0.5;
+    tmpTornado.size = Vector.New(32, 30);
+    tmpTornado.pivot = Vector.New(tmpTornado.size.x * 0.5, tmpTornado.size.y * 0.5);
     tmpTornado.angle = initialAngle;
 
     -- Behaviour
     tmpTornado.range = 150;
     tmpTornado.speed = 100;
     tmpTornado.collider = CollisionController.NewCollider(
-        tmpTornado.position.x,
-        tmpTornado.position.y,
-        tmpTornado.width * tmpTornado.scaleX,
-        tmpTornado.height * tmpTornado.scaleY,
+        tmpTornado.position - Vector.New(tmpTornado.pivot.x * tmpTornado.scale.x, tmpTornado.pivot.y * tmpTornado.scale.y),
+        Vector.New(tmpTornado.size.x * tmpTornado.scale.x, tmpTornado.size.y * tmpTornado.scale.y),
         tmpTornado,
         tmpTornado.OnHit
     );
@@ -44,7 +40,7 @@ end
 Tornado.OnHit = function(collider, other)
     if other.parent.tag == "enemy" then
         other.parent:ApplyDamages(collider.parent.damages, other.parent);
-        other.parent:EnableBloodFX(other.parent.position);
+        other.parent:EnableBloodFX();
         StartScreenShake(0.2);
     end
 end
@@ -61,10 +57,10 @@ function Tornado:Draw()
         self.position.x,
         self.position.y,
         self.rotation,
-        self.scaleX,
-        self.scaleY,
-        self.pivotX,
-        self.pivotY
+        self.scale.x,
+        self.scale.y,
+        self.pivot.x,
+        self.pivot.y
     );
 end
 
@@ -73,7 +69,7 @@ function Tornado:PopulateAnims()
     local idleAnims = {};
     anims[0] = idleAnims;
 
-    local idleAnim = Anim:New(self.width, self.height, 0, 4, 50/self.speed, true);
+    local idleAnim = Anim:New(self.size.x, self.size.y, 0, 4, 50/self.speed, true);
     anims[0][0] = idleAnim;
 
     return anims;

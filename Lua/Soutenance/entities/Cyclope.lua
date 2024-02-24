@@ -15,17 +15,13 @@ function Cyclope:New(x, y)
 
     -- Inner
     tmpCyclope.position = Vector.New(x, y);
-    tmpCyclope.width = 25;
-    tmpCyclope.height = 26;
-    tmpCyclope.pivotX = tmpCyclope.width * 0.5;
-    tmpCyclope.pivotY = tmpCyclope.height * 0.5;
+    tmpCyclope.size = Vector.New(25, 26);
+    tmpCyclope.pivot = Vector.New(tmpCyclope.size.x * 0.5, tmpCyclope.size.y * 0.5);
 
     -- Behaviour
     tmpCyclope.collider = CollisionController.NewCollider(
-        tmpCyclope.position.x - tmpCyclope.width * 0.5 + cameraOffset.x,
-        tmpCyclope.position.y - tmpCyclope.height * 0.5 + cameraOffset.y,
-        tmpCyclope.width,
-        tmpCyclope.height,
+        tmpCyclope.position - Vector.New(tmpCyclope.pivot.x * tmpCyclope.scale.x, tmpCyclope.pivot.y * tmpCyclope.scale.y),
+        Vector.New(tmpCyclope.size.x * tmpCyclope.scale.x, tmpCyclope.size.y * tmpCyclope.scale.y),
         tmpCyclope
     );
 
@@ -59,7 +55,7 @@ function Cyclope:New(x, y)
     tmpCyclope.anims = tmpCyclope:PopulateAnims();
     tmpCyclope.renderLayer = 6;
 
-    tmpCyclope.bloodFX = BloodFX:New(tmpCyclope.position.x, tmpCyclope.position.y);
+    tmpCyclope.bloodFX = BloodFX:New(tmpCyclope.position);
 
     table.insert(entities, tmpCyclope);
 
@@ -117,9 +113,9 @@ function Cyclope:Draw()
     -- Life gauge
     if self.life > 0 then
         love.graphics.setColor(255, 0, 0, 1);
-        love.graphics.rectangle("fill", self.position.x - self.width - 5, self.position.y + self.height, 60, 7);
+        love.graphics.rectangle("fill", self.position.x - self.size.x - 5, self.position.y + self.size.y, 60, 7);
         love.graphics.setColor(0, 255, 0, 1);
-        love.graphics.rectangle("fill", self.position.x - self.width - 5, self.position.y + self.height, 60 * (self.life / self.maxlife), 7);
+        love.graphics.rectangle("fill", self.position.x - self.size.x - 5, self.position.y + self.size.y, 60 * (self.life / self.maxlife), 7);
         love.graphics.setColor(255, 255, 255, 1);
     end
 
@@ -133,20 +129,14 @@ function Cyclope:Draw()
         self.position.x, 
         self.position.y, 
         self.rotation, 
-        self.scaleX, 
-        self.scaleY, 
-        self.pivotX, 
-        self.pivotY
+        self.scale.x, 
+        self.scale.y, 
+        self.pivot.x, 
+        self.pivot.y
     );
     love.graphics.setColor(255, 255, 255, 1);
 
     if debugMode then self:DrawRange() end
-end
-
-function Cyclope:EnableBloodFX(position)
-    self.bloodFX.active = true;
-    self.bloodFX.position.x = position.x;
-    self.bloodFX.position.y = position.y - self.height;
 end
 
 function Cyclope:Die(dt)
@@ -182,10 +172,10 @@ function Cyclope:PopulateAnims()
     anims[4] = dieAnims;
     anims[5] = attackAnims;
 
-    local runLeftAnim = Anim:New(self.width, self.height, 0, 5, 50/self.speed, true);
-    local runTopAnim = Anim:New(self.width, self.height, 6, 11, 50/self.speed, true);
-    local runRightAnim = Anim:New(self.width, self.height, 12, 17, 50/self.speed, true);
-    local runBottomAnim = Anim:New(self.width, self.height, 18, 23, 50/self.speed, true);
+    local runLeftAnim = Anim:New(self.size.x, self.size.y, 0, 5, 50/self.speed, true);
+    local runTopAnim = Anim:New(self.size.x, self.size.y, 6, 11, 50/self.speed, true);
+    local runRightAnim = Anim:New(self.size.x, self.size.y, 12, 17, 50/self.speed, true);
+    local runBottomAnim = Anim:New(self.size.x, self.size.y, 18, 23, 50/self.speed, true);
     anims[0][0] = runLeftAnim;
     anims[0][1] = runTopAnim;
     anims[0][2] = runRightAnim;
@@ -203,19 +193,19 @@ function Cyclope:PopulateAnims()
     anims[3][2] = runRightAnim;
     anims[3][3] = runBottomAnim;
 
-    local dieLeftAnim = Anim:New(self.width, self.height, 24, 29, self.dyingSpeed, false);
-    local dieTopAnim = Anim:New(self.width, self.height, 30, 35, self.dyingSpeed, false);
-    local dieRightAnim = Anim:New(self.width, self.height, 36, 41, self.dyingSpeed, false);
-    local dieBottomAnim = Anim:New(self.width, self.height, 42, 47, self.dyingSpeed, false);
+    local dieLeftAnim = Anim:New(self.size.x, self.size.y, 24, 29, self.dyingSpeed, false);
+    local dieTopAnim = Anim:New(self.size.x, self.size.y, 30, 35, self.dyingSpeed, false);
+    local dieRightAnim = Anim:New(self.size.x, self.size.y, 36, 41, self.dyingSpeed, false);
+    local dieBottomAnim = Anim:New(self.size.x, self.size.y, 42, 47, self.dyingSpeed, false);
     anims[4][0] = dieLeftAnim;
     anims[4][1] = dieTopAnim;
     anims[4][2] = dieRightAnim;
     anims[4][3] = dieBottomAnim;
 
-    local attackLeftAnim = Anim:New(self.width, self.height, 48, 53, self.attackSpeed, true);
-    local attackTopAnim = Anim:New(self.width, self.height, 54, 59, self.attackSpeed, true);
-    local attackRightAnim = Anim:New(self.width, self.height, 60, 65, self.attackSpeed, true);
-    local attackBottomAnim = Anim:New(self.width, self.height, 66, 71, self.attackSpeed, true);
+    local attackLeftAnim = Anim:New(self.size.x, self.size.y, 48, 53, self.attackSpeed, true);
+    local attackTopAnim = Anim:New(self.size.x, self.size.y, 54, 59, self.attackSpeed, true);
+    local attackRightAnim = Anim:New(self.size.x, self.size.y, 60, 65, self.attackSpeed, true);
+    local attackBottomAnim = Anim:New(self.size.x, self.size.y, 66, 71, self.attackSpeed, true);
     anims[5][0] = attackLeftAnim;
     anims[5][1] = attackTopAnim;
     anims[5][2] = attackRightAnim;

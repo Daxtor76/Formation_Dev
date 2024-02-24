@@ -16,10 +16,8 @@ function Projectile:NewArrow(x, y, damages, upgraded)
 
     -- Inner
     tmpProjectile.position = Vector.New(x, y);
-    tmpProjectile.width = tmpProjectile.spritesheet:getWidth();
-    tmpProjectile.height = tmpProjectile.spritesheet:getHeight();
-    tmpProjectile.pivotX = tmpProjectile.width * 0.5;
-    tmpProjectile.pivotY = tmpProjectile.height * 0.5;
+    tmpProjectile.size = Vector.New(tmpProjectile.spritesheet:getWidth(), tmpProjectile.spritesheet:getHeight());
+    tmpProjectile.pivot = Vector.New(tmpProjectile.size.x * 0.5, tmpProjectile.size.y * 0.5);
 
     local delta = GetMousePos() - tmpProjectile.position + cameraOffset;
     tmpProjectile.rotation = Vector.GetAngle(delta) - math.pi*0.5;
@@ -28,10 +26,8 @@ function Projectile:NewArrow(x, y, damages, upgraded)
     -- Behaviour
     tmpProjectile.speed = 800;
     tmpProjectile.collider = CollisionController.NewCollider(
-        tmpProjectile.position.x + cameraOffset.x,
-        tmpProjectile.position.y - tmpProjectile.height * 0.5 + cameraOffset.y,
-        15,
-        15,
+        tmpProjectile.position - Vector.New(tmpProjectile.pivot.x * tmpProjectile.scale.x, tmpProjectile.pivot.y * tmpProjectile.scale.y),
+        Vector.New(tmpProjectile.size.x, tmpProjectile.size.y),
         tmpProjectile,
         Projectile.OnHit
     );
@@ -50,10 +46,8 @@ function Projectile:NewFireBall(x, y, damages, upgraded)
 
     -- Inner
     tmpProjectile.position = Vector.New(x, y);
-    tmpProjectile.width = 35;
-    tmpProjectile.height = 17;
-    tmpProjectile.pivotX = tmpProjectile.width * 0.5;
-    tmpProjectile.pivotY = tmpProjectile.height * 0.5;
+    tmpProjectile.size = Vector.New(35, 17);
+    tmpProjectile.pivot = Vector.New(tmpProjectile.size.x * 0.5, tmpProjectile.size.y * 0.5);
 
     local delta = hero.position - tmpProjectile.position;
     tmpProjectile.rotation = Vector.GetAngle(delta);
@@ -62,10 +56,8 @@ function Projectile:NewFireBall(x, y, damages, upgraded)
     -- Behaviour
     tmpProjectile.speed = 400;
     tmpProjectile.collider = CollisionController.NewCollider(
-        tmpProjectile.position.x,
-        tmpProjectile.position.y,
-        tmpProjectile.width,
-        tmpProjectile.height,
+        tmpProjectile.position - Vector.New(tmpProjectile.pivot.x * tmpProjectile.scale.x, tmpProjectile.pivot.y * tmpProjectile.scale.y),
+        Vector.New(tmpProjectile.size.x * tmpProjectile.scale.x * 0.5, tmpProjectile.size.y * tmpProjectile.scale.y),
         tmpProjectile,
         Projectile.OnHit
     );
@@ -95,7 +87,7 @@ Projectile.OnHit = function(collider, other)
             collider.parent.enabled = false;
         elseif other.parent.tag == "enemy" then
             other.parent:ApplyDamages(collider.parent.damages, other.parent);
-            other.parent:EnableBloodFX(other.parent.position);
+            other.parent:EnableBloodFX();
             StartScreenShake(0.2);
             if collider.parent.isUpgraded == false then
                 collider.enabled = false;
@@ -110,7 +102,7 @@ Projectile.OnHit = function(collider, other)
             collider.enabled = false;
             collider.parent.enabled = false;
             other.parent:ApplyDamages(collider.parent.damages, other.parent);
-            other.parent:EnableBloodFX(other.parent.position);
+            other.parent:EnableBloodFX();
             StartScreenShake(0.2);
         end
     end
@@ -131,10 +123,10 @@ function Projectile:Draw()
             self.position.x,
             self.position.y,
             self.rotation,
-            self.scaleX,
-            self.scaleY,
-            self.pivotX,
-            self.pivotY
+            self.scale.x,
+            self.scale.y,
+            self.pivot.x,
+            self.pivot.y
         );
     else
         love.graphics.draw(
@@ -142,10 +134,10 @@ function Projectile:Draw()
             self.position.x,
             self.position.y,
             self.rotation,
-            self.scaleX,
-            self.scaleY,
-            self.pivotX,
-            self.pivotY
+            self.scale.x,
+            self.scale.y,
+            self.pivot.x,
+            self.pivot.y
         );
     end
 end
@@ -155,7 +147,7 @@ function Projectile:PopulateAnims()
     local idleAnims = {};
     anims[0] = idleAnims;
 
-    local idleAnim = Anim:New(self.width, self.height, 0, 4, 200/self.speed, true);
+    local idleAnim = Anim:New(self.size.x, self.size.y, 0, 4, 200/self.speed, true);
     anims[0][0] = idleAnim;
 
     return anims;

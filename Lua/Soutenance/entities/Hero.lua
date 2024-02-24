@@ -14,17 +14,13 @@ function Hero:New(x, y)
 
     -- Inner
     tmpHero.position = Vector.New(x, y);
-    tmpHero.width = 24;
-    tmpHero.height = 24;
-    tmpHero.pivotX = tmpHero.width * 0.5;
-    tmpHero.pivotY = tmpHero.height * 0.5;
+    tmpHero.size = Vector.New(24, 24);
+    tmpHero.pivot = Vector.New(tmpHero.size.x * 0.5, tmpHero.size.y * 0.5);
 
     -- Behaviour
     tmpHero.collider = CollisionController.NewCollider(
-        tmpHero.position.x,
-        tmpHero.position.y,
-        tmpHero.width,
-        tmpHero.height * 1.5,
+        tmpHero.position - Vector.New(tmpHero.pivot.x * tmpHero.scale.x, tmpHero.pivot.y * tmpHero.scale.y),
+        Vector.New(tmpHero.size.x * tmpHero.scale.x, tmpHero.size.y * tmpHero.scale.y),
         tmpHero
     );
     tmpHero.states["idle"] = 0;
@@ -72,7 +68,7 @@ function Hero:New(x, y)
     tmpHero.anims = tmpHero:PopulateAnims();
     tmpHero.renderLayer = 8;
 
-    tmpHero.bloodFX = BloodFX:New(tmpHero.position.x, tmpHero.position.y);
+    tmpHero.bloodFX = BloodFX:New(tmpHero.position);
 
     table.insert(entities, tmpHero);
 
@@ -127,9 +123,9 @@ function Hero:Draw()
     -- Life gauge
     if self.life > 0 then
         love.graphics.setColor(255, 0, 0, 1);
-        love.graphics.rectangle("fill", self.position.x - self.width - 5, self.position.y + self.height + 10, 60, 7);
+        love.graphics.rectangle("fill", self.position.x - 30, self.position.y + self.size.y, 60, 7);
         love.graphics.setColor(0, 255, 0, 1);
-        love.graphics.rectangle("fill", self.position.x - self.width - 5, self.position.y + self.height + 10, 60 * (self.life / self.maxlife), 7);
+        love.graphics.rectangle("fill", self.position.x - 30, self.position.y + self.size.y, 60 * (self.life / self.maxlife), 7);
         love.graphics.setColor(255, 255, 255, 1);
     end
 
@@ -143,10 +139,10 @@ function Hero:Draw()
         self.position.x, 
         self.position.y, 
         self.rotation, 
-        self.scaleX, 
-        self.scaleY, 
-        self.pivotX, 
-        self.pivotY
+        self.scale.x, 
+        self.scale.y, 
+        self.pivot.x, 
+        self.pivot.y
     );
     love.graphics.setColor(255, 255, 255, 1);
 end
@@ -158,12 +154,6 @@ function Hero:DrawOnScreen()
         love.graphics.rectangle("fill", 0, 0, screenWidth * (self.xp / self.xpThresholds[tostring(self.level)]), 7);
         love.graphics.setColor(255, 255, 255, 1);
     end
-end
-
-function Hero:EnableBloodFX(position)
-    self.bloodFX.active = true;
-    self.bloodFX.position.x = position.x;
-    self.bloodFX.position.y = position.y - self.height;
 end
 
 function Hero:LevelUp()
@@ -222,8 +212,8 @@ function Hero:Move(dt)
     end
     self.direction = Vector.Normalize(directionV + directionH);
     self.position = Vector.New(
-        Clamp(self.position.x, 0 + self.width, bg.size.x - self.width), 
-        Clamp(self.position.y, 0 + self.height, bg.size.y - self.height)) + dt * self.direction * self.speed;
+        Clamp(self.position.x, 0 + self.size.x, bg.size.x - self.size.x), 
+        Clamp(self.position.y, 0 + self.size.y, bg.size.y - self.size.y)) + dt * self.direction * self.speed;
     self.collider.position = self.position - self.collider.size * 0.5;
 
     local delta = self.position - GetScreenCenterPosition();
@@ -288,19 +278,19 @@ function Hero:PopulateAnims()
     anims[3] = recoverAnims;
     anims[4] = dieAnims;
 
-    local idleBottomAnim = Anim:New(self.width, self.height, 0, 3, 50/self.speed, true);
-    local idleLeftAnim = Anim:New(self.width, self.height, 4, 7, 50/self.speed, true);
-    local idleRightAnim = Anim:New(self.width, self.height, 8, 11, 50/self.speed, true);
-    local idleTopAnim = Anim:New(self.width, self.height, 12, 15, 50/self.speed, true);
+    local idleBottomAnim = Anim:New(self.size.x, self.size.y, 0, 3, 50/self.speed, true);
+    local idleLeftAnim = Anim:New(self.size.x, self.size.y, 4, 7, 50/self.speed, true);
+    local idleRightAnim = Anim:New(self.size.x, self.size.y, 8, 11, 50/self.speed, true);
+    local idleTopAnim = Anim:New(self.size.x, self.size.y, 12, 15, 50/self.speed, true);
     anims[0][0] = idleLeftAnim;
     anims[0][1] = idleTopAnim;
     anims[0][2] = idleRightAnim;
     anims[0][3] = idleBottomAnim;
 
-    local runBottomAnim = Anim:New(self.width, self.height, 16, 21, 50/self.speed, true);
-    local runLeftAnim = Anim:New(self.width, self.height, 22, 27, 50/self.speed, true);
-    local runRightAnim = Anim:New(self.width, self.height, 28, 33, 50/self.speed, true);
-    local runTopAnim = Anim:New(self.width, self.height, 34, 39, 50/self.speed, true);
+    local runBottomAnim = Anim:New(self.size.x, self.size.y, 16, 21, 50/self.speed, true);
+    local runLeftAnim = Anim:New(self.size.x, self.size.y, 22, 27, 50/self.speed, true);
+    local runRightAnim = Anim:New(self.size.x, self.size.y, 28, 33, 50/self.speed, true);
+    local runTopAnim = Anim:New(self.size.x, self.size.y, 34, 39, 50/self.speed, true);
     anims[1][0] = runLeftAnim;
     anims[1][1] = runTopAnim;
     anims[1][2] = runRightAnim;
@@ -314,10 +304,10 @@ function Hero:PopulateAnims()
     anims[3][2] = idleRightAnim;
     anims[3][3] = idleBottomAnim;
 
-    local dieBottomAnim = Anim:New(self.width, self.height, 40, 42, self.dyingSpeed, false);
-    local dieLeftAnim = Anim:New(self.width, self.height, 40, 42, self.dyingSpeed, false);
-    local dieRightAnim = Anim:New(self.width, self.height, 40, 42, self.dyingSpeed, false);
-    local dieTopAnim = Anim:New(self.width, self.height, 40, 42, self.dyingSpeed, false);
+    local dieBottomAnim = Anim:New(self.size.x, self.size.y, 40, 42, self.dyingSpeed, false);
+    local dieLeftAnim = Anim:New(self.size.x, self.size.y, 40, 42, self.dyingSpeed, false);
+    local dieRightAnim = Anim:New(self.size.x, self.size.y, 40, 42, self.dyingSpeed, false);
+    local dieTopAnim = Anim:New(self.size.x, self.size.y, 40, 42, self.dyingSpeed, false);
     anims[4][0] = dieLeftAnim;
     anims[4][1] = dieTopAnim;
     anims[4][2] = dieRightAnim;

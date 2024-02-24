@@ -12,19 +12,13 @@ function LP:New(x, y)
 
     -- Inner
     tmpLP.position = Vector.New(x, y);
-    tmpLP.width = 16;
-    tmpLP.height = 16;
-    tmpLP.scaleX = 2;
-    tmpLP.scaleY = 2;
-    tmpLP.pivotX = tmpLP.width*0.5;
-    tmpLP.pivotY = tmpLP.height*0.5;
+    tmpLP.size = Vector.New(16, 16);
+    tmpLP.pivot = Vector.New(tmpLP.size.x * 0.5, tmpLP.size.y * 0.5);
 
     -- Behaviour
     tmpLP.collider = CollisionController.NewCollider(
-        tmpLP.position.x,
-        tmpLP.position.y,
-        tmpLP.width,
-        tmpLP.height,
+        tmpLP.position - Vector.New(tmpLP.pivot.x * tmpLP.scale.x, tmpLP.pivot.y * tmpLP.scale.y),
+        Vector.New(tmpLP.size.x * tmpLP.scale.x, tmpLP.size.y * tmpLP.scale.y),
         tmpLP,
         LP.OnHit
     );
@@ -33,7 +27,7 @@ function LP:New(x, y)
 
     tmpLP.state = 0;
     tmpLP.range = 150;
-    tmpLP.speed = 170;
+    tmpLP.speed = 250;
 
     -- Graph
     tmpLP.spritesheet = love.graphics.newImage("images/collectibles/lifePotion_Spritesheet.png");
@@ -61,10 +55,10 @@ function LP:Draw()
         self.position.x, 
         self.position.y, 
         self.rotation, 
-        self.scaleX, 
-        self.scaleY, 
-        self.pivotX, 
-        self.pivotY
+        self.scale.x, 
+        self.scale.y, 
+        self.pivot.x, 
+        self.pivot.y
     );
 
     if debugMode then self:DrawRange() end
@@ -83,7 +77,7 @@ function LP:PopulateAnims()
     local idleAnims = {};
     anims[0] = idleAnims;
 
-    local idleAnim = Anim:New(self.width, self.height, 0, 7, 50/self.speed, true);
+    local idleAnim = Anim:New(self.size.x, self.size.y, 0, 7, 50/self.speed, true);
     anims[0][0] = idleAnim;
 
     return anims;

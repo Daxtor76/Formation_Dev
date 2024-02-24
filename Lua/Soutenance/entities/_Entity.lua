@@ -6,14 +6,11 @@ function _Entity:New(name, tag)
 
     -- Inner
     tmpEntity.name = name;
-    tmpEntity.position = Vector.New(x, y);
-    tmpEntity.width = 25;
-    tmpEntity.height = 26;
+    tmpEntity.position = Vector.New(0, 0);
+    tmpEntity.size = Vector.New(0, 0);
     tmpEntity.rotation = 0;
-    tmpEntity.pivotX = tmpEntity.width * 0.5;
-    tmpEntity.pivotY = tmpEntity.height * 0.5;
-    tmpEntity.scaleX = 2;
-    tmpEntity.scaleY = 2;
+    tmpEntity.pivot = Vector.New(tmpEntity.size.x * 0.5, tmpEntity.size.y * 0.5);
+    tmpEntity.scale = Vector.New(2, 2);
     tmpEntity.enabled = true;
     tmpEntity.tag = tag;
     tmpEntity.direction = nil;
@@ -64,6 +61,9 @@ function _Entity:New(name, tag)
     tmpEntity.renderLayer = 0;
     tmpEntity.active = true;
 
+    tmpEntity.bloodFX = nil;
+    tmpEntity.chargeFX = nil;
+
     return tmpEntity;
 end
 
@@ -74,6 +74,21 @@ function _Entity:Update()
 end
 
 function _Entity:Draw()
+end
+
+function _Entity:EnableBloodFX()
+    self.bloodFX.active = true;
+    self.bloodFX.position = self.position;
+end
+
+function _Entity:EnableChargeFX()
+    self.chargeFX.active = true;
+    self.chargeFX.position = self.position;
+end
+
+function _Entity:DisableChargeFX()
+    self.chargeFX.active = false;
+    self.chargeFX:ResetAnim(self.chargeFX.anims[self.chargeFX.state][0]);
 end
 
 function _Entity:DrawRange()
@@ -168,7 +183,7 @@ function _Entity:IsWaiting(dt, duration)
 end
 
 function _Entity:GetCurrentQuadToDisplay(animation)
-    return love.graphics.newQuad((animation.width * animation.from) + (animation.width * self.frame), 0, animation.width, animation.height, self.spritesheet);
+    return love.graphics.newQuad((animation.size.x * animation.frames.x) + (animation.size.x * self.frame), 0, animation.size.x, animation.size.y, self.spritesheet);
 end
 
 function _Entity:ResetAnim(animation)
@@ -233,31 +248,12 @@ end
 function _Entity:MoveAroundTarget(dt, targetPosition, range)
     self.angle = (self.angle + dt * self.speed)%360;
     local direction = Vector.New(math.cos(math.rad(self.angle)), math.sin(math.rad(self.angle)));
-    self.position = hero.position + direction * range;
+    self.position = targetPosition + direction * range;
     self.collider.position = self.position - self.collider.size * 0.5;
 end
 
-function _Entity:IsCollidingOnWalls()
-    local downFacePosY = self.posY + self.height;
-    local upperFacePosY = self.posY;
-    local leftFacePosX = self.posX - self.width;
-    local rightFacePosX = self.posX + self.width;
-
-    if leftFacePosX < 100 then
-        return 1;
-    elseif upperFacePosY < 100 then
-        return 2;
-    elseif rightFacePosX > love.graphics.getWidth() - 100 then
-        return 3;
-    elseif downFacePosY > love.graphics.getHeight() - 100 then
-        return 4;
-    else
-        return 0;
-    end
-end
-
-function _Entity:Replace(newPosX, newPosY)
-    self.position = Vector.New(newPosX, newPosY);
+function _Entity:Replace(newPos)
+    self.position = newPos;
 end
 
 return _Entity;

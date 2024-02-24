@@ -4,19 +4,16 @@ local Anim = require("animation/Anim");
 local SorceressCharge = {};
 setmetatable(SorceressCharge, {__index = _Entity});
 
-function SorceressCharge:New(x, y)
+function SorceressCharge:New(position)
     local tmpSorceressCharge = _Entity:New("SorceressCharge", "");
     --print("Création d'une instance de "..tmpSorceressCharge.name);
     setmetatable(tmpSorceressCharge, {__index = SorceressCharge});
 
     -- Inner
-    tmpSorceressCharge.position = Vector.New(x, y);
-    tmpSorceressCharge.width = 64;
-    tmpSorceressCharge.height = 42;
-    tmpSorceressCharge.scaleX = 1;
-    tmpSorceressCharge.scaleY = 1;
-    tmpSorceressCharge.pivotX = tmpSorceressCharge.width*0.5;
-    tmpSorceressCharge.pivotY = tmpSorceressCharge.height*0.5;
+    tmpSorceressCharge.position = position;
+    tmpSorceressCharge.size = Vector.New(64, 42);
+    tmpSorceressCharge.scale = Vector.New(1, 1);
+    tmpSorceressCharge.pivot = Vector.New(tmpSorceressCharge.size.x * 0.5, tmpSorceressCharge.size.y * 0.5);
 
     tmpSorceressCharge.states["idle"] = 0;
 
@@ -43,12 +40,12 @@ function SorceressCharge:Draw()
         self.spritesheet,
         self:GetCurrentQuadToDisplay(self.anims[self.state][0]),
         self.position.x, 
-        self.position.y + self.height * 0.5,
+        self.position.y + self.size.y * 0.5,
         self.rotation, 
-        self.scaleX, 
-        self.scaleY, 
-        self.pivotX, 
-        self.pivotY
+        self.scale.x, 
+        self.scale.y, 
+        self.pivot.x, 
+        self.pivot.y
     );
 end
 
@@ -57,7 +54,7 @@ function SorceressCharge:PopulateAnims()
     local idleAnims = {};
     anims[0] = idleAnims;
 
-    local idleAnim = Anim:New(self.width, self.height, 0, 8, 1, true);
+    local idleAnim = Anim:New(self.size.x, self.size.y, 0, 8, 1, true);
     anims[0][0] = idleAnim;
 
     return anims;

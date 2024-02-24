@@ -4,19 +4,16 @@ local Anim = require("animation/Anim");
 local Blood = {};
 setmetatable(Blood, {__index = _Entity});
 
-function Blood:New(x, y)
+function Blood:New(position)
     local tmpBlood = _Entity:New("Blood", "");
     --print("Création d'une instance de "..tmpBlood.name);
     setmetatable(tmpBlood, {__index = Blood});
 
     -- Inner
-    tmpBlood.position = Vector.New(x, y);
-    tmpBlood.width = 100;
-    tmpBlood.height = 100;
-    tmpBlood.scaleX = 1;
-    tmpBlood.scaleY = 1;
-    tmpBlood.pivotX = tmpBlood.width*0.5;
-    tmpBlood.pivotY = 0;
+    tmpBlood.position = position;
+    tmpBlood.size = Vector.New(100, 100);
+    tmpBlood.scale = Vector.New(1, 1);
+    tmpBlood.pivot = Vector.New(tmpBlood.size.x * 0.5, tmpBlood.size.y * 0.5);
 
     tmpBlood.states["idle"] = 0;
 
@@ -48,10 +45,10 @@ function Blood:Draw()
         self.position.x, 
         self.position.y, 
         self.rotation, 
-        self.scaleX, 
-        self.scaleY, 
-        self.pivotX,
-        self.pivotY
+        self.scale.x, 
+        self.scale.y, 
+        self.pivot.x,
+        self.pivot.y
     );
 end
 
@@ -66,7 +63,7 @@ function Blood:PopulateAnims()
     local idleAnims = {};
     anims[0] = idleAnims;
 
-    local idleAnim = Anim:New(self.width, self.height, 0, 17, 0.2, false);
+    local idleAnim = Anim:New(self.size.x, self.size.y, 0, 17, 0.2, false);
     anims[0][0] = idleAnim;
 
     return anims;
