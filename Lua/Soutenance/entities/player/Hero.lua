@@ -39,7 +39,7 @@ function Hero:New(x, y)
     
     tmpHero.scrollDist = 150;
 
-    tmpHero.maxlife = 3;
+    tmpHero.maxlife = 5;
     tmpHero.life = tmpHero.maxlife;
 
     tmpHero.recoverTimer = 0.5;
@@ -52,10 +52,10 @@ function Hero:New(x, y)
     tmpHero.xp = 0;
 
     tmpHero.xpThresholds = {};
-    tmpHero.xpThresholds[1] = 9;
-    tmpHero.xpThresholds[2] = 27;
-    tmpHero.xpThresholds[3] = 60;
-    tmpHero.xpThresholds[4] = 60;
+    tmpHero.xpThresholds[1] = 12;
+    tmpHero.xpThresholds[2] = 21;
+    tmpHero.xpThresholds[3] = 28;
+    tmpHero.xpThresholds[4] = 36;
     tmpHero.xpThresholds[5] = 60;
 
     tmpHero.upgrades = {};

@@ -48,11 +48,15 @@
     - Créer une liste de controllers -> ok
     - Donner un update aux controllers -> ok
     - Gamescene joue l'update des controllers -> ok
-- Add comments
+- Refacto scene controller ? -> overkill
+- Add UIController ? -> overkill
+    - Created at main
+    - Checks current scene and create/draw UI
 - LD & balancing
-    - Enemies win life every Waves
-    - Enemies win damages every Waves
-    - Enemies win speed every Waves
-    - Make many levels
-    - Make many Waves
+    - Enemies win life every Waves -> ok
+    - Enemies win damages every Waves -> ok
+    - Enemies win speed every Waves -> ok
+    - Make many levels -> ok
+    - Make many Waves -> ok
+- Add comments
 - Add biggest combo (max enemies killed in one arrow)

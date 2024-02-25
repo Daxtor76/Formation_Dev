@@ -38,7 +38,7 @@ function WavesController:InitWave(waveId)
     print("new wave");
     self.currentWave = self.waves[waveId];
     self.timer = self.currentWave.duration;
-    self.currentWave:SpawnEnemies(self.currentWave.enemiesAmount)
+    self.currentWave:SpawnEnemies(self.currentWave.enemiesAmount, self.waveCounter)
 end
 
 function WavesController:ResetWaves()
@@ -51,12 +51,13 @@ end
 function WavesController:PopulateWaves()
     local waves = {};
 
-    waves[1] = Wave:NewWave(20, 20, 3);
-    waves[2] = Wave:NewWave(15, 45, 3);
-    waves[3] = Wave:NewWave(8, 40, 5);
-    waves[4] = Wave:NewWave(7, 42, 6);
-    waves[5] = Wave:NewWave(7, 42, 7);
-    waves[6] = Wave:NewWave(7, 42, 8);
+    -- frequency, duration, cyclopes, sorceress, mobsAmount, speedMult, attackSpeedMult, damagesMult, lifeMult
+    waves[1] = Wave:NewWave(16, 15, true, false, 3, 1, 1, 1, 1);
+    waves[2] = Wave:NewWave(16, 15, false, true, 3, 1, 1, 1, 1);
+    waves[3] = Wave:NewWave(12, 36, true, true, 4, 1.1, 1.1, 1, 1.5);
+    waves[4] = Wave:NewWave(12, 36, true, true, 5, 1.2, 1.2, 1, 1.5);
+    waves[5] = Wave:NewWave(9, 27, true, true, 5, 1.5, 1.5, 1.5, 1.5);
+    waves[6] = Wave:NewWave(9, 27, true, true, 6, 1.5, 1.5, 1.5, 2);
 
     return waves
 end

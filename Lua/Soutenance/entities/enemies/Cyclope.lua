@@ -8,7 +8,7 @@ local Anim = require("constructors/Anim");
 local Cyclope = {};
 setmetatable(Cyclope, {__index = _Entity});
 
-function Cyclope:New(x, y)
+function Cyclope:New(x, y, speed, attackSpeed, damages, life)
     local tmpCyclope = _Entity:New("Cyclope", "enemy");
     --print("Création d'une instance de "..tmpCyclope.name);
     setmetatable(tmpCyclope, {__index = Cyclope});
@@ -35,14 +35,14 @@ function Cyclope:New(x, y)
 
     tmpCyclope.state = 1;
     tmpCyclope.range = 100;
-    tmpCyclope.speed = 80;
+    tmpCyclope.speed = speed; --80
 
-    tmpCyclope.attackSpeed = 1.2;
+    tmpCyclope.attackSpeed = attackSpeed; --1.2
     tmpCyclope.currentAttackTimer = tmpCyclope.attackSpeed;
 
-    tmpCyclope.damages = 1;
+    tmpCyclope.damages = damages; --1
 
-    tmpCyclope.maxlife = 3;
+    tmpCyclope.maxlife = life; --3
     tmpCyclope.life = tmpCyclope.maxlife;
 
     tmpCyclope.recoverTimer = 0.5;

@@ -10,7 +10,7 @@ local Anim = require("constructors/Anim");
 local Sorceress = {};
 setmetatable(Sorceress, {__index = _Entity});
 
-function Sorceress:New(x, y)
+function Sorceress:New(x, y, speed, attackSpeed, damages, life)
     local tmpSorceress = _Entity:New("Sorceress", "enemy");
     --print("Création d'une instance de "..tmpSorceress.name);
     setmetatable(tmpSorceress, {__index = Sorceress});
@@ -38,15 +38,15 @@ function Sorceress:New(x, y)
 
     tmpSorceress.state = 1;
     tmpSorceress.range = 350;
-    tmpSorceress.speed = 75;
+    tmpSorceress.speed = speed; --75
 
-    tmpSorceress.attackSpeed = 2.3;
+    tmpSorceress.attackSpeed = attackSpeed; --2.3
     tmpSorceress.isCasting = false;
     tmpSorceress.currentAttackTimer = tmpSorceress.attackSpeed;
 
-    tmpSorceress.damages = 2;
+    tmpSorceress.damages = damages; --2
 
-    tmpSorceress.maxlife = 3;
+    tmpSorceress.maxlife = life; --3
     tmpSorceress.life = tmpSorceress.maxlife;
 
     tmpSorceress.recoverTimer = 0.5;

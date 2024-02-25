@@ -10,8 +10,8 @@ require("utils/Vector");
 require("utils/Utils");
 
 SceneController = require("controllers/SceneController");
-Button = require("UI/Button");
-Text = require("UI/Text");
+Button = require("constructors/UI/Button");
+Text = require("constructors/UI/Text");
 
 require("scenes/MenuScene");
 require("scenes/GameScene");
