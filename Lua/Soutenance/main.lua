@@ -9,9 +9,10 @@ io.stdout:setvbuf("no")
 require("utils/Vector");
 require("utils/Utils");
 
-SceneController = require("scenes/SceneController");
+SceneController = require("controllers/SceneController");
 Button = require("UI/Button");
 Text = require("UI/Text");
+
 require("scenes/MenuScene");
 require("scenes/GameScene");
 require("scenes/GameOverScene");
