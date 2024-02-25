@@ -124,9 +124,9 @@ function Hero:Draw()
     -- Life gauge
     if self.life > 0 then
         love.graphics.setColor(255, 0, 0, 1);
-        love.graphics.rectangle("fill", self.position.x - 30, self.position.y + self.size.y, 60, 7);
+        love.graphics.rectangle("fill", self.position.x - 30, self.position.y + self.size.y + 17, 60, 7);
         love.graphics.setColor(0, 255, 0, 1);
-        love.graphics.rectangle("fill", self.position.x - 30, self.position.y + self.size.y, 60 * (self.life / self.maxlife), 7);
+        love.graphics.rectangle("fill", self.position.x - 30, self.position.y + self.size.y + 17, 60 * (self.life / self.maxlife), 7);
         love.graphics.setColor(255, 255, 255, 1);
     end
 
