@@ -4,26 +4,24 @@ local BGTile = require("constructors/BGTile");
 local Arena = {};
 
 function Arena:New(imgPath, gridWidth, gridHeight)
-    local arena = {};
-    setmetatable(arena, {__index = Arena});
+    local arena = Arena;
 
+    arena.image = love.graphics.newImage(imgPath);
+    arena.imageSize = Vector.New(arena.image:getWidth(), arena.image:getHeight());
     arena.grid = Vector.New(gridWidth, gridHeight);
-    arena.tiles = Arena:GenerateTiles(imgPath, gridWidth, gridHeight);
-    arena.size = Vector.New(gridWidth * arena.tiles[1].img:getWidth(), gridHeight * arena.tiles[1].img:getHeight());
-    arena.spawnPoints = Arena:GenerateSpawnPoints(arena.tiles, 6);
+    arena.tiles = arena:GenerateTiles();
+    arena.size = Vector.New(arena.grid.x * arena.imageSize.x, arena.grid.y * arena.imageSize.y);
+    arena.spawnPoints = arena:GenerateSpawnPoints(6);
     
     return arena;
 end
 
-function Arena:GenerateTiles(imgPath, gridWidth, gridHeight)
+function Arena:GenerateTiles()
     local tiles = {};
-    local image = love.graphics.newImage(imgPath);
-    local imageWidth = image:getWidth();
-    local imageHeight = image:getHeight();
 
-    for i = 0, gridWidth * imageWidth - 1, imageWidth do
-        for y = 0, gridHeight * imageHeight - 1, imageHeight do
-            local tile = BGTile:New(image, Vector.New(i + imageWidth * 0.5, y + imageHeight * 0.5), Vector.New(imageWidth, imageHeight), Vector.New(imageWidth * 0.5, imageHeight * 0.5));
+    for i = 0, self.grid.x * self.imageSize.x - 1, self.imageSize.x do
+        for y = 0, self.grid.y * self.imageSize.y - 1, self.imageSize.y do
+            local tile = BGTile:New(self.image, Vector.New(i + self.imageSize.x * 0.5, y + self.imageSize.y * 0.5), Vector.New(self.imageSize.x, self.imageSize.y), Vector.New(self.imageSize.x * 0.5, self.imageSize.y * 0.5));
             table.insert(tiles, tile);
         end
     end
@@ -31,10 +29,10 @@ function Arena:GenerateTiles(imgPath, gridWidth, gridHeight)
     return tiles;
 end
 
-function Arena:GenerateSpawnPoints(tiles, amountPerTile)
+function Arena:GenerateSpawnPoints(amountPerTile)
     local spawnPoints = {};
 
-    for __, value in ipairs(tiles) do
+    for __, value in ipairs(self.tiles) do
         for i = 0, amountPerTile - 1 do
             local sp = SpawnPoint:New(Vector.New(value.position.x + love.math.random(-value.size.x * 0.5, value.size.x * 0.5), value.position.y + love.math.random(-value.size.y * 0.5, value.size.y * 0.5)));
             table.insert(spawnPoints, sp);

@@ -1,88 +1,61 @@
-local Cyclope = require("entities/enemies/Cyclope");
-local Sorceress = require("entities/enemies/Sorceress");
+local Wave = require("constructors/Wave");
 
-local wavesController = {};
-wavesController.waves = {};
-wavesController.waveCounter = 0;
-wavesController.currentWave = wavesController.waves[1];
-wavesController.timer = 0;
-wavesController.isOver = false;
+local WavesController = {};
 
-wavesController.ResetWaves = function()
-    wavesController.waveCounter = 0;
-    wavesController.currentWave = wavesController.waves[1];
+function WavesController:New()
+    local wavesController = WavesController;
+
+    wavesController.waves = wavesController:PopulateWaves();
+    wavesController.waveCounter = 1;
+    wavesController.currentWave = nil;
     wavesController.timer = 0;
     wavesController.isOver = false;
+
+    wavesController:InitWave(1);
+
+    return wavesController;
 end
 
-wavesController.NewWave = function(frequency, duration, enemiesAmount)
-    local wave = {};
-    wave.frequency = frequency;
-    wave.duration = duration;
-    wave.timer = wave.frequency;
-
-    wave.InitSubWave = function()
-        print("new sub wave")
-        wave.timer = wave.frequency;
-        local subwave = wavesController.NewSubWave(enemiesAmount);
-        subwave.SpawnEnemies();
-    end
-
-    wave.UpdateSubWave = function(dt)
-        wave.timer = wave.timer - dt;
-        if wave.timer <= 0 then
-            wave.InitSubWave();
-        end
-    end
-
-    return wave;
-end
-
-wavesController.InitWave = function(waveId)
-    print("new wave")
-    wavesController.currentWave = wavesController.waves[waveId];
-    wavesController.timer = wavesController.currentWave.duration;
-    wavesController.currentWave.InitSubWave(waveId);
-end
-
-wavesController.UpdateWave = function(dt)
-    if wavesController.isOver == false then
-        wavesController.timer = wavesController.timer - dt;
-        if wavesController.timer <= 0 then
-            wavesController.waveCounter = wavesController.waveCounter + 1;
-            if wavesController.waves[wavesController.waveCounter] ~= nil then
-                wavesController.InitWave(wavesController.waveCounter);
+function WavesController:UpdateWave(dt)
+    if self.isOver == false then
+        self.timer = self.timer - dt;
+        if self.timer <= 0 then
+            self.waveCounter = self.waveCounter + 1;
+            if self.waves[self.waveCounter] ~= nil then
+                self:InitWave(self.waveCounter);
             else
-                wavesController.isOver = true;
+                self.isOver = true;
             end
         end
-        wavesController.currentWave.UpdateSubWave(dt); 
+        self.currentWave:UpdateSubWave(dt);
     end
 end
 
-wavesController.NewSubWave = function(enemiesAmount)
-    local subWave = {};
-    subWave.SpawnEnemies = function()
-        for i = 0, enemiesAmount - 1 do
-            local randEnemyType = love.math.random(0, 1);
-            local randSpawnPoint = love.math.random(1, #arena.spawnPoints);
-            enemiesCount = enemiesCount + 1;
-            if randEnemyType == 0 then
-                Cyclope:New(arena.spawnPoints[randSpawnPoint].position.x, arena.spawnPoints[randSpawnPoint].position.y);
-            else
-                Sorceress:New(arena.spawnPoints[randSpawnPoint].position.x, arena.spawnPoints[randSpawnPoint].position.y);
-            end
-        end
-    end
-
-    return subWave;
+function WavesController:InitWave(waveId)
+    print("new wave");
+    self.currentWave = self.waves[waveId];
+    self.timer = self.currentWave.duration;
+    self.currentWave:SpawnEnemies(self.currentWave.enemiesAmount)
 end
 
-wavesController.waves[1] = wavesController.NewWave(20, 20, 3);
-wavesController.waves[2] = wavesController.NewWave(15, 45, 3);
-wavesController.waves[3] = wavesController.NewWave(8, 40, 5);
-wavesController.waves[4] = wavesController.NewWave(7, 42, 6);
-wavesController.waves[5] = wavesController.NewWave(7, 42, 7);
-wavesController.waves[6] = wavesController.NewWave(7, 42, 8);
+function WavesController:ResetWaves()
+    self.waveCounter = 1;
+    self.currentWave = nil;
+    self.timer = 0;
+    self.isOver = false;
+end
 
-return wavesController;
+function WavesController:PopulateWaves()
+    local waves = {};
+
+    waves[1] = Wave:NewWave(20, 20, 3);
+    waves[2] = Wave:NewWave(15, 45, 3);
+    waves[3] = Wave:NewWave(8, 40, 5);
+    waves[4] = Wave:NewWave(7, 42, 6);
+    waves[5] = Wave:NewWave(7, 42, 7);
+    waves[6] = Wave:NewWave(7, 42, 8);
+
+    return waves
+end
+
+return WavesController;

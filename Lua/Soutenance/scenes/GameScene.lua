@@ -20,6 +20,7 @@ gameScene.Load = function()
     entities = {};
 
     arena = ArenaController:New("images/background/TX Tileset Grass.png", 5, 5);
+    wavesController = WavesController:New();
 
     cameraOffset = Vector.New(arena.size.x * 0.5 - screenWidth * 0.5, arena.size.y * 0.5 - screenHeight * 0.5);
     shake = Vector.New(0, 0);
@@ -32,8 +33,6 @@ gameScene.Load = function()
     arenaBounds[2] = CollisionController.NewCollider(Vector.New(0, arena.size.y), Vector.New(arena.size.x * arena.grid.x, 1), "wall");
     arenaBounds[3] = CollisionController.NewCollider(Vector.New(0, 0), Vector.New(1, arena.size.y * arena.grid.y), "wall");
     arenaBounds[4] = CollisionController.NewCollider(Vector.New(arena.size.x, 0), Vector.New(1, arena.size.y * arena.grid.y), "wall");
-
-    WavesController.InitWave(1);
 end
 
 gameScene.Update = function(dt)
@@ -47,7 +46,7 @@ gameScene.Update = function(dt)
         end
     
         if gameScene.CheckVictory() == false and gameScene.CheckDefeat() == false then
-            WavesController.UpdateWave(dt);
+            wavesController:UpdateWave(dt);
             CollisionController.CheckCollisions();
             gameScene.UpdateGameTime(dt);
             gameScene.UpdateScreenShakeTimer(dt);
@@ -124,6 +123,7 @@ gameScene.Unload = function()
     cameraOffset = nil;
     arenaBounds = nil;
     enemiesCount = nil;
+    wavesController = nil;
 
     for __, value in ipairs(entities) do
         if value.collider ~= nil then
@@ -133,7 +133,6 @@ gameScene.Unload = function()
     end
     gameScene.CleanLists();
     entities = nil;
-    WavesController.ResetWaves();
 end
 
 gameScene.Checkbuttons = function()
