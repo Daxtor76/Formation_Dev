@@ -65,6 +65,10 @@ function Bow:Update(dt)
             if self.canShoot then
                 self:EnableChargeReadyFX(dt);
             end
+        elseif self.state == 2 then
+            if self:IsWaiting(dt, 0.2) then
+                self:ChangeState("reload");
+            end
         elseif self.state == 3 then
             self.canReload = self:CanReload(dt);
             if self.canReload then

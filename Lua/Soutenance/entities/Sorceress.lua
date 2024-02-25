@@ -170,7 +170,7 @@ function Sorceress:Die(dt)
             LP:New(self.position.x, self.position.y);
         end
         for i = 0, self.xpDropped - 1 do
-            XP:New(self.position.x + love.math.random(40, 100), self.position.y + love.math.random(40, 100));
+            XP:New(self.position.x + love.math.random(-60, 60), self.position.y + love.math.random(-60, 60));
         end
     end
 end
