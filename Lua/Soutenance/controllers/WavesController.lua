@@ -65,12 +65,12 @@ wavesController.NewSubWave = function(enemiesAmount)
     subWave.SpawnEnemies = function()
         for i = 0, enemiesAmount - 1 do
             local randEnemyType = love.math.random(0, 1);
-            local randSpawnPoint = love.math.random(1, #bg.spawnPoints);
+            local randSpawnPoint = love.math.random(1, #arena.spawnPoints);
             enemiesCount = enemiesCount + 1;
             if randEnemyType == 0 then
-                Cyclope:New(bg.spawnPoints[randSpawnPoint].position.x, bg.spawnPoints[randSpawnPoint].position.y);
+                Cyclope:New(arena.spawnPoints[randSpawnPoint].position.x, arena.spawnPoints[randSpawnPoint].position.y);
             else
-                Sorceress:New(bg.spawnPoints[randSpawnPoint].position.x, bg.spawnPoints[randSpawnPoint].position.y);
+                Sorceress:New(arena.spawnPoints[randSpawnPoint].position.x, arena.spawnPoints[randSpawnPoint].position.y);
             end
         end
     end

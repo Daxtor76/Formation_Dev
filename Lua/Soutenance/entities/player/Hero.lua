@@ -213,8 +213,8 @@ function Hero:Move(dt)
     end
     self.direction = Vector.Normalize(directionV + directionH);
     self.position = Vector.New(
-        Clamp(self.position.x, 0 + self.size.x, bg.size.x - self.size.x), 
-        Clamp(self.position.y, 0 + self.size.y, bg.size.y - self.size.y)) + dt * self.direction * self.speed;
+        Clamp(self.position.x, 0 + self.size.x, arena.size.x - self.size.x), 
+        Clamp(self.position.y, 0 + self.size.y, arena.size.y - self.size.y)) + dt * self.direction * self.speed;
     self.collider.position = self.position - self.collider.size * 0.5;
 
     local delta = self.position - GetScreenCenterPosition();
@@ -235,13 +235,13 @@ function Hero:MoveCamera(dt, cameraToHeroVec, radius)
     if CheckCameraCollision() == "left" then
         cameraOffset.x = 0;
     elseif CheckCameraCollision() == "right" then
-        cameraOffset.x = bg.size.x - screenWidth;
+        cameraOffset.x = arena.size.x - screenWidth;
     end
 
     if CheckCameraCollision() == "top" then
         cameraOffset.y = 0;
     elseif CheckCameraCollision() == "bottom" then
-        cameraOffset.y = bg.size.y - screenHeight;
+        cameraOffset.y = arena.size.y - screenHeight;
     end
 end
 
@@ -253,13 +253,13 @@ function CheckCameraCollision()
 
     if leftPoint < 0 then
         return "left";
-    elseif rightPoint > bg.size.x then
+    elseif rightPoint > arena.size.x then
         return "right";
     end
     
     if topPoint < 0 then
         return "top";
-    elseif bottomPoint > bg.size.y then
+    elseif bottomPoint > arena.size.y then
         return "bottom";
     end
 

@@ -1,6 +1,7 @@
 local gameScene = SceneController.NewScene("Game");
 local CollisionController = require("controllers/CollisionController");
 local WavesController = require("controllers/WavesController");
+local ArenaController = require("controllers/ArenaController");
 
 local Hero = require("entities/player/Hero");
 local Bow = require("entities/player/Bow");
@@ -18,23 +19,19 @@ gameScene.Load = function()
     
     entities = {};
 
-    bg = {};
-    bg.grid = Vector.New(5, 5);
-    bg.tiles = gameScene.GenerateBackground("images/background/TX Tileset Grass.png", bg.grid.x, bg.grid.y);
-    bg.size = Vector.New(bg.grid.x * bg.tiles[1].img:getWidth(), bg.grid.y * bg.tiles[1].img:getHeight());
-    bg.spawnPoints = gameScene.GenerateSpawnPoints(6);
+    arena = ArenaController:New("images/background/TX Tileset Grass.png", 5, 5);
 
-    cameraOffset = Vector.New(bg.size.x * 0.5 - screenWidth * 0.5, bg.size.y * 0.5 - screenHeight * 0.5);
+    cameraOffset = Vector.New(arena.size.x * 0.5 - screenWidth * 0.5, arena.size.y * 0.5 - screenHeight * 0.5);
     shake = Vector.New(0, 0);
 
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Bow:New(hero.position.x, hero.position.y);
 
     arenaBounds = {};
-    arenaBounds[0] = CollisionController.NewCollider(Vector.New(0, 0), Vector.New(bg.size.x * bg.grid.x, 1), "wall");
-    arenaBounds[1] = CollisionController.NewCollider(Vector.New(0, bg.size.y), Vector.New(bg.size.x * bg.grid.x, 1), "wall");
-    arenaBounds[2] = CollisionController.NewCollider(Vector.New(0, 0), Vector.New(1, bg.size.y * bg.grid.y), "wall");
-    arenaBounds[3] = CollisionController.NewCollider(Vector.New(bg.size.x, 0), Vector.New(1, bg.size.y * bg.grid.y), "wall");
+    arenaBounds[0] = CollisionController.NewCollider(Vector.New(0, 0), Vector.New(arena.size.x * arena.grid.x, 1), "wall");
+    arenaBounds[1] = CollisionController.NewCollider(Vector.New(0, arena.size.y), Vector.New(arena.size.x * arena.grid.x, 1), "wall");
+    arenaBounds[2] = CollisionController.NewCollider(Vector.New(0, 0), Vector.New(1, arena.size.y * arena.grid.y), "wall");
+    arenaBounds[3] = CollisionController.NewCollider(Vector.New(arena.size.x, 0), Vector.New(1, arena.size.y * arena.grid.y), "wall");
 
     WavesController.InitWave(0);
 end
@@ -82,7 +79,7 @@ gameScene.Draw = function()
     love.graphics.translate(-cameraOffset.x + shake.x, -cameraOffset.y + shake.y);
     -- Draw in World position
     -- BG
-    gameScene.DrawBackground();
+    arena:DrawBackground();
 
     -- Render entities layer by layer (0 = the deepest)
     for y = 0, 10 do
@@ -98,7 +95,7 @@ gameScene.Draw = function()
         CollisionController.DrawColliders(); 
         love.graphics.rectangle("fill", GetScreenCenterPosition().x, GetScreenCenterPosition().y, 5, 5);
         love.graphics.circle("line", hero.position.x, hero.position.y, hero.scrollDist);
-        gameScene.DrawSpawnPoints();
+        arena:DrawSpawnPoints();
     end
     love.graphics.pop();
 
@@ -123,7 +120,7 @@ gameScene.Unload = function()
     buttons = nil;
     hero = nil;
     weapon = nil;
-    bg = nil;
+    arena = nil;
     cameraOffset = nil;
     arenaBounds = nil;
     enemiesCount = nil;
@@ -184,66 +181,6 @@ gameScene.CleanLists = function()
         if entities[i].enabled == false then
             table.remove(entities, i);
         end
-    end
-end
-
--- BG functions
-gameScene.NewBGTile = function(img, position, size)
-    local tile = {};
-    tile.img = img;
-    tile.position = position;
-    tile.size = size;
-
-    return tile;
-end
-
-gameScene.GenerateBackground = function(imgPath, gridWidth, gridHeight)
-    local image = love.graphics.newImage(imgPath);
-    local imageWidth = image:getWidth();
-    local imageHeight = image:getHeight();
-    local bg = {};
-
-        for i = 0, gridWidth * imageWidth - 1, imageWidth do
-            for y = 0, gridHeight * imageHeight - 1, imageHeight do
-                local tile = gameScene.NewBGTile(image, Vector.New(i, y), Vector.New(imageWidth, imageHeight))
-                table.insert(bg, tile);
-            end
-        end
-    return bg;
-end
-
-gameScene.DrawBackground = function()
-    for key, value in pairs(bg.tiles) do
-        love.graphics.draw(value.img, value.position.x, value.position.y, 0, 1, 1, 0, 0);
-    end
-end
-
--- SpawnPoints
-gameScene.NewSpawnPoint = function(position)
-    local spawnPoint = {};
-    spawnPoint.position = position;
-
-    return spawnPoint;
-end
-
-gameScene.GenerateSpawnPoints = function(amountPerTile)
-    local spawnPoints = {};
-
-    for key, value in pairs(bg.tiles) do
-        for i = 0, amountPerTile - 1 do
-            local sp = gameScene.NewSpawnPoint(Vector.New(love.math.random(value.position.x, value.position.x + value.size.x), love.math.random(value.position.y, value.position.y + value.size.y)));
-            table.insert(spawnPoints, sp);
-        end
-    end
-
-    return spawnPoints;
-end
-
-gameScene.DrawSpawnPoints = function()
-    for key, value in pairs(bg.spawnPoints) do
-        love.graphics.setColor(255, 0, 0, 1);
-        love.graphics.rectangle("fill", value.position.x, value.position.y, 5, 5);
-        love.graphics.setColor(255, 255, 255, 1);
     end
 end
 

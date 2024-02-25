@@ -28,7 +28,7 @@ function Tornado:New(x, y, damages, initialAngle)
     tmpTornado.damages = damages;
 
     -- Graph
-    tmpTornado.spritesheet = love.graphics.newImage("images/upgrades/tornado_Spritesheet.png");
+    tmpTornado.spritesheet = love.graphics.newImage("images/projectiles/tornado_Spritesheet.png");
     tmpTornado.anims = tmpTornado:PopulateAnims();
     tmpTornado.renderLayer = 0;
 
