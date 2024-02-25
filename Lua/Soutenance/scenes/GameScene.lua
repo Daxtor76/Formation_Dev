@@ -1,9 +1,9 @@
 local gameScene = SceneController.NewScene("Game");
-local CollisionController = require("collisions/CollisionController");
-local WavesController = require("waves/WavesController");
+local CollisionController = require("controllers/CollisionController");
+local WavesController = require("controllers/WavesController");
 
-local Hero = require("entities/Hero");
-local Bow = require("entities/Bow");
+local Hero = require("entities/player/Hero");
+local Bow = require("entities/player/Bow");
 
 local arenaBounds = nil;
     

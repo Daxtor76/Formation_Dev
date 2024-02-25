@@ -1,8 +1,8 @@
 local _Entity = require("entities/_Entity");
-local Projectile = require("entities/Projectile");
-local HeroChargeFX = require("FXs/HeroCharge");
-local HeroChargeReadyFX = require("FXs/HeroChargeReady");
-local Anim = require("animation/Anim");
+local Projectile = require("entities/projectiles/Projectile");
+local HeroChargeFX = require("entities/FXs/HeroCharge");
+local HeroChargeReadyFX = require("entities/FXs/HeroChargeReady");
+local Anim = require("constructors/Anim");
 
 local Bow = {};
 setmetatable(Bow, {__index = _Entity});

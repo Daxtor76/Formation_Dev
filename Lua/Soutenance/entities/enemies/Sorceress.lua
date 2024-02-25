@@ -1,11 +1,11 @@
 local _Entity = require("entities/_Entity");
-local Projectile = require("entities/Projectile");
-local SorceressChargeFX = require("FXs/SorceressCharge");
-local BloodFX = require("FXs/Blood");
-local XP = require("collectibles/XP");
-local LP = require("collectibles/LifePot");
-local CollisionController = require("collisions/CollisionController");
-local Anim = require("animation/Anim");
+local Projectile = require("entities/projectiles/Projectile");
+local SorceressChargeFX = require("entities/FXs/SorceressCharge");
+local BloodFX = require("entities/FXs/Blood");
+local XP = require("entities/collectibles/XP");
+local LP = require("entities/collectibles/LifePot");
+local CollisionController = require("controllers/CollisionController");
+local Anim = require("constructors/Anim");
 
 local Sorceress = {};
 setmetatable(Sorceress, {__index = _Entity});
@@ -55,7 +55,7 @@ function Sorceress:New(x, y)
     tmpSorceress.currentDyingTimer = tmpSorceress.dyingSpeed;
 
     -- Graph
-    tmpSorceress.spritesheet = love.graphics.newImage("images/enemies/Sorceress/sorceress_Spritesheet.png");
+    tmpSorceress.spritesheet = love.graphics.newImage("images/enemies/sorceress/sorceress_Spritesheet.png");
     tmpSorceress.anims = tmpSorceress:PopulateAnims();
     tmpSorceress.renderLayer = 6;
 

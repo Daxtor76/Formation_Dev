@@ -1,8 +1,8 @@
 local _Entity = require("entities/_Entity");
-local Upgrade = require("upgrades/Upgrade");
-local BloodFX = require("FXs/Blood");
-local CollisionController = require("collisions/CollisionController");
-local Anim = require("animation/Anim");
+local BloodFX = require("entities/FXs/Blood");
+local CollisionController = require("controllers/CollisionController");
+local Anim = require("constructors/Anim");
+local Upgrade = require("constructors/Upgrade");
 
 local Hero = {};
 setmetatable(Hero, {__index = _Entity});
@@ -19,8 +19,8 @@ function Hero:New(x, y)
 
     -- Behaviour
     tmpHero.collider = CollisionController.NewCollider(
-        tmpHero.position - Vector.New(tmpHero.pivot.x * tmpHero.scale.x, tmpHero.pivot.y * tmpHero.scale.y),
-        Vector.New(tmpHero.size.x * tmpHero.scale.x, tmpHero.size.y * tmpHero.scale.y),
+        tmpHero.position - Vector.New(tmpHero.pivot.x * tmpHero.scale.x * 0.5, tmpHero.pivot.y * tmpHero.scale.y * 0.75),
+        Vector.New(tmpHero.size.x * tmpHero.scale.x * 0.5, tmpHero.size.y * tmpHero.scale.y * 0.75),
         tmpHero
     );
     tmpHero.states["idle"] = 0;

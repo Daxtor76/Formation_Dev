@@ -1,5 +1,5 @@
 local Upgrade = {};
-local Tornado = require("entities/Tornado");
+local Tornado = require("entities/projectiles/Tornado");
 
 local tornadoCount = 0;
 

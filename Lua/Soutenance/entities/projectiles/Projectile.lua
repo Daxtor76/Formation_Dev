@@ -1,6 +1,6 @@
 local _Entity = require("entities/_Entity");
-local CollisionController = require("collisions/CollisionController");
-local Anim = require("animation/Anim");
+local CollisionController = require("controllers/CollisionController");
+local Anim = require("constructors/Anim");
 
 local Projectile = {};
 setmetatable(Projectile, {__index = _Entity});

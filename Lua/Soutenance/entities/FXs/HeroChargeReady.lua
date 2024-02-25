@@ -1,5 +1,5 @@
 local _Entity = require("entities/_Entity");
-local Anim = require("animation/Anim");
+local Anim = require("constructors/Anim");
 
 local HeroChargeReady = {};
 setmetatable(HeroChargeReady, {__index = _Entity});

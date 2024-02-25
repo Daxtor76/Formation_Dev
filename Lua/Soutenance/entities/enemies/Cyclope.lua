@@ -1,9 +1,9 @@
 local _Entity = require("entities/_Entity");
-local BloodFX = require("FXs/Blood");
-local XP = require("collectibles/XP");
-local LP = require("collectibles/LifePot");
-local CollisionController = require("collisions/CollisionController");
-local Anim = require("animation/Anim");
+local BloodFX = require("entities/FXs/Blood");
+local XP = require("entities/collectibles/XP");
+local LP = require("entities/collectibles/LifePot");
+local CollisionController = require("controllers/CollisionController");
+local Anim = require("constructors/Anim");
 
 local Cyclope = {};
 setmetatable(Cyclope, {__index = _Entity});
@@ -51,7 +51,7 @@ function Cyclope:New(x, y)
     tmpCyclope.currentDyingTimer = tmpCyclope.dyingSpeed;
 
     -- Graph
-    tmpCyclope.spritesheet = love.graphics.newImage("images/enemies/Cyclope/cyclope_Spritesheet.png");
+    tmpCyclope.spritesheet = love.graphics.newImage("images/enemies/cyclope/cyclope_Spritesheet.png");
     tmpCyclope.anims = tmpCyclope:PopulateAnims();
     tmpCyclope.renderLayer = 6;
 

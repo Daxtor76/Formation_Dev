@@ -1,5 +1,5 @@
-local Cyclope = require("entities/Cyclope");
-local Sorceress = require("entities/Sorceress");
+local Cyclope = require("entities/enemies/Cyclope");
+local Sorceress = require("entities/enemies/Sorceress");
 
 local wavesController = {};
 wavesController.waves = {};

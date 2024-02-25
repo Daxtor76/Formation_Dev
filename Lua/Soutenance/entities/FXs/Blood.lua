@@ -1,5 +1,5 @@
 local _Entity = require("entities/_Entity");
-local Anim = require("animation/Anim");
+local Anim = require("constructors/Anim");
 
 local Blood = {};
 setmetatable(Blood, {__index = _Entity});
