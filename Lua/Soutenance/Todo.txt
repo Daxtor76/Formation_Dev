@@ -44,6 +44,7 @@
 - Refacto (add constructors and controllers files) -> ok 
 - Add rotation to tiles -> ok
 - Use ipairs instead of pairs -> ok
+- Add comments
 - LD & balancing
     - Enemies win life every Waves
     - Enemies win damages every Waves

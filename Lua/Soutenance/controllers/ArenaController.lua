@@ -36,7 +36,7 @@ function Arena:GenerateSpawnPoints(tiles, amountPerTile)
 
     for __, value in ipairs(tiles) do
         for i = 0, amountPerTile - 1 do
-            local sp = SpawnPoint:New(Vector.New(love.math.random(value.position.x, value.position.x + value.size.x), love.math.random(value.position.y, value.position.y + value.size.y)));
+            local sp = SpawnPoint:New(Vector.New(value.position.x + love.math.random(-value.size.x * 0.5, value.size.x * 0.5), value.position.y + love.math.random(-value.size.y * 0.5, value.size.y * 0.5)));
             table.insert(spawnPoints, sp);
         end
     end
