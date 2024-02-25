@@ -1,6 +1,6 @@
 local _Entity = require("entities/_Entity");
 local BloodFX = require("entities/FXs/Blood");
-local CollisionController = require("controllers/gameControllers/CollisionController");
+local Collider = require("constructors/Collider");
 local Anim = require("constructors/Anim");
 local Upgrade = require("constructors/Upgrade");
 
@@ -18,11 +18,13 @@ function Hero:New(x, y)
     tmpHero.pivot = Vector.New(tmpHero.size.x * 0.5, tmpHero.size.y * 0.5);
 
     -- Behaviour
-    tmpHero.collider = CollisionController.NewCollider(
+    tmpHero.collider = Collider:New(
         tmpHero.position - Vector.New(tmpHero.pivot.x * tmpHero.scale.x * 0.5, tmpHero.pivot.y * tmpHero.scale.y * 0.75),
         Vector.New(tmpHero.size.x * tmpHero.scale.x * 0.5, tmpHero.size.y * tmpHero.scale.y * 0.75),
         tmpHero
     );
+    table.insert(collisionController.colliders, tmpHero.collider);
+
     tmpHero.states["idle"] = 0;
     tmpHero.states["run"] = 1;
     tmpHero.states["hit"] = 2;

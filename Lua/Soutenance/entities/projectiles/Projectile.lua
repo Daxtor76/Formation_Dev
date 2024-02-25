@@ -1,5 +1,5 @@
 local _Entity = require("entities/_Entity");
-local CollisionController = require("controllers/gameControllers/CollisionController");
+local Collider = require("constructors/Collider");
 local Anim = require("constructors/Anim");
 
 local Projectile = {};
@@ -25,12 +25,15 @@ function Projectile:NewArrow(x, y, damages, upgraded)
 
     -- Behaviour
     tmpProjectile.speed = 800;
-    tmpProjectile.collider = CollisionController.NewCollider(
+
+    tmpProjectile.collider = Collider:New(
         tmpProjectile.position - Vector.New(tmpProjectile.pivot.x * tmpProjectile.scale.x, tmpProjectile.pivot.y * tmpProjectile.scale.y),
         Vector.New(tmpProjectile.size.x, tmpProjectile.size.y),
         tmpProjectile,
         Projectile.OnHit
     );
+    table.insert(collisionController.colliders, tmpProjectile.collider);
+
     tmpProjectile.damages = damages;
     tmpProjectile.isUpgraded = upgraded;
 
@@ -55,12 +58,15 @@ function Projectile:NewFireBall(x, y, damages, upgraded)
 
     -- Behaviour
     tmpProjectile.speed = 400;
-    tmpProjectile.collider = CollisionController.NewCollider(
+    
+    tmpProjectile.collider = Collider:New(
         tmpProjectile.position - Vector.New(tmpProjectile.pivot.x * tmpProjectile.scale.x, tmpProjectile.pivot.y * tmpProjectile.scale.y),
         Vector.New(tmpProjectile.size.x * tmpProjectile.scale.x * 0.5, tmpProjectile.size.y * tmpProjectile.scale.y),
         tmpProjectile,
         Projectile.OnHit
     );
+    table.insert(collisionController.colliders, tmpProjectile.collider);
+
     tmpProjectile.damages = damages;
     tmpProjectile.isUpgraded = upgraded;
 

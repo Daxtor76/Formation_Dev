@@ -1,22 +1,43 @@
 local SpawnPoint = require("constructors/SpawnPoint");
 local BGTile = require("constructors/BGTile");
+local Collider = require("constructors/Collider");
 
-local Arena = {};
+local ArenaController = {};
 
-function Arena:New(imgPath, gridWidth, gridHeight)
-    local arena = Arena;
+function ArenaController:New(imgPath, gridWidth, gridHeight)
+    local arenaController = {};
+    setmetatable(arenaController, {__index = ArenaController});
 
-    arena.image = love.graphics.newImage(imgPath);
-    arena.imageSize = Vector.New(arena.image:getWidth(), arena.image:getHeight());
-    arena.grid = Vector.New(gridWidth, gridHeight);
-    arena.tiles = arena:GenerateTiles();
-    arena.size = Vector.New(arena.grid.x * arena.imageSize.x, arena.grid.y * arena.imageSize.y);
-    arena.spawnPoints = arena:GenerateSpawnPoints(6);
+    arenaController.image = love.graphics.newImage(imgPath);
+    arenaController.imageSize = Vector.New(arenaController.image:getWidth(), arenaController.image:getHeight());
+    arenaController.grid = Vector.New(gridWidth, gridHeight);
+    arenaController.tiles = arenaController:GenerateTiles();
+    arenaController.size = Vector.New(arenaController.grid.x * arenaController.imageSize.x, arenaController.grid.y * arenaController.imageSize.y);
+    arenaController.spawnPoints = arenaController:GenerateSpawnPoints(6);
+
+    arenaController.arenaBounds = {};
+    arenaController:GenerateArenaBounds();
+
+    table.insert(controllers, arenaController);
     
-    return arena;
+    return arenaController;
 end
 
-function Arena:GenerateTiles()
+function ArenaController:Update()
+end
+
+function ArenaController:GenerateArenaBounds()
+    self.arenaBounds[1] = Collider:New(Vector.New(0, 0), Vector.New(self.size.x * self.grid.x, 1), "wall");
+    self.arenaBounds[2] = Collider:New(Vector.New(0, self.size.y), Vector.New(self.size.x * self.grid.x, 1), "wall");
+    self.arenaBounds[3] = Collider:New(Vector.New(0, 0), Vector.New(1, self.size.y * self.grid.y), "wall");
+    self.arenaBounds[4] = Collider:New(Vector.New(self.size.x, 0), Vector.New(1, self.size.y * self.grid.y), "wall");
+    
+    for __, value in ipairs(self.arenaBounds) do
+        table.insert(collisionController.colliders, value);
+    end
+end
+
+function ArenaController:GenerateTiles()
     local tiles = {};
 
     for i = 0, self.grid.x * self.imageSize.x - 1, self.imageSize.x do
@@ -29,7 +50,7 @@ function Arena:GenerateTiles()
     return tiles;
 end
 
-function Arena:GenerateSpawnPoints(amountPerTile)
+function ArenaController:GenerateSpawnPoints(amountPerTile)
     local spawnPoints = {};
 
     for __, value in ipairs(self.tiles) do
@@ -42,13 +63,13 @@ function Arena:GenerateSpawnPoints(amountPerTile)
     return spawnPoints;
 end
 
-function Arena:DrawBackground()
+function ArenaController:DrawBackground()
     for __, value in ipairs(self.tiles) do
         love.graphics.draw(value.img, value.position.x, value.position.y, value.rotation, 1, 1, value.pivot.x, value.pivot.y);
     end
 end
 
-function Arena:DrawSpawnPoints()
+function ArenaController:DrawSpawnPoints()
     for __, value in ipairs(self.spawnPoints) do
         love.graphics.setColor(255, 0, 0, 1);
         love.graphics.rectangle("fill", value.position.x, value.position.y, 5, 5);
@@ -56,4 +77,4 @@ function Arena:DrawSpawnPoints()
     end
 end
 
-return Arena;
+return ArenaController;

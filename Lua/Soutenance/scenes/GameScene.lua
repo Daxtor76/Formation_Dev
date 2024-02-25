@@ -1,7 +1,10 @@
 local gameScene = SceneController.NewScene("Game");
+
 local CollisionController = require("controllers/gameControllers/CollisionController");
 local WavesController = require("controllers/gameControllers/WavesController");
 local ArenaController = require("controllers/gameControllers/ArenaController");
+
+local Collider = require("constructors/Collider");
 
 local Hero = require("entities/player/Hero");
 local Bow = require("entities/player/Bow");
@@ -20,6 +23,7 @@ gameScene.Load = function()
     entities = {};
     controllers = {};
 
+    collisionController = CollisionController:New();
     arena = ArenaController:New("images/background/TX Tileset Grass.png", 5, 5);
     wavesController = WavesController:New();
 
@@ -28,50 +32,45 @@ gameScene.Load = function()
 
     hero = Hero:New(GetScreenCenterPosition().x, GetScreenCenterPosition().y);
     weapon = Bow:New(hero.position.x, hero.position.y);
-
-    arenaBounds = {};
-    arenaBounds[1] = CollisionController.NewCollider(Vector.New(0, 0), Vector.New(arena.size.x * arena.grid.x, 1), "wall");
-    arenaBounds[2] = CollisionController.NewCollider(Vector.New(0, arena.size.y), Vector.New(arena.size.x * arena.grid.x, 1), "wall");
-    arenaBounds[3] = CollisionController.NewCollider(Vector.New(0, 0), Vector.New(1, arena.size.y * arena.grid.y), "wall");
-    arenaBounds[4] = CollisionController.NewCollider(Vector.New(arena.size.x, 0), Vector.New(1, arena.size.y * arena.grid.y), "wall");
 end
 
 gameScene.Update = function(dt)
     gameScene.CleanLists();
-    if isPaused == false then
-        -- Entities
-        for __, value in ipairs(entities) do
-            if value.active then
-                value:Update(dt);
-            end
-        end
-    
         if gameScene.CheckVictory() == false and gameScene.CheckDefeat() == false then
-            wavesController:UpdateWave(dt);
-            CollisionController.CheckCollisions();
-            gameScene.UpdateGameTime(dt);
-            gameScene.UpdateScreenShakeTimer(dt);
+            if isPaused == false then
+                -- Controllers
+                for __, value in ipairs(controllers) do
+                        value:Update(dt);
+                end
+                -- Entities
+                for __, value in ipairs(entities) do
+                    if value.active then
+                        value:Update(dt);
+                    end
+                end
+                gameScene.UpdateGameTime(dt);
+                gameScene.UpdateScreenShakeTimer(dt);
+
+                if love.keyboard.isDown(love.keyboard.getScancodeFromKey("space")) then
+                    debugMode = true;
+                else
+                    debugMode = false;
+                end
+            else
+                if #buttons == 0 then
+                    for i = 1, 3 do
+                        local rand = love.math.random(1, #hero.upgrades);
+                        local upgrade = hero.upgrades[rand];
+                        buttons[i] = Button:New(screenWidth * 0.25 * i, screenHeight * 0.5, 110, 50, upgrade.label, upgrade.onSelect);
+                    end
+                else
+                    gameScene.Checkbuttons();
+                end
+            end
         elseif gameScene.CheckVictory() or gameScene.CheckDefeat() then
             SceneController.LoadSceneAdditive("GameOver");
             SceneController.SetCurrentScene("GameOver");
         end
-    else
-        if #buttons == 0 then
-            for i = 1, 3 do
-                local rand = love.math.random(1, #hero.upgrades);
-                local upgrade = hero.upgrades[rand];
-                buttons[i] = Button:New(screenWidth * 0.25 * i, screenHeight * 0.5, 110, 50, upgrade.label, upgrade.onSelect);
-            end
-        else
-            gameScene.Checkbuttons();
-        end
-    end
-
-    if love.keyboard.isDown(love.keyboard.getScancodeFromKey("space")) then
-        debugMode = true;
-    else
-        debugMode = false;
-    end
 end
 
 gameScene.Draw = function()
@@ -92,7 +91,7 @@ gameScene.Draw = function()
         end
     end
     if debugMode then 
-        CollisionController.DrawColliders(); 
+        collisionController:DrawColliders(); 
         love.graphics.rectangle("fill", GetScreenCenterPosition().x, GetScreenCenterPosition().y, 5, 5);
         love.graphics.circle("line", hero.position.x, hero.position.y, hero.scrollDist);
         arena:DrawSpawnPoints();
@@ -108,7 +107,7 @@ gameScene.Draw = function()
     else
         ReplaceMouseCrosshair(false, hero.crosshair);
     end
-    love.graphics.print("Wave: "..WavesController.waveCounter, 0, 10);
+    love.graphics.print("Wave: "..wavesController.waveCounter, 0, 10);
     love.graphics.print("Enemies alive: "..enemiesCount, 0, 25);
 
     if debugMode then 
@@ -124,7 +123,6 @@ gameScene.Unload = function()
     cameraOffset = nil;
     arenaBounds = nil;
     enemiesCount = nil;
-    wavesController = nil;
 
     for __, value in ipairs(entities) do
         if value.collider ~= nil then
@@ -133,7 +131,13 @@ gameScene.Unload = function()
         value.enabled = false;
     end
     gameScene.CleanLists();
+
+    wavesController = nil;
+    arena = nil;
+    collisionController = nil;
+
     entities = nil;
+    controllers = nil;
 end
 
 gameScene.Checkbuttons = function()
@@ -164,7 +168,7 @@ gameScene.UpdateGameTime = function(dt)
 end
 
 gameScene.CheckVictory = function()
-    return WavesController.isOver and enemiesCount == 0;
+    return wavesController.isOver and enemiesCount == 0;
 end
 
 gameScene.CheckDefeat = function()
@@ -172,9 +176,9 @@ gameScene.CheckDefeat = function()
 end
 
 gameScene.CleanLists = function()
-    for i=#CollisionController.colliders, 1, -1 do
-        if CollisionController.colliders[i].enabled == false then
-            table.remove(CollisionController.colliders, i);
+    for i=#collisionController.colliders, 1, -1 do
+        if collisionController.colliders[i].enabled == false then
+            table.remove(collisionController.colliders, i);
         end
     end
     for i=#entities, 1, -1 do

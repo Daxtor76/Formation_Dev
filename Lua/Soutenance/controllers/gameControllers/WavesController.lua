@@ -3,7 +3,8 @@ local Wave = require("constructors/Wave");
 local WavesController = {};
 
 function WavesController:New()
-    local wavesController = WavesController;
+    local wavesController = {};
+    setmetatable(wavesController, {__index = WavesController});
 
     wavesController.waves = wavesController:PopulateWaves();
     wavesController.waveCounter = 1;
@@ -13,10 +14,12 @@ function WavesController:New()
 
     wavesController:InitWave(1);
 
+    table.insert(controllers, wavesController);
+
     return wavesController;
 end
 
-function WavesController:UpdateWave(dt)
+function WavesController:Update(dt)
     if self.isOver == false then
         self.timer = self.timer - dt;
         if self.timer <= 0 then

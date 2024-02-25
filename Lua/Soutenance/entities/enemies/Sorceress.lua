@@ -4,7 +4,7 @@ local SorceressChargeFX = require("entities/FXs/SorceressCharge");
 local BloodFX = require("entities/FXs/Blood");
 local XP = require("entities/collectibles/XP");
 local LP = require("entities/collectibles/LifePot");
-local CollisionController = require("controllers/gameControllers/CollisionController");
+local Collider = require("constructors/Collider");
 local Anim = require("constructors/Anim");
 
 local Sorceress = {};
@@ -22,11 +22,12 @@ function Sorceress:New(x, y)
     tmpSorceress.pivot = Vector.New(tmpSorceress.size.x * 0.5, tmpSorceress.size.y * 0.5);
 
     -- Behaviour
-    tmpSorceress.collider = CollisionController.NewCollider(
+    tmpSorceress.collider = Collider:New(
         tmpSorceress.position - Vector.New(tmpSorceress.pivot.x * tmpSorceress.scale.x, tmpSorceress.pivot.y * tmpSorceress.scale.y),
         Vector.New(tmpSorceress.size.x * tmpSorceress.scale.x * 0.5, tmpSorceress.size.y * tmpSorceress.scale.y * 0.75),
         tmpSorceress
     );
+    table.insert(collisionController.colliders, tmpSorceress.collider);
 
     tmpSorceress.states["idle"] = 0;
     tmpSorceress.states["run"] = 1;

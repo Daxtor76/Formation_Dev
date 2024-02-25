@@ -45,9 +45,9 @@
 - Add rotation to tiles -> ok
 - Use ipairs instead of pairs -> ok
 - Essayer de traiter les controllers comme les entities
-    - Créer une liste de controllers
-    - Donner un load(Init), update, unload(Reset) aux controllers
-    - GameScene joue toutes ces fonctions comme pour les entities
+    - Créer une liste de controllers -> ok
+    - Donner un update aux controllers -> ok
+    - Gamescene joue l'update des controllers -> ok
 - Add comments
 - LD & balancing
     - Enemies win life every Waves

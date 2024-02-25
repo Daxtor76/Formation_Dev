@@ -1,5 +1,5 @@
 local _Entity = require("entities/_Entity");
-local CollisionController = require("controllers/gameControllers/CollisionController");
+local Collider = require("constructors/Collider");
 local Anim = require("constructors/Anim");
 
 local Tornado = {};
@@ -19,12 +19,15 @@ function Tornado:New(x, y, damages, initialAngle)
     -- Behaviour
     tmpTornado.range = 150;
     tmpTornado.speed = 100;
-    tmpTornado.collider = CollisionController.NewCollider(
+
+    tmpTornado.collider = Collider:New(
         tmpTornado.position - Vector.New(tmpTornado.pivot.x * tmpTornado.scale.x, tmpTornado.pivot.y * tmpTornado.scale.y),
         Vector.New(tmpTornado.size.x * tmpTornado.scale.x, tmpTornado.size.y * tmpTornado.scale.y),
         tmpTornado,
         tmpTornado.OnHit
     );
+    table.insert(collisionController.colliders, tmpTornado.collider);
+
     tmpTornado.damages = damages;
 
     -- Graph

@@ -1,5 +1,5 @@
 local _Entity = require("entities/_Entity");
-local CollisionController = require("controllers/gameControllers/CollisionController");
+local Collider = require("constructors/Collider");
 local Anim = require("constructors/Anim");
 
 local LP = {};
@@ -16,12 +16,13 @@ function LP:New(x, y)
     tmpLP.pivot = Vector.New(tmpLP.size.x * 0.5, tmpLP.size.y * 0.5);
 
     -- Behaviour
-    tmpLP.collider = CollisionController.NewCollider(
+    tmpLP.collider = Collider:New(
         tmpLP.position - Vector.New(tmpLP.pivot.x * tmpLP.scale.x, tmpLP.pivot.y * tmpLP.scale.y),
         Vector.New(tmpLP.size.x * tmpLP.scale.x, tmpLP.size.y * tmpLP.scale.y),
         tmpLP,
         LP.OnHit
     );
+    table.insert(collisionController.colliders, tmpLP.collider);
 
     tmpLP.states["idle"] = 0;
 

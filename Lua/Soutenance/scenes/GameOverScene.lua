@@ -12,8 +12,8 @@ gameOverScene.Load = function(test)
         end
         return "Defeat :'("
     end
-    enemiesDead = enemiesKilled or 0;
-    timePlayed = gameTime or 0;
+    enemiesDead = enemiesKilled or -1;
+    timePlayed = gameTime or -1;
     
     texts[1] = Text:NewTitle(screenWidth * 0.5, 50, Victory());
     texts[2] = Text:NewMiddle(screenWidth * 0.5, 100, "Enemies killed: "..enemiesDead);

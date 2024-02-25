@@ -2,7 +2,7 @@ local _Entity = require("entities/_Entity");
 local BloodFX = require("entities/FXs/Blood");
 local XP = require("entities/collectibles/XP");
 local LP = require("entities/collectibles/LifePot");
-local CollisionController = require("controllers/gameControllers/CollisionController");
+local Collider = require("constructors/Collider");
 local Anim = require("constructors/Anim");
 
 local Cyclope = {};
@@ -19,11 +19,12 @@ function Cyclope:New(x, y)
     tmpCyclope.pivot = Vector.New(tmpCyclope.size.x * 0.5, tmpCyclope.size.y * 0.5);
 
     -- Behaviour
-    tmpCyclope.collider = CollisionController.NewCollider(
+    tmpCyclope.collider = Collider:New(
         tmpCyclope.position - Vector.New(tmpCyclope.pivot.x * tmpCyclope.scale.x, tmpCyclope.pivot.y * tmpCyclope.scale.y),
         Vector.New(tmpCyclope.size.x * tmpCyclope.scale.x, tmpCyclope.size.y * tmpCyclope.scale.y),
         tmpCyclope
     );
+    table.insert(collisionController.colliders, tmpCyclope.collider);
 
     tmpCyclope.states["idle"] = 0;
     tmpCyclope.states["run"] = 1;
