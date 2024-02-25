@@ -2,7 +2,7 @@ local _Entity = require("entities/_Entity");
 local BloodFX = require("entities/FXs/Blood");
 local XP = require("entities/collectibles/XP");
 local LP = require("entities/collectibles/LifePot");
-local CollisionController = require("controllers/CollisionController");
+local CollisionController = require("controllers/gameControllers/CollisionController");
 local Anim = require("constructors/Anim");
 
 local Cyclope = {};

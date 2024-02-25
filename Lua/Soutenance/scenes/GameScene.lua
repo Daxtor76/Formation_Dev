@@ -1,7 +1,7 @@
 local gameScene = SceneController.NewScene("Game");
-local CollisionController = require("controllers/CollisionController");
-local WavesController = require("controllers/WavesController");
-local ArenaController = require("controllers/ArenaController");
+local CollisionController = require("controllers/gameControllers/CollisionController");
+local WavesController = require("controllers/gameControllers/WavesController");
+local ArenaController = require("controllers/gameControllers/ArenaController");
 
 local Hero = require("entities/player/Hero");
 local Bow = require("entities/player/Bow");
@@ -18,6 +18,7 @@ gameScene.Load = function()
     enemiesCount = 0;
     
     entities = {};
+    controllers = {};
 
     arena = ArenaController:New("images/background/TX Tileset Grass.png", 5, 5);
     wavesController = WavesController:New();
@@ -108,10 +109,10 @@ gameScene.Draw = function()
         ReplaceMouseCrosshair(false, hero.crosshair);
     end
     love.graphics.print("Wave: "..WavesController.waveCounter, 0, 10);
-    love.graphics.print("Enemies alive: "..enemiesCount, 0, 20);
+    love.graphics.print("Enemies alive: "..enemiesCount, 0, 25);
 
     if debugMode then 
-        love.graphics.print("XP: "..hero.xp, 0, 30);
+        love.graphics.print("XP: "..hero.xp, 0, 40);
     end
 end
 

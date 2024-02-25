@@ -1,6 +1,6 @@
 local _Entity = require("entities/_Entity");
 local BloodFX = require("entities/FXs/Blood");
-local CollisionController = require("controllers/CollisionController");
+local CollisionController = require("controllers/gameControllers/CollisionController");
 local Anim = require("constructors/Anim");
 local Upgrade = require("constructors/Upgrade");
 

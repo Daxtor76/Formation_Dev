@@ -44,6 +44,10 @@
 - Refacto (add constructors and controllers files) -> ok 
 - Add rotation to tiles -> ok
 - Use ipairs instead of pairs -> ok
+- Essayer de traiter les controllers comme les entities
+    - Créer une liste de controllers
+    - Donner un load(Init), update, unload(Reset) aux controllers
+    - GameScene joue toutes ces fonctions comme pour les entities
 - Add comments
 - LD & balancing
     - Enemies win life every Waves

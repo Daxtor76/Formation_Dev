@@ -1,5 +1,5 @@
 local _Entity = require("entities/_Entity");
-local CollisionController = require("controllers/CollisionController");
+local CollisionController = require("controllers/gameControllers/CollisionController");
 local Anim = require("constructors/Anim");
 
 local XP = {};
