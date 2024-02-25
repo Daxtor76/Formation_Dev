@@ -50,18 +50,18 @@ function Hero:New(x, y)
     tmpHero.xp = 0;
 
     tmpHero.xpThresholds = {};
-    tmpHero.xpThresholds["1"] = 9;
-    tmpHero.xpThresholds["2"] = 27;
-    tmpHero.xpThresholds["3"] = 60;
-    tmpHero.xpThresholds["4"] = 60;
-    tmpHero.xpThresholds["5"] = 60;
+    tmpHero.xpThresholds[1] = 9;
+    tmpHero.xpThresholds[2] = 27;
+    tmpHero.xpThresholds[3] = 60;
+    tmpHero.xpThresholds[4] = 60;
+    tmpHero.xpThresholds[5] = 60;
 
     tmpHero.upgrades = {};
-    tmpHero.upgrades[0] = Upgrade:New("Upgrade arrows", Upgrade.OnArrowUpgradeSelected);
-    tmpHero.upgrades[1] = Upgrade:New("Shoot faster", Upgrade.OnFireRateUpgrade);
-    tmpHero.upgrades[2] = Upgrade:New("1 more life", Upgrade.OnLifeUpgrade);
-    tmpHero.upgrades[3] = Upgrade:New("1 more damage", Upgrade.OnDamageUpgrade);
-    tmpHero.upgrades[4] = Upgrade:New("1 tornado", Upgrade.OnTornadoSelected);
+    tmpHero.upgrades[1] = Upgrade:New("Upgrade arrows", Upgrade.OnArrowUpgradeSelected);
+    tmpHero.upgrades[2] = Upgrade:New("Shoot faster", Upgrade.OnFireRateUpgrade);
+    tmpHero.upgrades[3] = Upgrade:New("1 more life", Upgrade.OnLifeUpgrade);
+    tmpHero.upgrades[4] = Upgrade:New("1 more damage", Upgrade.OnDamageUpgrade);
+    tmpHero.upgrades[5] = Upgrade:New("1 tornado", Upgrade.OnTornadoSelected);
 
     -- Graph
     tmpHero.spritesheet = love.graphics.newImage("images/player/character.png");
@@ -152,20 +152,20 @@ function Hero:DrawOnScreen()
     -- xp gauge
     if self.life > 0 then
         love.graphics.setColor(love.math.colorFromBytes(goldColor));
-        love.graphics.rectangle("fill", 0, 0, screenWidth * (self.xp / self.xpThresholds[tostring(self.level)]), 7);
+        love.graphics.rectangle("fill", 0, 0, screenWidth * (self.xp / self.xpThresholds[self.level]), 7);
         love.graphics.setColor(255, 255, 255, 1);
     end
 end
 
 function Hero:LevelUp()
-        self.xp = self.xp - self.xpThresholds[tostring(self.level)];
+        self.xp = self.xp - self.xpThresholds[self.level];
         self.level = self.level + 1;
         isPaused = true;
 end
 
 function Hero:CheckLevelUp()
-    if self.xpThresholds[tostring(self.level + 1)] ~= nil then
-        if self.xp >= self.xpThresholds[tostring(self.level)] then
+    if self.xpThresholds[self.level + 1] ~= nil then
+        if self.xp >= self.xpThresholds[self.level] then
             self:LevelUp();
         end
     end
@@ -189,7 +189,7 @@ function Hero:Die(dt)
 end
 
 function Hero:DisableTornados()
-    for key, value in pairs(self.tornados) do
+    for __, value in ipairs(self.tornados) do
         value.enabled = false;
         value.collider.enabled = false;
     end

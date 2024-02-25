@@ -28,19 +28,19 @@ gameScene.Load = function()
     weapon = Bow:New(hero.position.x, hero.position.y);
 
     arenaBounds = {};
-    arenaBounds[0] = CollisionController.NewCollider(Vector.New(0, 0), Vector.New(arena.size.x * arena.grid.x, 1), "wall");
-    arenaBounds[1] = CollisionController.NewCollider(Vector.New(0, arena.size.y), Vector.New(arena.size.x * arena.grid.x, 1), "wall");
-    arenaBounds[2] = CollisionController.NewCollider(Vector.New(0, 0), Vector.New(1, arena.size.y * arena.grid.y), "wall");
-    arenaBounds[3] = CollisionController.NewCollider(Vector.New(arena.size.x, 0), Vector.New(1, arena.size.y * arena.grid.y), "wall");
+    arenaBounds[1] = CollisionController.NewCollider(Vector.New(0, 0), Vector.New(arena.size.x * arena.grid.x, 1), "wall");
+    arenaBounds[2] = CollisionController.NewCollider(Vector.New(0, arena.size.y), Vector.New(arena.size.x * arena.grid.x, 1), "wall");
+    arenaBounds[3] = CollisionController.NewCollider(Vector.New(0, 0), Vector.New(1, arena.size.y * arena.grid.y), "wall");
+    arenaBounds[4] = CollisionController.NewCollider(Vector.New(arena.size.x, 0), Vector.New(1, arena.size.y * arena.grid.y), "wall");
 
-    WavesController.InitWave(0);
+    WavesController.InitWave(1);
 end
 
 gameScene.Update = function(dt)
     gameScene.CleanLists();
     if isPaused == false then
         -- Entities
-        for key, value in pairs(entities) do
+        for __, value in ipairs(entities) do
             if value.active then
                 value:Update(dt);
             end
@@ -57,10 +57,10 @@ gameScene.Update = function(dt)
         end
     else
         if #buttons == 0 then
-            for i = 0, 2 do
-                local rand = love.math.random(0, #hero.upgrades);
+            for i = 1, 3 do
+                local rand = love.math.random(1, #hero.upgrades);
                 local upgrade = hero.upgrades[rand];
-                buttons[i] = Button:New(screenWidth * 0.25 * (i + 1), screenHeight * 0.5, 110, 50, upgrade.label, upgrade.onSelect);
+                buttons[i] = Button:New(screenWidth * 0.25 * i, screenHeight * 0.5, 110, 50, upgrade.label, upgrade.onSelect);
             end
         else
             gameScene.Checkbuttons();
@@ -83,7 +83,7 @@ gameScene.Draw = function()
 
     -- Render entities layer by layer (0 = the deepest)
     for y = 0, 10 do
-        for key, value in pairs(entities) do
+        for __, value in ipairs(entities) do
             if value.renderLayer == y then
                 if value.active then
                     value:Draw();
@@ -108,11 +108,11 @@ gameScene.Draw = function()
     else
         ReplaceMouseCrosshair(false, hero.crosshair);
     end
-    love.graphics.print("Wave: "..WavesController.waveCounter);
-    love.graphics.print("Enemies alive: "..enemiesCount, 0, 10);
+    love.graphics.print("Wave: "..WavesController.waveCounter, 0, 10);
+    love.graphics.print("Enemies alive: "..enemiesCount, 0, 20);
 
     if debugMode then 
-        love.graphics.print("XP: "..hero.xp, 0, 20);
+        love.graphics.print("XP: "..hero.xp, 0, 30);
     end
 end
 
@@ -125,7 +125,7 @@ gameScene.Unload = function()
     arenaBounds = nil;
     enemiesCount = nil;
 
-    for key, value in pairs(entities) do
+    for __, value in ipairs(entities) do
         if value.collider ~= nil then
             value.collider.enabled = false;
         end
@@ -137,7 +137,7 @@ gameScene.Unload = function()
 end
 
 gameScene.Checkbuttons = function()
-    for key, value in pairs(buttons) do
+    for __, value in ipairs(buttons) do
         if value:CheckHover() then
             if value:CheckClick() then
                 value:applyButtonEffect();
@@ -147,7 +147,7 @@ gameScene.Checkbuttons = function()
 end
 
 gameScene.Drawbuttons = function()
-    for key, value in pairs(buttons) do
+    for __, value in ipairs(buttons) do
         value:Draw();
     end
 end

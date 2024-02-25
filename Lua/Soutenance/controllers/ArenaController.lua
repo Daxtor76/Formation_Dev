@@ -34,7 +34,7 @@ end
 function Arena:GenerateSpawnPoints(tiles, amountPerTile)
     local spawnPoints = {};
 
-    for key, value in pairs(tiles) do
+    for __, value in ipairs(tiles) do
         for i = 0, amountPerTile - 1 do
             local sp = SpawnPoint:New(Vector.New(love.math.random(value.position.x, value.position.x + value.size.x), love.math.random(value.position.y, value.position.y + value.size.y)));
             table.insert(spawnPoints, sp);
@@ -45,13 +45,13 @@ function Arena:GenerateSpawnPoints(tiles, amountPerTile)
 end
 
 function Arena:DrawBackground()
-    for key, value in pairs(self.tiles) do
+    for __, value in ipairs(self.tiles) do
         love.graphics.draw(value.img, value.position.x, value.position.y, value.rotation, 1, 1, value.pivot.x, value.pivot.y);
     end
 end
 
 function Arena:DrawSpawnPoints()
-    for key, value in pairs(self.spawnPoints) do
+    for __, value in ipairs(self.spawnPoints) do
         love.graphics.setColor(255, 0, 0, 1);
         love.graphics.rectangle("fill", value.position.x, value.position.y, 5, 5);
         love.graphics.setColor(255, 255, 255, 1);

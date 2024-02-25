@@ -4,13 +4,13 @@ local Sorceress = require("entities/enemies/Sorceress");
 local wavesController = {};
 wavesController.waves = {};
 wavesController.waveCounter = 0;
-wavesController.currentWave = wavesController.waves[0];
+wavesController.currentWave = wavesController.waves[1];
 wavesController.timer = 0;
 wavesController.isOver = false;
 
 wavesController.ResetWaves = function()
     wavesController.waveCounter = 0;
-    wavesController.currentWave = wavesController.waves[0];
+    wavesController.currentWave = wavesController.waves[1];
     wavesController.timer = 0;
     wavesController.isOver = false;
 end
@@ -78,11 +78,11 @@ wavesController.NewSubWave = function(enemiesAmount)
     return subWave;
 end
 
-wavesController.waves[0] = wavesController.NewWave(20, 20, 3);
-wavesController.waves[1] = wavesController.NewWave(15, 45, 3);
-wavesController.waves[2] = wavesController.NewWave(8, 40, 5);
-wavesController.waves[3] = wavesController.NewWave(7, 42, 6);
-wavesController.waves[4] = wavesController.NewWave(7, 42, 7);
-wavesController.waves[5] = wavesController.NewWave(7, 42, 8);
+wavesController.waves[1] = wavesController.NewWave(20, 20, 3);
+wavesController.waves[2] = wavesController.NewWave(15, 45, 3);
+wavesController.waves[3] = wavesController.NewWave(8, 40, 5);
+wavesController.waves[4] = wavesController.NewWave(7, 42, 6);
+wavesController.waves[5] = wavesController.NewWave(7, 42, 7);
+wavesController.waves[6] = wavesController.NewWave(7, 42, 8);
 
 return wavesController;

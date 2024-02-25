@@ -15,12 +15,12 @@ gameOverScene.Load = function(test)
     enemiesDead = enemiesKilled or 0;
     timePlayed = gameTime or 0;
     
-    texts[0] = Text:NewTitle(screenWidth * 0.5, 50, Victory());
-    texts[1] = Text:NewMiddle(screenWidth * 0.5, 100, "Enemies killed: "..enemiesDead);
-    texts[2] = Text:NewMiddle(screenWidth * 0.5, 130, "Time played: "..math.ceil(timePlayed).."s");
+    texts[1] = Text:NewTitle(screenWidth * 0.5, 50, Victory());
+    texts[2] = Text:NewMiddle(screenWidth * 0.5, 100, "Enemies killed: "..enemiesDead);
+    texts[3] = Text:NewMiddle(screenWidth * 0.5, 130, "Time played: "..math.ceil(timePlayed).."s");
 
-    buttons[0] = Button:New(screenWidth * 0.25, screenHeight * 0.5, 100, 50, "Main menu", gameOverScene.OnMenuButtonClicked);
-    buttons[1] = Button:New(screenWidth * 0.75, screenHeight * 0.5, 100, 50, "Reload", gameOverScene.OnReloadButtonClicked);
+    buttons[1] = Button:New(screenWidth * 0.25, screenHeight * 0.5, 100, 50, "Main menu", gameOverScene.OnMenuButtonClicked);
+    buttons[2] = Button:New(screenWidth * 0.75, screenHeight * 0.5, 100, 50, "Reload", gameOverScene.OnReloadButtonClicked);
 end
 
 gameOverScene.Update = function(dt)
@@ -42,16 +42,16 @@ gameOverScene.Unload = function()
 end
 
 gameOverScene.DrawUI = function()
-    for key, value in pairs(buttons) do
+    for __, value in ipairs(buttons) do
         value:Draw();
     end
-    for key, value in pairs(texts) do
+    for __, value in ipairs(texts) do
         value:Draw();
     end
 end
 
 gameOverScene.Checkbuttons = function()
-    for key, value in pairs(buttons) do
+    for __, value in ipairs(buttons) do
         if value:CheckHover() then
             if value:CheckClick() then
                 value:applyButtonEffect();

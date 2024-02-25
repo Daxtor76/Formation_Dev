@@ -43,6 +43,7 @@
 - Fix button (no click when down) -> ok
 - Refacto (add constructors and controllers files) -> ok 
 - Add rotation to tiles -> ok
+- Use ipairs instead of pairs -> ok
 - LD & balancing
     - Enemies win life every Waves
     - Enemies win damages every Waves

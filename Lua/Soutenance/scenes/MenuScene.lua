@@ -7,8 +7,8 @@ menuScene.Load = function()
     texts = {};
     buttons = {};
 
-    texts[0] = Text:NewTitle(screenWidth * 0.5, 50, "Soutenance Lua");
-    buttons[0] = Button:New(screenWidth * 0.5, screenHeight * 0.5, 100, 50, "Launch Game", menuScene.OnGameButtonClicked);
+    texts[1] = Text:NewTitle(screenWidth * 0.5, 50, "Soutenance Lua");
+    buttons[1] = Button:New(screenWidth * 0.5, screenHeight * 0.5, 100, 50, "Launch Game", menuScene.OnGameButtonClicked);
 end
 
 menuScene.Update = function(dt)
@@ -25,16 +25,16 @@ menuScene.Unload = function()
 end
 
 menuScene.DrawUI = function()
-    for key, value in pairs(buttons) do
+    for __, value in ipairs(buttons) do
         value:Draw();
     end
-    for key, value in pairs(texts) do
+    for __, value in ipairs(texts) do
         value:Draw();
     end
 end
 
 menuScene.CheckButtons = function()
-    for key, value in pairs(buttons) do
+    for __, value in ipairs(buttons) do
         if value:CheckHover() then
             if value:CheckClick() then
                 value:applyButtonEffect();
