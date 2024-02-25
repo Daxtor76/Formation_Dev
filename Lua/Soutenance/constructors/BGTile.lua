@@ -2,6 +2,8 @@ local Tile = {};
 
 function Tile:New(img, position, size, pivot)
     local tile = {};
+    setmetatable(tile, {__index = Tile});
+    
     tile.img = img;
     tile.position = position;
     tile.size = size;
