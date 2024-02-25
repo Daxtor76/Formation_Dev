@@ -40,7 +40,7 @@
 - Revoir les différents paramètres local + les require -> ok ?
 - Change all x & y variables to vectors -> ok
 - Replace all colliders -> ok
-- Fix button (no click when down)
+- Fix button (no click when down) -> ok
 - Refacto (add constructors and controllers files) -> ok 
 - Add rotation to tiles -> ok
 - LD & balancing
