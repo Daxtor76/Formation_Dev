@@ -16,27 +16,27 @@ end
 function Upgrade.OnArrowUpgradeSelected(self)
     weapon.arrowsUpgraded = true;
     buttons = {};
-    isPaused = false;
+    isUpgrading = false;
 end
 
 function Upgrade.OnFireRateUpgrade(self)
     weapon.chargeTimer = weapon.chargeTimer - 0.1;
     weapon.reloadSpeed = weapon.reloadSpeed - 0.1;
     buttons = {};
-    isPaused = false;
+    isUpgrading = false;
 end
 
 function Upgrade.OnLifeUpgrade(self)
     hero.maxlife = hero.maxlife + 1;
     hero.life = hero.life + 1;
     buttons = {};
-    isPaused = false;
+    isUpgrading = false;
 end
 
 function Upgrade.OnDamageUpgrade()
     weapon.damages = weapon.damages + 1;
     buttons = {};
-    isPaused = false;
+    isUpgrading = false;
 end
 
 function Upgrade.OnTornadoSelected()
@@ -50,7 +50,7 @@ function Upgrade.OnTornadoSelected()
     end
 
     buttons = {};
-    isPaused = false;
+    isUpgrading = false;
 end
 
 return Upgrade;

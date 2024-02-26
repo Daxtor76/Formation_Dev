@@ -32,7 +32,7 @@ function Wave:UpdateSubWave(dt)
 end
 
 function Wave:SpawnEnemies(enemiesAmount)
-    print("new sub wave");
+    --print("new sub wave");
     for i = 0, enemiesAmount - 1 do
         local randEnemyType = 0;
         if self.canSpawnCyclopes and self.canSpawnSorceress then
@@ -44,7 +44,7 @@ function Wave:SpawnEnemies(enemiesAmount)
         end
 
         local randSpawnPoint = love.math.random(1, #arena.spawnPoints);
-        
+
         enemiesCount = enemiesCount + 1;
         if randEnemyType == 0 then
             Cyclope:New(

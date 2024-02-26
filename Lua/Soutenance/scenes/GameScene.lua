@@ -15,7 +15,7 @@ gameScene.Load = function()
     buttons = {};
 
     defeat = false;
-    isPaused = false;
+    isUpgrading = false;
     gameTime = 0;
     enemiesKilled = 0;
     enemiesCount = 0;
@@ -37,7 +37,7 @@ end
 gameScene.Update = function(dt)
     gameScene.CleanLists();
         if gameScene.CheckVictory() == false and gameScene.CheckDefeat() == false then
-            if isPaused == false then
+            if isUpgrading == false then
                 -- Controllers
                 for __, value in ipairs(controllers) do
                         value:Update(dt);
@@ -101,7 +101,7 @@ gameScene.Draw = function()
     -- Draw in Screen position
     hero:DrawOnScreen();
 
-    if isPaused then
+    if isUpgrading then
         gameScene.Drawbuttons();
         ReplaceMouseCrosshair(true);
     else

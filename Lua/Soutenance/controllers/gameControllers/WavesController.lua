@@ -35,7 +35,7 @@ function WavesController:Update(dt)
 end
 
 function WavesController:InitWave(waveId)
-    print("new wave");
+    --print("new wave");
     self.currentWave = self.waves[waveId];
     self.timer = self.currentWave.duration;
     self.currentWave:SpawnEnemies(self.currentWave.enemiesAmount, self.waveCounter)

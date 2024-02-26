@@ -105,7 +105,7 @@ end
 
 function Bow:Draw()
     local angle;
-    if isPaused == false then
+    if isUpgrading == false then
         local delta = GetMousePos() - self.position + cameraOffset;
         angle = delta:GetAngle() - math.pi*0.5;
         love.graphics.draw(

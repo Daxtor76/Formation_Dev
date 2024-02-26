@@ -31,7 +31,7 @@ function HeroChargeReady:New(position)
 end
 
 function HeroChargeReady:Update(dt)
-    if isPaused == false then
+    if isUpgrading == false then
         local delta = GetMousePos() - (hero.position - cameraOffset);
         local heroToMouseDirection = delta:Normalize();
         local distance = weapon.size.y - 10;

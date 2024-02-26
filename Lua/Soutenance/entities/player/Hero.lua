@@ -82,19 +82,19 @@ function Hero:Update(dt)
     if self:IsAlive() then
         hero:UpdateCharacterDirectionByTarget(GetMousePos(), true);
 
-        -- Hero Movement & Collision with camera bounds
+        -- Hero States
         if love.keyboard.isDown(love.keyboard.getScancodeFromKey("a")) or 
         love.keyboard.isDown(love.keyboard.getScancodeFromKey("w")) or 
         love.keyboard.isDown("d") or 
         love.keyboard.isDown("s") then
-            if self.state == 0 then
+            if self.state == 0 then -- idle
                 self:ChangeState("run");
-            elseif self.state == 1 then
+            elseif self.state == 1 then -- run
                 self:Move(dt);
-            elseif self.state == 2 then
+            elseif self.state == 2 then -- hit
                 self:Move(dt);
-                self:ChangeState("recover");
-            elseif self.state == 3 then
+                self:ChangeState("recover"); 
+            elseif self.state == 3 then -- recover
                 self:Move(dt);
                 self.canTakeDamages = self:CanTakeDamages(dt);
                 if self.canTakeDamages then
@@ -102,11 +102,11 @@ function Hero:Update(dt)
                 end
             end
         else
-            if self.state == 1 then
+            if self.state == 1 then -- idle
                 self:ChangeState("idle");
-            elseif self.state == 2 then
+            elseif self.state == 2 then -- run
                 self:ChangeState("recover");
-            elseif self.state == 3 then
+            elseif self.state == 3 then -- hit
                 self.canTakeDamages = self:CanTakeDamages(dt);
                 if self.canTakeDamages then
                     self:ChangeState("idle");
@@ -133,7 +133,7 @@ function Hero:Draw()
     end
 
     -- Character
-    if self.state == 3 then
+    if self.state == 3 then -- recover
         love.graphics.setColor(255, 0, 0, 1);
     end
     love.graphics.draw(
@@ -160,9 +160,9 @@ function Hero:DrawOnScreen()
 end
 
 function Hero:LevelUp()
-        self.xp = self.xp - self.xpThresholds[self.level];
-        self.level = self.level + 1;
-        isPaused = true;
+    self.xp = self.xp - self.xpThresholds[self.level];
+    self.level = self.level + 1;
+    isUpgrading = true;
 end
 
 function Hero:CheckLevelUp()
