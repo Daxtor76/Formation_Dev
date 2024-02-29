@@ -18,22 +18,18 @@ namespace ProjectTemplate.Scenes
 
         public virtual void Load()
         {
-            Debug.WriteLine($"{name} scene LOAD base");
         }
 
         public virtual void Update(GameTime gameTime)
         {
-            Debug.WriteLine($"{name} scene UPDATE base");
         }
 
         public virtual void Draw(GameTime gameTime)
         {
-            Debug.WriteLine($"{name} scene DRAW base");
         }
 
         public virtual void Unload()
         {
-            Debug.WriteLine($"{name} scene UNLOAD base");
         }
     }
 }

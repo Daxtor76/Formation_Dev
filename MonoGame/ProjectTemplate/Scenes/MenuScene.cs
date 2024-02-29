@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,31 +13,31 @@ namespace ProjectTemplate.Scenes
     {
         public MenuScene(string pName) : base(pName)
         {
-            Debug.WriteLine($"New {name} scene");
         }
 
         public override void Load()
         {
             base.Load();
-            Debug.WriteLine($"{name} scene LOAD");
+            Debug.WriteLine($"{name} scene has been loaded.");
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            Debug.WriteLine($"{name} scene UPDATE");
+            if(Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                SceneController.ChangeScene(SceneController.SceneType.Game);
+            }
         }
 
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-            Debug.WriteLine($"{name} scene DRAW");
         }
 
         public override void Unload()
         {
             base.Unload();
-            Debug.WriteLine($"{name} scene UNLOAD");
         }
     }
 }

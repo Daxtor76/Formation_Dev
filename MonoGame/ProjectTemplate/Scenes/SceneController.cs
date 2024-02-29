@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjectTemplate.Scenes
 {
-    public class SceneController
+    public static class SceneController
     {
         public enum SceneType
         {
@@ -15,10 +15,10 @@ namespace ProjectTemplate.Scenes
             Game,
             GameOver
         }
-        public List<Scene> sceneList = new List<Scene>();
-        public Scene currentScene;
+        public static List<Scene> sceneList = new List<Scene>();
+        public static Scene currentScene;
 
-        public void Init()
+        public static void Init()
         {
             // Same order as the enum
             Scene menuScene = new MenuScene("Menu");
@@ -31,7 +31,7 @@ namespace ProjectTemplate.Scenes
             ChangeScene(SceneType.Menu);
         }
 
-        public void ChangeScene(SceneType scene)
+        public static void ChangeScene(SceneType scene)
         {
             if (currentScene != null)
             {

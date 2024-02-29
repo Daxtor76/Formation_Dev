@@ -12,22 +12,18 @@ namespace ProjectTemplate
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private SceneController sceneController;
-
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-
-            sceneController = new SceneController();
         }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
 
-            sceneController.Init();
+            SceneController.Init();
 
             base.Initialize();
         }
@@ -45,7 +41,10 @@ namespace ProjectTemplate
                 Exit();
 
             // TODO: Add your update logic here
-            sceneController.currentScene.Update(gameTime);
+            if(SceneController.currentScene != null)
+            {
+                SceneController.currentScene.Update(gameTime);
+            }
 
             base.Update(gameTime);
         }
@@ -55,7 +54,8 @@ namespace ProjectTemplate
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            sceneController.currentScene.Draw(gameTime);
+            if(SceneController.currentScene != null)
+                SceneController.currentScene.Draw(gameTime);
 
             base.Draw(gameTime);
         }
