@@ -6,12 +6,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProjectTemplate.Scenes;
 
-namespace ProjectTemplate.Scenes
+namespace ProjectTemplate
 {
     class GameScene : Scene
     {
-        public GameScene(string pName) : base(pName)
+        public GameScene(MainGame pProjectGame, string pName) : base(pProjectGame, pName)
         {
         }
 

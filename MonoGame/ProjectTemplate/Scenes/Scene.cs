@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,9 +11,12 @@ namespace ProjectTemplate.Scenes
 {
     public abstract class Scene
     {
+        public MainGame projectGame;
         public string name;
-        public Scene(string pName)
+
+        public Scene(MainGame pProjectGame, string pName)
         {
+            projectGame = pProjectGame;
             name = pName;
         }
 

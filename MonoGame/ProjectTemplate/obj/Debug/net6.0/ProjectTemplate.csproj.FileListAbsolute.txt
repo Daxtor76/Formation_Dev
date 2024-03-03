@@ -24,3 +24,4 @@ E:\Projets\Formation_Dev\MonoGame\ProjectTemplate\obj\Debug\net6.0\refint\Projec
 E:\Projets\Formation_Dev\MonoGame\ProjectTemplate\obj\Debug\net6.0\ProjectTemplate.pdb
 E:\Projets\Formation_Dev\MonoGame\ProjectTemplate\obj\Debug\net6.0\ProjectTemplate.genruntimeconfig.cache
 E:\Projets\Formation_Dev\MonoGame\ProjectTemplate\obj\Debug\net6.0\ref\ProjectTemplate.dll
+E:\Projets\Formation_Dev\MonoGame\ProjectTemplate\bin\Debug\net6.0\Content\Hero\personnage.xnb

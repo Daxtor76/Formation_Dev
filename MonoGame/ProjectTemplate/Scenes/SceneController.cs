@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -18,12 +20,12 @@ namespace ProjectTemplate.Scenes
         public static List<Scene> sceneList = new List<Scene>();
         public static Scene currentScene;
 
-        public static void Init()
+        public static void Init(MainGame projectGame)
         {
             // Same order as the enum
-            Scene menuScene = new MenuScene("Menu");
-            Scene gameScene = new GameScene("Game");
-            Scene gameOverScene = new GameOverScene("GameOver");
+            Scene menuScene = new MenuScene(projectGame, "Menu");
+            Scene gameScene = new GameScene(projectGame, "Game");
+            Scene gameOverScene = new GameOverScene(projectGame, "GameOver");
             sceneList.Add(menuScene);
             sceneList.Add(gameScene);
             sceneList.Add(gameOverScene);

@@ -5,12 +5,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProjectTemplate.Scenes;
 
-namespace ProjectTemplate.Scenes
+namespace ProjectTemplate
 {
     class GameOverScene : Scene
     {
-        public GameOverScene(string pName) : base(pName)
+        public GameOverScene(MainGame pProjectGame, string pName) : base(pProjectGame, pName)
         {
         }
 

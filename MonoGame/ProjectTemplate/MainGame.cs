@@ -1,18 +1,19 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using ProjectTemplate.Scenes;
 using System;
 using System.Diagnostics;
+using System.Net.Security;
+using ProjectTemplate.Scenes;
 
 namespace ProjectTemplate
 {
-    public class Game1 : Game
+    public class MainGame : Game
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        public GraphicsDeviceManager _graphics { get; private set; }
+        public SpriteBatch _spriteBatch { get; private set; }
 
-        public Game1()
+        public MainGame()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -22,8 +23,7 @@ namespace ProjectTemplate
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-            SceneController.Init();
+            SceneController.Init(this);
 
             base.Initialize();
         }
@@ -42,20 +42,22 @@ namespace ProjectTemplate
 
             // TODO: Add your update logic here
             if(SceneController.currentScene != null)
-            {
                 SceneController.currentScene.Update(gameTime);
-            }
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
             if(SceneController.currentScene != null)
+            {
+                _spriteBatch.Begin();
                 SceneController.currentScene.Draw(gameTime);
+                _spriteBatch.End();
+            }
 
             base.Draw(gameTime);
         }

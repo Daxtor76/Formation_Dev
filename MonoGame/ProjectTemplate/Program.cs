@@ -1,3 +1,3 @@
 ﻿
-using var game = new ProjectTemplate.Game1();
+using var game = new ProjectTemplate.MainGame();
 game.Run();
