@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using ProjectTemplate.Constructors;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectTemplate.Colliders
+namespace ProjectTemplate.Controllers
 {
     public static class CollisionController
     {
@@ -14,10 +15,10 @@ namespace ProjectTemplate.Colliders
 
         public static void UpdateColliders(GameTime gameTime)
         {
-            foreach(Collider col in collidersList)
+            foreach (Collider col in collidersList)
             {
                 col.UpdatePosition(gameTime);
-                foreach(Collider other in collidersList)
+                foreach (Collider other in collidersList)
                 {
                     if (col != other)
                     {
@@ -29,7 +30,7 @@ namespace ProjectTemplate.Colliders
 
         public static void DrawColliders()
         {
-            foreach(Collider col in collidersList)
+            foreach (Collider col in collidersList)
             {
                 col.Draw();
             }

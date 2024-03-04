@@ -1,0 +1,1 @@
+- Virer la class hero de MenuScene

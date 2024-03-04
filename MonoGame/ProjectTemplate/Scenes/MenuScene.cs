@@ -8,16 +8,30 @@ using System.Linq;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
-using ProjectTemplate.Scenes;
-using ProjectTemplate.Colliders;
+using ProjectTemplate.Constructors;
+using ProjectTemplate.Controllers;
+using System.Reflection.Emit;
 
 namespace ProjectTemplate
 {
+    public class Hero : Entity
+    {
+        public Texture2D img;
+        public Collider col;
+
+        public Hero(MainGame pProjectGame, Texture2D pImg, Vector2 pPos) : base(pProjectGame)
+        {
+            projectGame = pProjectGame;
+            position = pPos;
+            img = pImg;
+            size = new Vector2(img.Width, img.Height);
+            col = new Collider(pProjectGame, this);
+        }
+    }
+
     class MenuScene : Scene
     {
-        Texture2D img;
-        Vector2 imgPos = new Vector2();
-        Collider imgCol;
+        public Hero hero;
 
         public MenuScene(MainGame pProjectGame, string pName) : base(pProjectGame, pName)
         {
@@ -26,16 +40,15 @@ namespace ProjectTemplate
         public override void Load()
         {
             base.Load();
-            img = projectGame.Content.Load<Texture2D>("Hero/personnage");
-            imgCol = new Collider(projectGame, new Vector2(100, 100), new Vector2(100, 100), img);
+            hero = new Hero(projectGame, projectGame.Content.Load<Texture2D>("Hero/personnage"), new Vector2(100, 100));
             Debug.WriteLine($"{name} scene has been loaded.");
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            imgPos.X += 100 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            imgPos.X = Math.Clamp(imgPos.X, 0, 300);
+            hero.position.X += 100 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            hero.position.X = Math.Clamp(hero.position.X, 0, 300);
 
             CollisionController.UpdateColliders(gameTime);
 
@@ -48,7 +61,7 @@ namespace ProjectTemplate
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-            projectGame._spriteBatch.Draw(img, imgPos, Color.White);
+            projectGame._spriteBatch.Draw(hero.img, hero.position, Color.White);
             CollisionController.DrawColliders();
         }
 
