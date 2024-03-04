@@ -11,7 +11,7 @@ namespace ProjectTemplate.Scenes
 {
     public abstract class Scene
     {
-        public MainGame projectGame;
+        protected MainGame projectGame;
         public string name;
 
         public Scene(MainGame pProjectGame, string pName)

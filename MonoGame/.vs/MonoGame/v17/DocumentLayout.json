@@ -3,12 +3,28 @@
   "WorkspaceRootPath": "E:\\Projets\\Formation_Dev\\MonoGame\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|e:\\projets\\formation_dev\\monogame\\projecttemplate\\colliders\\collider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|solutionrelative:projecttemplate\\colliders\\collider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|e:\\projets\\formation_dev\\monogame\\projecttemplate\\colliders\\collisioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|solutionrelative:projecttemplate\\colliders\\collisioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|e:\\projets\\formation_dev\\monogame\\projecttemplate\\scenes\\menuscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|solutionrelative:projecttemplate\\scenes\\menuscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|e:\\projets\\formation_dev\\monogame\\projecttemplate\\scenes\\scene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|solutionrelative:projecttemplate\\scenes\\scene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|e:\\projets\\formation_dev\\monogame\\projecttemplate\\scenes\\scenecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|solutionrelative:projecttemplate\\scenes\\scenecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|e:\\projets\\formation_dev\\monogame\\projecttemplate\\maingame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|solutionrelative:projecttemplate\\maingame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,28 +46,80 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CollisionController.cs",
+              "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Colliders\\CollisionController.cs",
+              "RelativeDocumentMoniker": "ProjectTemplate\\Colliders\\CollisionController.cs",
+              "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Colliders\\CollisionController.cs",
+              "RelativeToolTip": "ProjectTemplate\\Colliders\\CollisionController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-03T23:06:10.417Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Collider.cs",
+              "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Colliders\\Collider.cs",
+              "RelativeDocumentMoniker": "ProjectTemplate\\Colliders\\Collider.cs",
+              "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Colliders\\Collider.cs",
+              "RelativeToolTip": "ProjectTemplate\\Colliders\\Collider.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAQwB0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-03T23:05:50.379Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "MenuScene.cs",
               "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Scenes\\MenuScene.cs",
               "RelativeDocumentMoniker": "ProjectTemplate\\Scenes\\MenuScene.cs",
               "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Scenes\\MenuScene.cs",
               "RelativeToolTip": "ProjectTemplate\\Scenes\\MenuScene.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAxwCAAAAAiAAAA",
+              "ViewState": "AQIAABgAAAAAAAAAAAAgwCcAAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-03T14:15:20.064Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
+              "Title": "Scene.cs",
+              "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Scenes\\Scene.cs",
+              "RelativeDocumentMoniker": "ProjectTemplate\\Scenes\\Scene.cs",
+              "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Scenes\\Scene.cs",
+              "RelativeToolTip": "ProjectTemplate\\Scenes\\Scene.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-03T23:45:30.894Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "SceneController.cs",
               "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Scenes\\SceneController.cs",
               "RelativeDocumentMoniker": "ProjectTemplate\\Scenes\\SceneController.cs",
               "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Scenes\\SceneController.cs",
               "RelativeToolTip": "ProjectTemplate\\Scenes\\SceneController.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAA1wAcAAAAdAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-03T14:13:49.389Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MainGame.cs",
+              "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\MainGame.cs",
+              "RelativeDocumentMoniker": "ProjectTemplate\\MainGame.cs",
+              "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\MainGame.cs",
+              "RelativeToolTip": "ProjectTemplate\\MainGame.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAgwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-03T23:51:27.742Z",
               "EditorCaption": ""
             }
           ]
