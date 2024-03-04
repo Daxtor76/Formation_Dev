@@ -1,1 +1,16 @@
-- Virer la class hero de MenuScene
+- Virer la class hero de MenuScene -> ok
+- Créer Hero qui hérite de Character
+- Créer Brick qui hérite de Character
+
+
+
+Exercice :
+- Wizard : Character
+- Warrior : Character
+
+- Hit
+- Heal
+- Warrior isRage = damages * 2.5f
+- Wizard Fireball
+
+- Attack()

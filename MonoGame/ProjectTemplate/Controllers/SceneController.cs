@@ -31,7 +31,7 @@ namespace ProjectTemplate.Controllers
             sceneList.Add(gameScene);
             sceneList.Add(gameOverScene);
 
-            ChangeScene(SceneType.Menu);
+            ChangeScene(SceneType.Game);
         }
 
         public static void ChangeScene(SceneType scene)
