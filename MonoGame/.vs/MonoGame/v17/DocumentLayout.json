@@ -3,20 +3,8 @@
   "WorkspaceRootPath": "E:\\Projets\\Formation_Dev\\MonoGame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A262472F-CD10-42FE-9129-36E7AF13D5DD}|Exo01\\Exo01.csproj|e:\\projets\\formation_dev\\monogame\\exo01\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A262472F-CD10-42FE-9129-36E7AF13D5DD}|Exo01\\Exo01.csproj|solutionrelative:exo01\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A262472F-CD10-42FE-9129-36E7AF13D5DD}|Exo01\\Exo01.csproj|e:\\projets\\formation_dev\\monogame\\exo01\\entities\\wizard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A262472F-CD10-42FE-9129-36E7AF13D5DD}|Exo01\\Exo01.csproj|solutionrelative:exo01\\entities\\wizard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A262472F-CD10-42FE-9129-36E7AF13D5DD}|Exo01\\Exo01.csproj|e:\\projets\\formation_dev\\monogame\\exo01\\entities\\warrior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A262472F-CD10-42FE-9129-36E7AF13D5DD}|Exo01\\Exo01.csproj|solutionrelative:exo01\\entities\\warrior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A262472F-CD10-42FE-9129-36E7AF13D5DD}|Exo01\\Exo01.csproj|e:\\projets\\formation_dev\\monogame\\exo01\\constructors\\character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A262472F-CD10-42FE-9129-36E7AF13D5DD}|Exo01\\Exo01.csproj|solutionrelative:exo01\\constructors\\character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|e:\\projets\\formation_dev\\monogame\\projecttemplate\\constructors\\moveableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|solutionrelative:projecttemplate\\constructors\\moveableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,53 +27,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Game1.cs",
-              "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\Exo01\\Game1.cs",
-              "RelativeDocumentMoniker": "Exo01\\Game1.cs",
-              "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\Exo01\\Game1.cs",
-              "RelativeToolTip": "Exo01\\Game1.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAQwB4AAAAAAAAA",
+              "Title": "MoveableObject.cs",
+              "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Constructors\\MoveableObject.cs",
+              "RelativeDocumentMoniker": "ProjectTemplate\\Constructors\\MoveableObject.cs",
+              "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Constructors\\MoveableObject.cs",
+              "RelativeToolTip": "ProjectTemplate\\Constructors\\MoveableObject.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-04T23:43:04.663Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Character.cs",
-              "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\Exo01\\Constructors\\Character.cs",
-              "RelativeDocumentMoniker": "Exo01\\Constructors\\Character.cs",
-              "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\Exo01\\Constructors\\Character.cs",
-              "RelativeToolTip": "Exo01\\Constructors\\Character.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAQwCgAAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-04T23:14:23.261Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Wizard.cs",
-              "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\Exo01\\Entities\\Wizard.cs",
-              "RelativeDocumentMoniker": "Exo01\\Entities\\Wizard.cs",
-              "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\Exo01\\Entities\\Wizard.cs",
-              "RelativeToolTip": "Exo01\\Entities\\Wizard.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAowCwAAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-04T23:35:47.116Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Warrior.cs",
-              "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\Exo01\\Entities\\Warrior.cs",
-              "RelativeDocumentMoniker": "Exo01\\Entities\\Warrior.cs",
-              "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\Exo01\\Entities\\Warrior.cs",
-              "RelativeToolTip": "Exo01\\Entities\\Warrior.cs",
-              "ViewState": "AQIAABIAAAAAAAAAAAA5wCsAAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-04T23:25:25.979Z",
+              "WhenOpened": "2024-03-05T00:06:11.041Z",
               "EditorCaption": ""
             }
           ]
