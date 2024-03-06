@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 using ProjectTemplate.Constructors;
 using Microsoft.Xna.Framework.Graphics;
 using ProjectTemplate.Controllers;
+using ProjectTemplate.Entities;
 
 namespace ProjectTemplate
 {
     class GameScene : Scene
     {
-        public MoveableObject hero;
+        public Hero hero;
 
         public GameScene(MainGame pProjectGame, string pName) : base(pProjectGame, pName)
         {
@@ -23,9 +24,9 @@ namespace ProjectTemplate
         public override void Load()
         {
             base.Load();
-            hero = new MoveableObject(projectGame, projectGame.Content.Load<Texture2D>("Hero/personnage"), new Vector2(100, 100), "Hero", "Hero");
+            hero = new Hero(projectGame, projectGame.Content.Load<Texture2D>("Hero/personnage"), new Vector2(100, 100), "Hero", "Hero");
 
-            Collider test = new Collider(projectGame, new Vector2(300, 300), new Vector2(75, 75));
+            Collider test = new Collider(projectGame, new Vector2(400, 150), new Vector2(75, 75));
             Debug.WriteLine($"{name} scene has been loaded.");
         }
 

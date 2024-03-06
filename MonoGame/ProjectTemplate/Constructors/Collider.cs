@@ -12,12 +12,14 @@ namespace ProjectTemplate.Constructors
 {
     public class Collider : Entity
     {
-        public Entity parent;
+        Entity parent;
         public delegate void CallBack();
         CallBack collisionEffect;
 
         Texture2D texture;
         Rectangle rect;
+
+        bool canCollide = true;
 
         public Collider(MainGame pProjectGame, Entity pParent, CallBack pCollisionEffect = null) : base(pProjectGame)
         {
@@ -65,14 +67,25 @@ namespace ProjectTemplate.Constructors
 
         public void CheckCollision(Collider other)
         {
+            if (IsColliding(other) && canCollide)
+            {
+                canCollide = false;
+                if (collisionEffect != null)
+                    collisionEffect();
+            }
+        }
+
+        public bool IsColliding(Collider other)
+        {
             if (position.X < other.position.X + other.size.X &&
                 position.X + size.X > other.position.X &&
                 position.Y < other.position.Y + other.size.Y &&
                 position.Y + size.Y > other.position.Y)
             {
-                if (collisionEffect != null)
-                    collisionEffect();
+                return true;
             }
+            canCollide = true;
+            return false;
         }
     }
 }
