@@ -34,10 +34,10 @@ namespace ProjectTemplate.Constructors
             else if (Keyboard.GetState().IsKeyDown(Keys.Q))
                 direction.X = -1;
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Z))
-                direction.Y = -1;
-            else if (Keyboard.GetState().IsKeyDown(Keys.S))
-                direction.Y = 1;
+            //if (Keyboard.GetState().IsKeyDown(Keys.Z))
+                //direction.Y = -1;
+            //else if (Keyboard.GetState().IsKeyDown(Keys.S))
+                //direction.Y = 1;
 
             return direction;
         }

@@ -3,28 +3,28 @@
   "WorkspaceRootPath": "E:\\Projets\\Formation_Dev\\MonoGame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|e:\\projets\\formation_dev\\monogame\\projecttemplate\\scenes\\gamescene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|solutionrelative:projecttemplate\\scenes\\gamescene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|e:\\projets\\formation_dev\\monogame\\projecttemplate\\constructors\\collider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|solutionrelative:projecttemplate\\constructors\\collider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|e:\\projets\\formation_dev\\monogame\\projecttemplate\\constructors\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|solutionrelative:projecttemplate\\constructors\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|e:\\projets\\formation_dev\\monogame\\projecttemplate\\entities\\hero.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|solutionrelative:projecttemplate\\entities\\hero.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|e:\\projets\\formation_dev\\monogame\\projecttemplate\\constructors\\collider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|solutionrelative:projecttemplate\\constructors\\collider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|e:\\projets\\formation_dev\\monogame\\projecttemplate\\todo.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|solutionrelative:projecttemplate\\todo.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|e:\\projets\\formation_dev\\monogame\\projecttemplate\\constructors\\mover.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|solutionrelative:projecttemplate\\constructors\\mover.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|e:\\projets\\formation_dev\\monogame\\projecttemplate\\todo.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|solutionrelative:projecttemplate\\todo.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|e:\\projets\\formation_dev\\monogame\\projecttemplate\\constructors\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|solutionrelative:projecttemplate\\constructors\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|e:\\projets\\formation_dev\\monogame\\projecttemplate\\scenes\\gamescene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EE3A1A8-18F0-4672-8018-D3CD038C6946}|ProjectTemplate\\ProjectTemplate.csproj|solutionrelative:projecttemplate\\scenes\\gamescene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,20 +46,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "GameScene.cs",
-              "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Scenes\\GameScene.cs",
-              "RelativeDocumentMoniker": "ProjectTemplate\\Scenes\\GameScene.cs",
-              "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Scenes\\GameScene.cs",
-              "RelativeToolTip": "ProjectTemplate\\Scenes\\GameScene.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAACAAAAA2AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-06T16:30:45.379Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "ToDo.txt",
               "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\ToDo.txt",
               "RelativeDocumentMoniker": "ProjectTemplate\\ToDo.txt",
@@ -72,7 +59,33 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Collider.cs",
+              "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Constructors\\Collider.cs",
+              "RelativeDocumentMoniker": "ProjectTemplate\\Constructors\\Collider.cs",
+              "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Constructors\\Collider.cs",
+              "RelativeToolTip": "ProjectTemplate\\Constructors\\Collider.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAQwBoAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-06T16:42:34.718Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "GameScene.cs",
+              "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Scenes\\GameScene.cs",
+              "RelativeDocumentMoniker": "ProjectTemplate\\Scenes\\GameScene.cs",
+              "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Scenes\\GameScene.cs",
+              "RelativeToolTip": "ProjectTemplate\\Scenes\\GameScene.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAACAAAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-06T16:30:45.379Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Entity.cs",
               "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Constructors\\Entity.cs",
               "RelativeDocumentMoniker": "ProjectTemplate\\Constructors\\Entity.cs",
@@ -86,38 +99,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Collider.cs",
-              "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Constructors\\Collider.cs",
-              "RelativeDocumentMoniker": "ProjectTemplate\\Constructors\\Collider.cs",
-              "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Constructors\\Collider.cs",
-              "RelativeToolTip": "ProjectTemplate\\Constructors\\Collider.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAQwBwAAAAvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-06T16:13:07.17Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "Hero.cs",
               "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Entities\\Hero.cs",
               "RelativeDocumentMoniker": "ProjectTemplate\\Entities\\Hero.cs",
               "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Entities\\Hero.cs",
               "RelativeToolTip": "ProjectTemplate\\Entities\\Hero.cs",
-              "ViewState": "AQIAABQAAAAAAAAAAAA9wCsAAABGAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAACkAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-05T00:06:11.041Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Mover.cs",
               "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Constructors\\Mover.cs",
               "RelativeDocumentMoniker": "ProjectTemplate\\Constructors\\Mover.cs",
               "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\ProjectTemplate\\Constructors\\Mover.cs",
               "RelativeToolTip": "ProjectTemplate\\Constructors\\Mover.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAIwBsAAAAqAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAIwA0AAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-06T15:54:14.931Z",
               "EditorCaption": ""

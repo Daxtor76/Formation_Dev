@@ -22,7 +22,6 @@ namespace ProjectTemplate.Entities
         {
             name = pName;
             layer = pLayer;
-            projectGame = pProjectGame;
             position = pPos;
             img = pImg;
             size = new Vector2(img.Width, img.Height);
