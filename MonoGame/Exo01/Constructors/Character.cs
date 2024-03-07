@@ -25,9 +25,10 @@ namespace Exo01.Constructors
             intellect = pIntellect;
         }
 
-        public virtual void Hit()
+        public virtual void Hit(float damages)
         {
             Debug.WriteLine($"{name} says: Outch");
+            life = Math.Clamp(life - damages, 0, maxLife);
         }
 
         public virtual void Heal(Character target, int amount)

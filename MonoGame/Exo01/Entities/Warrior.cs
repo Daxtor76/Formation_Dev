@@ -22,7 +22,7 @@ namespace Exo01.Entities
             Debug.WriteLine($"{name} enters in Berserk mode");
         }
 
-        public override void Hit()
+        public override void Hit(float damages)
         {
             Debug.WriteLine($"{name} says: Meh outch");
 
@@ -36,7 +36,6 @@ namespace Exo01.Entities
             Debug.WriteLine($"{name} attacks {target.name + berserk}");
 
             float damages = isRage ? strength * 2.5f : strength;
-            target.life = Math.Clamp(target.life - damages, 0, target.maxLife);
             Debug.WriteLine($"{target.name} has been hit and lost {damages} life points. Remaining life: {target.life}");
 
             base.Attack(target);

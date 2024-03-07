@@ -15,7 +15,7 @@ namespace Exo01.Entities
             Debug.WriteLine($"{pName} enters in arena");
         }
 
-        public override void Hit()
+        public override void Hit(float damages)
         {
             Debug.WriteLine($"{name} says: Very outch");
         }
@@ -38,7 +38,6 @@ namespace Exo01.Entities
             Debug.WriteLine($"{name} casts a fireball on {target.name}");
 
             float damages = intellect * 2.5f;
-            target.life = Math.Clamp(target.life - damages, 0, target.maxLife);
 
             Debug.WriteLine($"{target.name} has been hit and lost {damages} life points");
 
