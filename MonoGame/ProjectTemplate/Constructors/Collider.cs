@@ -15,18 +15,20 @@ namespace ProjectTemplate.Constructors
         Entity parent;
         public delegate void CallBack();
         CallBack collisionEffect;
+        CallBack continuousCollisionEffect;
 
         Texture2D texture;
         Rectangle rect;
 
         bool canCollide = true;
 
-        public Collider(MainGame pProjectGame, Entity pParent, CallBack pCollisionEffect = null) : base(pProjectGame)
+        public Collider(MainGame pProjectGame, Entity pParent, CallBack pCollisionEffect = null, CallBack pContinuousCollisionEffect = null) : base(pProjectGame)
         {
             parent = pParent;
             position = pParent.position;
             size = pParent.size;
             collisionEffect = pCollisionEffect;
+            continuousCollisionEffect = pContinuousCollisionEffect;
 
             texture = new Texture2D(projectGame._graphics.GraphicsDevice, 1, 1);
             texture.SetData(new[] { Color.Green });
@@ -36,11 +38,12 @@ namespace ProjectTemplate.Constructors
             CollisionController.collidersList.Add(this);
         }
 
-        public Collider(MainGame pProjectGame, Vector2 pPosition, Vector2 pSize, CallBack pCollisionEffect = null) : base(pProjectGame)
+        public Collider(MainGame pProjectGame, Vector2 pPosition, Vector2 pSize, CallBack pCollisionEffect = null, CallBack pContinuousCollisionEffect = null) : base(pProjectGame)
         {
             position = pPosition;
             size = pSize;
             collisionEffect = pCollisionEffect;
+            continuousCollisionEffect = pContinuousCollisionEffect;
 
             texture = new Texture2D(projectGame._graphics.GraphicsDevice, 1, 1);
             texture.SetData(new[] { Color.Green });
@@ -67,11 +70,21 @@ namespace ProjectTemplate.Constructors
 
         public void CheckCollision(Collider other)
         {
-            if (IsColliding(other) && canCollide)
+            if (collisionEffect != null)
             {
-                canCollide = false;
-                if (collisionEffect != null)
+                if (IsColliding(other) && canCollide)
+                {
+                    canCollide = false;
                     collisionEffect();
+                }
+            }
+
+            if (continuousCollisionEffect != null)
+            {
+                if (IsColliding(other))
+                {
+                    continuousCollisionEffect();
+                }
             }
         }
 

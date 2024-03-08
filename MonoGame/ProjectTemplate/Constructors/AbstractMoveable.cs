@@ -11,12 +11,15 @@ namespace ProjectTemplate.Constructors
 {
     public abstract class AbstractMoveable : Entity, IMoveable
     {
-        public AbstractMoveable(MainGame pProjectGame) : base(pProjectGame)
+        protected float speed = 0.0f;
+
+        public AbstractMoveable(MainGame pProjectGame, float pSpeed) : base(pProjectGame)
         {
+            speed = pSpeed;
         }
 
 
-        public void Move(GameTime gameTime, Vector2 direction, float speed)
+        public void Move(GameTime gameTime, Vector2 direction)
         {
             position += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
             position.X = Math.Clamp(position.X, 0, 800 - size.X);

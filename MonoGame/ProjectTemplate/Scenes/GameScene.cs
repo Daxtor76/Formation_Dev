@@ -25,7 +25,7 @@ namespace ProjectTemplate
         public override void Load()
         {
             base.Load();
-            hero = new Hero(projectGame, projectGame.Content.Load<Texture2D>("Hero/personnage"), new Vector2(100, 100), "Hero", "Hero");
+            hero = new Hero(projectGame, projectGame.Content.Load<Texture2D>("Hero/personnage"), new Vector2(100, 100), 200.0f, "Hero", "Hero");
 
             Collider test = new Collider(projectGame, new Vector2(400, 150), new Vector2(75, 75));
             Debug.WriteLine($"{name} scene has been loaded.");

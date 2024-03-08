@@ -9,6 +9,6 @@ namespace ProjectTemplate.Interfaces
 {
     public interface IMoveable
     {
-        public abstract void Move(GameTime gameTime, Vector2 direction, float speed);
+        public abstract void Move(GameTime gameTime, Vector2 direction);
     }
 }

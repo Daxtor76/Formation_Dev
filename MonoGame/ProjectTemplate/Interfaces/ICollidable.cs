@@ -10,5 +10,6 @@ namespace ProjectTemplate.Interfaces
     public interface ICollidable
     {
         public void OnCollisionEnter();
+        public void OnCollision();
     }
 }

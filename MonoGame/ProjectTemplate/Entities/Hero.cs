@@ -18,14 +18,14 @@ namespace ProjectTemplate.Entities
         public Texture2D img;
         public Collider col;
 
-        public Hero(MainGame pProjectGame, Texture2D pImg, Vector2 pPos, string pName, string pLayer) : base(pProjectGame)
+        public Hero(MainGame pProjectGame, Texture2D pImg, Vector2 pPos, float pSpeed, string pName, string pLayer) : base(pProjectGame, pSpeed)
         {
             name = pName;
             layer = pLayer;
             position = pPos;
             img = pImg;
             size = new Vector2(img.Width, img.Height);
-            col = new Collider(pProjectGame, this, OnCollisionEnter);
+            col = new Collider(pProjectGame, this, OnCollisionEnter, OnCollision);
 
             EntityController.entities.Add(this);
         }
@@ -33,7 +33,7 @@ namespace ProjectTemplate.Entities
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            Move(gameTime, GetInputDirection(), 200.0f);
+            Move(gameTime, GetInputDirection());
         }
 
         public override void Draw(GameTime gameTime)
@@ -45,6 +45,11 @@ namespace ProjectTemplate.Entities
         public void OnCollisionEnter()
         {
             Debug.WriteLine("Hit");
+        }
+
+        public void OnCollision()
+        {
+            Debug.WriteLine("Hit multiple times");
         }
     }
 }
