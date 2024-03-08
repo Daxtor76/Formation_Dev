@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ProjectTemplate.Constructors;
 using ProjectTemplate.Controllers;
+using ProjectTemplate.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,11 +13,10 @@ using System.Threading.Tasks;
 
 namespace ProjectTemplate.Entities
 {
-    public class Hero : Entity
+    public class Hero : AbstractMoveable, ICollidable
     {
         public Texture2D img;
         public Collider col;
-        public Mover mover;
 
         public Hero(MainGame pProjectGame, Texture2D pImg, Vector2 pPos, string pName, string pLayer) : base(pProjectGame)
         {
@@ -26,7 +26,6 @@ namespace ProjectTemplate.Entities
             img = pImg;
             size = new Vector2(img.Width, img.Height);
             col = new Collider(pProjectGame, this, OnCollisionEnter);
-            mover = new Mover(this);
 
             EntityController.entities.Add(this);
         }
@@ -34,7 +33,7 @@ namespace ProjectTemplate.Entities
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            mover.Move(gameTime, mover.GetInputDirection(), 200.0f);
+            Move(gameTime, GetInputDirection(), 200.0f);
         }
 
         public override void Draw(GameTime gameTime)
@@ -43,7 +42,7 @@ namespace ProjectTemplate.Entities
             projectGame._spriteBatch.Draw(img, position, Color.White);
         }
 
-        void OnCollisionEnter()
+        public void OnCollisionEnter()
         {
             Debug.WriteLine("Hit");
         }

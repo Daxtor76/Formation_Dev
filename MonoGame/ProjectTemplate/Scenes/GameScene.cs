@@ -10,6 +10,7 @@ using ProjectTemplate.Constructors;
 using Microsoft.Xna.Framework.Graphics;
 using ProjectTemplate.Controllers;
 using ProjectTemplate.Entities;
+using ProjectTemplate.Interfaces;
 
 namespace ProjectTemplate
 {
