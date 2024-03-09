@@ -47,11 +47,41 @@ namespace Soutenance_MonoGame.Entities
                 direction = new Vector2(modifier, -direction.Y);
             }
             else
-                direction = -direction;
+            {
+                bool isAboveAC = isOnUpperSideOfLine(other.corners["bottomRight"], other.corners["topLeft"], Position);
+                bool isAboveDB = isOnUpperSideOfLine(other.corners["topRight"], other.corners["bottomLeft"], Position);
+
+                if (isAboveAC)
+                {
+                    if (isAboveDB)
+                        // top edge
+                        direction.Y = -direction.Y;
+                    else
+                        // right edge
+                        direction.X = -direction.X;
+                }
+                else
+                {
+                    if (isAboveDB)
+                    {
+                        if (isAboveDB)
+                            // left edge
+                            direction.X = -direction.X;
+                        else
+                            // bottom edge
+                            direction.Y = -direction.Y;
+                    }
+                }    
+            }
         }
 
         public void OnCollision(Collider other)
         {
+        }
+
+        bool isOnUpperSideOfLine(Vector2 corner1, Vector2 oppositeCorner, Vector2 ballCenter)
+        {
+            return ((oppositeCorner.X - corner1.X) * (ballCenter.Y - corner1.Y) - (oppositeCorner.Y - corner1.Y) * (ballCenter.X - corner1.X)) > 0;
         }
     }
 }

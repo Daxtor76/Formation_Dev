@@ -22,6 +22,7 @@ namespace Soutenance_MonoGame.Constructors
         Rectangle rect;
 
         bool canCollide = true;
+        public Dictionary<string, Vector2> corners;
 
         public Collider(Entity pParent, CallBack pCollisionEffect = null, CallBack pContinuousCollisionEffect = null)
         {
@@ -35,6 +36,8 @@ namespace Soutenance_MonoGame.Constructors
             texture.SetData(new[] { Color.Green });
 
             rect = new Rectangle((int)Position.X, (int)Position.Y, (int)size.X, (int)size.Y);
+
+            corners = GetCorners(rect);
 
             CollisionController.collidersList.Add(this);
         }
@@ -89,6 +92,21 @@ namespace Soutenance_MonoGame.Constructors
             }
             canCollide = true;
             return false;
+        }
+        private Dictionary<string, Vector2> GetCorners(Rectangle rect)
+        {
+            Dictionary<string, Vector2> dico = new Dictionary<string, Vector2>();
+
+            Vector2 tl = new Vector2(rect.X, rect.Y);
+            Vector2 tr = new Vector2(rect.X + rect.Width, rect.Y);
+            Vector2 br = new Vector2(rect.X + rect.Width, rect.Y + rect.Height);
+            Vector2 bl = new Vector2(rect.X, rect.Y + rect.Height);
+            dico.Add("topLeft", tl);
+            dico.Add("topRight", tr);
+            dico.Add("bottomRight", br);
+            dico.Add("bottomLeft", bl);
+
+            return dico;
         }
     }
 }
