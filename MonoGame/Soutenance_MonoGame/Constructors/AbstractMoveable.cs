@@ -21,12 +21,18 @@ namespace ProjectTemplate.Constructors
             direction = pDirection;
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            Move(gameTime);
+        }
+
         public void Move(GameTime gameTime)
         {
             Vector2 screenSize = Utils.GetScreenSize();
-            position += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            position.X = Math.Clamp(position.X, 0, screenSize.X - size.X);
-            position.Y = Math.Clamp(position.Y, 0, screenSize.Y - size.Y);
+            
+            Position += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //Position = new Vector2(Math.Clamp(Position.X, 0, screenSize.X - size.X), Math.Clamp(Position.Y, 0, screenSize.Y - size.Y));
         }
 
         protected Vector2 GetInputDirection()

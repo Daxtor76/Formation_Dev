@@ -23,7 +23,7 @@ namespace Soutenance_MonoGame.Entities
             layer = pLayer;
             img = pImg;
             size = new Vector2(img.Width, img.Height);
-            position = pPos - size * 0.5f;
+            Position = pPos;
             col = new Collider(this, OnCollisionEnter, OnCollision);
 
             EntityController.entities.Add(this);
@@ -32,13 +32,26 @@ namespace Soutenance_MonoGame.Entities
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            Move(gameTime);
+        }
+
+        float GetAngleFromTarget(Entity target)
+        {
+            Vector2 delta = target.Position - Position;
+            float angle = 0.0f;
+
+
+
+            return angle;
         }
 
         public void OnCollisionEnter(Collider other)
         {
             direction = -direction;
-            Debug.WriteLine(other.parent.layer);
+            if (other.parent.layer == "Paddle")
+            {
+                float distance = (other.parent.Position - Position).Length();
+                Debug.WriteLine($"Distance from paddle center: {distance - size.Y}");
+            }
         }
 
         public void OnCollision(Collider other)

@@ -23,7 +23,7 @@ namespace ProjectTemplate.Entities
             layer = pLayer;
             img = pImg;
             size = new Vector2(img.Width, img.Height);
-            position = pPos - size * 0.5f;
+            Position = pPos;
             col = new Collider(this, OnCollisionEnter, OnCollision);
 
             EntityController.entities.Add(this);
@@ -33,7 +33,7 @@ namespace ProjectTemplate.Entities
         {
             base.Update(gameTime);
             direction = GetInputDirection();
-            Move(gameTime);
+            //Move(gameTime);
         }
 
         public void OnCollisionEnter(Collider other)

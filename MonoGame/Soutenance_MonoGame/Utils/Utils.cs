@@ -31,12 +31,12 @@ namespace Soutenance_MonoGame.Utils
         }
         public static Vector2 GetPaddleSpawnPosition()
         {
-            Vector2 screenSize = new Vector2();
+            Vector2 paddleSpawnPos = new Vector2();
 
-            screenSize.X = MainGame._graphics.PreferredBackBufferWidth * 0.5f;
-            screenSize.Y = MainGame._graphics.PreferredBackBufferHeight - MainGame._graphics.PreferredBackBufferHeight * 0.05f;
+            paddleSpawnPos.X = MainGame._graphics.PreferredBackBufferWidth * 0.5f;
+            paddleSpawnPos.Y = MainGame._graphics.PreferredBackBufferHeight - MainGame._graphics.PreferredBackBufferHeight * 0.05f;
 
-            return screenSize;
+            return paddleSpawnPos;
         }
     }
 }

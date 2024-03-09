@@ -26,7 +26,7 @@ namespace ProjectTemplate.Constructors
         public Collider(Entity pParent, CallBack pCollisionEffect = null, CallBack pContinuousCollisionEffect = null)
         {
             parent = pParent;
-            position = pParent.position;
+            Position = pParent.Position;
             size = pParent.size;
             collisionEffect = pCollisionEffect;
             continuousCollisionEffect = pContinuousCollisionEffect;
@@ -34,7 +34,7 @@ namespace ProjectTemplate.Constructors
             texture = new Texture2D(MainGame._graphics.GraphicsDevice, 1, 1);
             texture.SetData(new[] { Color.Green });
 
-            rect = new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y);
+            rect = new Rectangle((int)Position.X, (int)Position.Y, (int)size.X, (int)size.Y);
 
             CollisionController.collidersList.Add(this);
         }
@@ -43,9 +43,9 @@ namespace ProjectTemplate.Constructors
         {
             if (parent != null)
             {
-                position = parent.position;
-                rect.X = (int)position.X;
-                rect.Y = (int)position.Y;
+                Position = parent.Position - size * 0.5f;
+                rect.X = (int)Position.X;
+                rect.Y = (int)Position.Y;
             }
         }
 
@@ -80,10 +80,10 @@ namespace ProjectTemplate.Constructors
 
         public bool IsColliding(Collider other)
         {
-            if (position.X < other.position.X + other.size.X &&
-                position.X + size.X > other.position.X &&
-                position.Y < other.position.Y + other.size.Y &&
-                position.Y + size.Y > other.position.Y)
+            if (Position.X < other.Position.X + other.size.X &&
+                Position.X + size.X > other.Position.X &&
+                Position.Y < other.Position.Y + other.size.Y &&
+                Position.Y + size.Y > other.Position.Y)
             {
                 return true;
             }
