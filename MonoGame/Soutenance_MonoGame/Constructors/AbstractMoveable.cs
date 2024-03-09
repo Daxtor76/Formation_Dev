@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using ProjectTemplate.Interfaces;
+using Soutenance_MonoGame.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,10 @@ namespace ProjectTemplate.Constructors
 
         public void Move(GameTime gameTime, Vector2 direction)
         {
+            Vector2 screenSize = Utils.GetScreenSize();
             position += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            position.X = Math.Clamp(position.X, 0, 800 - size.X);
-            position.Y = Math.Clamp(position.Y, 0, 500 - size.Y);
+            position.X = Math.Clamp(position.X, 0, screenSize.X - size.X);
+            position.Y = Math.Clamp(position.Y, 0, screenSize.Y - size.Y);
         }
 
         protected Vector2 GetInputDirection()
@@ -34,11 +36,12 @@ namespace ProjectTemplate.Constructors
             else if (Keyboard.GetState().IsKeyDown(Keys.Q))
                 direction.X = -1;
 
+            /*
             if (Keyboard.GetState().IsKeyDown(Keys.Z))
                 direction.Y = -1;
             else if (Keyboard.GetState().IsKeyDown(Keys.S))
                 direction.Y = 1;
-
+            */
             return direction;
         }
     }

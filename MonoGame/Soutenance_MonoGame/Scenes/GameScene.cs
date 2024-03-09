@@ -26,9 +26,8 @@ namespace ProjectTemplate
         public override void Load()
         {
             base.Load();
-            hero = new Paddle(MainGame._content.Load<Texture2D>("Hero/personnage"), Utils.GetScreenCenter(), 200.0f, "Hero", "Hero");;
+            hero = new Paddle(MainGame._content.Load<Texture2D>("Paddle/paddle_grey"), Utils.GetPaddleSpawnPosition(), 400.0f, "Paddle", "Paddle");
 
-            Collider test = new Collider(new Vector2(400, 150), new Vector2(75, 75));
             Debug.WriteLine($"{name} scene has been loaded.");
         }
 

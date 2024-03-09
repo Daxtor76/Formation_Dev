@@ -5,8 +5,22 @@
   <Config />
   <SourceFiles>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Hero/personnage.png</File>
+    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_green.png</File>
+    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_grey.png</File>
+    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_orange.png</File>
+    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_purple.png</File>
+    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_red.png</File>
+    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_yellow.png</File>
+    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddles_and_balls.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>

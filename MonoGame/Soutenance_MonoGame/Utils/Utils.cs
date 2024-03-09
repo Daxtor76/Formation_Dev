@@ -29,5 +29,14 @@ namespace Soutenance_MonoGame.Utils
 
             return screenSize;
         }
+        public static Vector2 GetPaddleSpawnPosition()
+        {
+            Vector2 screenSize = new Vector2();
+
+            screenSize.X = MainGame._graphics.PreferredBackBufferWidth * 0.5f;
+            screenSize.Y = MainGame._graphics.PreferredBackBufferHeight - MainGame._graphics.PreferredBackBufferHeight * 0.05f;
+
+            return screenSize;
+        }
     }
 }

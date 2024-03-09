@@ -55,7 +55,8 @@ namespace ProjectTemplate.Constructors
 
         public void Draw()
         {
-            MainGame._spriteBatch.Draw(texture, rect, new Color(Color.Green, 100));
+            if (MainGame.debugMode)
+                MainGame._spriteBatch.Draw(texture, rect, new Color(Color.Green, 100));
         }
 
         public void UpdatePosition(GameTime gameTime)
