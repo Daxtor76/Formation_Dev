@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +16,19 @@ namespace ProjectTemplate
         public bool enabled = true;
         public string name = "";
         public string layer = "";
+        public Texture2D img;
+
+        public virtual void Update()
+        {
+        }
 
         public virtual void Update(GameTime gameTime)
         {
         }
 
-        public virtual void Draw(GameTime gameTime)
+        public virtual void Draw()
         {
+            MainGame._spriteBatch.Draw(img, position, Color.White);
         }
     }
 }

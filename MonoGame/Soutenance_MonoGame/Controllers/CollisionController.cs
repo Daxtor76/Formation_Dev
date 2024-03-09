@@ -13,11 +13,11 @@ namespace ProjectTemplate.Controllers
     {
         public static List<Collider> collidersList = new List<Collider>();
 
-        public static void UpdateColliders(GameTime gameTime)
+        public static void UpdateColliders()
         {
             foreach (Collider col in collidersList)
             {
-                col.UpdatePosition(gameTime);
+                col.Update();
                 foreach (Collider other in collidersList)
                 {
                     if (col != other)

@@ -15,7 +15,6 @@ namespace ProjectTemplate.Entities
 {
     public class Paddle : AbstractMoveable, ICollidable
     {
-        public Texture2D img;
         public Collider col;
 
         public Paddle(Texture2D pImg, Vector2 pPos, float pSpeed, string pName, string pLayer) : base(pSpeed)
@@ -33,13 +32,8 @@ namespace ProjectTemplate.Entities
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            Move(gameTime, GetInputDirection());
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            base.Draw(gameTime);
-            MainGame._spriteBatch.Draw(img, position, Color.White);
+            direction = GetInputDirection();
+            Move(gameTime);
         }
 
         public void OnCollisionEnter()

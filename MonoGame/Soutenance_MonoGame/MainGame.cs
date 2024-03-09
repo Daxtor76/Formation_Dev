@@ -14,7 +14,7 @@ namespace ProjectTemplate
         public static GraphicsDeviceManager _graphics { get; private set; }
         public static SpriteBatch _spriteBatch { get; private set; }
         public static ContentManager _content { get; private set; }
-        public static bool debugMode = true;
+        public static bool debugMode = false;
 
         public MainGame()
         {
@@ -69,7 +69,7 @@ namespace ProjectTemplate
             if(SceneController.currentScene != null)
             {
                 _spriteBatch.Begin();
-                SceneController.currentScene.Draw(gameTime);
+                SceneController.currentScene.Draw();
                 _spriteBatch.End();
             }
 

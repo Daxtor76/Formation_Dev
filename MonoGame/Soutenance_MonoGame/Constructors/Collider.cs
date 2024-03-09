@@ -53,13 +53,7 @@ namespace ProjectTemplate.Constructors
             CollisionController.collidersList.Add(this);
         }
 
-        public void Draw()
-        {
-            if (MainGame.debugMode)
-                MainGame._spriteBatch.Draw(texture, rect, new Color(Color.Green, 100));
-        }
-
-        public void UpdatePosition(GameTime gameTime)
+        public override void Update()
         {
             if (parent != null)
             {
@@ -67,6 +61,12 @@ namespace ProjectTemplate.Constructors
                 rect.X = (int)position.X;
                 rect.Y = (int)position.Y;
             }
+        }
+
+        public override void Draw()
+        {
+            if (MainGame.debugMode)
+                MainGame._spriteBatch.Draw(texture, rect, new Color(Color.Green, 100));
         }
 
         public void CheckCollision(Collider other)

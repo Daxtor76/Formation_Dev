@@ -13,13 +13,15 @@ namespace ProjectTemplate.Constructors
     public abstract class AbstractMoveable : Entity, IMoveable
     {
         protected float speed = 0.0f;
+        protected Vector2 direction;
 
-        public AbstractMoveable(float pSpeed)
+        public AbstractMoveable(float pSpeed, Vector2 pDirection = new Vector2())
         {
             speed = pSpeed;
+            direction = pDirection;
         }
 
-        public void Move(GameTime gameTime, Vector2 direction)
+        public void Move(GameTime gameTime)
         {
             Vector2 screenSize = Utils.GetScreenSize();
             position += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;

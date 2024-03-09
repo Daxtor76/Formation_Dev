@@ -26,9 +26,9 @@ namespace ProjectTemplate
             base.Update(gameTime);
         }
 
-        public override void Draw(GameTime gameTime)
+        public override void Draw()
         {
-            base.Draw(gameTime);
+            base.Draw();
         }
 
         public override void Unload()

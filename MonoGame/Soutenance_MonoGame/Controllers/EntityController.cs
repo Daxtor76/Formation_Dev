@@ -18,11 +18,11 @@ namespace ProjectTemplate.Controllers
             }
         }
 
-        public static void DrawEntities(GameTime gameTime)
+        public static void DrawEntities()
         {
             foreach(Entity entity in entities)
             {
-                entity.Draw(gameTime);
+                entity.Draw();
             }
         }
     }

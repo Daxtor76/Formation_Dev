@@ -12,12 +12,14 @@ using ProjectTemplate.Controllers;
 using ProjectTemplate.Entities;
 using ProjectTemplate.Interfaces;
 using Soutenance_MonoGame.Utils;
+using Soutenance_MonoGame.Entities;
 
 namespace ProjectTemplate
 {
     class GameScene : Scene
     {
-        public Paddle hero;
+        public Paddle paddle;
+        public Ball ball;
 
         public GameScene(string pName) : base(pName)
         {
@@ -26,7 +28,12 @@ namespace ProjectTemplate
         public override void Load()
         {
             base.Load();
-            hero = new Paddle(MainGame._content.Load<Texture2D>("Paddle/paddle_grey"), Utils.GetPaddleSpawnPosition(), 400.0f, "Paddle", "Paddle");
+            paddle = new Paddle(MainGame._content.Load<Texture2D>("Paddle/paddle_grey"), Utils.GetPaddleSpawnPosition(), 400.0f, "Paddle", "Paddle");
+            ball = new Ball(MainGame._content.Load<Texture2D>("Ball/ball_orange"), Utils.GetScreenCenter(), 300.0f, new Vector2(0, 1), "Ball", "Ball");
+
+            Collider wallTop = new Collider(new Vector2(0, 0), new Vector2(Utils.GetScreenSize().X, 2));
+            Collider wallLeft = new Collider(new Vector2(0, 0), new Vector2(2, Utils.GetScreenSize().Y));
+            Collider wallRight = new Collider(new Vector2(Utils.GetScreenSize().X - 2, 0), new Vector2(2, Utils.GetScreenSize().Y));
 
             Debug.WriteLine($"{name} scene has been loaded.");
         }
@@ -36,14 +43,14 @@ namespace ProjectTemplate
             base.Update(gameTime);
 
             EntityController.UpdateEntities(gameTime);
-            CollisionController.UpdateColliders(gameTime);
+            CollisionController.UpdateColliders();
         }
 
-        public override void Draw(GameTime gameTime)
+        public override void Draw()
         {
-            base.Draw(gameTime);
+            base.Draw();
 
-            EntityController.DrawEntities(gameTime);
+            EntityController.DrawEntities();
             CollisionController.DrawColliders();
         }
 

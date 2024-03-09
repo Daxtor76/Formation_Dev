@@ -4,6 +4,12 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Ball/ball_green.png</File>
+    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Ball/ball_grey.png</File>
+    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Ball/ball_orange.png</File>
+    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Ball/ball_purple.png</File>
+    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Ball/ball_red.png</File>
+    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Ball/ball_yellow.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Hero/personnage.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_green.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_grey.png</File>
@@ -14,6 +20,12 @@
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddles_and_balls.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
