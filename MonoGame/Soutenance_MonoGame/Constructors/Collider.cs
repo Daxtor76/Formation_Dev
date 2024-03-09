@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ProjectTemplate.Controllers;
+using ProjectTemplate.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,8 +13,8 @@ namespace ProjectTemplate.Constructors
 {
     public class Collider : Entity
     {
-        Entity parent;
-        public delegate void CallBack();
+        public Entity parent {get; private set;}
+        public delegate void CallBack(Collider other);
         CallBack collisionEffect;
         CallBack continuousCollisionEffect;
 
@@ -27,21 +28,6 @@ namespace ProjectTemplate.Constructors
             parent = pParent;
             position = pParent.position;
             size = pParent.size;
-            collisionEffect = pCollisionEffect;
-            continuousCollisionEffect = pContinuousCollisionEffect;
-
-            texture = new Texture2D(MainGame._graphics.GraphicsDevice, 1, 1);
-            texture.SetData(new[] { Color.Green });
-
-            rect = new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y);
-
-            CollisionController.collidersList.Add(this);
-        }
-
-        public Collider(Vector2 pPosition, Vector2 pSize, CallBack pCollisionEffect = null, CallBack pContinuousCollisionEffect = null)
-        {
-            position = pPosition;
-            size = pSize;
             collisionEffect = pCollisionEffect;
             continuousCollisionEffect = pContinuousCollisionEffect;
 
@@ -71,20 +57,23 @@ namespace ProjectTemplate.Constructors
 
         public void CheckCollision(Collider other)
         {
-            if (collisionEffect != null)
+            if (other.parent is ICollidable)
             {
-                if (IsColliding(other) && canCollide)
+                if (collisionEffect != null)
                 {
-                    canCollide = false;
-                    collisionEffect();
+                    if (IsColliding(other) && canCollide)
+                    {
+                        canCollide = false;
+                        collisionEffect(other);
+                    }
                 }
-            }
 
-            if (continuousCollisionEffect != null)
-            {
-                if (IsColliding(other))
+                if (continuousCollisionEffect != null)
                 {
-                    continuousCollisionEffect();
+                    if (IsColliding(other))
+                    {
+                        continuousCollisionEffect(other);
+                    }
                 }
             }
         }

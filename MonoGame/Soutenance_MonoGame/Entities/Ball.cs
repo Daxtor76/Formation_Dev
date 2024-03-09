@@ -6,6 +6,7 @@ using ProjectTemplate.Controllers;
 using ProjectTemplate.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,12 +35,13 @@ namespace Soutenance_MonoGame.Entities
             Move(gameTime);
         }
 
-        public void OnCollisionEnter()
+        public void OnCollisionEnter(Collider other)
         {
             direction = -direction;
+            Debug.WriteLine(other.parent.layer);
         }
 
-        public void OnCollision()
+        public void OnCollision(Collider other)
         {
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectTemplate.Constructors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace ProjectTemplate.Interfaces
 {
     public interface ICollidable
     {
-        public void OnCollisionEnter();
-        public void OnCollision();
+        public void OnCollisionEnter(Collider other);
+        public void OnCollision(Collider other);
     }
 }

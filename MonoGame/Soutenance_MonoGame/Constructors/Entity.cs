@@ -28,7 +28,8 @@ namespace ProjectTemplate
 
         public virtual void Draw()
         {
-            MainGame._spriteBatch.Draw(img, position, Color.White);
+            if (img != null)
+                MainGame._spriteBatch.Draw(img, position, Color.White);
         }
     }
 }

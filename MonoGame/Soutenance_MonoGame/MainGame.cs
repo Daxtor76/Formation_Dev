@@ -14,7 +14,7 @@ namespace ProjectTemplate
         public static GraphicsDeviceManager _graphics { get; private set; }
         public static SpriteBatch _spriteBatch { get; private set; }
         public static ContentManager _content { get; private set; }
-        public static bool debugMode = false;
+        public static bool debugMode = true;
 
         public MainGame()
         {

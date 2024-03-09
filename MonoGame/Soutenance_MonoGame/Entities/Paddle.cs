@@ -36,14 +36,12 @@ namespace ProjectTemplate.Entities
             Move(gameTime);
         }
 
-        public void OnCollisionEnter()
+        public void OnCollisionEnter(Collider other)
         {
-            Debug.WriteLine("Hit");
         }
 
-        public void OnCollision()
+        public void OnCollision(Collider other)
         {
-            Debug.WriteLine("Hit multiple times");
         }
     }
 }

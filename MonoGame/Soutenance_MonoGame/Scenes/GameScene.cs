@@ -31,9 +31,9 @@ namespace ProjectTemplate
             paddle = new Paddle(MainGame._content.Load<Texture2D>("Paddle/paddle_grey"), Utils.GetPaddleSpawnPosition(), 400.0f, "Paddle", "Paddle");
             ball = new Ball(MainGame._content.Load<Texture2D>("Ball/ball_orange"), Utils.GetScreenCenter(), 300.0f, new Vector2(0, 1), "Ball", "Ball");
 
-            Collider wallTop = new Collider(new Vector2(0, 0), new Vector2(Utils.GetScreenSize().X, 2));
-            Collider wallLeft = new Collider(new Vector2(0, 0), new Vector2(2, Utils.GetScreenSize().Y));
-            Collider wallRight = new Collider(new Vector2(Utils.GetScreenSize().X - 2, 0), new Vector2(2, Utils.GetScreenSize().Y));
+            Wall wallTop = new Wall(new Vector2(0, 0), "Wall", new Vector2(Utils.GetScreenSize().X, 2));
+            Wall wallLeft = new Wall(new Vector2(0, 0), "Wall", new Vector2(2, Utils.GetScreenSize().Y));
+            Wall wallRight = new Wall(new Vector2(Utils.GetScreenSize().X - 2, 0), "Wall", new Vector2(2, Utils.GetScreenSize().Y));
 
             Debug.WriteLine($"{name} scene has been loaded.");
         }
