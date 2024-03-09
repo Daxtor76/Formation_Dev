@@ -13,11 +13,10 @@ namespace ProjectTemplate.Constructors
     {
         protected float speed = 0.0f;
 
-        public AbstractMoveable(MainGame pProjectGame, float pSpeed) : base(pProjectGame)
+        public AbstractMoveable(float pSpeed)
         {
             speed = pSpeed;
         }
-
 
         public void Move(GameTime gameTime, Vector2 direction)
         {

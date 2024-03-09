@@ -11,7 +11,7 @@ namespace ProjectTemplate
 {
     class GameOverScene : Scene
     {
-        public GameOverScene(MainGame pProjectGame, string pName) : base(pProjectGame, pName)
+        public GameOverScene(string pName) : base(pName)
         {
         }
 

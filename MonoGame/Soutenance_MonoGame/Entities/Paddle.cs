@@ -13,19 +13,19 @@ using System.Threading.Tasks;
 
 namespace ProjectTemplate.Entities
 {
-    public class Hero : AbstractMoveable, ICollidable
+    public class Paddle : AbstractMoveable, ICollidable
     {
         public Texture2D img;
         public Collider col;
 
-        public Hero(MainGame pProjectGame, Texture2D pImg, Vector2 pPos, float pSpeed, string pName, string pLayer) : base(pProjectGame, pSpeed)
+        public Paddle(Texture2D pImg, Vector2 pPos, float pSpeed, string pName, string pLayer) : base(pSpeed)
         {
             name = pName;
             layer = pLayer;
-            position = pPos;
             img = pImg;
             size = new Vector2(img.Width, img.Height);
-            col = new Collider(pProjectGame, this, OnCollisionEnter, OnCollision);
+            position = pPos - size * 0.5f;
+            col = new Collider(this, OnCollisionEnter, OnCollision);
 
             EntityController.entities.Add(this);
         }
@@ -39,7 +39,7 @@ namespace ProjectTemplate.Entities
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-            projectGame._spriteBatch.Draw(img, position, Color.White);
+            MainGame._spriteBatch.Draw(img, position, Color.White);
         }
 
         public void OnCollisionEnter()

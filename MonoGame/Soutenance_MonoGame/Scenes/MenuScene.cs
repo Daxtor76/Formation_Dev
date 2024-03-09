@@ -16,7 +16,7 @@ namespace ProjectTemplate
 {
     class MenuScene : Scene
     {
-        public MenuScene(MainGame pProjectGame, string pName) : base(pProjectGame, pName)
+        public MenuScene(string pName) : base(pName)
         {
         }
 

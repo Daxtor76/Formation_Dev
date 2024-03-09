@@ -11,12 +11,10 @@ namespace ProjectTemplate.Constructors
 {
     public abstract class Scene
     {
-        protected MainGame projectGame;
         public string name;
 
-        public Scene(MainGame pProjectGame, string pName)
+        public Scene(string pName)
         {
-            projectGame = pProjectGame;
             name = pName;
         }
 

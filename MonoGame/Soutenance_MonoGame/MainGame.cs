@@ -5,18 +5,21 @@ using System;
 using System.Diagnostics;
 using System.Net.Security;
 using ProjectTemplate.Controllers;
+using Microsoft.Xna.Framework.Content;
 
 namespace ProjectTemplate
 {
     public class MainGame : Game
     {
-        public GraphicsDeviceManager _graphics { get; private set; }
-        public SpriteBatch _spriteBatch { get; private set; }
+        public static GraphicsDeviceManager _graphics { get; private set; }
+        public static SpriteBatch _spriteBatch { get; private set; }
+        public static ContentManager _content { get; private set; }
 
         public MainGame()
         {
             _graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            _content = Content;
+            _content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
 
@@ -33,7 +36,7 @@ namespace ProjectTemplate
         {
             // TODO: Add your initialization logic here
             SetGameFullScreen(false);
-            SceneController.Init(this);
+            SceneController.Init();
 
             base.Initialize();
         }

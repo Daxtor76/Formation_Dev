@@ -21,12 +21,12 @@ namespace ProjectTemplate.Controllers
         public static List<Scene> sceneList = new List<Scene>();
         public static Scene currentScene;
 
-        public static void Init(MainGame projectGame)
+        public static void Init()
         {
             // Same order as the enum
-            Scene menuScene = new MenuScene(projectGame, "Menu");
-            Scene gameScene = new GameScene(projectGame, "Game");
-            Scene gameOverScene = new GameOverScene(projectGame, "GameOver");
+            Scene menuScene = new MenuScene("Menu");
+            Scene gameScene = new GameScene("Game");
+            Scene gameOverScene = new GameOverScene("GameOver");
             sceneList.Add(menuScene);
             sceneList.Add(gameScene);
             sceneList.Add(gameOverScene);
