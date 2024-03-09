@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using ProjectTemplate;
+using Soutenance_MonoGame;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soutenance_MonoGame.Utils
+namespace Soutenance_MonoGame
 {
     public static class Utils
     {

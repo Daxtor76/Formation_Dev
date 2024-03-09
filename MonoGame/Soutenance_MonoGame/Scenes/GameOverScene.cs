@@ -5,9 +5,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ProjectTemplate.Constructors;
+using Soutenance_MonoGame.Constructors;
 
-namespace ProjectTemplate
+namespace Soutenance_MonoGame
 {
     class GameOverScene : Scene
     {

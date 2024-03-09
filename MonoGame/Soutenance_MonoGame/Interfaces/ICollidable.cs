@@ -1,12 +1,11 @@
-﻿using ProjectTemplate.Constructors;
+﻿using Soutenance_MonoGame.Constructors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static ProjectTemplate.Constructors.Collider;
 
-namespace ProjectTemplate.Interfaces
+namespace Soutenance_MonoGame.Interfaces
 {
     public interface ICollidable
     {

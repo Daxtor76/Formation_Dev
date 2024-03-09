@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ProjectTemplate.Controllers;
-using ProjectTemplate.Interfaces;
+using Soutenance_MonoGame.Controllers;
+using Soutenance_MonoGame.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectTemplate.Constructors
+namespace Soutenance_MonoGame.Constructors
 {
     public class Collider : Entity
     {

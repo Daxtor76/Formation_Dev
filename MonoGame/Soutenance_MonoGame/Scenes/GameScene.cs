@@ -6,15 +6,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ProjectTemplate.Constructors;
+using Soutenance_MonoGame.Constructors;
 using Microsoft.Xna.Framework.Graphics;
-using ProjectTemplate.Controllers;
-using ProjectTemplate.Entities;
-using ProjectTemplate.Interfaces;
-using Soutenance_MonoGame.Utils;
+using Soutenance_MonoGame.Controllers;
 using Soutenance_MonoGame.Entities;
+using Soutenance_MonoGame.Interfaces;
 
-namespace ProjectTemplate
+namespace Soutenance_MonoGame
 {
     class GameScene : Scene
     {

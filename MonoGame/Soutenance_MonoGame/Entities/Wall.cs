@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ProjectTemplate;
-using ProjectTemplate.Constructors;
-using ProjectTemplate.Controllers;
-using ProjectTemplate.Interfaces;
+using Soutenance_MonoGame;
+using Soutenance_MonoGame.Constructors;
+using Soutenance_MonoGame.Controllers;
+using Soutenance_MonoGame.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -4,10 +4,10 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Diagnostics;
 using System.Net.Security;
-using ProjectTemplate.Controllers;
+using Soutenance_MonoGame.Controllers;
 using Microsoft.Xna.Framework.Content;
 
-namespace ProjectTemplate
+namespace Soutenance_MonoGame
 {
     public class MainGame : Game
     {

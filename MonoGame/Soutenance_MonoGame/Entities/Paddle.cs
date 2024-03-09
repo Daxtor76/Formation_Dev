@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using ProjectTemplate.Constructors;
-using ProjectTemplate.Controllers;
-using ProjectTemplate.Interfaces;
+using Soutenance_MonoGame.Constructors;
+using Soutenance_MonoGame.Controllers;
+using Soutenance_MonoGame.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectTemplate.Entities
+namespace Soutenance_MonoGame.Entities
 {
     public class Paddle : AbstractMoveable, ICollidable
     {
@@ -31,9 +31,8 @@ namespace ProjectTemplate.Entities
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
             direction = GetInputDirection();
-            //Move(gameTime);
+            base.Update(gameTime);
         }
 
         public void OnCollisionEnter(Collider other)

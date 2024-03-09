@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectTemplate.Constructors
+namespace Soutenance_MonoGame.Constructors
 {
     public abstract class Scene
     {

@@ -8,11 +8,11 @@ using System.Linq;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
-using ProjectTemplate.Constructors;
-using ProjectTemplate.Controllers;
+using Soutenance_MonoGame.Constructors;
+using Soutenance_MonoGame.Controllers;
 using System.Reflection.Emit;
 
-namespace ProjectTemplate
+namespace Soutenance_MonoGame
 {
     class MenuScene : Scene
     {

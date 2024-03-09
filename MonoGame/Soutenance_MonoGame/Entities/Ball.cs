@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ProjectTemplate;
-using ProjectTemplate.Constructors;
-using ProjectTemplate.Controllers;
-using ProjectTemplate.Interfaces;
+using Soutenance_MonoGame;
+using Soutenance_MonoGame.Constructors;
+using Soutenance_MonoGame.Controllers;
+using Soutenance_MonoGame.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -34,24 +34,20 @@ namespace Soutenance_MonoGame.Entities
             base.Update(gameTime);
         }
 
-        float GetAngleFromTarget(Entity target)
+        float GetImpactPointRelativePosition(Entity target)
         {
-            Vector2 delta = target.Position - Position;
-            float angle = 0.0f;
-
-
-
-            return angle;
+            return (Position.X - target.Position.X) / (target.size.X * 0.5f);
         }
 
         public void OnCollisionEnter(Collider other)
         {
-            direction = -direction;
             if (other.parent.layer == "Paddle")
             {
-                float distance = (other.parent.Position - Position).Length();
-                Debug.WriteLine($"Distance from paddle center: {distance - size.Y}");
+                float modifier = GetImpactPointRelativePosition(other.parent);
+                direction = new Vector2(modifier, -direction.Y);
             }
+            else
+                direction = -direction;
         }
 
         public void OnCollision(Collider other)

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectTemplate
+namespace Soutenance_MonoGame
 {
     public abstract class Entity
     {

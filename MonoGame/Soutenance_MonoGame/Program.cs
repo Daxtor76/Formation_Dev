@@ -1,3 +1,3 @@
 ﻿
-using var game = new ProjectTemplate.MainGame();
+using var game = new Soutenance_MonoGame.MainGame();
 game.Run();

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectTemplate.Interfaces
+namespace Soutenance_MonoGame.Interfaces
 {
     public interface IMoveable
     {

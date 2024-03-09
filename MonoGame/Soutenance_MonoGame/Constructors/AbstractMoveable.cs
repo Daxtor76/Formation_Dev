@@ -1,14 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using ProjectTemplate.Interfaces;
-using Soutenance_MonoGame.Utils;
+using Soutenance_MonoGame.Interfaces;
+using Soutenance_MonoGame;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectTemplate.Constructors
+namespace Soutenance_MonoGame.Constructors
 {
     public abstract class AbstractMoveable : Entity, IMoveable
     {
@@ -32,7 +32,7 @@ namespace ProjectTemplate.Constructors
             Vector2 screenSize = Utils.GetScreenSize();
             
             Position += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            //Position = new Vector2(Math.Clamp(Position.X, 0, screenSize.X - size.X), Math.Clamp(Position.Y, 0, screenSize.Y - size.Y));
+            Position = new Vector2(Math.Clamp(Position.X, 0, screenSize.X - size.X), Math.Clamp(Position.Y, 0, screenSize.Y - size.Y));
         }
 
         protected Vector2 GetInputDirection()
