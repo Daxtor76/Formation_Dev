@@ -32,16 +32,9 @@ namespace Soutenance_MonoGame.Entities
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            // TO DO: voir si on peut pas ranger ça ailleurs
             col.oldPosition = col.position;
-        }
-        public Vector2 GetSpawnPosition()
-        {
-            Vector2 ballSpawnPos = new Vector2();
-
-            ballSpawnPos.X = MainGame._graphics.PreferredBackBufferWidth * 0.5f - size.X * 0.5f;
-            ballSpawnPos.Y = MainGame._graphics.PreferredBackBufferHeight * 0.5f - size.Y * 0.5f;
-
-            return ballSpawnPos;
         }
 
         float GetImpactPointRelativePosition(Entity target)
@@ -59,14 +52,22 @@ namespace Soutenance_MonoGame.Entities
                 float modifier = GetImpactPointRelativePosition(other.parent);
                 direction = new Vector2(modifier, -direction.Y);
             }
+            else if (side == "bottom" && other.parent.layer == "Wall")
+            {
+                position = Utils.GetScreenCenter();
+            }
             else
             {
-                Debug.WriteLine(side);
                 if (side == "top" || side == "bottom")
                     direction.Y = -direction.Y;
-
-                if (side == "left" || side == "right")
+                else if (side == "left" || side == "right")
                     direction.X = -direction.X;
+            }
+
+            if (other.parent is IDamageable)
+            {
+                IDamageable parent = other.parent as IDamageable;
+                parent.TakeDamages(1);
             }
         }
 

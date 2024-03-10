@@ -3,7 +3,7 @@
   <SourceFile>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Hero/personnage.png</SourceFile>
   <SourceTime>2024-03-03T13:57:49.3548702+01:00</SourceTime>
   <DestFile>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/bin/DesktopGL/Hero/personnage.xnb</DestFile>
-  <DestTime>2024-03-09T12:48:56.9153075+01:00</DestTime>
+  <DestTime>2024-03-10T16:30:43.9568517+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -29,7 +29,6 @@ namespace Soutenance_MonoGame.Constructors
             parent = pParent;
             size = pParent.size;
             position = new Vector2(pParent.position.X + size.X, pParent.position.Y);
-            //oldPosition = position;
             collisionEffect = pCollisionEffect;
             continuousCollisionEffect = pContinuousCollisionEffect;
 

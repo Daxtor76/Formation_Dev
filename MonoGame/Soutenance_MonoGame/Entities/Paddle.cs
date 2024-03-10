@@ -34,7 +34,7 @@ namespace Soutenance_MonoGame.Entities
             direction = GetInputDirection();
             base.Update(gameTime);
         }
-        public Vector2 GetSpawnPosition()
+        protected override Vector2 GetSpawnPosition()
         {
             Vector2 paddleSpawnPos = new Vector2();
 

@@ -27,11 +27,14 @@ namespace Soutenance_MonoGame
         {
             base.Load();
             paddle = new Paddle(MainGame._content.Load<Texture2D>("Paddle/paddle_grey"), 400.0f, "Paddle", "Paddle");
-            ball = new Ball(MainGame._content.Load<Texture2D>("Ball/ball_orange"), 300.0f, new Vector2(0, 1), "Ball", "Ball");
+            ball = new Ball(MainGame._content.Load<Texture2D>("Ball/ball_orange"), 500.0f, new Vector2(0, 1), "Ball", "Ball");
 
-            Wall wallTop = new Wall(new Vector2(0, 2), "Wall", new Vector2(Utils.GetScreenSize().X, 2));
+            Wall wallTop = new Wall(new Vector2(0, 0), "Wall", new Vector2(Utils.GetScreenSize().X, 2));
+            Wall wallBottom = new Wall(new Vector2(0, Utils.GetScreenSize().Y - 2), "Wall", new Vector2(Utils.GetScreenSize().X, 2));
             Wall wallLeft = new Wall(new Vector2(0, 0), "Wall", new Vector2(2, Utils.GetScreenSize().Y));
             Wall wallRight = new Wall(new Vector2(Utils.GetScreenSize().X - 2, 0), "Wall", new Vector2(2, Utils.GetScreenSize().Y));
+
+            Brick brick = new Brick(MainGame._content.Load<Texture2D>("Bricks/brick_green"), Utils.GetScreenCenter(), 1, "Brick", "Brick");
 
             Debug.WriteLine($"{name} scene has been loaded.");
         }

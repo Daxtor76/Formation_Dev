@@ -31,5 +31,15 @@ namespace Soutenance_MonoGame
             if (img != null)
                 MainGame._spriteBatch.Draw(img, position, Color.White);
         }
+
+        protected virtual Vector2 GetSpawnPosition()
+        {
+            Vector2 spawnPos = new Vector2();
+
+            spawnPos.X = MainGame._graphics.PreferredBackBufferWidth * 0.5f - size.X * 0.5f;
+            spawnPos.Y = MainGame._graphics.PreferredBackBufferHeight * 0.5f - size.Y * 0.5f;
+
+            return spawnPos;
+        }
     }
 }
