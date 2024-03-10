@@ -56,12 +56,14 @@ namespace Soutenance_MonoGame.Entities
         public void TakeDamages(int amount)
         {
             life = Math.Clamp(life - amount, 0, maxLife);
-            Debug.WriteLine(life);
+
+            if (life <= 0)
+                Die();
         }
 
         public void Die()
         {
-            throw new NotImplementedException();
+            enabled = false;
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Soutenance_MonoGame.Constructors
 
             rect = new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y);
 
-            CollisionController.collidersList.Add(this);
+            CollisionController.colliders.Add(this);
         }
 
         public override void Update()

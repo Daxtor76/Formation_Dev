@@ -14,7 +14,8 @@ namespace Soutenance_MonoGame.Controllers
         {
             foreach(Entity entity in entities)
             {
-                entity.Update(gameTime);
+                if (entity.enabled)
+                    entity.Update(gameTime);
             }
         }
 
@@ -22,7 +23,17 @@ namespace Soutenance_MonoGame.Controllers
         {
             foreach(Entity entity in entities)
             {
-                entity.Draw();
+                if (entity.enabled)
+                    entity.Draw();
+            }
+        }
+
+        public static void CleanEntities()
+        {
+            for (int i = entities.Count - 1; i >= 0; i--)
+            {
+                if (!entities[i].enabled)
+                    entities.Remove(entities[i]);
             }
         }
     }

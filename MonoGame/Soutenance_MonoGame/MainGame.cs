@@ -14,7 +14,7 @@ namespace Soutenance_MonoGame
         public static GraphicsDeviceManager _graphics { get; private set; }
         public static SpriteBatch _spriteBatch { get; private set; }
         public static ContentManager _content { get; private set; }
-        public static bool debugMode = true;
+        public static bool debugMode = false;
 
         public MainGame()
         {
@@ -57,6 +57,9 @@ namespace Soutenance_MonoGame
             // TODO: Add your update logic here
             if(SceneController.currentScene != null)
                 SceneController.currentScene.Update(gameTime);
+
+            CollisionController.CleanColliders();
+            EntityController.CleanEntities();
 
             base.Update(gameTime);
         }

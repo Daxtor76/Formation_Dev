@@ -34,7 +34,15 @@ namespace Soutenance_MonoGame
             Wall wallLeft = new Wall(new Vector2(0, 0), "Wall", new Vector2(2, Utils.GetScreenSize().Y));
             Wall wallRight = new Wall(new Vector2(Utils.GetScreenSize().X - 2, 0), "Wall", new Vector2(2, Utils.GetScreenSize().Y));
 
-            Brick brick = new Brick(MainGame._content.Load<Texture2D>("Bricks/brick_green"), Utils.GetScreenCenter(), 1, "Brick", "Brick");
+            Brick brick = new Brick(MainGame._content.Load<Texture2D>("Bricks/brick_green"), new Vector2(1, 10), 1, "Brick", "Brick");
+            Brick brick2 = new Brick(MainGame._content.Load<Texture2D>("Bricks/brick_green"), new Vector2(200, 10), 1, "Brick", "Brick");
+            Brick brick3 = new Brick(MainGame._content.Load<Texture2D>("Bricks/brick_green"), new Vector2(450, 10), 1, "Brick", "Brick");
+            Brick brick4 = new Brick(MainGame._content.Load<Texture2D>("Bricks/brick_green"), new Vector2(900, 150), 1, "Brick", "Brick");
+            Brick brick5 = new Brick(MainGame._content.Load<Texture2D>("Bricks/brick_green"), new Vector2(500, 150), 1, "Brick", "Brick");
+            Brick brick6 = new Brick(MainGame._content.Load<Texture2D>("Bricks/brick_green"), new Vector2(1000, 150), 1, "Brick", "Brick");
+            Brick brick7 = new Brick(MainGame._content.Load<Texture2D>("Bricks/brick_green"), new Vector2(100, 300), 1, "Brick", "Brick");
+            Brick brick8 = new Brick(MainGame._content.Load<Texture2D>("Bricks/brick_green"), new Vector2(750, 300), 1, "Brick", "Brick");
+            Brick brick9 = new Brick(MainGame._content.Load<Texture2D>("Bricks/brick_green"), new Vector2(1050, 300), 1, "Brick", "Brick");
 
             Debug.WriteLine($"{name} scene has been loaded.");
         }
