@@ -9,7 +9,7 @@ namespace Soutenance_MonoGame.Interfaces
 {
     public interface ICollidable
     {
-        public void OnCollisionEnter(Collider other);
-        public void OnCollision(Collider other);
+        public void OnCollisionEnter(Collider other, string side);
+        public void OnCollision(Collider other, string side);
     }
 }

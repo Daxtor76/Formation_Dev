@@ -10,12 +10,7 @@ namespace Soutenance_MonoGame
 {
     public abstract class Entity
     {
-        private Vector2 position = new Vector2();
-        public Vector2 Position
-        {
-            get => position + size * 0.5f;
-            set => position = value - size * 0.5f;
-        }
+        public Vector2 position = new Vector2();
         public Vector2 size = new Vector2();
         public Vector2 scale = new Vector2(1, 1);
         public bool enabled = true;

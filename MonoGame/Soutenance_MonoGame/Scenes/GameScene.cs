@@ -26,12 +26,12 @@ namespace Soutenance_MonoGame
         public override void Load()
         {
             base.Load();
-            paddle = new Paddle(MainGame._content.Load<Texture2D>("Paddle/paddle_grey"), Utils.GetPaddleSpawnPosition(), 400.0f, "Paddle", "Paddle");
-            ball = new Ball(MainGame._content.Load<Texture2D>("Ball/ball_orange"), Utils.GetScreenCenter(), 300.0f, new Vector2(0, 1), "Ball", "Ball");
+            paddle = new Paddle(MainGame._content.Load<Texture2D>("Paddle/paddle_grey"), 400.0f, "Paddle", "Paddle");
+            ball = new Ball(MainGame._content.Load<Texture2D>("Ball/ball_orange"), 300.0f, new Vector2(0, 1), "Ball", "Ball");
 
-            Wall wallTop = new Wall(new Vector2(Utils.GetScreenCenter().X, 0), "Wall", new Vector2(Utils.GetScreenSize().X, 2));
-            Wall wallLeft = new Wall(new Vector2(0, Utils.GetScreenCenter().Y), "Wall", new Vector2(2, Utils.GetScreenSize().Y));
-            Wall wallRight = new Wall(new Vector2(Utils.GetScreenSize().X - 2, Utils.GetScreenCenter().Y), "Wall", new Vector2(2, Utils.GetScreenSize().Y));
+            Wall wallTop = new Wall(new Vector2(0, 2), "Wall", new Vector2(Utils.GetScreenSize().X, 2));
+            Wall wallLeft = new Wall(new Vector2(0, 0), "Wall", new Vector2(2, Utils.GetScreenSize().Y));
+            Wall wallRight = new Wall(new Vector2(Utils.GetScreenSize().X - 2, 0), "Wall", new Vector2(2, Utils.GetScreenSize().Y));
 
             Debug.WriteLine($"{name} scene has been loaded.");
         }

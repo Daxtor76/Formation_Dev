@@ -20,7 +20,7 @@ namespace Soutenance_MonoGame.Entities
         {
             layer = pLayer;
             size = pSize;
-            Position = pPos;
+            position = pPos;
             col = new Collider(this, OnCollisionEnter, OnCollision);
 
             EntityController.entities.Add(this);
@@ -31,17 +31,17 @@ namespace Soutenance_MonoGame.Entities
             layer = pLayer;
             img = pImg;
             size = new Vector2(img.Width, img.Height);
-            Position = pPos;
+            position = pPos;
             col = new Collider(this, OnCollisionEnter, OnCollision);
 
             EntityController.entities.Add(this);
         }
 
-        public void OnCollision(Collider other)
+        public void OnCollision(Collider other, string side)
         {
         }
 
-        public void OnCollisionEnter(Collider other)
+        public void OnCollisionEnter(Collider other, string side)
         {
         }
     }

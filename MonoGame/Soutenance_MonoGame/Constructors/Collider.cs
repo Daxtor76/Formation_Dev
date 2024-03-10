@@ -14,7 +14,7 @@ namespace Soutenance_MonoGame.Constructors
     public class Collider : Entity
     {
         public Entity parent {get; private set;}
-        public delegate void CallBack(Collider other);
+        public delegate void CallBack(Collider other, string side);
         CallBack collisionEffect;
         CallBack continuousCollisionEffect;
 
@@ -22,22 +22,20 @@ namespace Soutenance_MonoGame.Constructors
         Rectangle rect;
 
         bool canCollide = true;
-        public Dictionary<string, Vector2> corners;
+        public Dictionary<string, Vector2> edges;
 
         public Collider(Entity pParent, CallBack pCollisionEffect = null, CallBack pContinuousCollisionEffect = null)
         {
             parent = pParent;
-            Position = pParent.Position;
             size = pParent.size;
+            position = new Vector2(pParent.position.X + size.X, pParent.position.Y);
             collisionEffect = pCollisionEffect;
             continuousCollisionEffect = pContinuousCollisionEffect;
 
             texture = new Texture2D(MainGame._graphics.GraphicsDevice, 1, 1);
             texture.SetData(new[] { Color.Green });
 
-            rect = new Rectangle((int)Position.X, (int)Position.Y, (int)size.X, (int)size.Y);
-
-            corners = GetCorners(rect);
+            rect = new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y);
 
             CollisionController.collidersList.Add(this);
         }
@@ -46,9 +44,9 @@ namespace Soutenance_MonoGame.Constructors
         {
             if (parent != null)
             {
-                Position = parent.Position - size * 0.5f;
-                rect.X = (int)Position.X;
-                rect.Y = (int)Position.Y;
+                position = parent.position;
+                rect.X = (int)position.X;
+                rect.Y = (int)position.Y;
             }
         }
 
@@ -64,49 +62,35 @@ namespace Soutenance_MonoGame.Constructors
             {
                 if (collisionEffect != null)
                 {
-                    if (IsColliding(other) && canCollide)
+                    if (IsColliding(other, out string collidingSide) && canCollide)
                     {
                         canCollide = false;
-                        collisionEffect(other);
+                        collisionEffect(other, collidingSide);
                     }
                 }
 
                 if (continuousCollisionEffect != null)
                 {
-                    if (IsColliding(other))
+                    if (IsColliding(other, out string collidingSide))
                     {
-                        continuousCollisionEffect(other);
+                        continuousCollisionEffect(other, collidingSide);
                     }
                 }
             }
         }
 
-        public bool IsColliding(Collider other)
+        public bool IsColliding(Collider other, out string collidingSide)
         {
-            if (Position.X < other.Position.X + other.size.X &&
-                Position.X + size.X > other.Position.X &&
-                Position.Y < other.Position.Y + other.size.Y &&
-                Position.Y + size.Y > other.Position.Y)
+            collidingSide = "";
+            if (position.X < other.position.X + other.size.X &&
+                position.X + size.X > other.position.X &&
+                position.Y < other.position.Y + other.size.Y &&
+                position.Y + size.Y > other.position.Y)
             {
                 return true;
             }
             canCollide = true;
             return false;
-        }
-        private Dictionary<string, Vector2> GetCorners(Rectangle rect)
-        {
-            Dictionary<string, Vector2> dico = new Dictionary<string, Vector2>();
-
-            Vector2 tl = new Vector2(rect.X, rect.Y);
-            Vector2 tr = new Vector2(rect.X + rect.Width, rect.Y);
-            Vector2 br = new Vector2(rect.X + rect.Width, rect.Y + rect.Height);
-            Vector2 bl = new Vector2(rect.X, rect.Y + rect.Height);
-            dico.Add("topLeft", tl);
-            dico.Add("topRight", tr);
-            dico.Add("bottomRight", br);
-            dico.Add("bottomLeft", bl);
-
-            return dico;
         }
     }
 }

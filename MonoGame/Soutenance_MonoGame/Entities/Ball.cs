@@ -17,13 +17,13 @@ namespace Soutenance_MonoGame.Entities
     {
         public Collider col;
 
-        public Ball(Texture2D pImg, Vector2 pPos, float pSpeed, Vector2 pDirection, string pName, string pLayer) : base(pSpeed, pDirection)
+        public Ball(Texture2D pImg, float pSpeed, Vector2 pDirection, string pName, string pLayer) : base(pSpeed, pDirection)
         {
             name = pName;
             layer = pLayer;
             img = pImg;
             size = new Vector2(img.Width, img.Height);
-            Position = pPos;
+            position = GetSpawnPosition();
             col = new Collider(this, OnCollisionEnter, OnCollision);
 
             EntityController.entities.Add(this);
@@ -33,13 +33,25 @@ namespace Soutenance_MonoGame.Entities
         {
             base.Update(gameTime);
         }
+        public Vector2 GetSpawnPosition()
+        {
+            Vector2 ballSpawnPos = new Vector2();
+
+            ballSpawnPos.X = MainGame._graphics.PreferredBackBufferWidth * 0.5f - size.X * 0.5f;
+            ballSpawnPos.Y = MainGame._graphics.PreferredBackBufferHeight * 0.5f - size.Y * 0.5f;
+
+            return ballSpawnPos;
+        }
 
         float GetImpactPointRelativePosition(Entity target)
         {
-            return (Position.X - target.Position.X) / (target.size.X * 0.5f);
+            float ballCenterPos = position.X + size.X * 0.5f;
+            float targetCenterPos = target.position.X + target.size.X * 0.5f;
+            float targetSizeHalf = target.size.X * 0.5f;
+            return -(targetCenterPos - ballCenterPos) / targetSizeHalf;
         }
 
-        public void OnCollisionEnter(Collider other)
+        public void OnCollisionEnter(Collider other, string side)
         {
             if (other.parent.layer == "Paddle")
             {
@@ -48,40 +60,26 @@ namespace Soutenance_MonoGame.Entities
             }
             else
             {
-                bool isAboveAC = isOnUpperSideOfLine(other.corners["bottomRight"], other.corners["topLeft"], Position);
-                bool isAboveDB = isOnUpperSideOfLine(other.corners["topRight"], other.corners["bottomLeft"], Position);
-
-                if (isAboveAC)
+                direction = -direction;
+                /*if (Position.Y > other.edges["top"].Y && Position.Y < other.edges["bottom"].Y)
                 {
-                    if (isAboveDB)
-                        // top edge
-                        direction.Y = -direction.Y;
-                    else
-                        // right edge
-                        direction.X = -direction.X;
+                    //sides
+                    direction.X = -direction.X;
+                    Debug.WriteLine("sides");
+                }
+                else if (Position.X > other.edges["left"].X && Position.X < other.edges["right"].X)
+                {
+                    // top bottom
+                    direction.Y = -direction.Y;
+                    Debug.WriteLine("top bottom");
                 }
                 else
-                {
-                    if (isAboveDB)
-                    {
-                        if (isAboveDB)
-                            // left edge
-                            direction.X = -direction.X;
-                        else
-                            // bottom edge
-                            direction.Y = -direction.Y;
-                    }
-                }    
+                    Debug.WriteLine("wtf");*/
             }
         }
 
-        public void OnCollision(Collider other)
+        public void OnCollision(Collider other, string side)
         {
-        }
-
-        bool isOnUpperSideOfLine(Vector2 corner1, Vector2 oppositeCorner, Vector2 ballCenter)
-        {
-            return ((oppositeCorner.X - corner1.X) * (ballCenter.Y - corner1.Y) - (oppositeCorner.Y - corner1.Y) * (ballCenter.X - corner1.X)) > 0;
         }
     }
 }

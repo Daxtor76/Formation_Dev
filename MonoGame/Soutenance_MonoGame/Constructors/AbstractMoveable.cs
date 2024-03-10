@@ -31,8 +31,8 @@ namespace Soutenance_MonoGame.Constructors
         {
             Vector2 screenSize = Utils.GetScreenSize();
             
-            Position += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            Position = new Vector2(Math.Clamp(Position.X, 0, screenSize.X - size.X), Math.Clamp(Position.Y, 0, screenSize.Y - size.Y));
+            position += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            position = new Vector2(Math.Clamp(position.X, 0, screenSize.X - size.X), position.Y);
         }
 
         protected Vector2 GetInputDirection()
