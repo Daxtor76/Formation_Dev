@@ -20,7 +20,7 @@ function SorceressCharge:New(position)
     tmpSorceressCharge.state = 0;
 
     -- Graph
-    tmpSorceressCharge.spritesheet = love.graphics.newImage("images/enemies/Sorceress/charge.png");
+    tmpSorceressCharge.spritesheet = love.graphics.newImage("images/enemies/sorceress/charge.png");
     tmpSorceressCharge.anims = tmpSorceressCharge:PopulateAnims();
     tmpSorceressCharge.renderLayer = 0;
     tmpSorceressCharge.active = false;
