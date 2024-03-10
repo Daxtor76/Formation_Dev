@@ -32,6 +32,7 @@ namespace Soutenance_MonoGame.Entities
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            col.oldPosition = col.position;
         }
         public Vector2 GetSpawnPosition()
         {
@@ -60,21 +61,12 @@ namespace Soutenance_MonoGame.Entities
             }
             else
             {
-                direction = -direction;
-                /*if (Position.Y > other.edges["top"].Y && Position.Y < other.edges["bottom"].Y)
-                {
-                    //sides
-                    direction.X = -direction.X;
-                    Debug.WriteLine("sides");
-                }
-                else if (Position.X > other.edges["left"].X && Position.X < other.edges["right"].X)
-                {
-                    // top bottom
+                Debug.WriteLine(side);
+                if (side == "top" || side == "bottom")
                     direction.Y = -direction.Y;
-                    Debug.WriteLine("top bottom");
-                }
-                else
-                    Debug.WriteLine("wtf");*/
+
+                if (side == "left" || side == "right")
+                    direction.X = -direction.X;
             }
         }
 

@@ -14,6 +14,7 @@ namespace Soutenance_MonoGame.Constructors
     public class Collider : Entity
     {
         public Entity parent {get; private set;}
+        public Vector2 oldPosition;
         public delegate void CallBack(Collider other, string side);
         CallBack collisionEffect;
         CallBack continuousCollisionEffect;
@@ -22,13 +23,13 @@ namespace Soutenance_MonoGame.Constructors
         Rectangle rect;
 
         bool canCollide = true;
-        public Dictionary<string, Vector2> edges;
 
         public Collider(Entity pParent, CallBack pCollisionEffect = null, CallBack pContinuousCollisionEffect = null)
         {
             parent = pParent;
             size = pParent.size;
             position = new Vector2(pParent.position.X + size.X, pParent.position.Y);
+            //oldPosition = position;
             collisionEffect = pCollisionEffect;
             continuousCollisionEffect = pContinuousCollisionEffect;
 
@@ -82,13 +83,31 @@ namespace Soutenance_MonoGame.Constructors
         public bool IsColliding(Collider other, out string collidingSide)
         {
             collidingSide = "";
+
             if (position.X < other.position.X + other.size.X &&
                 position.X + size.X > other.position.X &&
                 position.Y < other.position.Y + other.size.Y &&
                 position.Y + size.Y > other.position.Y)
             {
+                if (oldPosition.X + size.X <= other.position.X)
+                {
+                    collidingSide = "right";
+                }
+                if (oldPosition.X >= other.position.X + other.size.X)
+                {
+                    collidingSide = "left";
+                }
+                if (oldPosition.Y >= other.position.Y + other.size.Y)
+                {
+                    collidingSide = "top";
+                }
+                if (oldPosition.Y + size.Y <= other.position.Y)
+                {
+                    collidingSide = "bottom";
+                }
                 return true;
             }
+
             canCollide = true;
             return false;
         }
