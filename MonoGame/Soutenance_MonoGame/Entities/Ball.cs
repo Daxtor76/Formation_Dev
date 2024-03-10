@@ -47,14 +47,15 @@ namespace Soutenance_MonoGame.Entities
 
         public void OnCollisionEnter(Collider other, string side)
         {
+            if (side == "bottom" && other.parent.layer == "Wall")
+            {
+                position = Utils.GetScreenCenter();
+            }
+
             if (other.parent.layer == "Paddle")
             {
                 float modifier = GetImpactPointRelativePosition(other.parent);
                 direction = new Vector2(modifier, -direction.Y);
-            }
-            else if (side == "bottom" && other.parent.layer == "Wall")
-            {
-                position = Utils.GetScreenCenter();
             }
             else
             {
