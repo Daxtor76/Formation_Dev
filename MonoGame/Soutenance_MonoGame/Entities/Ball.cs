@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Vector2 = System.Numerics.Vector2;
 using Soutenance_MonoGame;
 using Soutenance_MonoGame.Constructors;
 using Soutenance_MonoGame.Controllers;
@@ -55,7 +56,7 @@ namespace Soutenance_MonoGame.Entities
             if (other.parent.layer == "Paddle")
             {
                 float modifier = GetImpactPointRelativePosition(other.parent);
-                direction = new Vector2(modifier, -direction.Y);
+                direction = Vector2.Normalize(new Vector2(modifier, -direction.Y));
             }
             else
             {

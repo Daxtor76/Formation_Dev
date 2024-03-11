@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Vector2 = System.Numerics.Vector2;
 using Soutenance_MonoGame.Constructors;
 using Soutenance_MonoGame.Controllers;
 using Soutenance_MonoGame.Interfaces;
@@ -34,7 +35,7 @@ namespace Soutenance_MonoGame.Entities
             direction = GetInputDirection();
             base.Update(gameTime);
         }
-        protected override Vector2 GetSpawnPosition()
+        public override Vector2 GetSpawnPosition()
         {
             Vector2 paddleSpawnPos = new Vector2();
 

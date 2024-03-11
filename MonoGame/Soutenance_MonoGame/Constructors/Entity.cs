@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Vector2 = System.Numerics.Vector2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace Soutenance_MonoGame
                 MainGame._spriteBatch.Draw(img, position, Color.White);
         }
 
-        protected virtual Vector2 GetSpawnPosition()
+        public virtual Vector2 GetSpawnPosition()
         {
             Vector2 spawnPos = new Vector2();
 

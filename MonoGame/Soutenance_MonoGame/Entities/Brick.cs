@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Vector2 = System.Numerics.Vector2;
 using Soutenance_MonoGame.Constructors;
 using Soutenance_MonoGame.Controllers;
 using Soutenance_MonoGame.Interfaces;
@@ -63,6 +64,7 @@ namespace Soutenance_MonoGame.Entities
 
         public void Die()
         {
+            // TO DO: Clean own collider here and remove the clean from collider controller ?
             enabled = false;
         }
     }
