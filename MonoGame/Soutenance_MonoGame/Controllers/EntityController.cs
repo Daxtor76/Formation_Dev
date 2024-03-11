@@ -33,7 +33,9 @@ namespace Soutenance_MonoGame.Controllers
             for (int i = entities.Count - 1; i >= 0; i--)
             {
                 if (!entities[i].enabled)
+                {
                     entities.Remove(entities[i]);
+                }
             }
         }
     }

@@ -11,18 +11,30 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Soutenance_MonoGame.Entities.Brick;
 
 namespace Soutenance_MonoGame.Entities
 {
     public class Paddle : AbstractMoveable, ICollidable
     {
-        public Collider col;
+        public enum Colors
+        {
+            grey,
+            green,
+            yellow,
+            orange,
+            red,
+            purple
+        }
+        Collider col;
+        Colors paddleColor;
 
-        public Paddle(Texture2D pImg, float pSpeed, string pName, string pLayer) : base(pSpeed)
+        public Paddle(Colors pColor, float pSpeed, string pName) : base(pSpeed)
         {
             name = pName;
-            layer = pLayer;
-            img = pImg;
+            layer = "Paddle";
+            paddleColor = pColor;
+            img = MainGame._content.Load<Texture2D>($"Paddle/paddle_{paddleColor}");
             size = new Vector2(img.Width, img.Height);
             position = GetSpawnPosition();
             col = new Collider(this, OnCollisionEnter, OnCollision);

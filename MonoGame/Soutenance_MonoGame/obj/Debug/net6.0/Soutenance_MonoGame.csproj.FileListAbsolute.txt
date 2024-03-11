@@ -32,12 +32,6 @@ E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\P
 E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Paddle\paddle_purple.xnb
 E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Paddle\paddle_red.xnb
 E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Paddle\paddle_yellow.xnb
-E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Ball\ball_green.xnb
-E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Ball\ball_grey.xnb
-E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Ball\ball_orange.xnb
-E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Ball\ball_purple.xnb
-E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Ball\ball_red.xnb
-E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Ball\ball_yellow.xnb
 E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Bricks\bigbrick_green.xnb
 E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Bricks\bigbrick_green_1hit.xnb
 E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Bricks\bigbrick_green_2hit.xnb
@@ -85,3 +79,9 @@ E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\B
 E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Bricks\littlebrick_red_1hit.xnb
 E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Bricks\littlebrick_yellow.xnb
 E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Bricks\littlebrick_yellow_1hit.xnb
+E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Balls\ball_green.xnb
+E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Balls\ball_grey.xnb
+E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Balls\ball_orange.xnb
+E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Balls\ball_purple.xnb
+E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Balls\ball_red.xnb
+E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Balls\ball_yellow.xnb

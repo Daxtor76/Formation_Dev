@@ -16,13 +16,23 @@ namespace Soutenance_MonoGame.Entities
 {
     public class Ball : AbstractMoveable, ICollidable
     {
-        public Collider col;
+        public enum Colors
+        {
+            grey,
+            green,
+            yellow,
+            orange,
+            red,
+            purple
+        }
+        Collider col;
+        Colors ballColor;
 
-        public Ball(Texture2D pImg, float pSpeed, Vector2 pDirection, string pName, string pLayer) : base(pSpeed, pDirection)
+        public Ball(Colors pColor, float pSpeed, Vector2 pDirection, string pName) : base(pSpeed, pDirection)
         {
             name = pName;
-            layer = pLayer;
-            img = pImg;
+            layer = "Ball";
+            img = MainGame._content.Load<Texture2D>($"Balls/ball_{ballColor}");
             size = new Vector2(img.Width, img.Height);
             position = GetSpawnPosition();
             col = new Collider(this, OnCollisionEnter, OnCollision);
@@ -38,7 +48,44 @@ namespace Soutenance_MonoGame.Entities
             col.oldPosition = col.position;
         }
 
-        float GetImpactPointRelativePosition(Entity target)
+        public void OnCollisionEnter(Collider other, string side)
+        {
+            CheckCollisionWithBottomWall(other, side);
+            ModifyDirection(other, side);
+            Hit(other.parent as IDamageable);
+        }
+
+        void CheckCollisionWithBottomWall(Collider other, string side)
+        {
+            if (side == "bottom" && other.parent.layer == "Wall")
+                LoseLife();
+
+            return;
+        }
+
+        void LoseLife()
+        {
+            position = Utils.GetScreenCenter();
+            // TO DO: Ajouter ici la perte du vie du player
+            // Check la defeat -> si == 0 game over sinon reset
+            // Voir pour faire des unity event? avec un defeatManager qui regarde la vie du joueur et qui check quand la valeur change
+        }
+
+        void ModifyDirection(Collider other, string side)
+        {
+            if (other.parent.layer == "Paddle")
+                CollidePaddle(other);
+            else
+                CollideOther(side);
+        }
+
+        void CollidePaddle(Collider other)
+        {
+            float modifier = GetImpactPointRelativePositionX(other.parent);
+            direction = Vector2.Normalize(new Vector2(modifier, -direction.Y));
+        }
+
+        float GetImpactPointRelativePositionX(Entity target)
         {
             float ballCenterPos = position.X + size.X * 0.5f;
             float targetCenterPos = target.position.X + target.size.X * 0.5f;
@@ -46,31 +93,18 @@ namespace Soutenance_MonoGame.Entities
             return -(targetCenterPos - ballCenterPos) / targetSizeHalf;
         }
 
-        public void OnCollisionEnter(Collider other, string side)
+        private void CollideOther(string side)
         {
-            if (side == "bottom" && other.parent.layer == "Wall")
-            {
-                position = Utils.GetScreenCenter();
-            }
+            if (side == "top" || side == "bottom")
+                direction.Y = -direction.Y;
+            else if (side == "left" || side == "right")
+                direction.X = -direction.X;
+        }
 
-            if (other.parent.layer == "Paddle")
-            {
-                float modifier = GetImpactPointRelativePosition(other.parent);
-                direction = Vector2.Normalize(new Vector2(modifier, -direction.Y));
-            }
-            else
-            {
-                if (side == "top" || side == "bottom")
-                    direction.Y = -direction.Y;
-                else if (side == "left" || side == "right")
-                    direction.X = -direction.X;
-            }
-
-            if (other.parent is IDamageable)
-            {
-                IDamageable parent = other.parent as IDamageable;
-                parent.TakeDamages(1);
-            }
+        void Hit(IDamageable target)
+        {
+            if (target is IDamageable)
+                target.TakeDamages(1);
         }
 
         public void OnCollision(Collider other, string side)

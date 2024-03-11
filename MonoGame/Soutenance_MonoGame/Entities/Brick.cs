@@ -16,21 +16,40 @@ namespace Soutenance_MonoGame.Entities
 {
     public class Brick : Entity, ICollidable, IDamageable
     {
-        public int life;
-        public Collider col;
+        public enum BrickTypes
+        {
+            littlebrick,
+            brick,
+            bigbrick
+        }
+        public enum Colors
+        {
+            grey,
+            green,
+            yellow,
+            orange,
+            red,
+            purple
+        }
 
+        int life;
         int maxLife;
+        Collider col;
+        BrickTypes brickType;
+        Colors brickColor;
 
-        public Brick(Texture2D pImg, Vector2 pPos, int pLife, string pName, string pLayer)
+        public Brick(BrickTypes pType, Colors pColor, Vector2 pPos, string pName)
         {
             name = pName;
-            layer = pLayer;
-            img = pImg;
+            layer = "Brick";
+            brickType = pType;
+            brickColor = pColor;
+            img = MainGame._content.Load<Texture2D>($"Bricks/{brickType}_{brickColor}");
             size = new Vector2(img.Width, img.Height);
             position = pPos;
             col = new Collider(this, OnCollisionEnter, OnCollision);
 
-            life = pLife;
+            life = 1;
             maxLife = life;
 
             EntityController.entities.Add(this);
@@ -64,7 +83,6 @@ namespace Soutenance_MonoGame.Entities
 
         public void Die()
         {
-            // TO DO: Clean own collider here and remove the clean from collider controller ?
             enabled = false;
         }
     }
