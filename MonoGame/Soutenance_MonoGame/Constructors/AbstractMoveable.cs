@@ -30,10 +30,11 @@ namespace Soutenance_MonoGame.Constructors
         public void Move(GameTime gameTime)
         {
             Vector2 screenSize = Utils.GetScreenSize();
-            
+
+            // direction.Normalize(); TO DO: à ajouter pour éviter les accélérations diagonales :)
             position += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
             position = new Vector2(Math.Clamp(position.X, 0, screenSize.X - size.X), position.Y);
-        }
+        } 
 
         protected Vector2 GetInputDirection()
         {
