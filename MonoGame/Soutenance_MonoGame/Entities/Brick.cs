@@ -49,8 +49,8 @@ namespace Soutenance_MonoGame.Entities
             position = pPos;
             col = new Collider(this, OnCollisionEnter, OnCollision);
 
-            life = 1;
-            maxLife = life;
+            maxLife = GetMaxLife(brickType, brickColor);
+            life = maxLife;
 
             EntityController.entities.Add(this);
         }
@@ -84,6 +84,24 @@ namespace Soutenance_MonoGame.Entities
         public void Die()
         {
             enabled = false;
+        }
+
+        public int GetMaxLife(BrickTypes type, Colors color)
+        {
+            if (type != BrickTypes.littlebrick)
+            {
+                if (color == Colors.yellow || color == Colors.orange)
+                    return 2;
+                else if (color == Colors.red || color ==  Colors.purple)
+                    return 3;
+            }
+            else
+            {
+               if (color == Colors.yellow || color == Colors.orange)
+                    return 2;
+            }
+
+            return 1;
         }
     }
 }

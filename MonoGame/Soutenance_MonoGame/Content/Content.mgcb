@@ -85,6 +85,18 @@
 /processorParam:TextureFormat=Color
 /build:Balls/ball_yellow.png
 
+#begin Bricks/bigbrick_green_0hit.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Bricks/bigbrick_green_0hit.png
+
 #begin Bricks/bigbrick_green_1hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -109,7 +121,7 @@
 /processorParam:TextureFormat=Color
 /build:Bricks/bigbrick_green_2hit.png
 
-#begin Bricks/bigbrick_green.png
+#begin Bricks/bigbrick_grey_0hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -119,7 +131,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Bricks/bigbrick_green.png
+/build:Bricks/bigbrick_grey_0hit.png
 
 #begin Bricks/bigbrick_grey_1hit.png
 /importer:TextureImporter
@@ -145,7 +157,7 @@
 /processorParam:TextureFormat=Color
 /build:Bricks/bigbrick_grey_2hit.png
 
-#begin Bricks/bigbrick_grey.png
+#begin Bricks/bigbrick_orange_0hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -155,7 +167,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Bricks/bigbrick_grey.png
+/build:Bricks/bigbrick_orange_0hit.png
 
 #begin Bricks/bigbrick_orange_1hit.png
 /importer:TextureImporter
@@ -181,7 +193,7 @@
 /processorParam:TextureFormat=Color
 /build:Bricks/bigbrick_orange_2hit.png
 
-#begin Bricks/bigbrick_orange.png
+#begin Bricks/bigbrick_purple_0hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -191,7 +203,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Bricks/bigbrick_orange.png
+/build:Bricks/bigbrick_purple_0hit.png
 
 #begin Bricks/bigbrick_purple_1hit.png
 /importer:TextureImporter
@@ -217,7 +229,7 @@
 /processorParam:TextureFormat=Color
 /build:Bricks/bigbrick_purple_2hit.png
 
-#begin Bricks/bigbrick_purple.png
+#begin Bricks/bigbrick_red_0hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -227,7 +239,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Bricks/bigbrick_purple.png
+/build:Bricks/bigbrick_red_0hit.png
 
 #begin Bricks/bigbrick_red_1hit.png
 /importer:TextureImporter
@@ -253,7 +265,7 @@
 /processorParam:TextureFormat=Color
 /build:Bricks/bigbrick_red_2hit.png
 
-#begin Bricks/bigbrick_red.png
+#begin Bricks/bigbrick_yellow_0hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -263,7 +275,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Bricks/bigbrick_red.png
+/build:Bricks/bigbrick_yellow_0hit.png
 
 #begin Bricks/bigbrick_yellow_1hit.png
 /importer:TextureImporter
@@ -289,7 +301,7 @@
 /processorParam:TextureFormat=Color
 /build:Bricks/bigbrick_yellow_2hit.png
 
-#begin Bricks/bigbrick_yellow.png
+#begin Bricks/brick_green_0hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -299,7 +311,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Bricks/bigbrick_yellow.png
+/build:Bricks/brick_green_0hit.png
 
 #begin Bricks/brick_green_1hit.png
 /importer:TextureImporter
@@ -325,7 +337,7 @@
 /processorParam:TextureFormat=Color
 /build:Bricks/brick_green_2hit.png
 
-#begin Bricks/brick_green.png
+#begin Bricks/brick_grey_0hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -335,7 +347,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Bricks/brick_green.png
+/build:Bricks/brick_grey_0hit.png
 
 #begin Bricks/brick_grey_1hit.png
 /importer:TextureImporter
@@ -361,7 +373,7 @@
 /processorParam:TextureFormat=Color
 /build:Bricks/brick_grey_2hit.png
 
-#begin Bricks/brick_grey.png
+#begin Bricks/brick_orange_0hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -371,7 +383,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Bricks/brick_grey.png
+/build:Bricks/brick_orange_0hit.png
 
 #begin Bricks/brick_orange_1hit.png
 /importer:TextureImporter
@@ -397,7 +409,7 @@
 /processorParam:TextureFormat=Color
 /build:Bricks/brick_orange_2hit.png
 
-#begin Bricks/brick_orange.png
+#begin Bricks/brick_purple_0hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -407,7 +419,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Bricks/brick_orange.png
+/build:Bricks/brick_purple_0hit.png
 
 #begin Bricks/brick_purple_1hit.png
 /importer:TextureImporter
@@ -433,7 +445,7 @@
 /processorParam:TextureFormat=Color
 /build:Bricks/brick_purple_2hit.png
 
-#begin Bricks/brick_purple.png
+#begin Bricks/brick_red_0hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -443,7 +455,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Bricks/brick_purple.png
+/build:Bricks/brick_red_0hit.png
 
 #begin Bricks/brick_red_1hit.png
 /importer:TextureImporter
@@ -469,7 +481,7 @@
 /processorParam:TextureFormat=Color
 /build:Bricks/brick_red_2hit.png
 
-#begin Bricks/brick_red.png
+#begin Bricks/brick_yellow_0hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -479,7 +491,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Bricks/brick_red.png
+/build:Bricks/brick_yellow_0hit.png
 
 #begin Bricks/brick_yellow_1hit.png
 /importer:TextureImporter
@@ -505,7 +517,7 @@
 /processorParam:TextureFormat=Color
 /build:Bricks/brick_yellow_2hit.png
 
-#begin Bricks/brick_yellow.png
+#begin Bricks/littlebrick_green_0hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -515,7 +527,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Bricks/brick_yellow.png
+/build:Bricks/littlebrick_green_0hit.png
 
 #begin Bricks/littlebrick_green_1hit.png
 /importer:TextureImporter
@@ -529,7 +541,7 @@
 /processorParam:TextureFormat=Color
 /build:Bricks/littlebrick_green_1hit.png
 
-#begin Bricks/littlebrick_green.png
+#begin Bricks/littlebrick_grey_0hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -539,9 +551,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Bricks/littlebrick_green.png
+/build:Bricks/littlebrick_grey_0hit.png
 
-#begin Bricks/littlebrick_grey.png
+#begin Bricks/littlebrick_orange_0hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -551,7 +563,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Bricks/littlebrick_grey.png
+/build:Bricks/littlebrick_orange_0hit.png
 
 #begin Bricks/littlebrick_orange_1hit.png
 /importer:TextureImporter
@@ -565,7 +577,7 @@
 /processorParam:TextureFormat=Color
 /build:Bricks/littlebrick_orange_1hit.png
 
-#begin Bricks/littlebrick_orange.png
+#begin Bricks/littlebrick_purple_0hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -575,7 +587,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Bricks/littlebrick_orange.png
+/build:Bricks/littlebrick_purple_0hit.png
 
 #begin Bricks/littlebrick_purple_1hit.png
 /importer:TextureImporter
@@ -589,7 +601,7 @@
 /processorParam:TextureFormat=Color
 /build:Bricks/littlebrick_purple_1hit.png
 
-#begin Bricks/littlebrick_purple.png
+#begin Bricks/littlebrick_red_0hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -599,7 +611,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Bricks/littlebrick_purple.png
+/build:Bricks/littlebrick_red_0hit.png
 
 #begin Bricks/littlebrick_red_1hit.png
 /importer:TextureImporter
@@ -613,7 +625,7 @@
 /processorParam:TextureFormat=Color
 /build:Bricks/littlebrick_red_1hit.png
 
-#begin Bricks/littlebrick_red.png
+#begin Bricks/littlebrick_yellow_0hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -623,7 +635,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Bricks/littlebrick_red.png
+/build:Bricks/littlebrick_yellow_0hit.png
 
 #begin Bricks/littlebrick_yellow_1hit.png
 /importer:TextureImporter
@@ -636,18 +648,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Bricks/littlebrick_yellow_1hit.png
-
-#begin Bricks/littlebrick_yellow.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Bricks/littlebrick_yellow.png
 
 #begin Hero/personnage.png
 /importer:TextureImporter
