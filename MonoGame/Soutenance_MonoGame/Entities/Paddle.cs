@@ -19,12 +19,12 @@ namespace Soutenance_MonoGame.Entities
     {
         public enum Colors
         {
-            grey,
             green,
-            yellow,
+            grey,
             orange,
+            purple,
             red,
-            purple
+            yellow
         }
         Collider col;
         Colors paddleColor;
@@ -34,7 +34,7 @@ namespace Soutenance_MonoGame.Entities
             name = pName;
             layer = "Paddle";
             paddleColor = pColor;
-            img = MainGame._content.Load<Texture2D>($"Paddle/paddle_{paddleColor}");
+            img = ServiceLocator.GetService<ISpritesManager>().GetPaddleTexture((int)pColor);
             size = new Vector2(img.Width, img.Height);
             position = GetSpawnPosition();
             col = new Collider(this, OnCollisionEnter, OnCollision);

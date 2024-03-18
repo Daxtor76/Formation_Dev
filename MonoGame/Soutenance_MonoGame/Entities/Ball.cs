@@ -18,12 +18,12 @@ namespace Soutenance_MonoGame.Entities
     {
         public enum Colors
         {
-            grey,
             green,
-            yellow,
+            grey,
             orange,
+            purple,
             red,
-            purple
+            yellow
         }
         Collider col;
         Colors ballColor;
@@ -32,7 +32,7 @@ namespace Soutenance_MonoGame.Entities
         {
             name = pName;
             layer = "Ball";
-            img = MainGame._content.Load<Texture2D>($"Balls/ball_{ballColor}");
+            img = ServiceLocator.GetService<ISpritesManager>().GetBallTexture((int)pColor);
             size = new Vector2(img.Width, img.Height);
             position = GetSpawnPosition();
             col = new Collider(this, OnCollisionEnter, OnCollision);

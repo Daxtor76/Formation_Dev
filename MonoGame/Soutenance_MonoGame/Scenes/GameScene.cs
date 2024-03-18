@@ -17,6 +17,9 @@ namespace Soutenance_MonoGame
 {
     class GameScene : Scene
     {
+        // TO DO: obligé d'instancier ça quand même ???
+        private SpritesManager spritesManager = new SpritesManager();
+
         public Paddle paddle;
         public Ball ball;
 
