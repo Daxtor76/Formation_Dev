@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soutenance_MonoGame.Controllers
+namespace Soutenance_MonoGame
 {
     public static class EntityController
     {

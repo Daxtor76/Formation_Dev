@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using Soutenance_MonoGame.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soutenance_MonoGame.Controllers
+namespace Soutenance_MonoGame
 {
     class SpritesManager : ISpritesManager
     {

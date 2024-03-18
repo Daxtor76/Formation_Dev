@@ -1,6 +1,4 @@
-﻿using Soutenance_MonoGame.Controllers;
-using Soutenance_MonoGame.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,16 +8,16 @@ namespace Soutenance_MonoGame
 {
     public static class ServiceLocator
     {
-        private static readonly Dictionary<Type, object> services = new Dictionary<Type, object>();
+        private static readonly Dictionary<Type, object> _services = new Dictionary<Type, object>();
 
-        public static void RegisterService<T>(T serviceType)
+        public static void RegisterService<T>(T service)
         {
-            services.Add(typeof(T), serviceType);
+            _services.Add(typeof(T), service);
         }
 
         public static T GetService<T>()
         {
-            return (T)services[typeof(T)];
+            return (T)_services[typeof(T)];
         }
     }
 }

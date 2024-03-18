@@ -1,11 +1,10 @@
-﻿using Soutenance_MonoGame.Constructors;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soutenance_MonoGame.Interfaces
+namespace Soutenance_MonoGame
 {
     public interface ICollidable
     {

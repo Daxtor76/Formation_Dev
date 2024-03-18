@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Diagnostics;
 using System.Net.Security;
-using Soutenance_MonoGame.Controllers;
 using Microsoft.Xna.Framework.Content;
 
 namespace Soutenance_MonoGame

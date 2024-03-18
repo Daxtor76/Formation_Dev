@@ -7,19 +7,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Soutenance_MonoGame.Constructors;
 using Microsoft.Xna.Framework.Graphics;
-using Soutenance_MonoGame.Controllers;
-using Soutenance_MonoGame.Entities;
-using Soutenance_MonoGame.Interfaces;
 
 namespace Soutenance_MonoGame
 {
     class GameScene : Scene
     {
-        // TO DO: obligé d'instancier ça quand même ???
-        private SpritesManager spritesManager = new SpritesManager();
-
         public Paddle paddle;
         public Ball ball;
 
@@ -30,6 +23,8 @@ namespace Soutenance_MonoGame
         public override void Load()
         {
             base.Load();
+            new SpritesManager();
+            new InputManager();
             paddle = new Paddle(Paddle.Colors.yellow, 400.0f, "Paddle");
             ball = new Ball(Ball.Colors.red, 500.0f, new Vector2(0, 1), "Ball");
 

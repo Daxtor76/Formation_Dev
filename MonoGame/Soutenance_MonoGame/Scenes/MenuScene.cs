@@ -8,8 +8,6 @@ using System.Linq;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
-using Soutenance_MonoGame.Constructors;
-using Soutenance_MonoGame.Controllers;
 using System.Reflection.Emit;
 
 namespace Soutenance_MonoGame

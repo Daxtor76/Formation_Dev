@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Soutenance_MonoGame.Constructors;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,7 +7,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soutenance_MonoGame.Controllers
+namespace Soutenance_MonoGame
 {
     public static class CollisionController
     {

@@ -2,18 +2,15 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Vector2 = System.Numerics.Vector2;
-using Soutenance_MonoGame.Constructors;
-using Soutenance_MonoGame.Controllers;
-using Soutenance_MonoGame.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Soutenance_MonoGame.Entities.Brick;
+using Soutenance_MonoGame.Interfaces;
 
-namespace Soutenance_MonoGame.Entities
+namespace Soutenance_MonoGame
 {
     public class Paddle : AbstractMoveable, ICollidable
     {
@@ -44,7 +41,7 @@ namespace Soutenance_MonoGame.Entities
 
         public override void Update(GameTime gameTime)
         {
-            direction = GetInputDirection();
+            direction = ServiceLocator.GetService<IInputManager>().GetInputDirection();
             base.Update(gameTime);
         }
         public override Vector2 GetSpawnPosition()
