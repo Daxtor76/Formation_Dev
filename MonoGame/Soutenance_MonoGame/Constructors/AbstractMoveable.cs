@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Vector2 = System.Numerics.Vector2;
-using Soutenance_MonoGame.Interfaces;
 using Soutenance_MonoGame;
 using System;
 using System.Collections.Generic;

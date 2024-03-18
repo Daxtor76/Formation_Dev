@@ -10,6 +10,9 @@ namespace Soutenance_MonoGame
     {
         private static readonly Dictionary<Type, object> _services = new Dictionary<Type, object>();
 
+        // TO DO: pour faire un vrai service locator, faire un deuxième service de sprites qui marche pas pareil, qui ne renvoie pas la même chose etc
+        // Choisir le service de sprite avec un random
+
         public static void RegisterService<T>(T service)
         {
             _services.Add(typeof(T), service);
