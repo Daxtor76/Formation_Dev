@@ -9,8 +9,6 @@ namespace Soutenance_MonoGame
 {
     public interface ISpritesManager
     {
-        public List<Texture2D> LoadPaddleTextures();
-        public List<Texture2D> LoadBallTextures();
         public Texture2D GetPaddleTexture(int id);
         public Texture2D GetBallTexture(int id);
     }
