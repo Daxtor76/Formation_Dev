@@ -31,7 +31,7 @@ namespace Soutenance_MonoGame
             collisionEffect = pCollisionEffect;
             continuousCollisionEffect = pContinuousCollisionEffect;
 
-            texture = new Texture2D(MainGame._graphics.GraphicsDevice, 1, 1);
+            texture = new Texture2D(MainGame.graphics.GraphicsDevice, 1, 1);
             texture.SetData(new[] { Color.Green });
 
             rect = new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y);
@@ -52,7 +52,7 @@ namespace Soutenance_MonoGame
         public override void Draw()
         {
             if (MainGame.debugMode)
-                MainGame._spriteBatch.Draw(texture, rect, new Color(Color.Green, 100));
+                MainGame.spriteBatch.Draw(texture, rect, new Color(Color.Green, 100));
         }
 
         public void CheckCollision(Collider other)

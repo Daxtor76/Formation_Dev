@@ -41,7 +41,7 @@ namespace Soutenance_MonoGame
             layer = "Brick";
             brickType = pType;
             brickColor = pColor;
-            img = MainGame._content.Load<Texture2D>($"Bricks/{brickType}_{brickColor}_0hit");
+            img = MainGame.content.Load<Texture2D>($"Bricks/{brickType}_{brickColor}_0hit");
             size = new Vector2(img.Width, img.Height);
             position = pPos;
             col = new Collider(this, OnCollisionEnter, OnCollision);

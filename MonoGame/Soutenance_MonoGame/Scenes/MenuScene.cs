@@ -9,6 +9,7 @@ using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection.Emit;
+using Soutenance_MonoGame.Interfaces;
 
 namespace Soutenance_MonoGame
 {
@@ -31,7 +32,7 @@ namespace Soutenance_MonoGame
 
             if(Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                SceneController.ChangeScene(SceneController.SceneType.Game);
+                ServiceLocator.GetService<ISceneManager>().ChangeScene(typeof(GameScene));
             }
         }
 

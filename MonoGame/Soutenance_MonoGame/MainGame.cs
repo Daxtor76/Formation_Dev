@@ -5,45 +5,46 @@ using System;
 using System.Diagnostics;
 using System.Net.Security;
 using Microsoft.Xna.Framework.Content;
+using Soutenance_MonoGame.Interfaces;
 
 namespace Soutenance_MonoGame
 {
     public class MainGame : Game
     {
-        public static GraphicsDeviceManager _graphics { get; private set; }
-        public static SpriteBatch _spriteBatch { get; private set; }
-        public static ContentManager _content { get; private set; }
+        public static GraphicsDeviceManager graphics { get; private set; }
+        public static SpriteBatch spriteBatch { get; private set; }
+        public static ContentManager content { get; private set; }
         public static bool debugMode = false;
 
         public MainGame()
         {
-            _graphics = new GraphicsDeviceManager(this);
-            _content = Content;
-            _content.RootDirectory = "Content";
+            graphics = new GraphicsDeviceManager(this);
+            content = Content;
+            content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
 
         private void SetGameFullScreen(bool isFull)
         {
-            _graphics.ApplyChanges();
-            _graphics.PreferredBackBufferWidth = isFull ? GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width : 1280;
-            _graphics.PreferredBackBufferHeight = isFull ? GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height : 720;
-            _graphics.IsFullScreen = isFull;
-            _graphics.ApplyChanges();
+            graphics.ApplyChanges();
+            graphics.PreferredBackBufferWidth = isFull ? GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width : 1280;
+            graphics.PreferredBackBufferHeight = isFull ? GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height : 720;
+            graphics.IsFullScreen = isFull;
+            graphics.ApplyChanges();
         }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            new SceneManager();
             SetGameFullScreen(false);
-            SceneController.Init();
 
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
         }
@@ -54,8 +55,8 @@ namespace Soutenance_MonoGame
                 Exit();
 
             // TODO: Add your update logic here
-            if(SceneController.currentScene != null)
-                SceneController.currentScene.Update(gameTime);
+            if(ServiceLocator.GetService<ISceneManager>().GetCurrentScene() != null)
+                ServiceLocator.GetService<ISceneManager>().GetCurrentScene().Update(gameTime);
 
             CollisionController.CleanColliders();
             EntityController.CleanEntities();
@@ -68,11 +69,11 @@ namespace Soutenance_MonoGame
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            if(SceneController.currentScene != null)
+            if(ServiceLocator.GetService<ISceneManager>().GetCurrentScene() != null)
             {
-                _spriteBatch.Begin();
-                SceneController.currentScene.Draw();
-                _spriteBatch.End();
+                spriteBatch.Begin();
+                ServiceLocator.GetService<ISceneManager>().GetCurrentScene().Draw();
+                spriteBatch.End();
             }
 
             base.Draw(gameTime);

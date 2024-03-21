@@ -1,11 +1,15 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Exo01",
     "\\Exo01\\Constructors",
     "\\Exo01\\Entities",
-    "\\ProjectTemplate\\Constructors"
+    "\\Soutenance_MonoGame",
+    "\\Soutenance_MonoGame\\Constructors",
+    "\\Soutenance_MonoGame\\Controllers",
+    "\\Soutenance_MonoGame\\Interfaces",
+    "\\Soutenance_MonoGame\\Scenes",
+    "\\Soutenance_MonoGame\\Utils"
   ],
-  "SelectedNode": "\\Exo01\\Entities\\Wizard.cs",
+  "SelectedNode": "\\Soutenance_MonoGame\\Constructors",
   "PreviewInSolutionExplorer": false
 }

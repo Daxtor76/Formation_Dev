@@ -13,6 +13,8 @@ namespace Soutenance_MonoGame
         List<Texture2D> paddleTextures;
         List<Texture2D> ballTextures;
 
+        // TO DO : Refaire avec des types génériques
+
         public SpritesManager()
         {
             paddleTextures = LoadPaddleTextures();
@@ -24,12 +26,12 @@ namespace Soutenance_MonoGame
         public List<Texture2D> LoadPaddleTextures()
         {
             List<Texture2D> list = new List<Texture2D>();
-            string dirPath = MainGame._content.RootDirectory + "/Paddle";
+            string dirPath = MainGame.content.RootDirectory + "/Paddle";
 
             foreach (string filePath in System.IO.Directory.GetFiles(dirPath))
             {
                 string path = filePath.Split('/', '.')[1];
-                list.Add(MainGame._content.Load<Texture2D>($"{path}"));
+                list.Add(MainGame.content.Load<Texture2D>($"{path}"));
             }
 
             return list;
@@ -38,12 +40,12 @@ namespace Soutenance_MonoGame
         public List<Texture2D> LoadBallTextures()
         {
             List<Texture2D> list = new List<Texture2D>();
-            string dirPath = MainGame._content.RootDirectory + "/Balls";
+            string dirPath = MainGame.content.RootDirectory + "/Balls";
 
             foreach (string filePath in System.IO.Directory.GetFiles(dirPath))
             {
                 string path = filePath.Split('/', '.')[1];
-                list.Add(MainGame._content.Load<Texture2D>($"{path}"));
+                list.Add(MainGame.content.Load<Texture2D>($"{path}"));
             }
 
             return list;

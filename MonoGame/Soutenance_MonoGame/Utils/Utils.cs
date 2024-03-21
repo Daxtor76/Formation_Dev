@@ -14,8 +14,8 @@ namespace Soutenance_MonoGame
         {
             Vector2 screenSize = new Vector2();
 
-            screenSize.X = MainGame._graphics.PreferredBackBufferWidth;
-            screenSize.Y = MainGame._graphics.PreferredBackBufferHeight;
+            screenSize.X = MainGame.graphics.PreferredBackBufferWidth;
+            screenSize.Y = MainGame.graphics.PreferredBackBufferHeight;
 
             return screenSize;
         }
@@ -23,8 +23,8 @@ namespace Soutenance_MonoGame
         {
             Vector2 screenSize = new Vector2();
 
-            screenSize.X = MainGame._graphics.PreferredBackBufferWidth * 0.5f;
-            screenSize.Y = MainGame._graphics.PreferredBackBufferHeight * 0.5f;
+            screenSize.X = MainGame.graphics.PreferredBackBufferWidth * 0.5f;
+            screenSize.Y = MainGame.graphics.PreferredBackBufferHeight * 0.5f;
 
             return screenSize;
         }

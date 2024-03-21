@@ -47,8 +47,8 @@ namespace Soutenance_MonoGame
         {
             Vector2 paddleSpawnPos = new Vector2();
 
-            paddleSpawnPos.X = MainGame._graphics.PreferredBackBufferWidth * 0.5f - size.X * 0.5f;
-            paddleSpawnPos.Y = MainGame._graphics.PreferredBackBufferHeight - MainGame._graphics.PreferredBackBufferHeight * 0.05f - size.Y * 0.5f;
+            paddleSpawnPos.X = MainGame.graphics.PreferredBackBufferWidth * 0.5f - size.X * 0.5f;
+            paddleSpawnPos.Y = MainGame.graphics.PreferredBackBufferHeight - MainGame.graphics.PreferredBackBufferHeight * 0.05f - size.Y * 0.5f;
 
             return paddleSpawnPos;
         }
