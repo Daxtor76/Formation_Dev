@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace Soutenance_MonoGame
 {
@@ -41,7 +42,7 @@ namespace Soutenance_MonoGame
             layer = "Brick";
             brickType = pType;
             brickColor = pColor;
-            img = MainGame.content.Load<Texture2D>($"Bricks/{brickType}_{brickColor}_0hit");
+            img = ServiceLocator.GetService<ISpritesManager>().GetBrickTexture(pType + "_" + pColor + "_" + (maxLife - life).ToString() + "hit");
             size = new Vector2(img.Width, img.Height);
             position = pPos;
             col = new Collider(this, OnCollisionEnter, OnCollision);
@@ -76,6 +77,8 @@ namespace Soutenance_MonoGame
 
             if (life <= 0)
                 Die();
+            else
+                img = ServiceLocator.GetService<ISpritesManager>().GetBrickTexture(brickType + "_" + brickColor + "_" + (maxLife - life).ToString() + "hit");
         }
 
         public void Die()

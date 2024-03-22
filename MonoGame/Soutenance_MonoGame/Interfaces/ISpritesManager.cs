@@ -11,5 +11,6 @@ namespace Soutenance_MonoGame
     {
         public Texture2D GetPaddleTexture(string textureName);
         public Texture2D GetBallTexture(string textureName);
+        public Texture2D GetBrickTexture(string textureName);
     }
 }

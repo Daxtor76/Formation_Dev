@@ -12,11 +12,13 @@ namespace Soutenance_MonoGame
     {
         Dictionary<string, Texture2D> paddleTextures = new Dictionary<string, Texture2D>();
         Dictionary<string, Texture2D> ballTextures = new Dictionary<string, Texture2D>();
+        Dictionary<string, Texture2D> bricksTextures = new Dictionary<string, Texture2D>();
 
         public SpritesManager()
         {
             paddleTextures = LoadFromFolder("Paddle");
             ballTextures = LoadFromFolder("Balls");
+            bricksTextures = LoadFromFolder("Bricks");
 
             ServiceLocator.RegisterService<ISpritesManager>(this);
         }
@@ -46,6 +48,12 @@ namespace Soutenance_MonoGame
         {
             Random r = new Random();
             return ballTextures[textureName] != null ? ballTextures[textureName] : ballTextures.ElementAt(r.Next(0, ballTextures.Count)).Value;
+        }
+
+        public Texture2D GetBrickTexture(string textureName)
+        {
+            Random r = new Random();
+            return bricksTextures[textureName] != null ? bricksTextures[textureName] : bricksTextures.ElementAt(r.Next(0, bricksTextures.Count)).Value;
         }
     }
 }
