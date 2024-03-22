@@ -13,7 +13,7 @@ using Soutenance_MonoGame.Interfaces;
 
 namespace Soutenance_MonoGame
 {
-    public class Brick : Entity, ICollidable, IDamageable
+    public class Brick : Entity, ICollidable, IDamageable, ILevelElement
     {
         public enum BrickTypes
         {
@@ -36,6 +36,23 @@ namespace Soutenance_MonoGame
         Collider col;
         BrickTypes brickType;
         Colors brickColor;
+
+        public Brick(BrickTypes pType, Colors pColor, string pName)
+        {
+            name = pName;
+            layer = "Brick";
+            brickType = pType;
+            brickColor = pColor;
+            img = ServiceLocator.GetService<ISpritesManager>().GetBrickTexture(pType + "_" + pColor + "_" + (maxLife - life).ToString() + "hit");
+            size = new Vector2(img.Width, img.Height);
+            position = Vector2.Zero;
+            col = new Collider(this, OnCollisionEnter, OnCollision);
+
+            maxLife = GetMaxLife(brickType, brickColor);
+            life = maxLife;
+
+            ServiceLocator.GetService<IEntityManager>().AddEntity(this);
+        }
 
         public Brick(BrickTypes pType, Colors pColor, Vector2 pPos, string pName)
         {

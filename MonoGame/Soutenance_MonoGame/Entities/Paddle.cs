@@ -24,13 +24,11 @@ namespace Soutenance_MonoGame
             yellow
         }
         Collider col;
-        Colors paddleColor;
 
         public Paddle(Colors pColor, float pSpeed, string pName) : base(pSpeed)
         {
             name = pName;
             layer = "Paddle";
-            paddleColor = pColor;
             img = ServiceLocator.GetService<ISpritesManager>().GetPaddleTexture("paddle_" + pColor);
             size = new Vector2(img.Width, img.Height);
             position = GetSpawnPosition();

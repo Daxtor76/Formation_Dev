@@ -32,6 +32,18 @@ namespace Soutenance_MonoGame
             if (img != null)
                 MainGame.spriteBatch.Draw(img, position, Color.White);
         }
+        public void SetPosition(Vector2 position)
+        {
+            this.position = position;
+        }
+        public Vector2 GetPosition()
+        {
+            return position;
+        }
+        public Vector2 GetSize()
+        {
+            return size;
+        }
 
         public virtual Vector2 GetSpawnPosition()
         {

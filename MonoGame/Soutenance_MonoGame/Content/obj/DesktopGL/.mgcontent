@@ -57,7 +57,6 @@
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Bricks/littlebrick_red_1hit.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Bricks/littlebrick_yellow_0hit.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Bricks/littlebrick_yellow_1hit.png</File>
-    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Hero/personnage.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_green.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_grey.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_orange.png</File>
@@ -66,7 +65,6 @@
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_yellow.png</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

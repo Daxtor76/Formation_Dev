@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Soutenance_MonoGame.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

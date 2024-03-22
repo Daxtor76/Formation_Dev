@@ -24,9 +24,11 @@ namespace Soutenance_MonoGame
         public override void Load()
         {
             base.Load();
+            new CollisionManager();
             new SpritesManager();
             new KeyboardInputManager();
-            paddle = new Paddle(Paddle.Colors.yellow, 400.0f, "Paddle");
+            new LevelManager();
+            paddle = new Paddle(Paddle.Colors.grey, 400.0f, "Paddle");
             ball = new Ball(Ball.Colors.red, 500.0f, new Vector2(0, 1), "Ball");
 
             Wall wallTop = new Wall(new Vector2(0, 0), "WallTop", new Vector2(Utils.GetScreenSize().X, 2));
@@ -34,7 +36,7 @@ namespace Soutenance_MonoGame
             Wall wallLeft = new Wall(new Vector2(0, 0), "WallLeft", new Vector2(2, Utils.GetScreenSize().Y));
             Wall wallRight = new Wall(new Vector2(Utils.GetScreenSize().X - 2, 0), "WallRight", new Vector2(2, Utils.GetScreenSize().Y));
 
-            Brick brick = new Brick(Brick.BrickTypes.littlebrick, Brick.Colors.grey, new Vector2(1, 10), "Brick1");
+            /*Brick brick = new Brick(Brick.BrickTypes.littlebrick, Brick.Colors.grey, new Vector2(1, 10), "Brick1");
             Brick brick2 = new Brick(Brick.BrickTypes.littlebrick, Brick.Colors.green, new Vector2(200, 10), "Brick2");
             Brick brick3 = new Brick(Brick.BrickTypes.littlebrick, Brick.Colors.yellow, new Vector2(450, 10), "Brick3");
             Brick brick4 = new Brick(Brick.BrickTypes.brick, Brick.Colors.orange, new Vector2(900, 150), "Brick4");
@@ -42,7 +44,7 @@ namespace Soutenance_MonoGame
             Brick brick6 = new Brick(Brick.BrickTypes.brick, Brick.Colors.purple, new Vector2(1000, 150), "Brick6");
             Brick brick7 = new Brick(Brick.BrickTypes.bigbrick, Brick.Colors.green, new Vector2(100, 300), "Brick7");
             Brick brick8 = new Brick(Brick.BrickTypes.bigbrick, Brick.Colors.orange, new Vector2(750, 300), "Brick8");
-            Brick brick9 = new Brick(Brick.BrickTypes.bigbrick, Brick.Colors.purple, new Vector2(1050, 300), "Brick9");
+            Brick brick9 = new Brick(Brick.BrickTypes.bigbrick, Brick.Colors.purple, new Vector2(1050, 300), "Brick9");*/
 
             Debug.WriteLine($"{name} scene has been loaded.");
         }

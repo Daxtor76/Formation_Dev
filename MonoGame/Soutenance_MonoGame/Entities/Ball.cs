@@ -23,7 +23,6 @@ namespace Soutenance_MonoGame
             yellow
         }
         Collider col;
-        Colors ballColor;
 
         public Ball(Colors pColor, float pSpeed, Vector2 pDirection, string pName) : base(pSpeed, pDirection)
         {
