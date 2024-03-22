@@ -28,7 +28,7 @@ namespace Soutenance_MonoGame
         {
             name = pName;
             layer = "Ball";
-            img = ServiceLocator.GetService<ISpritesManager>().GetBallTexture((int)pColor);
+            img = ServiceLocator.GetService<ISpritesManager>().GetBallTexture("ball_green");
             size = new Vector2(img.Width, img.Height);
             position = GetSpawnPosition();
             col = new Collider(this, OnCollisionEnter, OnCollision);

@@ -10,55 +10,42 @@ namespace Soutenance_MonoGame
 {
     sealed class SpritesManager : ISpritesManager
     {
-        List<Texture2D> paddleTextures;
-        List<Texture2D> ballTextures;
-
-        // TO DO : Refaire avec des types génériques
+        Dictionary<string, Texture2D> paddleTextures = new Dictionary<string, Texture2D>();
+        Dictionary<string, Texture2D> ballTextures = new Dictionary<string, Texture2D>();
 
         public SpritesManager()
         {
-            paddleTextures = LoadPaddleTextures();
-            ballTextures = LoadBallTextures();
+            paddleTextures = LoadFromFolder("Paddle");
+            ballTextures = LoadFromFolder("Balls");
 
             ServiceLocator.RegisterService<ISpritesManager>(this);
         }
 
-        public List<Texture2D> LoadPaddleTextures()
+        public Dictionary<string, Texture2D> LoadFromFolder(string folderName)
         {
-            List<Texture2D> list = new List<Texture2D>();
-            string dirPath = MainGame.content.RootDirectory + "/Paddle";
+            Dictionary<string, Texture2D> list = new Dictionary<string, Texture2D>();
+            string dirPath = MainGame.content.RootDirectory + "/" + folderName;
 
             foreach (string filePath in System.IO.Directory.GetFiles(dirPath))
             {
                 string path = filePath.Split('/', '.')[1];
-                list.Add(MainGame.content.Load<Texture2D>($"{path}"));
+                string assetName = path.Split('\\')[1];
+                list.Add(assetName, MainGame.content.Load<Texture2D>($"{path}"));
             }
 
             return list;
         }
 
-        public List<Texture2D> LoadBallTextures()
+        public Texture2D GetPaddleTexture(string textureName)
         {
-            List<Texture2D> list = new List<Texture2D>();
-            string dirPath = MainGame.content.RootDirectory + "/Balls";
-
-            foreach (string filePath in System.IO.Directory.GetFiles(dirPath))
-            {
-                string path = filePath.Split('/', '.')[1];
-                list.Add(MainGame.content.Load<Texture2D>($"{path}"));
-            }
-
-            return list;
+            Random r = new Random();
+            return paddleTextures[textureName] != null ? paddleTextures[textureName] : paddleTextures.ElementAt(r.Next(0, paddleTextures.Count)).Value;
         }
 
-        public Texture2D GetPaddleTexture(int id)
+        public Texture2D GetBallTexture(string textureName)
         {
-            return paddleTextures[id] != null ? paddleTextures[id] : paddleTextures[0];
-        }
-
-        public Texture2D GetBallTexture(int id)
-        {
-            return ballTextures[id] != null ? ballTextures[id] : ballTextures[0];
+            Random r = new Random();
+            return ballTextures[textureName] != null ? ballTextures[textureName] : ballTextures.ElementAt(r.Next(0, ballTextures.Count)).Value;
         }
     }
 }

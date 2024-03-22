@@ -9,7 +9,7 @@ namespace Soutenance_MonoGame
 {
     public interface ISpritesManager
     {
-        public Texture2D GetPaddleTexture(int id);
-        public Texture2D GetBallTexture(int id);
+        public Texture2D GetPaddleTexture(string textureName);
+        public Texture2D GetBallTexture(string textureName);
     }
 }

@@ -24,7 +24,7 @@ namespace Soutenance_MonoGame
         {
             base.Load();
             new SpritesManager();
-            new InputManager();
+            new KeyboardInputManager();
             paddle = new Paddle(Paddle.Colors.yellow, 400.0f, "Paddle");
             ball = new Ball(Ball.Colors.red, 500.0f, new Vector2(0, 1), "Ball");
 
