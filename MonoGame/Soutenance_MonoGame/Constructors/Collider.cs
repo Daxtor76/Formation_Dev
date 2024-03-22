@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Soutenance_MonoGame.Interfaces;
 
 namespace Soutenance_MonoGame
 {
@@ -36,7 +37,7 @@ namespace Soutenance_MonoGame
 
             rect = new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y);
 
-            CollisionController.colliders.Add(this);
+            ServiceLocator.GetService<ICollisionManager>().AddCollider(this);
         }
 
         public override void Update()

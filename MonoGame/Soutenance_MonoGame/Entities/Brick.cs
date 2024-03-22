@@ -9,6 +9,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using Soutenance_MonoGame.Interfaces;
 
 namespace Soutenance_MonoGame
 {
@@ -50,7 +51,7 @@ namespace Soutenance_MonoGame
             maxLife = GetMaxLife(brickType, brickColor);
             life = maxLife;
 
-            EntityController.entities.Add(this);
+            ServiceLocator.GetService<IEntityManager>().AddEntity(this);
         }
 
         public override void Update()

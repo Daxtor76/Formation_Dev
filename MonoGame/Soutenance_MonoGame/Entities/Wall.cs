@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Soutenance_MonoGame.Interfaces;
 
 namespace Soutenance_MonoGame
 {
@@ -13,25 +14,27 @@ namespace Soutenance_MonoGame
     {
         public Collider col;
 
-        public Wall(Vector2 pPos, string pLayer, Vector2 pSize)
+        public Wall(Vector2 pPos, string pName, Vector2 pSize)
         {
-            layer = pLayer;
+            name = pName;
+            layer = "Wall";
             size = pSize;
             position = pPos;
             col = new Collider(this, OnCollisionEnter, OnCollision);
 
-            EntityController.entities.Add(this);
+            ServiceLocator.GetService<IEntityManager>().AddEntity(this);
         }
 
-        public Wall(Vector2 pPos, string pLayer, Texture2D pImg)
+        public Wall(Vector2 pPos, string pName, Texture2D pImg)
         {
-            layer = pLayer;
+            name = pName;
+            layer = "Wall";
             img = pImg;
             size = new Vector2(img.Width, img.Height);
             position = pPos;
             col = new Collider(this, OnCollisionEnter, OnCollision);
 
-            EntityController.entities.Add(this);
+            ServiceLocator.GetService<IEntityManager>().AddEntity(this);
         }
 
         public void OnCollision(Collider other, string side)

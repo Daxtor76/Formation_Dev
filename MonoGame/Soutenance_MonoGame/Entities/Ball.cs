@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Soutenance_MonoGame.Interfaces;
 
 namespace Soutenance_MonoGame
 {
@@ -33,7 +34,7 @@ namespace Soutenance_MonoGame
             position = GetSpawnPosition();
             col = new Collider(this, OnCollisionEnter, OnCollision);
 
-            EntityController.entities.Add(this);
+            ServiceLocator.GetService<IEntityManager>().AddEntity(this);
         }
 
         public override void Update(GameTime gameTime)

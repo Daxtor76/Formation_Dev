@@ -37,6 +37,7 @@ namespace Soutenance_MonoGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            new EntityManager();
             new SceneManager();
 
             base.Initialize();
@@ -58,8 +59,8 @@ namespace Soutenance_MonoGame
             if(ServiceLocator.GetService<ISceneManager>().GetCurrentScene() != null)
                 ServiceLocator.GetService<ISceneManager>().GetCurrentScene().Update(gameTime);
 
-            CollisionController.CleanColliders();
-            EntityController.CleanEntities();
+            ServiceLocator.GetService<ICollisionManager>().CleanColliders();
+            ServiceLocator.GetService<IEntityManager>().CleanEntities();
 
             base.Update(gameTime);
         }

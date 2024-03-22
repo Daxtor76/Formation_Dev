@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
+using Soutenance_MonoGame.Interfaces;
 
 namespace Soutenance_MonoGame
 {
@@ -28,10 +29,10 @@ namespace Soutenance_MonoGame
             paddle = new Paddle(Paddle.Colors.yellow, 400.0f, "Paddle");
             ball = new Ball(Ball.Colors.red, 500.0f, new Vector2(0, 1), "Ball");
 
-            Wall wallTop = new Wall(new Vector2(0, 0), "Wall", new Vector2(Utils.GetScreenSize().X, 2));
-            Wall wallBottom = new Wall(new Vector2(0, Utils.GetScreenSize().Y - 2), "Wall", new Vector2(Utils.GetScreenSize().X, 2));
-            Wall wallLeft = new Wall(new Vector2(0, 0), "Wall", new Vector2(2, Utils.GetScreenSize().Y));
-            Wall wallRight = new Wall(new Vector2(Utils.GetScreenSize().X - 2, 0), "Wall", new Vector2(2, Utils.GetScreenSize().Y));
+            Wall wallTop = new Wall(new Vector2(0, 0), "WallTop", new Vector2(Utils.GetScreenSize().X, 2));
+            Wall wallBottom = new Wall(new Vector2(0, Utils.GetScreenSize().Y - 2), "WallBottom", new Vector2(Utils.GetScreenSize().X, 2));
+            Wall wallLeft = new Wall(new Vector2(0, 0), "WallLeft", new Vector2(2, Utils.GetScreenSize().Y));
+            Wall wallRight = new Wall(new Vector2(Utils.GetScreenSize().X - 2, 0), "WallRight", new Vector2(2, Utils.GetScreenSize().Y));
 
             Brick brick = new Brick(Brick.BrickTypes.littlebrick, Brick.Colors.grey, new Vector2(1, 10), "Brick1");
             Brick brick2 = new Brick(Brick.BrickTypes.littlebrick, Brick.Colors.green, new Vector2(200, 10), "Brick2");
@@ -50,16 +51,16 @@ namespace Soutenance_MonoGame
         {
             base.Update(gameTime);
 
-            EntityController.UpdateEntities(gameTime);
-            CollisionController.UpdateColliders();
+            ServiceLocator.GetService<IEntityManager>().UpdateEntities(gameTime);
+            ServiceLocator.GetService<ICollisionManager>().UpdateColliders();
         }
 
         public override void Draw()
         {
             base.Draw();
 
-            EntityController.DrawEntities();
-            CollisionController.DrawColliders();
+            ServiceLocator.GetService<IEntityManager>().DrawEntities();
+            ServiceLocator.GetService<ICollisionManager>().DrawColliders();
         }
 
         public override void Unload()
