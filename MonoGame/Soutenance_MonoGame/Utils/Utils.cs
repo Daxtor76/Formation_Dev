@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -21,12 +22,13 @@ namespace Soutenance_MonoGame
         }
         public static Vector2 GetScreenCenter()
         {
-            Vector2 screenSize = new Vector2();
+            Vector2 screenCenter = new Vector2();
+            Vector2 screenSize = GetScreenSize();
 
-            screenSize.X = MainGame.graphics.PreferredBackBufferWidth * 0.5f;
-            screenSize.Y = MainGame.graphics.PreferredBackBufferHeight * 0.5f;
+            screenCenter.X = screenSize.X * 0.5f;
+            screenCenter.Y = screenSize.Y * 0.5f;
 
-            return screenSize;
+            return screenCenter;
         }
     }
 }

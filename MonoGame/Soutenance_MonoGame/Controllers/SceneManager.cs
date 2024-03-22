@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Soutenance_MonoGame
 {
-    public sealed class SceneManager : ISceneManager
+    sealed class SceneManager : ISceneManager
     {
         Dictionary<Type, Scene> scenes = new Dictionary<Type, Scene>();
         Scene currentScene;
@@ -32,10 +32,10 @@ namespace Soutenance_MonoGame
             scenes.Add(typeof(GameOverScene), gameOverScene);
 
             // To be changed by menuscene after
-            ChangeScene(typeof(GameScene));
+            SetCurrentScene(typeof(GameScene));
         }
 
-        public void ChangeScene(Type sceneType)
+        public void SetCurrentScene(Type sceneType)
         {
             if (currentScene != null)
             {

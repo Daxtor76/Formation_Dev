@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Soutenance_MonoGame
 {
-    class SpritesManager : ISpritesManager
+    sealed class SpritesManager : ISpritesManager
     {
         List<Texture2D> paddleTextures;
         List<Texture2D> ballTextures;

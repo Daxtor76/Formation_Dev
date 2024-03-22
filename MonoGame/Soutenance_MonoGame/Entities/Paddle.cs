@@ -46,9 +46,10 @@ namespace Soutenance_MonoGame
         public override Vector2 GetSpawnPosition()
         {
             Vector2 paddleSpawnPos = new Vector2();
+            Vector2 screenSize = Utils.GetScreenSize();
 
-            paddleSpawnPos.X = MainGame.graphics.PreferredBackBufferWidth * 0.5f - size.X * 0.5f;
-            paddleSpawnPos.Y = MainGame.graphics.PreferredBackBufferHeight - MainGame.graphics.PreferredBackBufferHeight * 0.05f - size.Y * 0.5f;
+            paddleSpawnPos.X = screenSize.X * 0.5f;
+            paddleSpawnPos.Y = screenSize.Y - 50;
 
             return paddleSpawnPos;
         }

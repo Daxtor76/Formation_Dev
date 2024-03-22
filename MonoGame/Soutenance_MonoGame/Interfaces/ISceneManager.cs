@@ -9,7 +9,7 @@ namespace Soutenance_MonoGame.Interfaces
     public interface ISceneManager
     {
         public void Init();
-        public void ChangeScene(Type sceneType);
+        public void SetCurrentScene(Type sceneType);
         public Scene GetCurrentScene();
     }
 }

@@ -14,7 +14,7 @@ namespace Soutenance_MonoGame
         public static GraphicsDeviceManager graphics { get; private set; }
         public static SpriteBatch spriteBatch { get; private set; }
         public static ContentManager content { get; private set; }
-        public static bool debugMode = false;
+        public static bool debugMode = true;
 
         public MainGame()
         {
@@ -22,14 +22,15 @@ namespace Soutenance_MonoGame
             content = Content;
             content.RootDirectory = "Content";
             IsMouseVisible = true;
+            SetGameScreen(false);
         }
 
-        private void SetGameFullScreen(bool isFull)
+        private void SetGameScreen(bool isFull)
         {
             graphics.ApplyChanges();
+            graphics.IsFullScreen = isFull;
             graphics.PreferredBackBufferWidth = isFull ? GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width : 1280;
             graphics.PreferredBackBufferHeight = isFull ? GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height : 720;
-            graphics.IsFullScreen = isFull;
             graphics.ApplyChanges();
         }
 
@@ -37,7 +38,6 @@ namespace Soutenance_MonoGame
         {
             // TODO: Add your initialization logic here
             new SceneManager();
-            SetGameFullScreen(false);
 
             base.Initialize();
         }

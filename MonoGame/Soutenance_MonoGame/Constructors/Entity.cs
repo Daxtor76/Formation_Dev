@@ -36,9 +36,10 @@ namespace Soutenance_MonoGame
         public virtual Vector2 GetSpawnPosition()
         {
             Vector2 spawnPos = new Vector2();
+            Vector2 screenSize = Utils.GetScreenSize();
 
-            spawnPos.X = MainGame.graphics.PreferredBackBufferWidth * 0.5f - size.X * 0.5f;
-            spawnPos.Y = MainGame.graphics.PreferredBackBufferHeight * 0.5f - size.Y * 0.5f;
+            spawnPos.X = screenSize.X * 0.5f - size.X * 0.5f;
+            spawnPos.Y = screenSize.Y * 0.5f - size.Y * 0.5f;
 
             return spawnPos;
         }

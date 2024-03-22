@@ -32,7 +32,7 @@ namespace Soutenance_MonoGame
 
             if(Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                ServiceLocator.GetService<ISceneManager>().ChangeScene(typeof(GameScene));
+                ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(GameScene));
             }
         }
 
