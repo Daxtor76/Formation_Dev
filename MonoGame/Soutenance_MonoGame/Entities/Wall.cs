@@ -37,11 +37,11 @@ namespace Soutenance_MonoGame
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
         }
 
-        public void OnCollision(Collider other, string side)
+        public void OnCollision(Collider other)
         {
         }
 
-        public void OnCollisionEnter(Collider other, string side)
+        public void OnCollisionEnter(Collider other)
         {
         }
     }

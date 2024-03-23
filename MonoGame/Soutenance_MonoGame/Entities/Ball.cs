@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Soutenance_MonoGame.Interfaces;
+using System.Drawing;
 
 namespace Soutenance_MonoGame
 {
@@ -44,11 +45,13 @@ namespace Soutenance_MonoGame
             col.oldPosition = col.position;
         }
 
-        public void OnCollisionEnter(Collider other, string side)
+        public void OnCollisionEnter(Collider other)
         {
+            string side = col.GetCollisionSide(other);
+
             CheckCollisionWithBottomWall(other, side);
-            ModifyDirection(other, side);
             Hit(other.parent as IDamageable);
+            ModifyDirection(other, side);
         }
 
         void CheckCollisionWithBottomWall(Collider other, string side)
@@ -89,7 +92,7 @@ namespace Soutenance_MonoGame
             return -(targetCenterPos - ballCenterPos) / targetSizeHalf;
         }
 
-        private void CollideOther(string side)
+        void CollideOther(string side)
         {
             if (side == "top" || side == "bottom")
                 direction.Y = -direction.Y;
@@ -103,7 +106,7 @@ namespace Soutenance_MonoGame
                 target.TakeDamages(1);
         }
 
-        public void OnCollision(Collider other, string side)
+        public void OnCollision(Collider other)
         {
         }
     }

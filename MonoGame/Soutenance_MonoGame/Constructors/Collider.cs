@@ -15,21 +15,22 @@ namespace Soutenance_MonoGame
     {
         public Entity parent {get; private set;}
         public Vector2 oldPosition;
-        public delegate void CallBack(Collider other, string side);
-        CallBack collisionEffect;
-        CallBack continuousCollisionEffect;
+        public List<Collider> others = new List<Collider>();
+        public delegate void CallBackOthersEffect(Collider other);
+        CallBackOthersEffect collisionEnterEffect;
+        CallBackOthersEffect continuousCollisionEffect;
 
         Texture2D texture;
         Rectangle rect;
 
         bool canCollide = true;
 
-        public Collider(Entity pParent, CallBack pCollisionEffect = null, CallBack pContinuousCollisionEffect = null)
+        public Collider(Entity pParent, CallBackOthersEffect pCollisionEffect = null, CallBackOthersEffect pContinuousCollisionEffect = null)
         {
             parent = pParent;
             size = pParent.size;
             position = new Vector2(pParent.position.X + size.X, pParent.position.Y);
-            collisionEffect = pCollisionEffect;
+            collisionEnterEffect = pCollisionEffect;
             continuousCollisionEffect = pContinuousCollisionEffect;
 
             texture = new Texture2D(MainGame.graphics.GraphicsDevice, 1, 1);
@@ -56,59 +57,64 @@ namespace Soutenance_MonoGame
                 MainGame.spriteBatch.Draw(texture, rect, new Color(Color.Green, 100));
         }
 
-        public void CheckCollision(Collider other)
+        public void ApplyCollisions()
         {
-            if (other.parent is ICollidable)
+            foreach (Collider other in others)
             {
-                if (collisionEffect != null)
+                if (collisionEnterEffect != null)
                 {
-                    if (IsColliding(other, out string collidingSide) && canCollide)
+                    if (canCollide)
                     {
                         canCollide = false;
-                        collisionEffect(other, collidingSide);
+                        collisionEnterEffect(other);
                     }
                 }
-
                 if (continuousCollisionEffect != null)
                 {
-                    if (IsColliding(other, out string collidingSide))
-                    {
-                        continuousCollisionEffect(other, collidingSide);
-                    }
+                    continuousCollisionEffect(other);
                 }
+                canCollide = true;
             }
         }
 
-        public bool IsColliding(Collider other, out string collidingSide)
+        public bool IsColliding(Collider other)
         {
-            collidingSide = "";
 
             if (position.X < other.position.X + other.size.X &&
                 position.X + size.X > other.position.X &&
                 position.Y < other.position.Y + other.size.Y &&
                 position.Y + size.Y > other.position.Y)
             {
-                if (oldPosition.X + size.X <= other.position.X)
-                {
-                    collidingSide = "right";
-                }
-                if (oldPosition.X >= other.position.X + other.size.X)
-                {
-                    collidingSide = "left";
-                }
-                if (oldPosition.Y >= other.position.Y + other.size.Y)
-                {
-                    collidingSide = "top";
-                }
-                if (oldPosition.Y + size.Y <= other.position.Y)
-                {
-                    collidingSide = "bottom";
-                }
                 return true;
             }
-
-            canCollide = true;
             return false;
+        }
+
+        public string GetCollisionSide(Collider other)
+        {
+            string collidingSide = "";
+            if (oldPosition.X + size.X <= other.position.X)
+            {
+                collidingSide = "right";
+            }
+            if (oldPosition.X >= other.position.X + other.size.X)
+            {
+                collidingSide = "left";
+            }
+            if (oldPosition.Y >= other.position.Y + other.size.Y)
+            {
+                collidingSide = "top";
+            }
+            if (oldPosition.Y + size.Y <= other.position.Y)
+            {
+                collidingSide = "bottom";
+            }
+            return collidingSide;
+        }
+
+        void ClearOthers()
+        {
+            others.Clear();
         }
     }
 }

@@ -53,11 +53,11 @@ namespace Soutenance_MonoGame
             return paddleSpawnPos;
         }
 
-        public void OnCollisionEnter(Collider other, string side)
+        public void OnCollisionEnter(Collider other)
         {
         }
 
-        public void OnCollision(Collider other, string side)
+        public void OnCollision(Collider other)
         {
         }
     }

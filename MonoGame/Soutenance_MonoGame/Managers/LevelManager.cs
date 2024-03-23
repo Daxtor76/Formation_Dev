@@ -20,7 +20,8 @@ namespace Soutenance_MonoGame
         {
             List<Level> list = new List<Level>();
 
-            list.Add(new Level(10, 10));
+            Random rand = new Random();
+            list.Add(new Level(rand.Next(1, 10), rand.Next(1, 10)));
 
             return list;
         }

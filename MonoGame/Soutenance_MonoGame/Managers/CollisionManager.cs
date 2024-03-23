@@ -30,6 +30,7 @@ namespace Soutenance_MonoGame
 
         public void UpdateColliders()
         {
+            // Remplir les objets qui collisionnent
             foreach (Collider col in colliders.Values)
             {
                 col.Update();
@@ -37,9 +38,14 @@ namespace Soutenance_MonoGame
                 {
                     if (col != other)
                     {
-                        col.CheckCollision(other);
+                        if (col.IsColliding(other))
+                        {
+                            col.others.Add(other);
+                        }
                     }
                 }
+                col.ApplyCollisions();
+                col.others.Clear();
             }
         }
 
