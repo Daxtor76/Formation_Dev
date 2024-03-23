@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Soutenance_MonoGame.Interfaces;
 using System.Drawing;
+using System.ComponentModel.Design;
 
 namespace Soutenance_MonoGame
 {
@@ -51,7 +52,7 @@ namespace Soutenance_MonoGame
 
             CheckCollisionWithBottomWall(other, side);
             Hit(other.parent as IDamageable);
-            ModifyDirection(other, side);
+            ModifyDirection(col.others, side);
         }
 
         void CheckCollisionWithBottomWall(Collider other, string side)
@@ -70,12 +71,15 @@ namespace Soutenance_MonoGame
             // Voir pour faire des unity event? avec un defeatManager qui regarde la vie du joueur et qui check quand la valeur change
         }
 
-        void ModifyDirection(Collider other, string side)
+        void ModifyDirection(List<Collider> others, string side)
         {
-            if (other.parent.layer == "Paddle")
-                CollidePaddle(other);
-            else
-                CollideOther(side);
+            foreach (Collider other in others)
+            {
+                if (other.parent.layer == "Paddle")
+                    CollidePaddle(other);
+                else
+                    CollideOther(side);
+            }
         }
 
         void CollidePaddle(Collider other)
@@ -94,10 +98,17 @@ namespace Soutenance_MonoGame
 
         void CollideOther(string side)
         {
-            if (side == "top" || side == "bottom")
-                direction.Y = -direction.Y;
-            else if (side == "left" || side == "right")
-                direction.X = -direction.X;
+            if (side == "top")
+                direction.Y = 1;
+            else if (side == "bottom")
+                direction.Y = -1;
+
+            if (side == "left")
+                direction.X = 1;
+            else if (side == "right")
+                direction.X = -1;
+
+            direction = Vector2.Normalize(direction);
         }
 
         void Hit(IDamageable target)
