@@ -8,8 +8,7 @@ namespace Soutenance_MonoGame
 {
     public interface ILevelManager
     {
-        public void SetCurrentLevel(int levelId);
+        public void ChangeLevel(int levelId);
         public Level GetCurrentLevel();
-        public void UnloadCurrentLevel();
     }
 }

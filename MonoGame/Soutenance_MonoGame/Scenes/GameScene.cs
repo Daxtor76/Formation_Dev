@@ -8,7 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
-using Soutenance_MonoGame.Interfaces;
+using System.Text.Json.Nodes;
+using System.Reflection.Emit;
+using System.Text.Json;
 
 namespace Soutenance_MonoGame
 {
@@ -28,6 +30,7 @@ namespace Soutenance_MonoGame
             new SpritesManager();
             new KeyboardInputManager();
             new LevelManager();
+
             paddle = new Paddle(Paddle.Colors.grey, 400.0f, "Paddle");
             ball = new Ball(Ball.Colors.red, 500.0f, new Vector2(0, -1), "Ball");
 
@@ -35,6 +38,8 @@ namespace Soutenance_MonoGame
             Wall wallBottom = new Wall(new Vector2(0, Utils.GetScreenSize().Y - 2), "WallBottom", new Vector2(Utils.GetScreenSize().X, 2));
             Wall wallLeft = new Wall(new Vector2(0, 0), "WallLeft", new Vector2(2, Utils.GetScreenSize().Y));
             Wall wallRight = new Wall(new Vector2(Utils.GetScreenSize().X - 2, 0), "WallRight", new Vector2(2, Utils.GetScreenSize().Y));
+
+            ServiceLocator.GetService<ILevelManager>().ChangeLevel(1);
 
             /*Brick brick = new Brick(Brick.BrickTypes.littlebrick, Brick.Colors.grey, new Vector2(180, 10), "Brick1");
             Brick brick2 = new Brick(Brick.BrickTypes.littlebrick, Brick.Colors.green, new Vector2(220, 10), "Brick2");

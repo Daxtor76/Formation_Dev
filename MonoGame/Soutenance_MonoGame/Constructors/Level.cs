@@ -9,21 +9,19 @@ namespace Soutenance_MonoGame
 {
     public class Level
     {
+        public Vector2 gridSize = Vector2.Zero;
         Dictionary<Vector2, ILevelElement> grid = new Dictionary<Vector2, ILevelElement>();
-        Vector2 gridInitPosition = new Vector2(50, 50);
 
         public Level(int sizeX, int sizeY)
         {
-            grid = GenerateGrid(sizeX, sizeY);
+            gridSize = new Vector2(sizeX, sizeY);
         }
 
-        public Dictionary<Vector2, ILevelElement> GenerateGrid(int sizeX, int sizeY)
+        public void GenerateGrid()
         {
-            Dictionary<Vector2, ILevelElement> dico = new Dictionary<Vector2, ILevelElement>();
-
-            for (int i = 0; i < sizeX; i++)
+            for (int i = 0; i < gridSize.X; i++)
             {
-                for (int y = 0; y < sizeY; y++)
+                for (int y = 0; y < gridSize.Y; y++)
                 {
                     Array types = Enum.GetValues<Brick.BrickTypes>();
                     Array colors = Enum.GetValues<Brick.Colors>();
@@ -31,18 +29,21 @@ namespace Soutenance_MonoGame
 
                     ILevelElement element = new Brick((Brick.BrickTypes)types.GetValue(rand.Next(0, types.Length)), (Brick.Colors)colors.GetValue(rand.Next(0, colors.Length)), "Brick" + i + y);
 
-                    float xPos = Utils.GetScreenCenter().X + element.GetSize().X * i - sizeX * element.GetSize().X * 0.5f;
+                    float xPos = Utils.GetScreenCenter().X + element.GetSize().X * i - gridSize.X * element.GetSize().X * 0.5f;
                     float yPos = 50 + element.GetSize().Y * y;
                     element.SetPosition(new Vector2(xPos, yPos));
+
+                    grid.Add(new Vector2(i, y), element);
                 }
             }
-
-            return dico;
         }
 
         public void Unload()
         {
-
+            foreach (ILevelElement element in grid.Values)
+            {
+                element.Unload();
+            }
         }
     }
 }

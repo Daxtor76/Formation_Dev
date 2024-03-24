@@ -12,5 +12,6 @@ namespace Soutenance_MonoGame
         public void SetPosition(Vector2 position);
         public Vector2 GetPosition();
         public Vector2 GetSize();
+        public void Unload();
     }
 }

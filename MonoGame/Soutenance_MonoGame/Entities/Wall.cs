@@ -6,11 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Soutenance_MonoGame.Interfaces;
 
 namespace Soutenance_MonoGame
 {
-    public class Wall : Entity, ICollidable
+    public class Wall : Entity, ICollidable, ILevelElement
     {
         public Collider col;
 
@@ -43,6 +42,11 @@ namespace Soutenance_MonoGame
 
         public void OnCollisionEnter(Collider other)
         {
+        }
+
+        public void Unload()
+        {
+            enabled = false;
         }
     }
 }

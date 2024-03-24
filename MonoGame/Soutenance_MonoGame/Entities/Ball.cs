@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Soutenance_MonoGame.Interfaces;
 using System.Drawing;
 using System.ComponentModel.Design;
 

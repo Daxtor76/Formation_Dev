@@ -9,7 +9,6 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
-using Soutenance_MonoGame.Interfaces;
 
 namespace Soutenance_MonoGame
 {
@@ -99,27 +98,32 @@ namespace Soutenance_MonoGame
                 img = ServiceLocator.GetService<ISpritesManager>().GetBrickTexture(brickType + "_" + brickColor + "_" + (maxLife - life).ToString() + "hit");
         }
 
-        public void Die()
-        {
-            enabled = false;
-        }
-
         public int GetMaxLife(BrickTypes type, Colors color)
         {
             if (type != BrickTypes.littlebrick)
             {
                 if (color == Colors.yellow || color == Colors.orange)
                     return 2;
-                else if (color == Colors.red || color ==  Colors.purple)
+                else if (color == Colors.red || color == Colors.purple)
                     return 3;
             }
             else
             {
-               if (color == Colors.yellow || color == Colors.orange)
+                if (color == Colors.yellow || color == Colors.orange)
                     return 2;
             }
 
             return 1;
+        }
+
+        public void Die()
+        {
+            enabled = false;
+        }
+
+        public void Unload()
+        {
+            enabled = false;
         }
     }
 }
