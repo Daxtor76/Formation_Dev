@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Soutenance_MonoGame.Interfaces;
 
 namespace Soutenance_MonoGame
 {
@@ -79,7 +78,6 @@ namespace Soutenance_MonoGame
 
         public bool IsColliding(Collider other)
         {
-
             if (position.X < other.position.X + other.size.X &&
                 position.X + size.X > other.position.X &&
                 position.Y < other.position.Y + other.size.Y &&

@@ -31,6 +31,7 @@ namespace Soutenance_MonoGame
             img = ServiceLocator.GetService<ISpritesManager>().GetPaddleTexture("paddle_" + pColor);
             size = new Vector2(img.Width, img.Height);
             position = GetSpawnPosition();
+            targetPos = position;
             col = new Collider(this, OnCollisionEnter, OnCollision);
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
@@ -50,6 +51,15 @@ namespace Soutenance_MonoGame
             paddleSpawnPos.Y = screenSize.Y - 50;
 
             return paddleSpawnPos;
+        }
+
+        public override void Move(GameTime gameTime)
+        {
+            Vector2 screenSize = Utils.GetScreenSize();
+            targetPos += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            targetPos = new Vector2(Math.Clamp(targetPos.X, 0, screenSize.X - size.X), targetPos.Y);
+
+            position = Vector2.Lerp(position, targetPos, 0.1f);
         }
 
         public void OnCollisionEnter(Collider other)

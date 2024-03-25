@@ -14,6 +14,7 @@ namespace Soutenance_MonoGame
     {
         protected float speed = 0.0f;
         protected Vector2 direction;
+        protected Vector2 targetPos;
 
         public AbstractMoveable(float pSpeed, Vector2 pDirection = new Vector2())
         {
@@ -27,11 +28,11 @@ namespace Soutenance_MonoGame
             Move(gameTime);
         }
 
-        public void Move(GameTime gameTime)
+        public virtual void Move(GameTime gameTime)
         {
             Vector2 screenSize = Utils.GetScreenSize();
             position += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
             position = new Vector2(Math.Clamp(position.X, 0, screenSize.X - size.X), position.Y);
-        } 
+        }
     }
 }
