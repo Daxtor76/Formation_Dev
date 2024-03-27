@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.ComponentModel.Design;
+using static Soutenance_MonoGame.Scene;
 
 namespace Soutenance_MonoGame
 {
@@ -47,16 +48,19 @@ namespace Soutenance_MonoGame
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            if (ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state == Scene.SceneStates.Preparation)
+            if (ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state == SceneStates.Preparation)
             {
                 position = mover.Follow(size, paddle);
                 if (ServiceLocator.GetService<IInputManager>().IsPressedOnce(Keys.Space))
                 {
                     Launch();
+                    ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state = SceneStates.Playing;
                 }
             }
-            else if (ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state == Scene.SceneStates.Playing)
-                position = mover.Move(gameTime, position, size);
+            else if (ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state == SceneStates.Playing)
+            {
+                position = mover.Move(gameTime, position, size, mover.direction);
+            }
 
             col.oldPosition = col.position;
         }
@@ -80,7 +84,7 @@ namespace Soutenance_MonoGame
 
         void LoseLife()
         {
-            position = Utils.GetScreenCenter();
+            ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state = SceneStates.Preparation;
             // TO DO: Ajouter ici la perte du vie du player
             // Check la defeat -> si == 0 game over sinon reset
             // Voir pour faire des unity event? avec un defeatManager qui regarde la vie du joueur et qui check quand la valeur change

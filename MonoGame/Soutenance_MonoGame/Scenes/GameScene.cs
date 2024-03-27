@@ -59,11 +59,6 @@ namespace Soutenance_MonoGame
         {
             base.Update(gameTime);
 
-            if (ServiceLocator.GetService<IInputManager>().IsPressedOnce(Keys.Space))
-            {
-                ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state = Scene.SceneStates.Playing;
-            }
-
             ServiceLocator.GetService<IEntityManager>().UpdateEntities(gameTime);
             ServiceLocator.GetService<ICollisionManager>().UpdateColliders();
         }

@@ -1,3 +1,5 @@
+- La balle doit suivre le paddle tant que la game n'a pas débuté (input space) -> ok
+- Change Lerp to Accel/Decel -> ok
 - Chemin générique pour fichier json (pour l'instant chemin en dur qui correspond à mon pc)
 - Gameplay: booster la balle si input au moment du rebond (pas de changement de direction tant que pas de mur touché)
 - Visuel: animations

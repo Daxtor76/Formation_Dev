@@ -42,7 +42,11 @@ namespace Soutenance_MonoGame
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            mover.direction = ServiceLocator.GetService<IInputManager>().GetInputDirection();
+            //position = mover.MoveSmoothly(gameTime, position, size, ServiceLocator.GetService<IInputManager>().GetInputDirection());
+            if (ServiceLocator.GetService<IInputManager>().IsPressed(Keys.Q) || ServiceLocator.GetService<IInputManager>().IsPressed(Keys.D))
+            {
+                mover.IncreaseAccel(gameTime, ServiceLocator.GetService<IInputManager>().GetInputDirection());
+            }
             position = mover.MoveSmoothly(gameTime, position, size);
         }
 
