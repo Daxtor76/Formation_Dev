@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Vector2 = System.Numerics.Vector2;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,13 @@ namespace Soutenance_MonoGame
             red,
             yellow
         }
+
         Collider col;
         Mover mover;
 
-        public Ball(Colors pColor, float pSpeed, Vector2 pDirection, string pName)
+        Entity paddle = ServiceLocator.GetService<IEntityManager>().GetEntity("Paddle") as Paddle;
+
+        public Ball(Colors pColor, float pSpeed, string pName)
         {
             name = pName;
             layer = "Ball";
@@ -34,7 +38,7 @@ namespace Soutenance_MonoGame
             size = new Vector2(img.Width, img.Height);
             position = GetSpawnPosition();
 
-            mover = new Mover(position, pDirection, pSpeed);
+            mover = new Mover(position, pSpeed);
             col = new Collider(this, OnCollisionEnter, OnCollision);
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
@@ -43,7 +47,16 @@ namespace Soutenance_MonoGame
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            position = mover.Move(gameTime, position, size);
+            if (ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state == Scene.SceneStates.Preparation)
+            {
+                position = mover.Follow(size, paddle);
+                if (ServiceLocator.GetService<IInputManager>().IsPressedOnce(Keys.Space))
+                {
+                    Launch();
+                }
+            }
+            else if (ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state == Scene.SceneStates.Playing)
+                position = mover.Move(gameTime, position, size);
 
             col.oldPosition = col.position;
         }
@@ -117,6 +130,11 @@ namespace Soutenance_MonoGame
         {
             if (target is IDamageable)
                 target.TakeDamages(1);
+        }
+
+        void Launch()
+        {
+            mover.direction = new Vector2(0, -1);
         }
 
         public void OnCollision(Collider other)

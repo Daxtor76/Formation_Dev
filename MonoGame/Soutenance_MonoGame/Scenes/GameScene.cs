@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Text.Json.Nodes;
 using System.Reflection.Emit;
 using System.Text.Json;
+using System.Diagnostics.Metrics;
 
 namespace Soutenance_MonoGame
 {
@@ -32,7 +33,7 @@ namespace Soutenance_MonoGame
             new LevelManager();
 
             paddle = new Paddle(Paddle.Colors.grey, 400.0f, "Paddle");
-            ball = new Ball(Ball.Colors.red, 500.0f, new Vector2(0, -1), "Ball");
+            ball = new Ball(Ball.Colors.red, 500.0f, "Ball");
 
             Wall wallTop = new Wall(new Vector2(0, 0), "WallTop", new Vector2(Utils.GetScreenSize().X, 2));
             Wall wallRight = new Wall(new Vector2(Utils.GetScreenSize().X - 2, 0), "WallRight", new Vector2(2, Utils.GetScreenSize().Y));
@@ -57,6 +58,11 @@ namespace Soutenance_MonoGame
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            if (ServiceLocator.GetService<IInputManager>().IsPressedOnce(Keys.Space))
+            {
+                ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state = Scene.SceneStates.Playing;
+            }
 
             ServiceLocator.GetService<IEntityManager>().UpdateEntities(gameTime);
             ServiceLocator.GetService<ICollisionManager>().UpdateColliders();

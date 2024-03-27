@@ -45,5 +45,15 @@ namespace Soutenance_MonoGame
 
             return Vector2.Lerp(position, targetPos, 0.1f);
         }
+
+        public Vector2 Follow(Vector2 size, Entity target)
+        {
+            Vector2 pos = new Vector2();
+
+            pos.X = target.position.X + target.size.X * 0.5f - size.X * 0.5f;
+            pos.Y = target.position.Y - target.size.Y * 0.5f - size.Y * 0.5f;
+
+            return pos;
+        }
     }
 }

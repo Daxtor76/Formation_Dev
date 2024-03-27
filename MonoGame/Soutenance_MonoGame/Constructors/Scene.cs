@@ -11,7 +11,15 @@ namespace Soutenance_MonoGame
 {
     public abstract class Scene
     {
+        public enum SceneStates
+        {
+            Preparation,
+            Playing,
+            End
+        }
+
         public string name;
+        public SceneStates state = SceneStates.Preparation;
 
         public Scene(string pName)
         {

@@ -10,9 +10,30 @@ namespace Soutenance_MonoGame
 {
     public class KeyboardInputManager : IInputManager
     {
+        bool pressed = false;
         public KeyboardInputManager()
         {
             ServiceLocator.RegisterService<IInputManager>(this);
+        }
+
+        public bool IsPressed(Keys key)
+        {
+            return Keyboard.GetState().IsKeyDown(key);
+        }
+
+        public bool IsPressedOnce(Keys key)
+        {
+            if (!pressed && Keyboard.GetState().IsKeyDown(key))
+            {
+                pressed = true;
+                return true;
+            }
+            else
+            {
+                if (Keyboard.GetState().IsKeyUp(key))
+                    pressed = false;
+                return false;
+            }
         }
 
         public Vector2 GetInputDirection()

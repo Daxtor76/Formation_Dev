@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Soutenance_MonoGame.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

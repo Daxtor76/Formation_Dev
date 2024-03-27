@@ -3,56 +3,44 @@
   "WorkspaceRootPath": "E:\\Projets\\Formation_Dev\\MonoGame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|e:\\projets\\formation_dev\\monogame\\soutenance_monogame\\constructors\\mover.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|solutionrelative:soutenance_monogame\\constructors\\mover.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|e:\\projets\\formation_dev\\monogame\\soutenance_monogame\\entities\\paddle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|solutionrelative:soutenance_monogame\\entities\\paddle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|e:\\projets\\formation_dev\\monogame\\soutenance_monogame\\utils\\utils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|solutionrelative:soutenance_monogame\\utils\\utils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|e:\\projets\\formation_dev\\monogame\\soutenance_monogame\\entities\\ball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|solutionrelative:soutenance_monogame\\entities\\ball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|e:\\projets\\formation_dev\\monogame\\soutenance_monogame\\constructors\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|solutionrelative:soutenance_monogame\\constructors\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|e:\\projets\\formation_dev\\monogame\\soutenance_monogame\\maingame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|solutionrelative:soutenance_monogame\\maingame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|e:\\projets\\formation_dev\\monogame\\soutenance_monogame\\scenes\\gamescene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|solutionrelative:soutenance_monogame\\scenes\\gamescene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|e:\\projets\\formation_dev\\monogame\\soutenance_monogame\\constructors\\mover.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|solutionrelative:soutenance_monogame\\constructors\\mover.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|e:\\projets\\formation_dev\\monogame\\soutenance_monogame\\maingame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|solutionrelative:soutenance_monogame\\maingame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|e:\\projets\\formation_dev\\monogame\\soutenance_monogame\\entities\\paddle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|solutionrelative:soutenance_monogame\\entities\\paddle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|e:\\projets\\formation_dev\\monogame\\soutenance_monogame\\interfaces\\ilevelmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|solutionrelative:soutenance_monogame\\interfaces\\ilevelmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|e:\\projets\\formation_dev\\monogame\\soutenance_monogame\\interfaces\\ilevelelement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|solutionrelative:soutenance_monogame\\interfaces\\ilevelelement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|e:\\projets\\formation_dev\\monogame\\soutenance_monogame\\constructors\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|solutionrelative:soutenance_monogame\\constructors\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|e:\\projets\\formation_dev\\monogame\\soutenance_monogame\\entities\\brick.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|solutionrelative:soutenance_monogame\\entities\\brick.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|e:\\projets\\formation_dev\\monogame\\soutenance_monogame\\levels\\leveldesign.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|solutionrelative:soutenance_monogame\\levels\\leveldesign.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|e:\\projets\\formation_dev\\monogame\\soutenance_monogame\\interfaces\\ilevelelement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|solutionrelative:soutenance_monogame\\interfaces\\ilevelelement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|e:\\projets\\formation_dev\\monogame\\soutenance_monogame\\managers\\levelmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|solutionrelative:soutenance_monogame\\managers\\levelmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|e:\\projets\\formation_dev\\monogame\\soutenance_monogame\\utils\\jsonreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|solutionrelative:soutenance_monogame\\utils\\jsonreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B51B3DCE-2A11-4523-A4A1-E844D87D8609}|Soutenance_MonoGame\\Soutenance_MonoGame.csproj|e:\\projets\\formation_dev\\monogame\\soutenance_monogame\\constructors\\level.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -66,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -78,98 +66,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Utils.cs",
-              "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Utils\\Utils.cs",
-              "RelativeDocumentMoniker": "Soutenance_MonoGame\\Utils\\Utils.cs",
-              "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Utils\\Utils.cs",
-              "RelativeToolTip": "Soutenance_MonoGame\\Utils\\Utils.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABMAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-27T13:59:44.367Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Entity.cs",
               "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Constructors\\Entity.cs",
               "RelativeDocumentMoniker": "Soutenance_MonoGame\\Constructors\\Entity.cs",
               "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Constructors\\Entity.cs",
               "RelativeToolTip": "Soutenance_MonoGame\\Constructors\\Entity.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAAgwC8AAAAxAAAA",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAowC8AAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-25T19:31:40.169Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Mover.cs",
               "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Constructors\\Mover.cs",
               "RelativeDocumentMoniker": "Soutenance_MonoGame\\Constructors\\Mover.cs",
               "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Constructors\\Mover.cs",
               "RelativeToolTip": "Soutenance_MonoGame\\Constructors\\Mover.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAgwBMAAAAUAAAA",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAswBMAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-25T18:49:51.737Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Paddle.cs",
               "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Entities\\Paddle.cs",
               "RelativeDocumentMoniker": "Soutenance_MonoGame\\Entities\\Paddle.cs",
               "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Entities\\Paddle.cs",
               "RelativeToolTip": "Soutenance_MonoGame\\Entities\\Paddle.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAQwCMAAAAbAAAA",
+              "ViewState": "AQIAABsAAAAAAAAAAAA5wCMAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-25T18:57:32.898Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Ball.cs",
               "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Entities\\Ball.cs",
               "RelativeDocumentMoniker": "Soutenance_MonoGame\\Entities\\Ball.cs",
               "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Entities\\Ball.cs",
               "RelativeToolTip": "Soutenance_MonoGame\\Entities\\Ball.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAUAAAA",
+              "ViewState": "AQIAABMAAAAAAAAAAAAgwCkAAABEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-22T14:47:59.835Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "LevelDesign.json",
-              "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Levels\\LevelDesign.json",
-              "RelativeDocumentMoniker": "Soutenance_MonoGame\\Levels\\LevelDesign.json",
-              "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Levels\\LevelDesign.json",
-              "RelativeToolTip": "Soutenance_MonoGame\\Levels\\LevelDesign.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-03-23T13:31:20.16Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "JSonReader.cs",
-              "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Utils\\JSonReader.cs",
-              "RelativeDocumentMoniker": "Soutenance_MonoGame\\Utils\\JSonReader.cs",
-              "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Utils\\JSonReader.cs",
-              "RelativeToolTip": "Soutenance_MonoGame\\Utils\\JSonReader.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-23T13:16:12.456Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 7,
               "Title": "Brick.cs",
               "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Entities\\Brick.cs",
               "RelativeDocumentMoniker": "Soutenance_MonoGame\\Entities\\Brick.cs",
@@ -190,12 +139,11 @@
               "RelativeToolTip": "Soutenance_MonoGame\\Interfaces\\ILevelElement.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-22T14:08:41.256Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-22T14:08:41.256Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 10,
               "Title": "Level.cs",
               "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Constructors\\Level.cs",
               "RelativeDocumentMoniker": "Soutenance_MonoGame\\Constructors\\Level.cs",
@@ -203,12 +151,11 @@
               "RelativeToolTip": "Soutenance_MonoGame\\Constructors\\Level.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAIBJwCEAAABBAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-22T14:06:41.512Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-22T14:06:41.512Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 9,
               "Title": "LevelManager.cs",
               "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Managers\\LevelManager.cs",
               "RelativeDocumentMoniker": "Soutenance_MonoGame\\Managers\\LevelManager.cs",
@@ -216,44 +163,43 @@
               "RelativeToolTip": "Soutenance_MonoGame\\Managers\\LevelManager.cs",
               "ViewState": "AQIAAA4AAAAAAAAAAAAQwCIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-22T14:03:37.381Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-22T14:03:37.381Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "ILevelManager.cs",
               "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Interfaces\\ILevelManager.cs",
               "RelativeDocumentMoniker": "Soutenance_MonoGame\\Interfaces\\ILevelManager.cs",
               "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Interfaces\\ILevelManager.cs",
               "RelativeToolTip": "Soutenance_MonoGame\\Interfaces\\ILevelManager.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAsAAAAnAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-22T14:04:56.887Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "GameScene.cs",
               "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Scenes\\GameScene.cs",
               "RelativeDocumentMoniker": "Soutenance_MonoGame\\Scenes\\GameScene.cs",
               "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Scenes\\GameScene.cs",
               "RelativeToolTip": "Soutenance_MonoGame\\Scenes\\GameScene.cs",
-              "ViewState": "AQIAACQAAAAAAAAAAAAowDYAAAAJAAAA",
+              "ViewState": "AQIAACwAAAAAAAAAAAAUwEIAAABRAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-08T10:52:22.999Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "MainGame.cs",
               "DocumentMoniker": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\MainGame.cs",
               "RelativeDocumentMoniker": "Soutenance_MonoGame\\MainGame.cs",
               "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\MainGame.cs",
               "RelativeToolTip": "Soutenance_MonoGame\\MainGame.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAA1wBkAAAAJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-23T10:27:12.502Z",
               "EditorCaption": ""

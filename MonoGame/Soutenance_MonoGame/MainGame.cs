@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics;
 using System.Net.Security;
 using Microsoft.Xna.Framework.Content;
-using Soutenance_MonoGame.Interfaces;
 
 namespace Soutenance_MonoGame
 {
