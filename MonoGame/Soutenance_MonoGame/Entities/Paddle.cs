@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Soutenance_MonoGame
 {
-    public class Paddle : AbstractMoveable, ICollidable
+    public class Paddle : Entity, ICollidable
     {
         public enum Colors
         {
@@ -23,15 +23,17 @@ namespace Soutenance_MonoGame
             yellow
         }
         Collider col;
+        Mover mover;
 
-        public Paddle(Colors pColor, float pSpeed, string pName) : base(pSpeed)
+        public Paddle(Colors pColor, float pSpeed, string pName)
         {
             name = pName;
             layer = "Paddle";
             img = ServiceLocator.GetService<ISpritesManager>().GetPaddleTexture("paddle_" + pColor);
             size = new Vector2(img.Width, img.Height);
             position = GetSpawnPosition();
-            targetPos = position;
+
+            mover = new Mover(position, pSpeed);
             col = new Collider(this, OnCollisionEnter, OnCollision);
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
@@ -39,9 +41,11 @@ namespace Soutenance_MonoGame
 
         public override void Update(GameTime gameTime)
         {
-            direction = ServiceLocator.GetService<IInputManager>().GetInputDirection();
             base.Update(gameTime);
+            mover.direction = ServiceLocator.GetService<IInputManager>().GetInputDirection();
+            position = mover.MoveSmoothly(gameTime, position, size);
         }
+
         public override Vector2 GetSpawnPosition()
         {
             Vector2 paddleSpawnPos = new Vector2();
@@ -51,15 +55,6 @@ namespace Soutenance_MonoGame
             paddleSpawnPos.Y = screenSize.Y - 50;
 
             return paddleSpawnPos;
-        }
-
-        public override void Move(GameTime gameTime)
-        {
-            Vector2 screenSize = Utils.GetScreenSize();
-            targetPos += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            targetPos = new Vector2(Math.Clamp(targetPos.X, 0, screenSize.X - size.X), targetPos.Y);
-
-            position = Vector2.Lerp(position, targetPos, 0.1f);
         }
 
         public void OnCollisionEnter(Collider other)

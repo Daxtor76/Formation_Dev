@@ -12,7 +12,7 @@ using System.ComponentModel.Design;
 
 namespace Soutenance_MonoGame
 {
-    public class Ball : AbstractMoveable, ICollidable
+    public class Ball : Entity, ICollidable
     {
         public enum Colors
         {
@@ -24,14 +24,17 @@ namespace Soutenance_MonoGame
             yellow
         }
         Collider col;
+        Mover mover;
 
-        public Ball(Colors pColor, float pSpeed, Vector2 pDirection, string pName) : base(pSpeed, pDirection)
+        public Ball(Colors pColor, float pSpeed, Vector2 pDirection, string pName)
         {
             name = pName;
             layer = "Ball";
             img = ServiceLocator.GetService<ISpritesManager>().GetBallTexture("ball_" + pColor);
             size = new Vector2(img.Width, img.Height);
             position = GetSpawnPosition();
+
+            mover = new Mover(position, pDirection, pSpeed);
             col = new Collider(this, OnCollisionEnter, OnCollision);
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
@@ -40,8 +43,8 @@ namespace Soutenance_MonoGame
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            position = mover.Move(gameTime, position, size);
 
-            // TO DO: voir si on peut pas ranger ça ailleurs
             col.oldPosition = col.position;
         }
 
@@ -84,7 +87,7 @@ namespace Soutenance_MonoGame
         void CollidePaddle(Collider other)
         {
             float modifier = GetImpactPointRelativePositionX(other.parent);
-            direction = Vector2.Normalize(new Vector2(modifier, -direction.Y));
+            mover.direction = Vector2.Normalize(new Vector2(modifier, -mover.direction.Y));
         }
 
         float GetImpactPointRelativePositionX(Entity target)
@@ -98,16 +101,16 @@ namespace Soutenance_MonoGame
         void CollideOther(string side)
         {
             if (side == "top")
-                direction.Y = 1;
+                mover.direction.Y = 1;
             else if (side == "bottom")
-                direction.Y = -1;
+                mover.direction.Y = -1;
 
             if (side == "left")
-                direction.X = 1;
+                mover.direction.X = 1;
             else if (side == "right")
-                direction.X = -1;
+                mover.direction.X = -1;
 
-            direction = Vector2.Normalize(direction);
+            mover.direction = Vector2.Normalize(mover.direction);
         }
 
         void Hit(IDamageable target)

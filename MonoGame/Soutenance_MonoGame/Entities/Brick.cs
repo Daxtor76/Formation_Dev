@@ -45,6 +45,7 @@ namespace Soutenance_MonoGame
             img = ServiceLocator.GetService<ISpritesManager>().GetBrickTexture(pType + "_" + pColor + "_" + (maxLife - life).ToString() + "hit");
             size = new Vector2(img.Width, img.Height);
             position = Vector2.Zero;
+
             col = new Collider(this, OnCollisionEnter, OnCollision);
 
             maxLife = GetMaxLife(brickType, brickColor);

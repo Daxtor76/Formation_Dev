@@ -25,15 +25,5 @@ namespace Soutenance_MonoGame
 
             return jsonNode;
         }
-
-        /* Exemple
-            JsonNode ld = JSonReader.Deserialize("E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Levels\\LevelDesign.json");
-            JsonNode ldLevels = ld["Levels"];
-
-            for (int i = 0; i < ldLevels.AsObject().Count; i++)
-            {
-                Debug.WriteLine($"Level {i}: {ldLevels[i.ToString()]["sizeX"]}");
-            }
-         */
     }
 }
