@@ -33,7 +33,7 @@ namespace Soutenance_MonoGame
             size = new Vector2(img.Width, img.Height);
             position = GetSpawnPosition();
 
-            mover = new Mover(position, pSpeed);
+            mover = new Mover(pSpeed);
             col = new Collider(this, OnCollisionEnter, OnCollision);
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
@@ -43,7 +43,7 @@ namespace Soutenance_MonoGame
         {
             base.Update(gameTime);
             //position = mover.MoveSmoothly(gameTime, position, size, ServiceLocator.GetService<IInputManager>().GetInputDirection());
-            if (ServiceLocator.GetService<IInputManager>().IsPressed(Keys.Q) || ServiceLocator.GetService<IInputManager>().IsPressed(Keys.D))
+            if (ServiceLocator.GetService<IInputManager>().GetInputDirection() != Vector2.Zero)
             {
                 mover.IncreaseAccel(gameTime, ServiceLocator.GetService<IInputManager>().GetInputDirection());
             }

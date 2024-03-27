@@ -15,15 +15,13 @@ namespace Soutenance_MonoGame
     {
         public Vector2 direction;
         public float speed;
-        Vector2 targetPos;
-        float accel;
+        Vector2 accel;
 
-        public Mover(Vector2 pPosition, float pSpeed)
+        public Mover(float pSpeed)
         {
-            targetPos = pPosition;
             speed = pSpeed;
             direction = new Vector2();
-            accel = 0.0f;
+            accel = Vector2.Zero;
         }
 
         public Vector2 Move(GameTime gameTime, Vector2 position, Vector2 size, Vector2 direction)
@@ -38,7 +36,7 @@ namespace Soutenance_MonoGame
             Vector2 screenSize = Utils.GetScreenSize();
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            position.X += accel * speed * dt;
+            position += accel * speed * dt;
             accel *= 0.9f;
 
             return new Vector2(Math.Clamp(position.X, 0, screenSize.X - size.X), position.Y);
@@ -57,7 +55,8 @@ namespace Soutenance_MonoGame
         public void IncreaseAccel(GameTime gameTime, Vector2 direction)
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            Math.Clamp(accel += 10 * direction.X * dt, -100.0f, 100.0f);
+            Math.Clamp(accel.X += 10 * direction.X * dt, -100.0f, 100.0f);
+            Math.Clamp(accel.Y += 10 * direction.Y * dt, -100.0f, 100.0f);
         }
     }
 }

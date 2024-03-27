@@ -39,7 +39,7 @@ namespace Soutenance_MonoGame
             size = new Vector2(img.Width, img.Height);
             position = GetSpawnPosition();
 
-            mover = new Mover(position, pSpeed);
+            mover = new Mover(pSpeed);
             col = new Collider(this, OnCollisionEnter, OnCollision);
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
