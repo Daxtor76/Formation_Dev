@@ -16,12 +16,12 @@ namespace Soutenance_MonoGame
             ServiceLocator.RegisterService<IInputManager>(this);
         }
 
-        public bool IsPressed(Keys key)
+        public bool KeyDown(Keys key)
         {
             return Keyboard.GetState().IsKeyDown(key);
         }
 
-        public bool IsPressedOnce(Keys key)
+        public bool KeyPressed(Keys key)
         {
             if (!pressed && Keyboard.GetState().IsKeyDown(key))
             {

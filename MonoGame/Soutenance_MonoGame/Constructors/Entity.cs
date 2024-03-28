@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Mime;
 
 namespace Soutenance_MonoGame
 {
@@ -18,10 +19,6 @@ namespace Soutenance_MonoGame
         public string name = "";
         public string layer = "";
         public Texture2D img;
-
-        public virtual void Update()
-        {
-        }
 
         public virtual void Update(GameTime gameTime)
         {
@@ -43,6 +40,11 @@ namespace Soutenance_MonoGame
         public Vector2 GetSize()
         {
             return size;
+        }
+
+        public float GetDistance(Entity target)
+        {
+            return Vector2.Distance(position, target.position);
         }
 
         public virtual Vector2 GetSpawnPosition()

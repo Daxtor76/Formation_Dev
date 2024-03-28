@@ -28,6 +28,11 @@ namespace Soutenance_MonoGame
 
         public virtual void Load()
         {
+            Start();
+        }
+
+        public virtual void Start()
+        {
         }
 
         public virtual void Update(GameTime gameTime)

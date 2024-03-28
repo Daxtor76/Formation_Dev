@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.ComponentModel.Design;
 using static Soutenance_MonoGame.Scene;
+using System.Threading;
 
 namespace Soutenance_MonoGame
 {
@@ -25,11 +26,19 @@ namespace Soutenance_MonoGame
             red,
             yellow
         }
+        public enum States
+        {
+            Normal,
+            Boosted
+        }
+
+        public States state;
 
         Collider col;
-        Mover mover;
+        public Mover mover;
+        Entity paddle;
 
-        Entity paddle = ServiceLocator.GetService<IEntityManager>().GetEntity("Paddle") as Paddle;
+        public bool canBeBoosted = false;
 
         public Ball(Colors pColor, float pSpeed, string pName)
         {
@@ -39,29 +48,30 @@ namespace Soutenance_MonoGame
             size = new Vector2(img.Width, img.Height);
             position = GetSpawnPosition();
 
-            mover = new Mover(pSpeed);
-            col = new Collider(this, OnCollisionEnter, OnCollision);
+            state = States.Normal;
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
+
+            col = new Collider(this, OnCollisionEnter, OnCollision);
+            mover = new Mover(pSpeed);
+            paddle = ServiceLocator.GetService<IEntityManager>().GetEntity("Paddle");
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             if (ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state == SceneStates.Preparation)
             {
                 mover.FollowAbove(this, paddle);
-                if (ServiceLocator.GetService<IInputManager>().IsPressedOnce(Keys.Space))
-                {
-                    Launch();
-                    ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state = SceneStates.Playing;
-                }
             }
             else if (ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state == SceneStates.Playing)
             {
-                Debug.WriteLine(mover.accel);
                 mover.ManageAccel(gameTime, new Vector2(5.0f, 5.0f));
                 mover.Move(gameTime, this, mover.direction);
+
+                canBeBoosted = GetDistance(paddle) <= paddle.size.X * 0.5f + size.X * 0.5f + 30.0f;
             }
 
             col.oldPosition = col.position;
@@ -107,6 +117,8 @@ namespace Soutenance_MonoGame
         {
             float modifier = GetImpactPointRelativePositionX(other.parent);
             mover.direction = Vector2.Normalize(new Vector2(modifier, -mover.direction.Y));
+            if (state == States.Boosted)
+                mover.accel += new Vector2(1.0f, 1.0f);
         }
 
         float GetImpactPointRelativePositionX(Entity target)
@@ -136,12 +148,6 @@ namespace Soutenance_MonoGame
         {
             if (target is IDamageable)
                 target.TakeDamages(1);
-        }
-
-        void Launch()
-        {
-            mover.accel = new Vector2(5.0f, 5.0f);
-            mover.direction = new Vector2(0, -1);
         }
 
         public void OnCollision(Collider other)

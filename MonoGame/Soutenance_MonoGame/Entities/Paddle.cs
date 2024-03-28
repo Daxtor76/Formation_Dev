@@ -8,6 +8,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Soutenance_MonoGame.Scene;
+using System.Reflection.Metadata;
+using static Soutenance_MonoGame.Ball;
 
 namespace Soutenance_MonoGame
 {
@@ -24,6 +27,7 @@ namespace Soutenance_MonoGame
         }
         Collider col;
         Mover mover;
+        public Ball ball;
 
         public Paddle(Colors pColor, float pSpeed, string pName)
         {
@@ -33,10 +37,10 @@ namespace Soutenance_MonoGame
             size = new Vector2(img.Width, img.Height);
             position = GetSpawnPosition();
 
-            mover = new Mover(pSpeed);
-            col = new Collider(this, OnCollisionEnter, OnCollision);
-
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
+
+            col = new Collider(this, OnCollisionEnter, OnCollision);
+            mover = new Mover(pSpeed);
         }
 
         public override void Update(GameTime gameTime)
@@ -44,9 +48,31 @@ namespace Soutenance_MonoGame
             base.Update(gameTime);
             if (ServiceLocator.GetService<IInputManager>().GetInputDirection() != Vector2.Zero)
             {
-                mover.IncreaseAccel(gameTime, ServiceLocator.GetService<IInputManager>().GetInputDirection());
+                mover.IncreaseAccelByDirection(gameTime, ServiceLocator.GetService<IInputManager>().GetInputDirection());
             }
             mover.MoveSmoothly(gameTime, this);
+
+            if (ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state == SceneStates.Preparation)
+            {
+                if (ServiceLocator.GetService<IInputManager>().KeyPressed(Keys.Space))
+                {
+                    LaunchBall(ball, new Vector2(0, -1));
+                    ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state = SceneStates.Playing;
+                }
+            }
+            else if (ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state == SceneStates.Playing)
+            {
+                if (ServiceLocator.GetService<IInputManager>().KeyPressed(Keys.Space))
+                {
+                    if (ball.canBeBoosted)
+                    {
+                        ball.state = States.Boosted;
+                        Debug.WriteLine("BOOSTED");
+                    }
+                    else
+                        Debug.WriteLine("raté");
+                }
+            }
         }
 
         public override Vector2 GetSpawnPosition()
@@ -66,6 +92,12 @@ namespace Soutenance_MonoGame
 
         public void OnCollision(Collider other)
         {
+        }
+
+        void LaunchBall(Ball ball, Vector2 direction)
+        {
+            ball.mover.accel = new Vector2(5.0f, 5.0f);
+            ball.mover.direction = direction;
         }
     }
 }

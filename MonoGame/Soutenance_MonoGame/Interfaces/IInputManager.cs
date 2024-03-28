@@ -11,7 +11,7 @@ namespace Soutenance_MonoGame
     public interface IInputManager
     {
         public Vector2 GetInputDirection();
-        public bool IsPressed(Keys key);
-        public bool IsPressedOnce(Keys key);
+        public bool KeyDown(Keys key);
+        public bool KeyPressed(Keys key);
     }
 }

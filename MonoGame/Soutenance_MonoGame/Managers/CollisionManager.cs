@@ -23,11 +23,11 @@ namespace Soutenance_MonoGame
             colliders.Add(col);
         }
 
-        public void UpdateColliders()
+        public void UpdateColliders(GameTime gameTime)
         {
             foreach (Collider col in colliders)
             {
-                col.Update();
+                col.Update(gameTime);
                 foreach (Collider other in colliders)
                 {
                     if (col != other)

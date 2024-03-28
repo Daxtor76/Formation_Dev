@@ -68,7 +68,7 @@ namespace Soutenance_MonoGame
                 Math.Clamp(accel.Y += 10 * dt, 0.0f, 15.0f);
         }
 
-        public void IncreaseAccel(GameTime gameTime, Vector2 direction)
+        public void IncreaseAccelByDirection(GameTime gameTime, Vector2 direction)
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
             Math.Clamp(accel.X += 10 * direction.X * dt, -100.0f, 100.0f);

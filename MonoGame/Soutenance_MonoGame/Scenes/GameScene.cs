@@ -26,7 +26,6 @@ namespace Soutenance_MonoGame
 
         public override void Load()
         {
-            base.Load();
             new CollisionManager();
             new SpritesManager();
             new KeyboardInputManager();
@@ -40,8 +39,6 @@ namespace Soutenance_MonoGame
             Wall wallBottom = new Wall(new Vector2(0, Utils.GetScreenSize().Y - 2), "WallBottom", new Vector2(Utils.GetScreenSize().X, 2));
             Wall wallLeft = new Wall(new Vector2(0, 0), "WallLeft", new Vector2(2, Utils.GetScreenSize().Y));
 
-            ServiceLocator.GetService<ILevelManager>().ChangeLevel(1);
-
             /*Brick brick = new Brick(Brick.BrickTypes.littlebrick, Brick.Colors.grey, new Vector2(180, 10), "Brick1");
             Brick brick2 = new Brick(Brick.BrickTypes.littlebrick, Brick.Colors.green, new Vector2(220, 10), "Brick2");
             Brick brick3 = new Brick(Brick.BrickTypes.littlebrick, Brick.Colors.yellow, new Vector2(450, 10), "Brick3");
@@ -53,6 +50,14 @@ namespace Soutenance_MonoGame
             Brick brick9 = new Brick(Brick.BrickTypes.bigbrick, Brick.Colors.purple, new Vector2(600, 100), "Brick9");*/
 
             Debug.WriteLine($"{name} scene has been loaded.");
+            base.Load();
+        }
+
+        public override void Start()
+        {
+            paddle.ball = ball;
+            ServiceLocator.GetService<ILevelManager>().ChangeLevel(1);
+            base.Start();
         }
 
         public override void Update(GameTime gameTime)
@@ -60,7 +65,7 @@ namespace Soutenance_MonoGame
             base.Update(gameTime);
 
             ServiceLocator.GetService<IEntityManager>().UpdateEntities(gameTime);
-            ServiceLocator.GetService<ICollisionManager>().UpdateColliders();
+            ServiceLocator.GetService<ICollisionManager>().UpdateColliders(gameTime);
         }
 
         public override void Draw()

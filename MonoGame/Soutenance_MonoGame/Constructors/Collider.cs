@@ -40,7 +40,7 @@ namespace Soutenance_MonoGame
             ServiceLocator.GetService<ICollisionManager>().AddCollider(this);
         }
 
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
             if (parent != null)
             {
