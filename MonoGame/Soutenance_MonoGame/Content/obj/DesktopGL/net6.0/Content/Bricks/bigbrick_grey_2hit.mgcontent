@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Bricks/bigbrick_grey_2hit.png</SourceFile>
-  <SourceTime>2024-03-28T01:04:24.8777115+01:00</SourceTime>
-  <DestFile>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/bin/DesktopGL/Content/Bricks/bigbrick_grey_2hit.xnb</DestFile>
-  <DestTime>2024-03-28T01:04:51.1702073+01:00</DestTime>
+  <SourceFile>C:/Formation/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Bricks/bigbrick_grey_2hit.png</SourceFile>
+  <SourceTime>2024-03-21T10:17:09.5755283+01:00</SourceTime>
+  <DestFile>C:/Formation/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/bin/DesktopGL/Content/Bricks/bigbrick_grey_2hit.xnb</DestFile>
+  <DestTime>2024-03-28T13:10:40.6838989+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

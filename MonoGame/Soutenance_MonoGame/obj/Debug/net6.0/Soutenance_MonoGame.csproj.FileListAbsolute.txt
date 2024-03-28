@@ -145,7 +145,6 @@ C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content
 C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Bricks\littlebrick_red_1hit.xnb
 C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Bricks\littlebrick_yellow_0hit.xnb
 C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Bricks\littlebrick_yellow_1hit.xnb
-C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Hero\personnage.xnb
 C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Paddle\paddle_green.xnb
 C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Paddle\paddle_grey.xnb
 C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Paddle\paddle_orange.xnb

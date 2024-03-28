@@ -24,7 +24,7 @@ namespace Soutenance_MonoGame
             List<Level> list = new List<Level>();
             if (fileName != null)
             {
-                JsonNode ld = JSonReader.Deserialize($"E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Levels\\{fileName}.json");
+                JsonNode ld = JSonReader.Deserialize($"{System.IO.Directory.GetParent(fileName)}\\..\\..\\..\\Levels\\{fileName}.json");
                 if (ld["Levels"] != null)
                 {
                     JsonNode ldLevels = ld["Levels"];
