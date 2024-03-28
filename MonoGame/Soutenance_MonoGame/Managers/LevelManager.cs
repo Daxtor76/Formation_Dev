@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -24,8 +25,8 @@ namespace Soutenance_MonoGame
             List<Level> list = new List<Level>();
             if (fileName != null)
             {
-                char sep = System.IO.Path.DirectorySeparatorChar;
-                JsonNode ld = JSonReader.Deserialize($"{System.IO.Directory.GetParent(fileName)}{sep}..{sep}..{sep}..{sep}Levels{sep}{fileName}.json");
+                char sep = Path.DirectorySeparatorChar;
+                JsonNode ld = JSonReader.Deserialize($"{Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName}{sep}Levels{sep}{fileName}.json");
                 if (ld["Levels"] != null)
                 {
                     JsonNode ldLevels = ld["Levels"];

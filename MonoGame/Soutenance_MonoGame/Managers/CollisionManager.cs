@@ -11,7 +11,7 @@ namespace Soutenance_MonoGame
 {
     sealed class CollisionManager : ICollisionManager
     {
-        Dictionary<Entity, Collider> colliders = new Dictionary<Entity, Collider>();
+        List<Collider> colliders = new List<Collider>();
 
         public CollisionManager()
         {
@@ -20,21 +20,15 @@ namespace Soutenance_MonoGame
 
         public void AddCollider(Collider col)
         {
-            colliders.Add(col.parent, col);
-        }
-
-        public Collider GetCollider(Entity entity)
-        {
-            return colliders[entity];
+            colliders.Add(col);
         }
 
         public void UpdateColliders()
         {
-            // Remplir les objets qui collisionnent
-            foreach (Collider col in colliders.Values)
+            foreach (Collider col in colliders)
             {
                 col.Update();
-                foreach (Collider other in colliders.Values)
+                foreach (Collider other in colliders)
                 {
                     if (col != other)
                     {
@@ -51,7 +45,7 @@ namespace Soutenance_MonoGame
 
         public void DrawColliders()
         {
-            foreach (Collider col in colliders.Values)
+            foreach (Collider col in colliders)
             {
                 col.Draw();
             }
@@ -59,11 +53,11 @@ namespace Soutenance_MonoGame
 
         public void CleanColliders()
         {
-            foreach (KeyValuePair<Entity, Collider> kvp in colliders)
+            for (int i = colliders.Count - 1; i >= 0 ; i--)
             {
-                if (!kvp.Value.parent.enabled)
+                if (!colliders[i].parent.enabled)
                 {
-                    colliders.Remove(kvp.Key);
+                    colliders.Remove(colliders[i]);
                 }
             }
         }

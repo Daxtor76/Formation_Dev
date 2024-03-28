@@ -9,7 +9,6 @@ namespace Soutenance_MonoGame
     public interface ICollisionManager
     {
         public void AddCollider(Collider col);
-        public Collider GetCollider(Entity entity);
         public void UpdateColliders();
         public void DrawColliders();
         public void CleanColliders();

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,16 +27,16 @@ namespace Soutenance_MonoGame
         public Dictionary<string, Texture2D> LoadFromFolder(string folderName)
         {
             Dictionary<string, Texture2D> list = new Dictionary<string, Texture2D>();
-            char sep = System.IO.Path.DirectorySeparatorChar;
+            char sep = Path.DirectorySeparatorChar;
             string dirPath = MainGame.content.RootDirectory + sep + folderName;
 
-            if (System.IO.Directory.Exists(dirPath))
+            if (Directory.Exists(dirPath))
             {
-                foreach (string filePath in System.IO.Directory.GetFiles(dirPath))
+                foreach (string filePath in Directory.GetFiles(dirPath))
                 {
                     string[] splitPath = filePath.Split(sep, '.');
                     string assetName = splitPath[2];
-                    string directoryName = System.IO.Directory.GetParent(filePath).ToString() + sep;
+                    string directoryName = Directory.GetParent(filePath).ToString() + sep;
 
                     list.Add(assetName, MainGame.content.Load<Texture2D>($"{directoryName + assetName}"));
                 }
