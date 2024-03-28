@@ -26,14 +26,22 @@ namespace Soutenance_MonoGame
         public Dictionary<string, Texture2D> LoadFromFolder(string folderName)
         {
             Dictionary<string, Texture2D> list = new Dictionary<string, Texture2D>();
-            string dirPath = MainGame.content.RootDirectory + "/" + folderName;
+            char sep = System.IO.Path.DirectorySeparatorChar;
+            string dirPath = MainGame.content.RootDirectory + sep + folderName;
 
-            foreach (string filePath in System.IO.Directory.GetFiles(dirPath))
+            if (System.IO.Directory.Exists(dirPath))
             {
-                string path = filePath.Split('/', '.')[1];
-                string assetName = path.Split('\\')[1];
-                list.Add(assetName, MainGame.content.Load<Texture2D>($"{path}"));
+                foreach (string filePath in System.IO.Directory.GetFiles(dirPath))
+                {
+                    string[] splitPath = filePath.Split(sep, '.');
+                    string assetName = splitPath[2];
+                    string directoryName = System.IO.Directory.GetParent(filePath).ToString() + sep;
+
+                    list.Add(assetName, MainGame.content.Load<Texture2D>($"{directoryName + assetName}"));
+                }
             }
+            else
+                Debug.WriteLine($"The folder {folderName} does not exist.");
 
             return list;
         }
