@@ -46,7 +46,7 @@ namespace Soutenance_MonoGame
             {
                 mover.IncreaseAccel(gameTime, ServiceLocator.GetService<IInputManager>().GetInputDirection());
             }
-            position = mover.MoveSmoothly(gameTime, this);
+            mover.MoveSmoothly(gameTime, this);
         }
 
         public override Vector2 GetSpawnPosition()
