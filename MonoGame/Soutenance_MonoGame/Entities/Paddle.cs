@@ -42,12 +42,11 @@ namespace Soutenance_MonoGame
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            //position = mover.MoveSmoothly(gameTime, position, size, ServiceLocator.GetService<IInputManager>().GetInputDirection());
             if (ServiceLocator.GetService<IInputManager>().GetInputDirection() != Vector2.Zero)
             {
                 mover.IncreaseAccel(gameTime, ServiceLocator.GetService<IInputManager>().GetInputDirection());
             }
-            position = mover.MoveSmoothly(gameTime, position, size);
+            position = mover.MoveSmoothly(gameTime, this);
         }
 
         public override Vector2 GetSpawnPosition()

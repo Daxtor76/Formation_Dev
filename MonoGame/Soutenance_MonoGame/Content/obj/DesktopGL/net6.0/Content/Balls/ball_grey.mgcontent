@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Balls/ball_grey.png</SourceFile>
-  <SourceTime>2024-03-09T13:04:46.9025486+01:00</SourceTime>
+  <SourceTime>2024-03-28T01:04:24.8754164+01:00</SourceTime>
   <DestFile>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/bin/DesktopGL/Content/Balls/ball_grey.xnb</DestFile>
-  <DestTime>2024-03-22T09:49:39.1123478+01:00</DestTime>
+  <DestTime>2024-03-28T01:04:51.1562447+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

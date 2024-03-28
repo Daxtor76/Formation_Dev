@@ -50,7 +50,7 @@ namespace Soutenance_MonoGame
             base.Update(gameTime);
             if (ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state == SceneStates.Preparation)
             {
-                position = mover.Follow(size, paddle);
+                position = mover.FollowAbove(this, paddle);
                 if (ServiceLocator.GetService<IInputManager>().IsPressedOnce(Keys.Space))
                 {
                     Launch();
@@ -59,7 +59,8 @@ namespace Soutenance_MonoGame
             }
             else if (ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state == SceneStates.Playing)
             {
-                position = mover.Move(gameTime, position, size, mover.direction);
+                mover.IncreaseAccel(gameTime);
+                position = mover.Move(gameTime, this, mover.direction);
             }
 
             col.oldPosition = col.position;
@@ -138,6 +139,7 @@ namespace Soutenance_MonoGame
 
         void Launch()
         {
+            mover.accel = new Vector2(0.2f, 0.2f);
             mover.direction = new Vector2(0, -1);
         }
 

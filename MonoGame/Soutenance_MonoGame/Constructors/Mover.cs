@@ -15,7 +15,7 @@ namespace Soutenance_MonoGame
     {
         public Vector2 direction;
         public float speed;
-        Vector2 accel;
+        public Vector2 accel;
 
         public Mover(float pSpeed)
         {
@@ -24,32 +24,40 @@ namespace Soutenance_MonoGame
             accel = Vector2.Zero;
         }
 
-        public Vector2 Move(GameTime gameTime, Vector2 position, Vector2 size, Vector2 direction)
+        public Vector2 Move(GameTime gameTime, Entity entity, Vector2 direction)
         {
             Vector2 screenSize = Utils.GetScreenSize();
-            position += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            return new Vector2(Math.Clamp(position.X, 0, screenSize.X - size.X), position.Y);
+            entity.position += accel * speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            accel *= 0.9f;
+            return new Vector2(Math.Clamp(entity.position.X, 0, screenSize.X - entity.size.X), entity.position.Y);
         }
 
-        public Vector2 MoveSmoothly(GameTime gameTime, Vector2 position, Vector2 size)
+        public Vector2 MoveSmoothly(GameTime gameTime, Entity entity)
         {
             Vector2 screenSize = Utils.GetScreenSize();
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            position += accel * speed * dt;
+            entity.position += accel * speed * dt;
             accel *= 0.9f;
 
-            return new Vector2(Math.Clamp(position.X, 0, screenSize.X - size.X), position.Y);
+            return new Vector2(Math.Clamp(entity.position.X, 0, screenSize.X - entity.size.X), entity.position.Y);
         }
 
-        public Vector2 Follow(Vector2 size, Entity target)
+        public Vector2 FollowAbove(Entity entity, Entity target)
         {
             Vector2 pos = new Vector2();
 
-            pos.X = target.position.X + target.size.X * 0.5f - size.X * 0.5f;
-            pos.Y = target.position.Y - target.size.Y * 0.5f - size.Y * 0.5f;
+            pos.X = target.position.X + target.size.X * 0.5f - entity.size.X * 0.5f;
+            pos.Y = target.position.Y - target.size.Y * 0.5f - entity.size.Y * 0.5f;
 
             return pos;
+        }
+
+        public void IncreaseAccel(GameTime gameTime)
+        {
+            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Math.Clamp(accel.X += 10 * dt, 0.0f, 100.0f);
+            Math.Clamp(accel.Y += 10 * dt, 0.0f, 100.0f);
         }
 
         public void IncreaseAccel(GameTime gameTime, Vector2 direction)
