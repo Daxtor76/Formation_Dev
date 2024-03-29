@@ -2,6 +2,7 @@
 - Change Lerp to Accel/Decel -> ok
 - Chemin générique pour fichier json (pour l'instant chemin en dur qui correspond à mon pc) -> ok
 - Gameplay: booster la balle si input au moment du rebond (pas de changement de direction tant que pas de mur touché)
+- Bug: Clamp paddle position en 0 et screenWidth
 - Visuel: animations
 - Visuel: effects
 - Gameplay: power up - agrandir le paddle
