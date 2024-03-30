@@ -117,8 +117,12 @@ namespace Soutenance_MonoGame
         {
             float modifier = GetImpactPointRelativePositionX(other.parent);
             mover.direction = Vector2.Normalize(new Vector2(modifier, -mover.direction.Y));
+
             if (state == States.Boosted)
+            {
                 mover.accel += new Vector2(1.0f, 1.0f);
+                state = States.Normal;
+            }
         }
 
         float GetImpactPointRelativePositionX(Entity target)

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace Soutenance_MonoGame
 {
@@ -29,11 +30,9 @@ namespace Soutenance_MonoGame
             Vector2 screenSize = Utils.GetScreenSize();
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            entity.position += accel * speed * direction * dt;
+            entity.position.X = Math.Clamp(entity.position.X + accel.X * speed * direction.X * dt, 0.0f, screenSize.X - entity.size.X);
+            entity.position.Y = Math.Clamp(entity.position.Y + accel.Y * speed * direction.Y * dt, 0.0f, screenSize.Y - entity.size.Y);
             accel *= 0.9f;
-
-            Math.Clamp(entity.position.X, 0.0f, screenSize.X - entity.size.X);
-            Math.Clamp(entity.position.Y, 0.0f, screenSize.Y - entity.size.Y);
         }
 
         public void MoveSmoothly(GameTime gameTime, Entity entity)
@@ -41,11 +40,9 @@ namespace Soutenance_MonoGame
             Vector2 screenSize = Utils.GetScreenSize();
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            entity.position += accel * speed * dt;
+            entity.position.X = Math.Clamp(entity.position.X + accel.X * speed * dt, 0.0f, screenSize.X - entity.size.X);
+            entity.position.Y = Math.Clamp(entity.position.Y + accel.Y * speed * dt, 0.0f, screenSize.Y - entity.size.Y);
             accel *= 0.9f;
-
-            Math.Clamp(entity.position.X, 0.0f, screenSize.X - entity.size.X);
-            Math.Clamp(entity.position.Y, 0.0f, screenSize.Y - entity.size.Y);
         }
 
         public void FollowAbove(Entity entity, Entity target)
