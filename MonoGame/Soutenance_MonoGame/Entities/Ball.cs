@@ -71,7 +71,7 @@ namespace Soutenance_MonoGame
                 mover.ManageAccel(gameTime, new Vector2(5.0f, 5.0f));
                 mover.Move(gameTime, this, mover.direction);
 
-                canBeBoosted = GetDistance(paddle) <= paddle.size.X * 0.5f + size.X * 0.5f + 30.0f;
+                canBeBoosted = GetDistance(paddle) <= paddle.size.X * 0.5f + size.X * 0.5f + 100.0f;
             }
 
             col.oldPosition = col.position;
@@ -82,8 +82,17 @@ namespace Soutenance_MonoGame
             string side = col.GetCollisionSide(other);
 
             CheckCollisionWithBottomWall(other, side);
-            Hit(other.parent as IDamageable);
-            ModifyDirection(col.others, side);
+
+            if (other.parent is IDamageable)
+                Hit(other.parent as IDamageable);
+
+            if (state == States.Normal || (state == States.Boosted && other.parent.layer != "Brick"))
+            {
+                ModifyDirection(other, side);
+
+                if (other.parent.layer == "Wall" && side == "top")
+                    state = States.Normal;
+            }
         }
 
         void CheckCollisionWithBottomWall(Collider other, string side)
@@ -102,15 +111,12 @@ namespace Soutenance_MonoGame
             // Voir pour faire des unity event? avec un defeatManager qui regarde la vie du joueur et qui check quand la valeur change
         }
 
-        void ModifyDirection(List<Collider> others, string side)
+        void ModifyDirection(Collider other, string side)
         {
-            foreach (Collider other in others)
-            {
-                if (other.parent.layer == "Paddle")
-                    CollidePaddle(other);
-                else
-                    CollideOther(side);
-            }
+            if (other.parent.layer == "Paddle")
+                CollidePaddle(other);
+            else
+                CollideOther(side);
         }
 
         void CollidePaddle(Collider other)
@@ -121,7 +127,6 @@ namespace Soutenance_MonoGame
             if (state == States.Boosted)
             {
                 mover.accel += new Vector2(1.0f, 1.0f);
-                state = States.Normal;
             }
         }
 
@@ -150,8 +155,7 @@ namespace Soutenance_MonoGame
 
         void Hit(IDamageable target)
         {
-            if (target is IDamageable)
-                target.TakeDamages(1);
+            target.TakeDamages(1);
         }
 
         public void OnCollision(Collider other)
