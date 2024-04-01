@@ -27,7 +27,11 @@ namespace Soutenance_MonoGame
                     Array colors = Enum.GetValues<Brick.Colors>();
                     Random rand = new Random();
 
-                    ILevelElement element = new Brick((Brick.BrickTypes)types.GetValue(rand.Next(0, types.Length)), (Brick.Colors)colors.GetValue(rand.Next(0, colors.Length)), "Brick" + i + y);
+                    ILevelElement element;
+                    if (rand.Next(0, 100) > 20.0f)
+                        element = new NormalBrick((Brick.BrickTypes)types.GetValue(rand.Next(0, types.Length)), (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)), "Brick" + i + y);
+                    else
+                        element = new UnbreakableBrick((Brick.BrickTypes)types.GetValue(rand.Next(0, types.Length)), "Brick" + i + y);
 
                     float xPos = Utils.GetScreenCenter().X + element.GetSize().X * i - gridSize.X * element.GetSize().X * 0.5f;
                     float yPos = 50 + element.GetSize().Y * y;

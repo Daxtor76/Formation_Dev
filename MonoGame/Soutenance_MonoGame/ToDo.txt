@@ -3,27 +3,29 @@
 - Chemin générique pour fichier json (pour l'instant chemin en dur qui correspond à mon pc) -> ok
 - Bug: Clamp paddle position en 0 et screenWidth -> ok
 - Gameplay: booster la balle si input au moment du rebond (pas de changement de direction tant que pas de mur touché) -> ok
+- Gameplay: nouvelle entité - Brique incassable -> ok
 - Gameplay: nouvelle entité - TP
-- Gameplay: nouvelle entité - Brique incassable
-- Visuel: animations
-- Visuel: effects
-- Gameplay: power up - agrandir le paddle
 - Gameplay: power up - multiball
-- Gameplay: power up - paddle speed
 - Gameplay: nouvelle entité - Moving brique
-- Gameplay: nouvelle entité - Paddle shooter
-- Gameplay: nouvelle entité - Cycle brick (fade in / fade out)
 - Gameplay: nouvelle entité - Hydra brick (boss fight???)
-- Gameplay: victoire
-- Gameplay: défaite
-- Random level generator v2 (bon alignement des pièces, ajouts d'options etc)
-- Visuel: backgrounds
+- Visuel: effects
 - Visuel: googly eyes (1 per brick life)
 - Visuel: screenshake
-- UI: buttons
-- UI: texts
+- Gameplay: victoire
+- Gameplay: défaite
 - Menu: sélecteur de niveau
 - Menu: main menu
 - Menu: gameover (victoire + défaite): durée de game, rebonds, rebonds par secondes moyen
-- Save
+- Random level generator v2 (bon alignement des pièces, ajouts d'options etc)
 - Map editor
+- Visuel: backgrounds
+- UI: buttons
+- UI: texts
+
+Bonus:
+- Save
+- Visuel: animations
+- Gameplay: power up - agrandir le paddle
+- Gameplay: power up - paddle speed
+- Gameplay: nouvelle entité - Paddle shooter
+- Gameplay: nouvelle entité - Cycle brick (fade in / fade out)

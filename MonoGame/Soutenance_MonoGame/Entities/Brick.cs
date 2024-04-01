@@ -12,7 +12,7 @@ using System.Data;
 
 namespace Soutenance_MonoGame
 {
-    public class Brick : Entity, ICollidable, IDamageable, ILevelElement
+    public abstract class Brick : Entity, ICollidable, ILevelElement
     {
         public enum BrickTypes
         {
@@ -30,11 +30,11 @@ namespace Soutenance_MonoGame
             purple
         }
 
-        int life;
-        int maxLife;
-        Collider col;
-        BrickTypes brickType;
-        Colors brickColor;
+        protected int life;
+        protected int maxLife;
+        protected Collider col;
+        protected BrickTypes brickType;
+        protected Colors brickColor;
 
         public Brick(BrickTypes pType, Colors pColor, string pName)
         {
@@ -43,6 +43,23 @@ namespace Soutenance_MonoGame
             brickType = pType;
             brickColor = pColor;
             img = ServiceLocator.GetService<ISpritesManager>().GetBrickTexture(pType + "_" + pColor + "_" + (maxLife - life).ToString() + "hit");
+            size = new Vector2(img.Width, img.Height);
+            position = Vector2.Zero;
+
+            col = new Collider(this, OnCollisionEnter, OnCollision);
+
+            maxLife = GetMaxLife(brickType, brickColor);
+            life = maxLife;
+
+            ServiceLocator.GetService<IEntityManager>().AddEntity(this);
+        }
+
+        public Brick(BrickTypes pType, string pName)
+        {
+            name = pName;
+            layer = "Brick";
+            brickType = pType;
+            img = ServiceLocator.GetService<ISpritesManager>().GetBrickTexture(pType + "_" + brickColor + "_" + (maxLife - life).ToString() + "hit");
             size = new Vector2(img.Width, img.Height);
             position = Vector2.Zero;
 
