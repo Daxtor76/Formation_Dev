@@ -106,6 +106,7 @@ namespace Soutenance_MonoGame
         void LoseLife()
         {
             ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state = SceneStates.Preparation;
+            state = States.Normal;
             // TO DO: Ajouter ici la perte du vie du player
             // Check la defeat -> si == 0 game over sinon reset
             // Voir pour faire des unity event? avec un defeatManager qui regarde la vie du joueur et qui check quand la valeur change

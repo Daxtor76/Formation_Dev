@@ -63,8 +63,10 @@
     <File>C:/Formation/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_purple.png</File>
     <File>C:/Formation/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_red.png</File>
     <File>C:/Formation/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_yellow.png</File>
+    <File>C:/Formation/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Teleporter/portal_spritesheet.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

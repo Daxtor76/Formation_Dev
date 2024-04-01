@@ -168,3 +168,4 @@ C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\runtime
 C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\obj\Debug\net6.0\Soutenance_MonoGame.csproj.CopyComplete
 C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\obj\Debug\net6.0\Soutenance_MonoGame.genruntimeconfig.cache
 C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\obj\Debug\net6.0\ref\Soutenance_MonoGame.dll
+C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Teleporter\portal_spritesheet.xnb

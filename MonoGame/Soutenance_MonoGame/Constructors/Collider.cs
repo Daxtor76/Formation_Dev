@@ -72,7 +72,6 @@ namespace Soutenance_MonoGame
                 {
                     continuousCollisionEffect(other);
                 }
-                canCollide = true;
             }
         }
 
@@ -85,6 +84,7 @@ namespace Soutenance_MonoGame
             {
                 return true;
             }
+            canCollide = true;
             return false;
         }
 
