@@ -19,7 +19,7 @@ namespace Soutenance_MonoGame
             layer = "Wall";
             size = pSize;
             position = pPos;
-            col = new Collider(this, OnCollisionEnter, OnCollision);
+            col = new Collider(this, scale, OnCollisionEnter, OnCollision);
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
         }
@@ -31,7 +31,7 @@ namespace Soutenance_MonoGame
             img = pImg;
             size = new Vector2(img.Width, img.Height);
             position = pPos;
-            col = new Collider(this, OnCollisionEnter, OnCollision);
+            col = new Collider(this, scale, OnCollisionEnter, OnCollision);
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
         }

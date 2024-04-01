@@ -39,15 +39,8 @@ namespace Soutenance_MonoGame
             Wall wallBottom = new Wall(new Vector2(0, Utils.GetScreenSize().Y - 2), "WallBottom", new Vector2(Utils.GetScreenSize().X, 2));
             Wall wallLeft = new Wall(new Vector2(0, 0), "WallLeft", new Vector2(2, Utils.GetScreenSize().Y));
 
-            /*Brick brick = new Brick(Brick.BrickTypes.littlebrick, Brick.Colors.grey, new Vector2(180, 10), "Brick1");
-            Brick brick2 = new Brick(Brick.BrickTypes.littlebrick, Brick.Colors.green, new Vector2(220, 10), "Brick2");
-            Brick brick3 = new Brick(Brick.BrickTypes.littlebrick, Brick.Colors.yellow, new Vector2(450, 10), "Brick3");
-            Brick brick4 = new Brick(Brick.BrickTypes.brick, Brick.Colors.orange, new Vector2(900, 150), "Brick4");
-            Brick brick5 = new Brick(Brick.BrickTypes.brick, Brick.Colors.red, new Vector2(500, 150), "Brick5");
-            Brick brick6 = new Brick(Brick.BrickTypes.brick, Brick.Colors.purple, new Vector2(1000, 150), "Brick6");
-            Brick brick7 = new Brick(Brick.BrickTypes.bigbrick, Brick.Colors.green, new Vector2(100, 300), "Brick7");
-            Brick brick8 = new Brick(Brick.BrickTypes.bigbrick, Brick.Colors.orange, new Vector2(550, 100), "Brick8");
-            Brick brick9 = new Brick(Brick.BrickTypes.bigbrick, Brick.Colors.purple, new Vector2(600, 100), "Brick9");*/
+            Teleporter tp = new Teleporter(new Vector2(100, 500), 0.0f, "Portal2", Vector2.UnitX, "Portal");
+            Teleporter tp2 = new Teleporter(new Vector2(1000, 500), Utils.DegreesToRad(45.0f), "Portal", new Vector2(-1, -1), "Portal2");
 
             Debug.WriteLine($"{name} scene has been loaded.");
             base.Load();
@@ -57,6 +50,7 @@ namespace Soutenance_MonoGame
         {
             paddle.ball = ball;
             ServiceLocator.GetService<ILevelManager>().ChangeLevel(1);
+
             base.Start();
         }
 

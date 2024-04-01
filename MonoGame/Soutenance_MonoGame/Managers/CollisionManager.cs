@@ -32,9 +32,12 @@ namespace Soutenance_MonoGame
                 {
                     if (col != other)
                     {
-                        if (col.IsColliding(other))
+                        if (other.enabled && other.active)
                         {
-                            col.others.Add(other);
+                            if (col.IsColliding(other))
+                            {
+                                col.others.Add(other);
+                            }
                         }
                     }
                 }
@@ -55,9 +58,10 @@ namespace Soutenance_MonoGame
         {
             for (int i = colliders.Count - 1; i >= 0 ; i--)
             {
-                if (!colliders[i].parent.enabled)
+                Collider col = colliders[i];
+                if (!col.parent.enabled || !col.enabled)
                 {
-                    colliders.Remove(colliders[i]);
+                    colliders.Remove(col);
                 }
             }
         }

@@ -15,19 +15,34 @@ namespace Soutenance_MonoGame
         public Vector2 position = new Vector2();
         public Vector2 size = new Vector2();
         public Vector2 scale = new Vector2(1, 1);
+        public float rotation = 0.0f;
         public bool enabled = true;
+        public bool active = true;
         public string name = "";
         public string layer = "";
         public Texture2D img;
+        public Rectangle sourceRect;
 
         public virtual void Update(GameTime gameTime)
         {
+            sourceRect = new Rectangle(
+                0,
+                0,
+                (int)size.X,
+                (int)size.Y);
         }
 
         public virtual void Draw()
         {
             if (img != null)
-                MainGame.spriteBatch.Draw(img, position, Color.White);
+            {
+                Rectangle destRect = new Rectangle(
+                    (int)position.X,
+                    (int)position.Y,
+                    (int)size.X,
+                    (int)size.Y);
+                MainGame.spriteBatch.Draw(img, destRect, sourceRect, Color.White, rotation, Vector2.Zero, SpriteEffects.None, 0.0f);
+            }
         }
         public void SetPosition(Vector2 position)
         {

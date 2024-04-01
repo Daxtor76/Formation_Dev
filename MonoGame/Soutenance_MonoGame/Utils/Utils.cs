@@ -11,6 +11,15 @@ namespace Soutenance_MonoGame
 {
     public static class Utils
     {
+        public static float DegreesToRad(float angle)
+        {
+            return (float)(angle * Math.PI / 180);
+        }
+        public static float RadToDegrees(float radAngle)
+        {
+            return (float)(radAngle * 180 / Math.PI);
+        }
+
         public static Vector2 GetScreenSize()
         {
             Vector2 screenSize = new Vector2();

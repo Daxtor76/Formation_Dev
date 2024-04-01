@@ -4,7 +4,7 @@
 - Bug: Clamp paddle position en 0 et screenWidth -> ok
 - Gameplay: booster la balle si input au moment du rebond (pas de changement de direction tant que pas de mur touché) -> ok
 - Gameplay: nouvelle entité - Brique incassable -> ok
-- Gameplay: nouvelle entité - TP
+- Gameplay: nouvelle entité - TP -> ok
 - Gameplay: power up - multiball
 - Gameplay: nouvelle entité - Moving brique
 - Gameplay: nouvelle entité - Hydra brick (boss fight???)

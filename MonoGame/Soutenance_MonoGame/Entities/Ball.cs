@@ -52,7 +52,7 @@ namespace Soutenance_MonoGame
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
 
-            col = new Collider(this, OnCollisionEnter, OnCollision);
+            col = new Collider(this, scale, OnCollisionEnter, OnCollision);
             mover = new Mover(pSpeed);
             paddle = ServiceLocator.GetService<IEntityManager>().GetEntity("Paddle");
         }
@@ -81,8 +81,6 @@ namespace Soutenance_MonoGame
         {
             string side = col.GetCollisionSide(other);
 
-            CheckCollisionWithBottomWall(other, side);
-
             if (other.parent is IDamageable)
                 Hit(other.parent as IDamageable);
 
@@ -93,14 +91,12 @@ namespace Soutenance_MonoGame
                 if (other.parent.layer == "Wall" && side == "top")
                     state = States.Normal;
             }
-        }
 
-        void CheckCollisionWithBottomWall(Collider other, string side)
-        {
+            if (other.parent.layer != "Teleporter")
+                ActivateTeleporters();
+
             if (side == "bottom" && other.parent.layer == "Wall")
                 LoseLife();
-
-            return;
         }
 
         void LoseLife()
@@ -116,8 +112,27 @@ namespace Soutenance_MonoGame
         {
             if (other.parent.layer == "Paddle")
                 CollidePaddle(other);
+            else if (other.parent.layer == "Teleporter")
+                CollideTeleporter(other);
             else
                 CollideOther(side);
+        }
+
+        void CollideTeleporter(Collider other)
+        {
+            Teleporter tp = other.parent as Teleporter;
+            Teleporter destTp = ServiceLocator.GetService<IEntityManager>().GetEntity(tp.destinationName) as Teleporter;
+            destTp.col.active = false;
+            position = destTp.position;
+            mover.direction = Vector2.Normalize(destTp.newDirection);
+        }
+
+        void ActivateTeleporters()
+        {
+            foreach (Teleporter tp in ServiceLocator.GetService<IEntityManager>().GetEntitiesOfType<Teleporter>())
+            {
+                tp.col.active = true;
+            }
         }
 
         void CollidePaddle(Collider other)

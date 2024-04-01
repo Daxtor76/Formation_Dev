@@ -10,6 +10,7 @@ namespace Soutenance_MonoGame
     public class Level
     {
         public Vector2 gridSize = Vector2.Zero;
+        public List<Teleporter> teleporters;
         Dictionary<Vector2, ILevelElement> grid = new Dictionary<Vector2, ILevelElement>();
 
         public Level(int sizeX, int sizeY)

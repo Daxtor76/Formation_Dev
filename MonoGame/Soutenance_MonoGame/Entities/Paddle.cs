@@ -39,7 +39,7 @@ namespace Soutenance_MonoGame
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
 
-            col = new Collider(this, OnCollisionEnter, OnCollision);
+            col = new Collider(this, scale, OnCollisionEnter, OnCollision);
             mover = new Mover(pSpeed);
         }
 

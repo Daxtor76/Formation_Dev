@@ -15,11 +15,15 @@ namespace Soutenance_MonoGame
         Dictionary<string, Texture2D> ballTextures = new Dictionary<string, Texture2D>();
         Dictionary<string, Texture2D> bricksTextures = new Dictionary<string, Texture2D>();
 
+        Texture2D portalTexture;
+
         public SpritesManager()
         {
             paddleTextures = LoadFromFolder("Paddle");
             ballTextures = LoadFromFolder("Balls");
             bricksTextures = LoadFromFolder("Bricks");
+
+            portalTexture = MainGame.content.Load<Texture2D>($"Teleporter/portal_spritesheet");
 
             ServiceLocator.RegisterService<ISpritesManager>(this);
         }
@@ -45,6 +49,11 @@ namespace Soutenance_MonoGame
                 Debug.WriteLine($"The folder {folderName} does not exist.");
 
             return list;
+        }
+
+        public Texture2D GetPortalTexture()
+        {
+            return portalTexture;
         }
 
         public Texture2D GetPaddleTexture(string textureName)

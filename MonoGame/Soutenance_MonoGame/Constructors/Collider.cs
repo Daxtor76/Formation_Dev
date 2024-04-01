@@ -20,22 +20,20 @@ namespace Soutenance_MonoGame
         CallBackOthersEffect continuousCollisionEffect;
 
         Texture2D texture;
-        Rectangle rect;
 
         bool canCollide = true;
 
-        public Collider(Entity pParent, CallBackOthersEffect pCollisionEffect = null, CallBackOthersEffect pContinuousCollisionEffect = null)
+        public Collider(Entity pParent, Vector2 pScale, CallBackOthersEffect pCollisionEffect = null, CallBackOthersEffect pContinuousCollisionEffect = null)
         {
             parent = pParent;
-            size = pParent.size;
-            position = new Vector2(pParent.position.X + size.X, pParent.position.Y);
+            scale = pScale;
+            size = pParent.size * pScale;
+            position = pParent.position;
             collisionEnterEffect = pCollisionEffect;
             continuousCollisionEffect = pContinuousCollisionEffect;
 
             texture = new Texture2D(MainGame.graphics.GraphicsDevice, 1, 1);
             texture.SetData(new[] { Color.Green });
-
-            rect = new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y);
 
             ServiceLocator.GetService<ICollisionManager>().AddCollider(this);
         }
@@ -44,16 +42,26 @@ namespace Soutenance_MonoGame
         {
             if (parent != null)
             {
-                position = parent.position;
-                rect.X = (int)position.X;
-                rect.Y = (int)position.Y;
+                position = parent.position + parent.size * scale - size * scale;
             }
         }
 
         public override void Draw()
         {
             if (MainGame.debugMode)
-                MainGame.spriteBatch.Draw(texture, rect, new Color(Color.Green, 100));
+            {
+                Rectangle sourceRect = new Rectangle(
+                    0,
+                    0,
+                    (int)size.X,
+                    (int)size.Y);
+                Rectangle destRect = new Rectangle(
+                    (int)position.X,
+                    (int)position.Y,
+                    (int)size.X,
+                    (int)size.Y);
+                MainGame.spriteBatch.Draw(texture, destRect, sourceRect, new Color(Color.Green, 100), 0.0f, Vector2.Zero, SpriteEffects.None, 0.0f);
+            }
         }
 
         public void ApplyCollisions()

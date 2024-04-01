@@ -26,6 +26,19 @@ namespace Soutenance_MonoGame
             return entities[name];
         }
 
+        public List<Entity> GetEntitiesOfType<T>()
+        {
+            List<Entity> list = new List<Entity>();
+
+            foreach (Entity entity in entities.Values)
+            {
+                if (entity.GetType() == typeof(T))
+                    list.Add(entity);
+            }
+
+            return list;
+        }
+
         public void UpdateEntities(GameTime gameTime)
         {
             foreach(Entity entity in entities.Values)
