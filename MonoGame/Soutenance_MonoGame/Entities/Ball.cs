@@ -84,38 +84,41 @@ namespace Soutenance_MonoGame
             if (other.parent is IDamageable)
                 Hit(other.parent as IDamageable);
 
-            if (state == States.Normal || (state == States.Boosted && other.parent.layer != "Brick"))
+            if (other.parent.layer == "Paddle")
             {
-                ModifyDirection(other, side);
+                BounceOnPaddle(other);
+                ActivateTeleporters();
+            }
+            else if (other.parent.layer == "Teleporter")
+                CollideTeleporter(other);
+            else if (other.parent.layer == "Wall")
+            {
+                if (side == "bottom")
+                    LoseLife();
 
-                if (other.parent.layer == "Wall" && side == "top")
+                ActivateTeleporters();
+                Bounce(side);
+                if (side == "top")
                     state = States.Normal;
             }
-
-            if (other.parent.layer != "Teleporter")
+            else
+            {
                 ActivateTeleporters();
-
-            if (side == "bottom" && other.parent.layer == "Wall")
-                LoseLife();
+                if (state == States.Normal || (state == States.Boosted && other.parent.layer != "Brick"))
+                {
+                    Bounce(side);
+                }
+            }
         }
 
         void LoseLife()
         {
             ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state = SceneStates.Preparation;
             state = States.Normal;
+            return;
             // TO DO: Ajouter ici la perte du vie du player
             // Check la defeat -> si == 0 game over sinon reset
             // Voir pour faire des unity event? avec un defeatManager qui regarde la vie du joueur et qui check quand la valeur change
-        }
-
-        void ModifyDirection(Collider other, string side)
-        {
-            if (other.parent.layer == "Paddle")
-                CollidePaddle(other);
-            else if (other.parent.layer == "Teleporter")
-                CollideTeleporter(other);
-            else
-                CollideOther(side);
         }
 
         void CollideTeleporter(Collider other)
@@ -135,7 +138,7 @@ namespace Soutenance_MonoGame
             }
         }
 
-        void CollidePaddle(Collider other)
+        void BounceOnPaddle(Collider other)
         {
             float modifier = GetImpactPointRelativePositionX(other.parent);
             mover.direction = Vector2.Normalize(new Vector2(modifier, -mover.direction.Y));
@@ -154,17 +157,13 @@ namespace Soutenance_MonoGame
             return -(targetCenterPos - ballCenterPos) / targetSizeHalf;
         }
 
-        void CollideOther(string side)
+        void Bounce(string side)
         {
-            if (side == "top")
-                mover.direction.Y = 1;
-            else if (side == "bottom")
-                mover.direction.Y = -1;
+            if (side == "top" || side == "bottom")
+                mover.direction.Y = -mover.direction.Y;
 
-            if (side == "left")
-                mover.direction.X = 1;
-            else if (side == "right")
-                mover.direction.X = -1;
+            if (side == "left" || side == "right")
+                mover.direction.X = -mover.direction.X;
 
             mover.direction = Vector2.Normalize(mover.direction);
         }
