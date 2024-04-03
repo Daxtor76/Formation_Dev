@@ -14,6 +14,7 @@ namespace Soutenance_MonoGame
         Dictionary<string, Texture2D> paddleTextures = new Dictionary<string, Texture2D>();
         Dictionary<string, Texture2D> ballTextures = new Dictionary<string, Texture2D>();
         Dictionary<string, Texture2D> bricksTextures = new Dictionary<string, Texture2D>();
+        Dictionary<string, Texture2D> powerupsTextures = new Dictionary<string, Texture2D>();
 
         Texture2D portalTexture;
 
@@ -22,6 +23,7 @@ namespace Soutenance_MonoGame
             paddleTextures = LoadFromFolder("Paddle");
             ballTextures = LoadFromFolder("Balls");
             bricksTextures = LoadFromFolder("Bricks");
+            powerupsTextures = LoadFromFolder("PowerUps");
 
             portalTexture = MainGame.content.Load<Texture2D>($"Teleporter/portal_spritesheet");
 
@@ -54,6 +56,12 @@ namespace Soutenance_MonoGame
         public Texture2D GetPortalTexture()
         {
             return portalTexture;
+        }
+
+        public Texture2D GetPowerUpTexture(string textureName)
+        {
+            Random r = new Random();
+            return powerupsTextures[textureName] != null ? powerupsTextures[textureName] : powerupsTextures.ElementAt(r.Next(0, powerupsTextures.Count)).Value;
         }
 
         public Texture2D GetPaddleTexture(string textureName)

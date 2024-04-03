@@ -25,11 +25,13 @@ namespace Soutenance_MonoGame
 
         public void UpdateColliders(GameTime gameTime)
         {
-            foreach (Collider col in colliders)
+            for (int i = 0; i < colliders.Count; i++)
             {
+                Collider col = colliders[i];
                 col.Update(gameTime);
-                foreach (Collider other in colliders)
+                for (int y = 0; y < colliders.Count; y++)
                 {
+                    Collider other = colliders[y];
                     if (col != other)
                     {
                         if (other.enabled && other.active)
@@ -37,11 +39,16 @@ namespace Soutenance_MonoGame
                             if (col.IsColliding(other))
                             {
                                 col.others.Add(other);
+                                if (col.parent.layer == "Ball")
+                                {
+                                    Debug.WriteLine(other.parent.name);
+                                }
                             }
                         }
                     }
                 }
                 col.ApplyCollisions();
+                col.StorePreviousOthers();
                 col.others.Clear();
             }
         }

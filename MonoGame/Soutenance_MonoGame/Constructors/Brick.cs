@@ -18,7 +18,8 @@ namespace Soutenance_MonoGame
         {
             littlebrick,
             brick,
-            bigbrick
+            bigbrick,
+            powerupbrick
         }
         public enum Colors
         {
@@ -33,56 +34,22 @@ namespace Soutenance_MonoGame
         protected int life;
         protected int maxLife;
         protected Collider col;
-        protected BrickTypes brickType;
-        protected Colors brickColor;
+        protected BrickTypes type;
+        protected Colors color;
 
         public Brick(BrickTypes pType, Colors pColor, string pName)
         {
             name = pName;
             layer = "Brick";
-            brickType = pType;
-            brickColor = pColor;
+            type = pType;
+            color = pColor;
             img = ServiceLocator.GetService<ISpritesManager>().GetBrickTexture(pType + "_" + pColor + "_" + (maxLife - life).ToString() + "hit");
             size = new Vector2(img.Width, img.Height);
             position = Vector2.Zero;
 
             col = new Collider(this, scale, OnCollisionEnter, OnCollision);
 
-            maxLife = GetMaxLife(brickType, brickColor);
-            life = maxLife;
-
-            ServiceLocator.GetService<IEntityManager>().AddEntity(this);
-        }
-
-        public Brick(BrickTypes pType, string pName)
-        {
-            name = pName;
-            layer = "Brick";
-            brickType = pType;
-            img = ServiceLocator.GetService<ISpritesManager>().GetBrickTexture(pType + "_" + brickColor + "_" + (maxLife - life).ToString() + "hit");
-            size = new Vector2(img.Width, img.Height);
-            position = Vector2.Zero;
-
-            col = new Collider(this, scale, OnCollisionEnter, OnCollision);
-
-            maxLife = GetMaxLife(brickType, brickColor);
-            life = maxLife;
-
-            ServiceLocator.GetService<IEntityManager>().AddEntity(this);
-        }
-
-        public Brick(BrickTypes pType, Colors pColor, Vector2 pPos, string pName)
-        {
-            name = pName;
-            layer = "Brick";
-            brickType = pType;
-            brickColor = pColor;
-            img = ServiceLocator.GetService<ISpritesManager>().GetBrickTexture(pType + "_" + pColor + "_" + (maxLife - life).ToString() + "hit");
-            size = new Vector2(img.Width, img.Height);
-            position = pPos;
-            col = new Collider(this, scale, OnCollisionEnter, OnCollision);
-
-            maxLife = GetMaxLife(brickType, brickColor);
+            maxLife = GetMaxLife(type, color);
             life = maxLife;
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
@@ -113,19 +80,19 @@ namespace Soutenance_MonoGame
             if (life <= 0)
                 Die();
             else
-                img = ServiceLocator.GetService<ISpritesManager>().GetBrickTexture(brickType + "_" + brickColor + "_" + (maxLife - life).ToString() + "hit");
+                img = ServiceLocator.GetService<ISpritesManager>().GetBrickTexture(type + "_" + color + "_" + (maxLife - life).ToString() + "hit");
         }
 
         public int GetMaxLife(BrickTypes type, Colors color)
         {
-            if (type != BrickTypes.littlebrick)
+            if (type == BrickTypes.bigbrick)
             {
                 if (color == Colors.yellow || color == Colors.orange)
                     return 2;
                 else if (color == Colors.red || color == Colors.purple)
                     return 3;
             }
-            else
+            else if (type == BrickTypes.brick || type == BrickTypes.littlebrick)
             {
                 if (color == Colors.yellow || color == Colors.orange)
                     return 2;
@@ -134,12 +101,12 @@ namespace Soutenance_MonoGame
             return 1;
         }
 
-        public void Die()
+        public virtual void Die()
         {
             enabled = false;
         }
 
-        public void Unload()
+        public virtual void Unload()
         {
             enabled = false;
         }

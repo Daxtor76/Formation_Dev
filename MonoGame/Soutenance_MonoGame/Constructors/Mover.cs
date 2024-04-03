@@ -25,8 +25,10 @@ namespace Soutenance_MonoGame
             accel = Vector2.Zero;
         }
 
-        public void Move(GameTime gameTime, Entity entity, Vector2 direction)
+        public void Move(GameTime gameTime, Entity entity, Vector2 direction, Vector2 targetAccel)
         {
+            ManageAccel(gameTime, targetAccel);
+
             Vector2 screenSize = Utils.GetScreenSize();
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 

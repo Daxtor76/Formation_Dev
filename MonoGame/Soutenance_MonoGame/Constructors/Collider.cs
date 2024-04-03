@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.Design;
 
 namespace Soutenance_MonoGame
 {
@@ -15,6 +16,7 @@ namespace Soutenance_MonoGame
         public Entity parent {get; private set;}
         public Vector2 oldPosition;
         public List<Collider> others = new List<Collider>();
+        public List<string> previousOthers = new List<string>();
         public delegate void CallBackOthersEffect(Collider other);
         CallBackOthersEffect collisionEnterEffect;
         CallBackOthersEffect continuousCollisionEffect;
@@ -70,9 +72,8 @@ namespace Soutenance_MonoGame
             {
                 if (collisionEnterEffect != null)
                 {
-                    if (canCollide)
+                    if (!previousOthers.Contains(other.parent.name))
                     {
-                        canCollide = false;
                         collisionEnterEffect(other);
                     }
                 }
@@ -85,14 +86,38 @@ namespace Soutenance_MonoGame
 
         public bool IsColliding(Collider other)
         {
-            if (position.X < other.position.X + other.size.X &&
-                position.X + size.X > other.position.X &&
-                position.Y < other.position.Y + other.size.Y &&
-                position.Y + size.Y > other.position.Y)
+            // top left
+            if (position.X >= other.position.X &&
+                position.X <= other.position.X + other.size.X &&
+                position.Y >= other.position.Y &&
+                position.Y <= other.position.Y + other.size.Y)
             {
                 return true;
             }
-            canCollide = true;
+            // top right
+            if (position.X + size.X >= other.position.X &&
+                position.X + size.X <= other.position.X + other.size.X &&
+                position.Y >= other.position.Y &&
+                position.Y <= other.position.Y + other.size.Y)
+            {
+                return true;
+            }
+            // bottom right
+            if (position.X + size.X >= other.position.X &&
+                position.X + size.X <= other.position.X + other.size.X &&
+                position.Y + size.Y >= other.position.Y &&
+                position.Y + size.Y <= other.position.Y + other.size.Y)
+            {
+                return true;
+            }
+            // bottom left
+            if (position.X >= other.position.X &&
+                position.X <= other.position.X + other.size.X &&
+                position.Y + size.Y >= other.position.Y &&
+                position.Y + size.Y <= other.position.Y + other.size.Y)
+            {
+                return true;
+            }
             return false;
         }
 
@@ -118,9 +143,13 @@ namespace Soutenance_MonoGame
             return collidingSide;
         }
 
-        void ClearOthers()
+        public void StorePreviousOthers()
         {
-            others.Clear();
+            previousOthers.Clear();
+            foreach (Collider col in others)
+            {
+                previousOthers.Add(col.parent.name);
+            }
         }
     }
 }

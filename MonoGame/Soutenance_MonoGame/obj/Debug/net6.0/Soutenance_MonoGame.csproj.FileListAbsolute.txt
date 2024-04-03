@@ -170,3 +170,10 @@ C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\obj\Debug\net6.0\Soutena
 C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\obj\Debug\net6.0\ref\Soutenance_MonoGame.dll
 C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Teleporter\portal_spritesheet.xnb
 E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Teleporter\portal_spritesheet.xnb
+E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Bricks\powerupbrick_green_0hit.xnb
+E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Bricks\powerupbrick_grey_0hit.xnb
+E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Bricks\powerupbrick_orange_0hit.xnb
+E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Bricks\powerupbrick_purple_0hit.xnb
+E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Bricks\powerupbrick_red_0hit.xnb
+E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Bricks\powerupbrick_yellow_0hit.xnb
+E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\PowerUps\powerup_multiball_spritesheet.xnb

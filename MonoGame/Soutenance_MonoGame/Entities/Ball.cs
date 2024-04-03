@@ -68,8 +68,7 @@ namespace Soutenance_MonoGame
             }
             else if (ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state == SceneStates.Playing)
             {
-                mover.ManageAccel(gameTime, new Vector2(5.0f, 5.0f));
-                mover.Move(gameTime, this, mover.direction);
+                mover.Move(gameTime, this, mover.direction, new Vector2(5.0f, 5.0f));
 
                 canBeBoosted = GetDistance(paddle) <= paddle.size.X * 0.5f + size.X * 0.5f + 100.0f;
             }
@@ -90,7 +89,7 @@ namespace Soutenance_MonoGame
                 ActivateTeleporters();
             }
             else if (other.parent.layer == "Teleporter")
-                CollideTeleporter(other);
+                Teleport(other);
             else if (other.parent.layer == "Wall")
             {
                 if (side == "bottom")
@@ -101,13 +100,11 @@ namespace Soutenance_MonoGame
                 if (side == "top")
                     state = States.Normal;
             }
-            else
+            else if (other.parent.layer == "Brick")
             {
                 ActivateTeleporters();
-                if (state == States.Normal || (state == States.Boosted && other.parent.layer != "Brick"))
-                {
+                if (state == States.Normal)
                     Bounce(side);
-                }
             }
         }
 
@@ -121,7 +118,7 @@ namespace Soutenance_MonoGame
             // Voir pour faire des unity event? avec un defeatManager qui regarde la vie du joueur et qui check quand la valeur change
         }
 
-        void CollideTeleporter(Collider other)
+        void Teleport(Collider other)
         {
             Teleporter tp = other.parent as Teleporter;
             Teleporter destTp = ServiceLocator.GetService<IEntityManager>().GetEntity(tp.destinationName) as Teleporter;

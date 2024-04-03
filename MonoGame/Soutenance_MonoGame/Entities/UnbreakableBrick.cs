@@ -8,9 +8,8 @@ namespace Soutenance_MonoGame
 {
     public class UnbreakableBrick : Brick
     {
-        public UnbreakableBrick(BrickTypes pType, string pName) : base(pType, pName)
+        public UnbreakableBrick(BrickTypes pType, Colors pColor, string pName) : base(pType, pColor, pName)
         {
-            brickColor = Colors.grey;
         }
     }
 }
