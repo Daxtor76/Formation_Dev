@@ -51,6 +51,7 @@ namespace Soutenance_MonoGame
         public override void Start()
         {
             paddle.ball = ball;
+            ball.paddle = paddle;
             ServiceLocator.GetService<ILevelManager>().ChangeLevel(1);
 
             base.Start();

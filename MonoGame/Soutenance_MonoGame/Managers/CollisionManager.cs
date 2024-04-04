@@ -39,15 +39,14 @@ namespace Soutenance_MonoGame
                             if (col.IsColliding(other))
                             {
                                 col.others.Add(other);
-                                if (col.parent.layer == "Ball")
-                                {
-                                    Debug.WriteLine(other.parent.name);
-                                }
                             }
                         }
                     }
                 }
-                col.ApplyCollisions();
+                if (col.others.Count != 0)
+                {
+                    col.ApplyCollisions(col.others);
+                }
                 col.StorePreviousOthers();
                 col.others.Clear();
             }

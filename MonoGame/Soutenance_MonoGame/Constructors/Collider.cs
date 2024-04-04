@@ -17,13 +17,11 @@ namespace Soutenance_MonoGame
         public Vector2 oldPosition;
         public List<Collider> others = new List<Collider>();
         public List<string> previousOthers = new List<string>();
-        public delegate void CallBackOthersEffect(Collider other);
+        public delegate void CallBackOthersEffect(List<Collider> others);
         CallBackOthersEffect collisionEnterEffect;
-        CallBackOthersEffect continuousCollisionEffect;
+        CallBackOthersEffect collisionEnterOthersEffect;
 
         Texture2D texture;
-
-        bool canCollide = true;
 
         public Collider(Entity pParent, Vector2 pScale, CallBackOthersEffect pCollisionEffect = null, CallBackOthersEffect pContinuousCollisionEffect = null)
         {
@@ -32,7 +30,7 @@ namespace Soutenance_MonoGame
             size = pParent.size * pScale;
             position = pParent.position;
             collisionEnterEffect = pCollisionEffect;
-            continuousCollisionEffect = pContinuousCollisionEffect;
+            collisionEnterOthersEffect = pContinuousCollisionEffect;
 
             texture = new Texture2D(MainGame.graphics.GraphicsDevice, 1, 1);
             texture.SetData(new[] { Color.Green });
@@ -66,21 +64,15 @@ namespace Soutenance_MonoGame
             }
         }
 
-        public void ApplyCollisions()
+        public void ApplyCollisions(List<Collider> others)
         {
-            foreach (Collider other in others)
+            if (collisionEnterEffect != null)
             {
-                if (collisionEnterEffect != null)
-                {
-                    if (!previousOthers.Contains(other.parent.name))
-                    {
-                        collisionEnterEffect(other);
-                    }
-                }
-                if (continuousCollisionEffect != null)
-                {
-                    continuousCollisionEffect(other);
-                }
+                collisionEnterEffect(others);
+            }
+            if (collisionEnterOthersEffect != null)
+            {
+                collisionEnterOthersEffect(others);
             }
         }
 

@@ -72,5 +72,10 @@ namespace Soutenance_MonoGame
 
             return spawnPos;
         }
+
+        public virtual void Destroy()
+        {
+            enabled = false;
+        }
     }
 }

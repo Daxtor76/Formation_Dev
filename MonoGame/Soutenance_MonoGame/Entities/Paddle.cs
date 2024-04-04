@@ -46,10 +46,7 @@ namespace Soutenance_MonoGame
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            if (ServiceLocator.GetService<IInputManager>().GetInputDirection() != Vector2.Zero)
-            {
-                mover.IncreaseAccelByDirection(gameTime, ServiceLocator.GetService<IInputManager>().GetInputDirection());
-            }
+            mover.IncreaseAccelByDirection(gameTime, ServiceLocator.GetService<IInputManager>().GetInputDirection());
             mover.MoveSmoothly(gameTime, this);
 
             if (ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state == SceneStates.Preparation)
@@ -86,11 +83,11 @@ namespace Soutenance_MonoGame
             return paddleSpawnPos;
         }
 
-        public void OnCollisionEnter(Collider other)
+        public void OnCollisionEnter(List<Collider> others)
         {
         }
 
-        public void OnCollision(Collider other)
+        public void OnCollision(List<Collider> others)
         {
         }
 

@@ -8,7 +8,7 @@ namespace Soutenance_MonoGame
 {
     public interface ICollidable
     {
-        public void OnCollisionEnter(Collider other);
-        public void OnCollision(Collider other);
+        public void OnCollisionEnter(List<Collider> others);
+        public void OnCollision(List<Collider> others);
     }
 }

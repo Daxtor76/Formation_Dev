@@ -65,11 +65,11 @@ namespace Soutenance_MonoGame
             base.Draw();
         }
 
-        public void OnCollisionEnter(Collider other)
+        public void OnCollisionEnter(List<Collider> others)
         {
         }
 
-        public void OnCollision(Collider other)
+        public void OnCollision(List<Collider> others)
         {
         }
 
@@ -103,12 +103,12 @@ namespace Soutenance_MonoGame
 
         public virtual void Die()
         {
-            enabled = false;
+            Destroy();
         }
 
         public virtual void Unload()
         {
-            enabled = false;
+            Destroy();
         }
     }
 }

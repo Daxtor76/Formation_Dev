@@ -36,7 +36,7 @@ namespace Soutenance_MonoGame
 
         Collider col;
         public Mover mover;
-        Entity paddle;
+        public Paddle paddle;
 
         public bool canBeBoosted = false;
 
@@ -54,7 +54,6 @@ namespace Soutenance_MonoGame
 
             col = new Collider(this, scale, OnCollisionEnter, OnCollision);
             mover = new Mover(pSpeed);
-            paddle = ServiceLocator.GetService<IEntityManager>().GetEntity("Paddle");
         }
 
         public override void Update(GameTime gameTime)
@@ -76,36 +75,46 @@ namespace Soutenance_MonoGame
             col.oldPosition = col.position;
         }
 
-        public void OnCollisionEnter(Collider other)
+        public void OnCollisionEnter(List<Collider> others)
         {
-            string side = col.GetCollisionSide(other);
+            Vector2 newDir = Vector2.Zero;
 
-            if (other.parent is IDamageable)
-                Hit(other.parent as IDamageable);
+            foreach (Collider other in others)
+            {
+                if (!col.previousOthers.Contains(other.parent.name))
+                {
+                    string side = col.GetCollisionSide(other);
 
-            if (other.parent.layer == "Paddle")
-            {
-                BounceOnPaddle(other);
-                ActivateTeleporters();
-            }
-            else if (other.parent.layer == "Teleporter")
-                Teleport(other);
-            else if (other.parent.layer == "Wall")
-            {
-                if (side == "bottom")
-                    LoseLife();
+                    if (other.parent is IDamageable && other.parent.layer != "PowerUp")
+                        Hit(other.parent as IDamageable);
 
-                ActivateTeleporters();
-                Bounce(side);
-                if (side == "top")
-                    state = States.Normal;
+                    if (other.parent.layer == "Paddle")
+                    {
+                        newDir = GetNewDirFromCollisionOnPaddle(other);
+                        ActivateTeleporters();
+                    }
+                    else if (other.parent.layer == "Teleporter")
+                        Teleport(other);
+                    else if (other.parent.layer == "Wall")
+                    {
+                        if (side == "bottom")
+                            LoseLife();
+
+                        ActivateTeleporters();
+                        newDir += GetNewDirFromCollision(side);
+                        if (side == "top")
+                            state = States.Normal;
+                    }
+                    else if (other.parent.layer == "Brick")
+                    {
+                        ActivateTeleporters();
+                        if (state == States.Normal)
+                            newDir += GetNewDirFromCollision(side);
+                    }
+                }
             }
-            else if (other.parent.layer == "Brick")
-            {
-                ActivateTeleporters();
-                if (state == States.Normal)
-                    Bounce(side);
-            }
+            if (newDir != mover.direction && newDir != Vector2.Zero)
+                Bounce(newDir);
         }
 
         void LoseLife()
@@ -135,15 +144,16 @@ namespace Soutenance_MonoGame
             }
         }
 
-        void BounceOnPaddle(Collider other)
+        Vector2 GetNewDirFromCollisionOnPaddle(Collider other)
         {
             float modifier = GetImpactPointRelativePositionX(other.parent);
-            mover.direction = Vector2.Normalize(new Vector2(modifier, -mover.direction.Y));
 
             if (state == States.Boosted)
             {
                 mover.accel += new Vector2(1.0f, 1.0f);
             }
+
+            return new Vector2(modifier, -mover.direction.Y);
         }
 
         float GetImpactPointRelativePositionX(Entity target)
@@ -152,6 +162,35 @@ namespace Soutenance_MonoGame
             float targetCenterPos = target.position.X + target.size.X * 0.5f;
             float targetSizeHalf = target.size.X * 0.5f;
             return -(targetCenterPos - ballCenterPos) / targetSizeHalf;
+        }
+
+        Vector2 GetNewDirFromCollision(string side)
+        {
+            Vector2 dir = Vector2.Zero;
+
+            switch (side)
+            {
+                case "top":
+                    dir = new Vector2(mover.direction.X, -mover.direction.Y);
+                    break;
+                case "right":
+                    dir = new Vector2(-mover.direction.X, mover.direction.Y);
+                    break;
+                case "bottom":
+                    dir = new Vector2(mover.direction.X, -mover.direction.Y);
+                    break;
+                case "left":
+                    dir = new Vector2(-mover.direction.X, mover.direction.Y);
+                    break;
+            }
+
+            return dir;
+        }
+
+        void Bounce(Vector2 newDirection)
+        {
+            Debug.WriteLine(newDirection);
+            mover.direction = Vector2.Normalize(newDirection);
         }
 
         void Bounce(string side)
@@ -170,7 +209,7 @@ namespace Soutenance_MonoGame
             target.TakeDamages(1);
         }
 
-        public void OnCollision(Collider other)
+        public void OnCollision(List<Collider> others)
         {
         }
     }
