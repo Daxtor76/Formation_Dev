@@ -20,6 +20,13 @@ namespace Soutenance_MonoGame
             return (float)(radAngle * 180 / Math.PI);
         }
 
+        public static Vector2 GetDirectionFromAngle(float angle)
+        {
+            float radAngle = DegreesToRad(angle);
+
+            return new Vector2((float)Math.Cos(radAngle), (float)Math.Sin(radAngle));
+        }
+
         public static Vector2 GetScreenSize()
         {
             Vector2 screenSize = new Vector2();

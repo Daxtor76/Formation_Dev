@@ -21,13 +21,16 @@ namespace Soutenance_MonoGame
         public PowerUpTypes type;
         public Collider col;
         public Mover mover;
-        public delegate void Effect();
+        public delegate void Effect(int amount = 0);
         public Effect powerUpEffect;
 
         public PowerUp(Vector2 pPos, PowerUpTypes pType)
         {
+            Random rand = new Random();
+            int rndNumber = rand.Next(0, 1000);
+
             type = pType;
-            name = "PowerUp" + ServiceLocator.GetService<IEntityManager>().GetEntitiesOfType<PowerUp>().Count;
+            name = "PowerUp" + rndNumber.ToString();
             layer = "PowerUp";
             img = ServiceLocator.GetService<ISpritesManager>().GetPowerUpTexture($"powerup_{pType}_spritesheet");
             size = new Vector2(30.0f, img.Height);
@@ -52,9 +55,24 @@ namespace Soutenance_MonoGame
             mover.Move(gameTime, this, new Vector2(0, 1), new Vector2(1, 1));
         }
 
-        public void MultiBallEffect()
+        public void MultiBallEffect(int amount)
         {
-            Debug.WriteLine("multibaaaaaall");
+            GameScene gameScene = ServiceLocator.GetService<ISceneManager>().GetCurrentScene() as GameScene;
+            if (gameScene.mainBall != null)
+            {
+                if (gameScene.mainBall.state != Ball.States.Preparation)
+                {
+                    Array colors = Enum.GetValues<Ball.Colors>();
+                    Random rand = new Random();
+
+                    for (int i = 0; i < amount; i++)
+                    {
+                        int rndNumber = rand.Next(0, 1000);
+                        Ball ball = new Ball(Ball.Colors.grey, 350.0f, "Ball" + rndNumber.ToString(), gameScene.mainBall.position, Ball.States.Boosted);
+                        ball.Launch(Utils.GetDirectionFromAngle(360 / (amount + 1) * (i + 1)), new Vector2(3.0f, 3.0f));
+                    }
+                }
+            }
         }
 
         public void OnCollision(List<Collider> others)
@@ -71,7 +89,7 @@ namespace Soutenance_MonoGame
                     }
                     else if (other.parent.layer == "Paddle")
                     {
-                        powerUpEffect();
+                        powerUpEffect(3);
                         Destroy();
                     }
                 }

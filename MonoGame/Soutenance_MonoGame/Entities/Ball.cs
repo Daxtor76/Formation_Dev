@@ -10,7 +10,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.ComponentModel.Design;
-using static Soutenance_MonoGame.Scene;
 using System.Threading;
 
 namespace Soutenance_MonoGame
@@ -28,6 +27,7 @@ namespace Soutenance_MonoGame
         }
         public enum States
         {
+            Preparation,
             Normal,
             Boosted
         }
@@ -36,19 +36,33 @@ namespace Soutenance_MonoGame
 
         Collider col;
         public Mover mover;
-        public Paddle paddle;
 
         public bool canBeBoosted = false;
 
-        public Ball(Colors pColor, float pSpeed, string pName)
+        public Ball(float pSpeed, string pName)
+        {
+            name = pName;
+            layer = "Ball";
+            img = ServiceLocator.GetService<ISpritesManager>().GetBallTexture("ball_" + Colors.red);
+            size = new Vector2(img.Width, img.Height);
+            position = GetSpawnPosition();
+            state = States.Preparation;
+
+            ServiceLocator.GetService<IEntityManager>().AddEntity(this);
+
+            col = new Collider(this, scale, OnCollisionEnter, OnCollision);
+            mover = new Mover(pSpeed);
+        }
+
+        public Ball(Colors pColor, float pSpeed, string pName, Vector2 pPosition, States pState)
         {
             name = pName;
             layer = "Ball";
             img = ServiceLocator.GetService<ISpritesManager>().GetBallTexture("ball_" + pColor);
             size = new Vector2(img.Width, img.Height);
-            position = GetSpawnPosition();
+            position = pPosition;
 
-            state = States.Normal;
+            state = pState;
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
 
@@ -61,15 +75,33 @@ namespace Soutenance_MonoGame
             base.Update(gameTime);
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state == SceneStates.Preparation)
+            if (state == States.Preparation)
             {
-                mover.FollowAbove(this, paddle);
+                mover.FollowAbove(this, ServiceLocator.GetService<IEntityManager>().GetEntity("Paddle"));
+
+                if (ServiceLocator.GetService<IInputManager>().KeyPressed(Keys.Space))
+                {
+                    Launch(new Vector2(0, -1), new Vector2(3.0f, 3.0f));
+                    state = States.Normal;
+                }
             }
-            else if (ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state == SceneStates.Playing)
+            else if (state == States.Normal || state == States.Boosted)
             {
                 mover.Move(gameTime, this, mover.direction, new Vector2(5.0f, 5.0f));
 
-                canBeBoosted = GetDistance(paddle) <= paddle.size.X * 0.5f + size.X * 0.5f + 100.0f;
+                if (ServiceLocator.GetService<IInputManager>().KeyPressed(Keys.Space))
+                {
+                    Paddle paddle = ServiceLocator.GetService<IEntityManager>().GetEntity("Paddle") as Paddle;
+                    canBeBoosted = GetDistance(paddle) <= paddle.size.X * 0.5f + size.X * 0.5f + 100.0f;
+
+                    if (canBeBoosted)
+                    {
+                        state = States.Boosted;
+                        Debug.WriteLine("BOOSTED");
+                    }
+                    else
+                        Debug.WriteLine("raté");
+                }
             }
 
             col.oldPosition = col.position;
@@ -119,8 +151,7 @@ namespace Soutenance_MonoGame
 
         void LoseLife()
         {
-            ServiceLocator.GetService<ISceneManager>().GetCurrentScene().state = SceneStates.Preparation;
-            state = States.Normal;
+            Destroy();
             return;
             // TO DO: Ajouter ici la perte du vie du player
             // Check la defeat -> si == 0 game over sinon reset
@@ -149,9 +180,7 @@ namespace Soutenance_MonoGame
             float modifier = GetImpactPointRelativePositionX(other.parent);
 
             if (state == States.Boosted)
-            {
                 mover.accel += new Vector2(1.0f, 1.0f);
-            }
 
             return new Vector2(modifier, -mover.direction.Y);
         }
@@ -189,7 +218,6 @@ namespace Soutenance_MonoGame
 
         void Bounce(Vector2 newDirection)
         {
-            Debug.WriteLine(newDirection);
             mover.direction = Vector2.Normalize(newDirection);
         }
 
@@ -200,6 +228,12 @@ namespace Soutenance_MonoGame
 
         public void OnCollision(List<Collider> others)
         {
+        }
+
+        public void Launch(Vector2 direction, Vector2 accel)
+        {
+            mover.accel = accel;
+            mover.direction = direction;
         }
     }
 }
