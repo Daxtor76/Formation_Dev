@@ -193,17 +193,6 @@ namespace Soutenance_MonoGame
             mover.direction = Vector2.Normalize(newDirection);
         }
 
-        void Bounce(string side)
-        {
-            if (side == "top" || side == "bottom")
-                mover.direction.Y = -mover.direction.Y;
-
-            if (side == "left" || side == "right")
-                mover.direction.X = -mover.direction.X;
-
-            mover.direction = Vector2.Normalize(mover.direction);
-        }
-
         void Hit(IDamageable target)
         {
             target.TakeDamages(1);

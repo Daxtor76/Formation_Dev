@@ -74,8 +74,7 @@
               "RelativeToolTip": "Soutenance_MonoGame\\ToDo.txt",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-03-27T15:22:59.121Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-27T15:22:59.121Z"
             },
             {
               "$type": "Document",
@@ -87,8 +86,7 @@
               "RelativeToolTip": "Soutenance_MonoGame\\Managers\\CollisionManager.cs",
               "ViewState": "AQIAABYAAAAAAAAAAADwvx0AAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T14:55:18.87Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-03T14:55:18.87Z"
             },
             {
               "$type": "Document",
@@ -100,8 +98,7 @@
               "RelativeToolTip": "Soutenance_MonoGame\\Constructors\\Collider.cs",
               "ViewState": "AQIAADIAAAAAAAAAAAAIwEcAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T14:37:05.69Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-03T14:37:05.69Z"
             },
             {
               "$type": "Document",
@@ -111,7 +108,7 @@
               "RelativeDocumentMoniker": "Soutenance_MonoGame\\Entities\\Ball.cs",
               "ToolTip": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Entities\\Ball.cs",
               "RelativeToolTip": "Soutenance_MonoGame\\Entities\\Ball.cs",
-              "ViewState": "AQIAAFAAAAAAAAAAAAAuwGcAAAA/AAAA",
+              "ViewState": "AQIAAEgAAAAAAAAAAAAmwFYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-22T14:47:59.835Z",
               "EditorCaption": ""
@@ -126,8 +123,7 @@
               "RelativeToolTip": "Soutenance_MonoGame\\Entities\\Paddle.cs",
               "ViewState": "AQIAAEUAAAAAAAAAAAAowFkAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-25T18:57:32.898Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-25T18:57:32.898Z"
             },
             {
               "$type": "Document",
@@ -139,8 +135,7 @@
               "RelativeToolTip": "Soutenance_MonoGame\\Constructors\\PowerUp.cs",
               "ViewState": "AQIAAC0AAAAAAAAAAAAkwEEAAAA+AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T11:37:01.905Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-03T11:37:01.905Z"
             },
             {
               "$type": "Document",
@@ -152,8 +147,7 @@
               "RelativeToolTip": "Soutenance_MonoGame\\Entities\\PowerUpBrick.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAYwBUAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T11:31:37.833Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-03T11:31:37.833Z"
             },
             {
               "$type": "Document",
@@ -165,8 +159,7 @@
               "RelativeToolTip": "Soutenance_MonoGame\\Constructors\\Brick.cs",
               "ViewState": "AQIAADAAAAAAAAAAAAAowEcAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T14:22:18.471Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-03T14:22:18.471Z"
             },
             {
               "$type": "Document",
@@ -178,8 +171,7 @@
               "RelativeToolTip": "Soutenance_MonoGame\\Constructors\\Level.cs",
               "ViewState": "AQIAACEAAAAAAAAAAAArwDQAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T12:23:55.291Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-03T12:23:55.291Z"
             },
             {
               "$type": "Document",
@@ -191,8 +183,7 @@
               "RelativeToolTip": "Soutenance_MonoGame\\Scenes\\GameScene.cs",
               "ViewState": "AQIAAB0AAAAAAAAAAADwvyoAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-08T10:52:22.999Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-08T10:52:22.999Z"
             },
             {
               "$type": "Document",
@@ -204,8 +195,7 @@
               "RelativeToolTip": "Soutenance_MonoGame\\MainGame.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-23T10:27:12.502Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-23T10:27:12.502Z"
             }
           ]
         }
