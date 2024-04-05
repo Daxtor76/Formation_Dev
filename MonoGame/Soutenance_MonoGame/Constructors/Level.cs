@@ -37,7 +37,7 @@ namespace Soutenance_MonoGame
                     else if (randNb < 25.0f && randNb >= 20.0f)
                         element = new BrickUnbreakable((Brick.BrickTypes)types.GetValue(rand.Next(0, types.Length - 1)), Brick.Colors.grey, "Brick" + i + y);
                     else if (randNb < 20.0f && randNb >= 10.0f)
-                        element = new BrickMoving((Brick.BrickTypes)types.GetValue(rand.Next(0, types.Length - 1)), (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)), "Brick" + i + y, new Vector2(rand.Next(100, 300), 0.0f));
+                        element = new BrickMoving((Brick.BrickTypes)types.GetValue(rand.Next(0, types.Length - 1)), (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)), "Brick" + i + y, new Vector2(rand.Next(-300, 300), 0.0f));
                     else
                         element = new BrickPowerUp(Brick.BrickTypes.powerupbrick, (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)), "Brick" + i + y);
 

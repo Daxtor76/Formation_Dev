@@ -16,6 +16,7 @@ namespace Soutenance_MonoGame
         public string destinationName;
         public Vector2 newDirection;
         public Collider col;
+        Animator animator;
         public Teleporter(Vector2 pPos, float pRotation, string pdestinationName, Vector2 pNewDirection, string pName)
         {
             name = pName;
@@ -30,6 +31,20 @@ namespace Soutenance_MonoGame
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
 
             col = new Collider(this, new Vector2(0.5f, 0.5f), OnCollisionEnter, OnCollision);
+            animator = new Animator(size);
+        }
+
+        public override void Start()
+        {
+            base.Start();
+
+            Animation idleAnim = new Animation(0, 5, 0.8f, true);
+            animator.anims.Add("Idle", idleAnim);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            sourceRect = animator.ReadAnim(gameTime, "Idle");
         }
 
         public override void Draw()

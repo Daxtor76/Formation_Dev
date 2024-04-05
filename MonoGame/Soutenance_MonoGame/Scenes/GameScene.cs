@@ -42,14 +42,10 @@ namespace Soutenance_MonoGame
             Teleporter tp = new Teleporter(new Vector2(100, 500), Utils.DegreesToRad(-45.0f), "Portal2", new Vector2(1, -1), "Portal");
             Teleporter tp2 = new Teleporter(new Vector2(1000, 500), Utils.DegreesToRad(45.0f), "Portal", new Vector2(-1, -1), "Portal2");
 
-            Debug.WriteLine($"{name} scene has been loaded.");
             ServiceLocator.GetService<ILevelManager>().ChangeLevel(1);
-            base.Load();
-        }
 
-        public override void Start()
-        {
-            base.Start();
+            Debug.WriteLine($"{name} scene has been loaded.");
+            base.Load();
         }
 
         public override void Update(GameTime gameTime)
