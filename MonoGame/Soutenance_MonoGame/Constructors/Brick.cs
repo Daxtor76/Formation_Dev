@@ -38,6 +38,11 @@ namespace Soutenance_MonoGame
         protected Colors color;
         protected List<Entity> googlyEyes = new List<Entity>();
 
+        public Brick()
+        {
+        
+        }
+
         public Brick(BrickTypes pType, Colors pColor, string pName)
         {
             name = pName;

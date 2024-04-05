@@ -52,6 +52,12 @@ namespace Soutenance_MonoGame
             accel *= 0.9f;
         }
 
+        public void MoveTo(GameTime gameTime, Entity entity, Vector2 destination, Vector2 targetAccel)
+        {
+            direction = destination - entity.position;
+            Move(gameTime, entity, direction, targetAccel);
+        }
+
         public void FollowAbove(Entity entity, Entity target)
         {
             entity.position.X = target.position.X + target.size.X * 0.5f - entity.size.X * 0.5f;

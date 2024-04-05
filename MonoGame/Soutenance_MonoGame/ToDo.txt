@@ -7,7 +7,7 @@
 - Gameplay: nouvelle entité - TP -> ok
 - Gameplay: power up - multiball -> ok
 - Visuel: googly eyes (1 per brick life) -> ok
-- Gameplay: nouvelle entité - Moving brique
+- Gameplay: nouvelle entité - Moving brique -> ok
 - Visuel: effects / animations
 - Gameplay: victoire
 - Gameplay: défaite

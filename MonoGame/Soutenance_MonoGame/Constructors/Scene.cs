@@ -25,14 +25,19 @@ namespace Soutenance_MonoGame
 
         public virtual void Start()
         {
+            ServiceLocator.GetService<IEntityManager>().StartEntities();
         }
 
         public virtual void Update(GameTime gameTime)
         {
+            ServiceLocator.GetService<IEntityManager>().UpdateEntities(gameTime);
+            ServiceLocator.GetService<ICollisionManager>().UpdateColliders(gameTime);
         }
 
         public virtual void Draw()
         {
+            ServiceLocator.GetService<IEntityManager>().DrawEntities();
+            ServiceLocator.GetService<ICollisionManager>().DrawColliders();
         }
 
         public virtual void Unload()

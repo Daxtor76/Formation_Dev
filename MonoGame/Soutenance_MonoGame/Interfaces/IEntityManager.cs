@@ -12,6 +12,7 @@ namespace Soutenance_MonoGame
         public void AddEntity(Entity entity);
         public List<Entity> GetEntitiesOfType<T>();
         public Entity GetEntity(string name);
+        public void StartEntities();
         public void UpdateEntities(GameTime gameTime);
         public void DrawEntities();
         public void CleanEntities();

@@ -43,22 +43,18 @@ namespace Soutenance_MonoGame
             Teleporter tp2 = new Teleporter(new Vector2(1000, 500), Utils.DegreesToRad(45.0f), "Portal", new Vector2(-1, -1), "Portal2");
 
             Debug.WriteLine($"{name} scene has been loaded.");
+            ServiceLocator.GetService<ILevelManager>().ChangeLevel(1);
             base.Load();
         }
 
         public override void Start()
         {
-            ServiceLocator.GetService<ILevelManager>().ChangeLevel(1);
-
             base.Start();
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-
-            ServiceLocator.GetService<IEntityManager>().UpdateEntities(gameTime);
-            ServiceLocator.GetService<ICollisionManager>().UpdateColliders(gameTime);
 
             if (ServiceLocator.GetService<IEntityManager>().GetEntitiesOfType<Ball>().Count <= 0)
                 mainBall = new Ball(350.0f, "Ball");
@@ -67,9 +63,6 @@ namespace Soutenance_MonoGame
         public override void Draw()
         {
             base.Draw();
-
-            ServiceLocator.GetService<IEntityManager>().DrawEntities();
-            ServiceLocator.GetService<ICollisionManager>().DrawColliders();
         }
 
         public override void Unload()

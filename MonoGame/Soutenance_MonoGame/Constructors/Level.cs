@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Soutenance_MonoGame
@@ -29,11 +30,14 @@ namespace Soutenance_MonoGame
                     Random rand = new Random();
 
                     ILevelElement element;
+
                     float randNb = rand.Next(0, 100);
-                    if (randNb >= 20.0f)
+                    if (randNb >= 25.0f)
                         element = new BrickNormal((Brick.BrickTypes)types.GetValue(rand.Next(0, types.Length - 1)), (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)), "Brick" + i + y);
-                    else if (randNb < 20.0f && randNb >= 15.0f)
+                    else if (randNb < 25.0f && randNb >= 20.0f)
                         element = new BrickUnbreakable((Brick.BrickTypes)types.GetValue(rand.Next(0, types.Length - 1)), Brick.Colors.grey, "Brick" + i + y);
+                    else if (randNb < 20.0f && randNb >= 10.0f)
+                        element = new BrickMoving((Brick.BrickTypes)types.GetValue(rand.Next(0, types.Length - 1)), (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)), "Brick" + i + y, new Vector2(rand.Next(100, 300), 0.0f));
                     else
                         element = new BrickPowerUp(Brick.BrickTypes.powerupbrick, (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)), "Brick" + i + y);
 

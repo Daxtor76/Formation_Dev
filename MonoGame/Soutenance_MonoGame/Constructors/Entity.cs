@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mime;
+using System.Diagnostics;
 
 namespace Soutenance_MonoGame
 {
@@ -22,6 +23,11 @@ namespace Soutenance_MonoGame
         public string layer = "";
         public Texture2D img;
         public Rectangle sourceRect;
+
+        public virtual void Start()
+        {
+            
+        }
 
         public virtual void Update(GameTime gameTime)
         {
@@ -44,13 +50,18 @@ namespace Soutenance_MonoGame
                 MainGame.spriteBatch.Draw(img, destRect, sourceRect, Color.White, rotation, Vector2.Zero, SpriteEffects.None, 0.0f);
             }
         }
-        public void SetPosition(Vector2 position)
+        public void SetPosition(Vector2 pPosition)
         {
-            this.position = position;
+            position = pPosition;
         }
         public Vector2 GetPosition()
         {
             return position;
+        }
+        public bool IsNear(Vector2 point, float distance)
+        {
+            float delta = Vector2.Distance(point, position);
+            return delta <= distance;
         }
         public Vector2 GetSize()
         {

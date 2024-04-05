@@ -21,6 +21,11 @@ namespace Soutenance_MonoGame
             Debug.WriteLine($"{name} scene has been loaded.");
         }
 
+        public override void Start()
+        {
+            base.Start();
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
