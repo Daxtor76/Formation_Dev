@@ -177,3 +177,6 @@ E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\B
 E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Bricks\powerupbrick_red_0hit.xnb
 E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Bricks\powerupbrick_yellow_0hit.xnb
 E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\PowerUps\powerup_multiball_spritesheet.xnb
+E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\FXs\GooglyEyes\background.xnb
+E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\FXs\GooglyEyes\eye.xnb
+E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Newtonsoft.Json.dll

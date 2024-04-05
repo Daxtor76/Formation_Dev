@@ -62,6 +62,11 @@ namespace Soutenance_MonoGame
             return Vector2.Distance(position, target.position);
         }
 
+        public Vector2 GetCenterPosition()
+        {
+            return position + size * 0.5f * scale;
+        }
+
         public virtual Vector2 GetSpawnPosition()
         {
             Vector2 spawnPos = new Vector2();

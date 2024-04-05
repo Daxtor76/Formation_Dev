@@ -5,13 +5,10 @@
 - Gameplay: booster la balle si input au moment du rebond (pas de changement de direction tant que pas de mur touché) -> ok
 - Gameplay: nouvelle entité - Brique incassable -> ok
 - Gameplay: nouvelle entité - TP -> ok
-- Gameplay: power up - multiball
-		Spawner (pour faire spawn les power ups, les balls, de nouveaux tp etc)
+- Gameplay: power up - multiball -> ok
+- Visuel: googly eyes (1 per brick life) -> ok
 - Gameplay: nouvelle entité - Moving brique
-- Gameplay: nouvelle entité - Hydra brick (boss fight???)
 - Visuel: effects / animations
-- Visuel: googly eyes (1 per brick life)
-- Visuel: screenshake
 - Gameplay: victoire
 - Gameplay: défaite
 - UI: buttons
@@ -20,8 +17,13 @@
 - Menu: main menu
 - Menu: gameover (victoire + défaite): durée de game, rebonds, rebonds par secondes moyen
 - Random level generator v2 (bon alignement des pièces, ajouts d'options etc)
-- Map editor
+- Visuel: screenshake
+- Gameplay: nouvelle entité - Hydra brick (boss fight???)
 - Visuel: backgrounds
+- Utiliser newtonsoft json pour le JsonReader : https://www.newtonsoft.com/json => Vraiment ? pourtant pas d'utilisation de library externe
+=> peut être continuer d'utiliser system.text.json avec WeatherForecast? weatherForecast = JsonSerializer.Deserialize<WeatherForecast>(jsonString);
+=> Actuellement : https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/use-dom
+- Map editor
 
 Bonus:
 - Save

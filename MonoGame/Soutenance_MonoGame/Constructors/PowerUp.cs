@@ -69,7 +69,7 @@ namespace Soutenance_MonoGame
                     {
                         int rndNumber = rand.Next(0, 1000);
                         Ball ball = new Ball(Ball.Colors.grey, 350.0f, "Ball" + rndNumber.ToString(), gameScene.mainBall.position, Ball.States.Boosted);
-                        ball.Launch(Utils.GetDirectionFromAngle(360 / (amount + 1) * (i + 1)), new Vector2(3.0f, 3.0f));
+                        ball.mover.Launch(Utils.GetDirectionFromAngle(324 / (amount + 1) * (i + 1)), new Vector2(3.0f, 3.0f));
                     }
                 }
             }

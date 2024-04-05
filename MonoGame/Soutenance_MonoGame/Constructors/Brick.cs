@@ -31,11 +31,12 @@ namespace Soutenance_MonoGame
             purple
         }
 
-        protected int life;
+        public int life;
         protected int maxLife;
         protected Collider col;
         protected BrickTypes type;
         protected Colors color;
+        protected List<Entity> googlyEyes = new List<Entity>();
 
         public Brick(BrickTypes pType, Colors pColor, string pName)
         {
@@ -76,6 +77,8 @@ namespace Soutenance_MonoGame
         public void TakeDamages(int amount)
         {
             life = Math.Clamp(life - amount, 0, maxLife);
+            if (googlyEyes.Count != 0)
+                googlyEyes[life].Destroy();
 
             if (life <= 0)
                 Die();

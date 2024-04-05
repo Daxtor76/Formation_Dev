@@ -15,6 +15,7 @@ namespace Soutenance_MonoGame
         Dictionary<string, Texture2D> ballTextures = new Dictionary<string, Texture2D>();
         Dictionary<string, Texture2D> bricksTextures = new Dictionary<string, Texture2D>();
         Dictionary<string, Texture2D> powerupsTextures = new Dictionary<string, Texture2D>();
+        Dictionary<string, Texture2D> googleEyesTextures = new Dictionary<string, Texture2D>();
 
         Texture2D portalTexture;
 
@@ -24,6 +25,7 @@ namespace Soutenance_MonoGame
             ballTextures = LoadFromFolder("Balls");
             bricksTextures = LoadFromFolder("Bricks");
             powerupsTextures = LoadFromFolder("PowerUps");
+            googleEyesTextures = LoadFromFolder("FXs/GooglyEyes");
 
             portalTexture = MainGame.content.Load<Texture2D>($"Teleporter/portal_spritesheet");
 
@@ -80,6 +82,12 @@ namespace Soutenance_MonoGame
         {
             Random r = new Random();
             return bricksTextures[textureName] != null ? bricksTextures[textureName] : bricksTextures.ElementAt(r.Next(0, bricksTextures.Count)).Value;
+        }
+
+        public Texture2D GetGoogleEyesTexture(string textureName)
+        {
+            Random r = new Random();
+            return googleEyesTextures[textureName] != null ? googleEyesTextures[textureName] : googleEyesTextures.ElementAt(r.Next(0, googleEyesTextures.Count)).Value;
         }
     }
 }

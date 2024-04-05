@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "DIIN3KQN/sQYbPf5hpw4IbXMMz4OOF4Qu68evEmQYkg0FF6+S99zHC9tiuUqTiTeXYDKqMwPyip7UGL+ZeA4iQ==",
+  "dgSpecHash": "bdla5zKPhtvTz9VlFgbHqcC2OAC8oJ4PZcXK8LMU/Te7D9/BMPm8hUMJh7kA0K46WWOyCx1lP/XIrq+R312uXQ==",
   "success": true,
   "projectFilePath": "E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\Soutenance_MonoGame.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Quentin\\.nuget\\packages\\monogame.content.builder.task\\3.8.1.303\\monogame.content.builder.task.3.8.1.303.nupkg.sha512",
-    "C:\\Users\\Quentin\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.1.303\\monogame.framework.desktopgl.3.8.1.303.nupkg.sha512"
+    "C:\\Users\\Quentin\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.1.303\\monogame.framework.desktopgl.3.8.1.303.nupkg.sha512",
+    "C:\\Users\\Quentin\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }

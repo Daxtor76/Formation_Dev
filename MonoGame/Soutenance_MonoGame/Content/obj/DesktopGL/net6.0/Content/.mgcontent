@@ -63,6 +63,8 @@
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Bricks/powerupbrick_purple_0hit.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Bricks/powerupbrick_red_0hit.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Bricks/powerupbrick_yellow_0hit.png</File>
+    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/FXs/GooglyEyes/background.png</File>
+    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/FXs/GooglyEyes/eye.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_green.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_grey.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_orange.png</File>
@@ -73,6 +75,8 @@
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Teleporter/portal_spritesheet.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

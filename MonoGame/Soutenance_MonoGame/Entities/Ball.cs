@@ -81,7 +81,7 @@ namespace Soutenance_MonoGame
 
                 if (ServiceLocator.GetService<IInputManager>().KeyPressed(Keys.Space))
                 {
-                    Launch(new Vector2(0, -1), new Vector2(3.0f, 3.0f));
+                    mover.Launch(new Vector2(0, -1), new Vector2(3.0f, 3.0f));
                     state = States.Normal;
                 }
             }
@@ -228,12 +228,6 @@ namespace Soutenance_MonoGame
 
         public void OnCollision(List<Collider> others)
         {
-        }
-
-        public void Launch(Vector2 direction, Vector2 accel)
-        {
-            mover.accel = accel;
-            mover.direction = direction;
         }
     }
 }
