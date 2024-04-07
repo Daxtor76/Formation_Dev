@@ -28,11 +28,6 @@ namespace Soutenance_MonoGame
 
         public override void Load()
         {
-            new CollisionManager();
-            new SpritesManager();
-            new KeyboardInputManager();
-            new LevelManager();
-
             paddle = new Paddle(Paddle.Colors.grey, 400.0f, "Paddle");
             mainBall = new Ball(350.0f, "Ball");
 
@@ -45,8 +40,6 @@ namespace Soutenance_MonoGame
             Teleporter tp2 = new Teleporter(new Vector2(1000, 500), Utils.DegreesToRad(45.0f), "Portal3", new Vector2(-1, -1), "Portal2", true, new List<string> {"Portal4"});
             Teleporter tp3 = new Teleporter(new Vector2(100, 100), Utils.DegreesToRad(45.0f), "Portal4", new Vector2(1, 1), "Portal3", false, new List<string> {"Portal2"});
             Teleporter tp4 = new Teleporter(new Vector2(1000, 100), Utils.DegreesToRad(45.0f), "Portal1", new Vector2(-1, 1), "Portal4", false, new List<string> {"Portal1"});
-
-            ServiceLocator.GetService<ILevelManager>().ChangeLevel(1);
 
             victoryManager = new VictoryManager();
 

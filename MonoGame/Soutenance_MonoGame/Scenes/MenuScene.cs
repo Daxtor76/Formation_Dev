@@ -29,9 +29,10 @@ namespace Soutenance_MonoGame
         {
             base.Update(gameTime);
 
-            if(Keyboard.GetState().IsKeyDown(Keys.Space))
+            if(ServiceLocator.GetService<IInputManager>().KeyPressed(Keys.Space))
             {
                 ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(GameScene));
+                ServiceLocator.GetService<ILevelManager>().ChangeLevel(1);
             }
         }
 

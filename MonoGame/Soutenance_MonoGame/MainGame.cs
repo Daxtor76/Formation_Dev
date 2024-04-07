@@ -37,7 +37,11 @@ namespace Soutenance_MonoGame
         {
             // TODO: Add your initialization logic here
             new EntityManager();
+            new CollisionManager();
+            new KeyboardInputManager();
             new SceneManager();
+            new SpritesManager();
+            new LevelManager();
 
             base.Initialize();
         }
