@@ -28,7 +28,8 @@ namespace Soutenance_MonoGame
             layer = "FXs";
             img = ServiceLocator.GetService<ISpritesManager>().GetGoogleEyesTexture("background");
             eye = ServiceLocator.GetService<ISpritesManager>().GetGoogleEyesTexture("eye");
-            size = new Vector2(img.Width, img.Height);
+            baseSize = new Vector2(img.Width, img.Height);
+            size = baseSize * scale;
             position = parent.GetCenterPosition();
             id = pId;
             eyePos = Vector2.Zero;

@@ -20,12 +20,6 @@ namespace Soutenance_MonoGame
 
         public virtual void Load()
         {
-            Start();
-        }
-
-        public virtual void Start()
-        {
-            ServiceLocator.GetService<IEntityManager>().StartEntities();
         }
 
         public virtual void Update(GameTime gameTime)

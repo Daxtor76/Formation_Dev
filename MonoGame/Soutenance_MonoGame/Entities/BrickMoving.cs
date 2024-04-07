@@ -20,7 +20,11 @@ namespace Soutenance_MonoGame
             CreateEyesPerLifepoints(maxLife);
             mover = new Mover(1.0f);
             point2 = pPoint2;
+
+            Random rand = new Random();
             currentTimer = 0.0f;
+
+            Start();
         }
 
         public override void Start()

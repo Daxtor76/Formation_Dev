@@ -15,12 +15,21 @@ namespace Soutenance_MonoGame
     {
         public enum PowerUpTypes
         {
-            multiball
+            multiball,
+            paddleScale,
+            paddleSpeed
+        }
+        public enum PowerUpStates
+        {
+            Spawn,
+            Idle
         }
 
         public PowerUpTypes type;
+        public PowerUpStates state;
         public Collider col;
         public Mover mover;
+        public Animator animator;
         public delegate void Effect(int amount = 0);
         public Effect powerUpEffect;
 
@@ -30,10 +39,12 @@ namespace Soutenance_MonoGame
             int rndNumber = rand.Next(0, 1000);
 
             type = pType;
+            state = PowerUpStates.Spawn;
             name = "PowerUp" + rndNumber.ToString();
             layer = "PowerUp";
             img = ServiceLocator.GetService<ISpritesManager>().GetPowerUpTexture($"powerup_{pType}_spritesheet");
-            size = new Vector2(30.0f, img.Height);
+            baseSize = new Vector2(30.0f, img.Height);
+            size = baseSize * scale;
             position = new Vector2(pPos.X - size.X * 0.5f, pPos.Y - size.Y);
 
             switch (pType)
@@ -41,18 +52,61 @@ namespace Soutenance_MonoGame
                 case PowerUpTypes.multiball:
                     powerUpEffect = MultiBallEffect;
                     break;
+                case PowerUpTypes.paddleScale:
+                    powerUpEffect = PaddleScaleEffect;
+                    break;
+                case PowerUpTypes.paddleSpeed:
+                    powerUpEffect = PaddleSpeedEffect;
+                    break;
             }
 
             col = new Collider(this, scale, OnCollisionEnter, OnCollision);
             mover = new Mover(100.0f);
+            animator = new Animator(size);
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
+
+            Start();
+        }
+
+        public override void Start()
+        {
+            base.Start();
+
+            Animation spawnAnim = new Animation(0, 5, 0.1f, false);
+            Animation idleAnim = new Animation(6, 7, 0.1f, true);
+            animator.anims.Add("Spawn", spawnAnim);
+            animator.anims.Add("Idle", idleAnim);
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
             mover.Move(gameTime, this, new Vector2(0, 1), new Vector2(1, 1));
+
+            if (animator.anims["Spawn"].isOver)
+                state = PowerUpStates.Idle;
+
+            sourceRect = animator.ReadAnim(gameTime, state.ToString());
+        }
+
+        public void PaddleSpeedEffect(int amount)
+        {
+            GameScene gameScene = ServiceLocator.GetService<ISceneManager>().GetCurrentScene() as GameScene;
+            if (gameScene.paddle != null)
+            {
+                gameScene.paddle.mover.speed *= 1.25f;
+            }
+        }
+
+        public void PaddleScaleEffect(int amount)
+        {
+            GameScene gameScene = ServiceLocator.GetService<ISceneManager>().GetCurrentScene() as GameScene;
+            if (gameScene.paddle != null)
+            {
+                Vector2 currentPaddleScale = gameScene.paddle.scale;
+                gameScene.paddle.SetScale(new Vector2(currentPaddleScale.X * 1.25f, currentPaddleScale.Y));
+            }
         }
 
         public void MultiBallEffect(int amount)

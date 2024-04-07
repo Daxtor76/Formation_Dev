@@ -9,6 +9,8 @@
 - Visuel: googly eyes (1 per brick life) -> ok
 - Gameplay: nouvelle entité - Moving brique -> ok
 - Visuel: effects / animations -> ok
+- Gameplay: power up - agrandir le paddle -> ok + gestion du scale des entities
+- Gameplay: power up - paddle speed -> ok
 - Gameplay: victoire
 - Gameplay: défaite
 - UI: buttons
@@ -27,7 +29,5 @@
 
 Bonus:
 - Save
-- Gameplay: power up - agrandir le paddle
-- Gameplay: power up - paddle speed
 - Gameplay: nouvelle entité - Paddle shooter
 - Gameplay: nouvelle entité - Cycle brick (fade in / fade out)

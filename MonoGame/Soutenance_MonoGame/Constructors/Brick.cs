@@ -50,7 +50,8 @@ namespace Soutenance_MonoGame
             type = pType;
             color = pColor;
             img = ServiceLocator.GetService<ISpritesManager>().GetBrickTexture(pType + "_" + pColor + "_" + (maxLife - life).ToString() + "hit");
-            size = new Vector2(img.Width, img.Height);
+            baseSize = new Vector2(img.Width, img.Height);
+            size = baseSize * scale;
             position = Vector2.Zero;
 
             col = new Collider(this, scale, OnCollisionEnter, OnCollision);

@@ -45,6 +45,8 @@ namespace Soutenance_MonoGame
                     float yPos = 50 + element.GetSize().Y * y;
                     element.SetPosition(new Vector2(xPos, yPos));
 
+                    element.Start();
+
                     grid.Add(new Vector2(i, y), element);
                 }
             }

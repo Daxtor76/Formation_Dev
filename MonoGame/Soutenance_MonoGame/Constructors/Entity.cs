@@ -15,6 +15,7 @@ namespace Soutenance_MonoGame
     {
         public Vector2 position = new Vector2();
         public Vector2 size = new Vector2();
+        public Vector2 baseSize = new Vector2();
         public Vector2 scale = new Vector2(1, 1);
         public float rotation = 0.0f;
         public bool enabled = true;
@@ -34,8 +35,8 @@ namespace Soutenance_MonoGame
             sourceRect = new Rectangle(
                 0,
                 0,
-                (int)size.X,
-                (int)size.Y);
+                (int)baseSize.X,
+                (int)baseSize.Y);
         }
 
         public virtual void Draw()
@@ -53,6 +54,11 @@ namespace Soutenance_MonoGame
         public void SetPosition(Vector2 pPosition)
         {
             position = pPosition;
+        }
+        public void SetScale(Vector2 pScale)
+        {
+            scale = pScale;
+            size = baseSize * pScale;
         }
         public Vector2 GetPosition()
         {

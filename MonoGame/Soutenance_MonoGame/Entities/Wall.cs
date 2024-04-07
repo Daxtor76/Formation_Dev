@@ -17,7 +17,8 @@ namespace Soutenance_MonoGame
         {
             name = pName;
             layer = "Wall";
-            size = pSize;
+            baseSize = pSize;
+            size = baseSize * scale;
             position = pPos;
             col = new Collider(this, scale, OnCollisionEnter, OnCollision);
 
@@ -29,7 +30,8 @@ namespace Soutenance_MonoGame
             name = pName;
             layer = "Wall";
             img = pImg;
-            size = new Vector2(img.Width, img.Height);
+            baseSize = new Vector2(img.Width, img.Height);
+            size = baseSize * scale;
             position = pPos;
             col = new Collider(this, scale, OnCollisionEnter, OnCollision);
 

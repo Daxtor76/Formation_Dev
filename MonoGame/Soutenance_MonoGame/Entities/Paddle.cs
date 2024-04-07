@@ -14,7 +14,7 @@ using static Soutenance_MonoGame.Ball;
 
 namespace Soutenance_MonoGame
 {
-    public class Paddle : Entity, ICollidable
+    public class Paddle : Entity, ILevelElement, ICollidable
     {
         public enum Colors
         {
@@ -26,19 +26,21 @@ namespace Soutenance_MonoGame
             yellow
         }
         Collider col;
-        Mover mover;
+        public Mover mover;
 
         public Paddle(Colors pColor, float pSpeed, string pName)
         {
             name = pName;
             layer = "Paddle";
+            scale = new Vector2(1.0f, 1.0f);
             img = ServiceLocator.GetService<ISpritesManager>().GetPaddleTexture("paddle_" + pColor);
-            size = new Vector2(img.Width, img.Height);
+            baseSize = new Vector2(img.Width, img.Height);
+            size = baseSize * scale;
             position = GetSpawnPosition();
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
 
-            col = new Collider(this, scale, OnCollisionEnter, OnCollision);
+            col = new Collider(this, new Vector2(1.0f, 1.0f), OnCollisionEnter, OnCollision);
             mover = new Mover(pSpeed);
         }
 
@@ -65,6 +67,10 @@ namespace Soutenance_MonoGame
         }
 
         public void OnCollision(List<Collider> others)
+        {
+        }
+
+        public void Unload()
         {
         }
     }

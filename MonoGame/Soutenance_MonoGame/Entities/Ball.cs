@@ -44,7 +44,8 @@ namespace Soutenance_MonoGame
             name = pName;
             layer = "Ball";
             img = ServiceLocator.GetService<ISpritesManager>().GetBallTexture("ball_" + Colors.red);
-            size = new Vector2(img.Width, img.Height);
+            baseSize = new Vector2(img.Width, img.Height);
+            size = baseSize * scale;
             position = GetSpawnPosition();
             state = States.Preparation;
 

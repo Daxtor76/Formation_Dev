@@ -22,7 +22,8 @@ namespace Soutenance_MonoGame
             name = pName;
             layer = "Teleporter";
             img = ServiceLocator.GetService<ISpritesManager>().GetPortalTexture();
-            size = new Vector2(53.3f, 92.0f);
+            baseSize = new Vector2(53.3f, 92.0f);
+            size = baseSize * scale;
             position = pPos;
             rotation = pRotation;
             destinationName = pdestinationName;
@@ -32,13 +33,15 @@ namespace Soutenance_MonoGame
 
             col = new Collider(this, new Vector2(0.5f, 0.5f), OnCollisionEnter, OnCollision);
             animator = new Animator(size);
+
+            Start();
         }
 
         public override void Start()
         {
             base.Start();
 
-            Animation idleAnim = new Animation(0, 5, 0.8f, true);
+            Animation idleAnim = new Animation(0, 5, 0.4f, true);
             animator.anims.Add("Idle", idleAnim);
         }
 

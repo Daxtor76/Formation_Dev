@@ -34,18 +34,15 @@ namespace Soutenance_MonoGame
             {
                 if (anim.isLoop)
                 {
-                    //self.frame = (self.frame + 1)%animation.framesCount;
-                    frame = (frame + 1) % (anim.frameCount + 1);
+                    frame = (int)anim.frames.X + (frame + 1) % (anim.frameCount + 1);
                 }
                 else
                 {
-                    /*if self.frame < animation.framesCount - 1 then
-                 self.frame = self.frame + 1;
-             else
-                         animation.isOver = true;
-                     end*/
+                    if (frame < anim.frameCount - 1)
+                        frame = (int)anim.frames.X + (frame + 1);
+                    else
+                        anim.isOver = true;
                 }
-
                 anim.currentTimer = anim.duration / anim.frameCount;
             }
 
@@ -55,33 +52,5 @@ namespace Soutenance_MonoGame
             (int)size.X,
             (int)size.Y);
         }
-
-        /*
-         * 
-
-function _Entity:GetCurrentQuadToDisplay(animation)
-    return love.graphics.newQuad((animation.size.x * animation.frames.x) + (animation.size.x * self.frame), 0, animation.size.x, animation.size.y, self.spritesheet);
-end
-
-function _Entity:ResetAnim(animation)
-    animation:ResetTimer();
-    self.frame = 0;
-end
-         * 
-function _Entity:UpdateAnim(deltaTime, animation)
-    animation.currentTimer = animation.currentTimer - deltaTime;
-    if animation.currentTimer <= 0 then
-        if animation.loop then
-            self.frame = (self.frame + 1)%animation.framesCount;
-        else
-            if self.frame < animation.framesCount - 1 then
-                self.frame = self.frame + 1;
-            else
-                animation.isOver = true;
-            end
-        end
-        animation.currentTimer = animation.duration / animation.framesCount;
-    end
-end*/
     }
 }

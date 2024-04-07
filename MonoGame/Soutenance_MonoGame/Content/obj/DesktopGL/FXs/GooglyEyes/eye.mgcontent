@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/FXs/GooglyEyes/eye.png</SourceFile>
-  <SourceTime>2024-03-05T21:28:00.064724+01:00</SourceTime>
+  <SourceTime>2024-04-05T12:16:40.0320006+02:00</SourceTime>
   <DestFile>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/bin/DesktopGL/FXs/GooglyEyes/eye.xnb</DestFile>
-  <DestTime>2024-04-05T11:58:20.1390531+02:00</DestTime>
+  <DestTime>2024-04-07T11:54:36.6122767+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

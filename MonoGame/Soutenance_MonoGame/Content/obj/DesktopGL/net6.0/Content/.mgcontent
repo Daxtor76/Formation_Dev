@@ -72,9 +72,13 @@
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_red.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Paddle/paddle_yellow.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/PowerUps/powerup_multiball_spritesheet.png</File>
+    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/PowerUps/powerup_paddleScale_spritesheet.png</File>
+    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/PowerUps/powerup_paddleSpeed_spritesheet.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Teleporter/portal_spritesheet.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -39,15 +39,6 @@ namespace Soutenance_MonoGame
             return list;
         }
 
-        public void StartEntities()
-        {
-            foreach (Entity entity in entities.Values)
-            {
-                if (entity.enabled)
-                    entity.Start();
-            }
-        }
-
         public void UpdateEntities(GameTime gameTime)
         {
             foreach(Entity entity in entities.Values)

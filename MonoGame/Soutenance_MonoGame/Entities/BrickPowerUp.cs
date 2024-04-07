@@ -21,7 +21,9 @@ namespace Soutenance_MonoGame
 
         public override void Die()
         {
-            DropPowerUp(PowerUp.PowerUpTypes.multiball);
+            Array powerUpTypes = Enum.GetValues<PowerUp.PowerUpTypes>();
+            Random rand = new Random();
+            DropPowerUp((PowerUp.PowerUpTypes)powerUpTypes.GetValue(rand.Next(0, powerUpTypes.Length - 1)));
             base.Die();
         }
     }

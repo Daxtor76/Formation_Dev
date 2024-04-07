@@ -21,8 +21,6 @@ namespace Soutenance_MonoGame
         CallBackOthersEffect collisionEnterEffect;
         CallBackOthersEffect collisionEnterOthersEffect;
 
-        Texture2D texture;
-
         public Collider(Entity pParent, Vector2 pScale, CallBackOthersEffect pCollisionEffect = null, CallBackOthersEffect pContinuousCollisionEffect = null)
         {
             parent = pParent;
@@ -32,17 +30,19 @@ namespace Soutenance_MonoGame
             collisionEnterEffect = pCollisionEffect;
             collisionEnterOthersEffect = pContinuousCollisionEffect;
 
-            texture = new Texture2D(MainGame.graphics.GraphicsDevice, 1, 1);
-            texture.SetData(new[] { Color.Green });
+            img = new Texture2D(MainGame.graphics.GraphicsDevice, 1, 1);
+            img.SetData(new[] { Color.Green });
 
             ServiceLocator.GetService<ICollisionManager>().AddCollider(this);
         }
 
         public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
             if (parent != null)
             {
-                position = parent.position + parent.size * scale - size * scale;
+                position = parent.position + parent.size * 0.5f - size * 0.5f;
+                size = parent.size * scale;
             }
         }
 
@@ -50,17 +50,12 @@ namespace Soutenance_MonoGame
         {
             if (MainGame.debugMode)
             {
-                Rectangle sourceRect = new Rectangle(
-                    0,
-                    0,
-                    (int)size.X,
-                    (int)size.Y);
                 Rectangle destRect = new Rectangle(
                     (int)position.X,
                     (int)position.Y,
                     (int)size.X,
                     (int)size.Y);
-                MainGame.spriteBatch.Draw(texture, destRect, sourceRect, new Color(Color.Green, 100), 0.0f, Vector2.Zero, SpriteEffects.None, 0.0f);
+                MainGame.spriteBatch.Draw(img, destRect, sourceRect, new Color(Color.Green, 100), 0.0f, Vector2.Zero, SpriteEffects.None, 0.0f);
             }
         }
 
