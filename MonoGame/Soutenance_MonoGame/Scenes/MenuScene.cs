@@ -9,6 +9,7 @@ using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection.Emit;
+using Vector2 = System.Numerics.Vector2;
 
 namespace Soutenance_MonoGame
 {
@@ -22,7 +23,15 @@ namespace Soutenance_MonoGame
         {
             base.Load();
 
+            Button button = new Button(new Vector2(100.0f, 100.0f), Button.Colors.blue, "button1", OnSelectLevelButtonClick);
+            Button button2 = new Button(new Vector2(1000.0f, 100.0f), Button.Colors.green, "button2", OnSelectLevelButtonClick);
+
             Debug.WriteLine($"{name} scene has been loaded.");
+        }
+
+        private void OnSelectLevelButtonClick()
+        {
+            Debug.WriteLine("GO TO SELECT LEVEL SCREEN");
         }
 
         public override void Update(GameTime gameTime)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,6 +12,12 @@ namespace Soutenance_MonoGame
 {
     public static class Utils
     {
+        public static Vector2 GetMousePosition()
+        {
+            Debug.WriteLine(new Vector2(Mouse.GetState().X, Mouse.GetState().Y));
+            return new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+        }
+
         public static float DegreesToRad(float angle)
         {
             return (float)(angle * Math.PI / 180);

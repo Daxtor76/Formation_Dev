@@ -39,9 +39,9 @@ namespace Soutenance_MonoGame
             new EntityManager();
             new CollisionManager();
             new KeyboardInputManager();
-            new SceneManager();
             new SpritesManager();
             new LevelManager();
+            new SceneManager();
 
             base.Initialize();
         }
