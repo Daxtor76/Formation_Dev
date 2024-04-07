@@ -52,5 +52,10 @@ namespace Soutenance_MonoGame
             (int)size.X,
             (int)size.Y);
         }
+
+        public void Unload()
+        {
+            anims.Clear();
+        }
     }
 }

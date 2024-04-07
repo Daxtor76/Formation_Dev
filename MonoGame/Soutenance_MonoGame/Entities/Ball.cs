@@ -41,7 +41,7 @@ namespace Soutenance_MonoGame
 
         public Ball(float pSpeed, string pName)
         {
-            name = pName;
+            SetName(pName);
             layer = "Ball";
             img = ServiceLocator.GetService<ISpritesManager>().GetBallTexture("ball_" + Colors.red);
             baseSize = new Vector2(img.Width, img.Height);
@@ -57,10 +57,11 @@ namespace Soutenance_MonoGame
 
         public Ball(Colors pColor, float pSpeed, string pName, Vector2 pPosition, States pState)
         {
-            name = pName;
+            SetName(pName);
             layer = "Ball";
             img = ServiceLocator.GetService<ISpritesManager>().GetBallTexture("ball_" + pColor);
-            size = new Vector2(img.Width, img.Height);
+            baseSize = new Vector2(img.Width, img.Height);
+            size = baseSize * scale;
             position = pPosition;
 
             state = pState;
@@ -75,10 +76,11 @@ namespace Soutenance_MonoGame
         {
             base.Update(gameTime);
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Paddle paddle = ServiceLocator.GetService<IEntityManager>().GetEntity("Paddle") as Paddle;
 
             if (state == States.Preparation)
             {
-                mover.FollowAbove(this, ServiceLocator.GetService<IEntityManager>().GetEntity("Paddle"));
+                mover.FollowAbove(this, paddle);
 
                 if (ServiceLocator.GetService<IInputManager>().KeyPressed(Keys.Space))
                 {
@@ -92,7 +94,6 @@ namespace Soutenance_MonoGame
 
                 if (ServiceLocator.GetService<IInputManager>().KeyPressed(Keys.Space))
                 {
-                    Paddle paddle = ServiceLocator.GetService<IEntityManager>().GetEntity("Paddle") as Paddle;
                     canBeBoosted = GetDistance(paddle) <= paddle.size.X * 0.5f + size.X * 0.5f + 100.0f;
 
                     if (canBeBoosted)
@@ -114,17 +115,14 @@ namespace Soutenance_MonoGame
 
             foreach (Collider other in others)
             {
-                if (!col.previousOthers.Contains(other.parent.name))
+                if (!col.previousOthers.Contains(other.parent.GetName()))
                 {
                     string side = col.GetCollisionSide(other);
-
-                    if (other.parent is IDamageable && other.parent.layer != "PowerUp")
-                        Hit(other.parent as IDamageable);
 
                     if (other.parent.layer == "Paddle")
                     {
                         newDir = GetNewDirFromCollisionOnPaddle(other);
-                        ActivateTeleporters();
+                        ActivateTeleportersColliders();
                     }
                     else if (other.parent.layer == "Teleporter")
                         Teleport(other);
@@ -133,17 +131,20 @@ namespace Soutenance_MonoGame
                         if (side == "bottom")
                             LoseLife();
 
-                        ActivateTeleporters();
+                        ActivateTeleportersColliders();
                         newDir += GetNewDirFromCollision(side);
                         if (side == "top")
                             state = States.Normal;
                     }
                     else if (other.parent.layer == "Brick")
                     {
-                        ActivateTeleporters();
+                        ActivateTeleportersColliders();
                         if (state == States.Normal)
                             newDir += GetNewDirFromCollision(side);
                     }
+
+                    if (other.parent is IDamageable)
+                        Hit(other.parent as IDamageable);
                 }
             }
             if (newDir != mover.direction && newDir != Vector2.Zero)
@@ -163,16 +164,17 @@ namespace Soutenance_MonoGame
         {
             Teleporter tp = other.parent as Teleporter;
             Teleporter destTp = ServiceLocator.GetService<IEntityManager>().GetEntity(tp.destinationName) as Teleporter;
-            destTp.col.active = false;
+            destTp.col.SetActive(false);
             position = destTp.position;
             mover.direction = Vector2.Normalize(destTp.newDirection);
         }
 
-        void ActivateTeleporters()
+        void ActivateTeleportersColliders()
         {
             foreach (Teleporter tp in ServiceLocator.GetService<IEntityManager>().GetEntitiesOfType<Teleporter>())
             {
-                tp.col.active = true;
+                if (tp.IsActive())
+                    tp.col.SetActive(true);
             }
         }
 
@@ -229,6 +231,13 @@ namespace Soutenance_MonoGame
 
         public void OnCollision(List<Collider> others)
         {
+        }
+
+        public override void Unload()
+        {
+            mover = null;
+
+            SetEnabled(false);
         }
     }
 }

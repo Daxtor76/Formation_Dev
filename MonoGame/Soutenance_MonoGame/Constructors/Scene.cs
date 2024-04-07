@@ -36,6 +36,11 @@ namespace Soutenance_MonoGame
 
         public virtual void Unload()
         {
+            ServiceLocator.GetService<IEntityManager>().UnloadEntities();
+            ServiceLocator.GetService<ICollisionManager>().CleanColliders();
+
+            ServiceLocator.GetService<IEntityManager>().CleanEntities();
+            ServiceLocator.GetService<ICollisionManager>().CleanColliders();
         }
     }
 }

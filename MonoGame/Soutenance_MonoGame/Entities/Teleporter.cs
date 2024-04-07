@@ -11,23 +11,27 @@ using System.Threading.Tasks;
 
 namespace Soutenance_MonoGame
 {
-    public class Teleporter : Entity, ILevelElement, ICollidable
+    public class Teleporter : Entity, ICollidable
     {
         public string destinationName;
         public Vector2 newDirection;
         public Collider col;
+        public List<string> othersToActivate;
         Animator animator;
-        public Teleporter(Vector2 pPos, float pRotation, string pdestinationName, Vector2 pNewDirection, string pName)
+        public Teleporter(Vector2 pPos, float pRotation, string pdestinationName, Vector2 pNewDirection, string pName, bool pActive, List<string> pOthersToActivate = null)
         {
-            name = pName;
+            SetName(pName);
             layer = "Teleporter";
             img = ServiceLocator.GetService<ISpritesManager>().GetPortalTexture();
             baseSize = new Vector2(53.3f, 92.0f);
             size = baseSize * scale;
             position = pPos;
             rotation = pRotation;
+            SetActive(pActive);
             destinationName = pdestinationName;
             newDirection = pNewDirection;
+
+            othersToActivate = pOthersToActivate;
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
 
@@ -69,11 +73,38 @@ namespace Soutenance_MonoGame
 
         public void OnCollisionEnter(List<Collider> others)
         {
+            foreach (Collider other in others)
+            {
+                if (other.parent.layer == "Ball")
+                {
+                    if (othersToActivate != null)
+                    {
+                        ActivateOthers();
+                        SetActive(false);
+                        col.SetActive(false);
+                    }
+                }
+            }
         }
 
-        public void Unload()
+        public void ActivateOthers()
         {
-            enabled = false;
+            foreach (string tpName in othersToActivate)
+            {
+                Teleporter tp = ServiceLocator.GetService<IEntityManager>().GetEntity(tpName) as Teleporter;
+                tp.SetActive(true);
+                tp.col.SetActive(true);
+            }
+        }
+
+        public override void Unload()
+        {
+            othersToActivate.Clear();
+
+            animator.Unload();
+            animator = null;
+
+            base.Unload();
         }
     }
 }

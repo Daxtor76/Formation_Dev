@@ -9,31 +9,31 @@ namespace Soutenance_MonoGame
 {
     sealed class EntityManager : IEntityManager
     {
-        Dictionary<string, Entity> entities = new Dictionary<string, Entity>();
+        Dictionary<string, IEntity> entities = new Dictionary<string, IEntity>();
 
         public EntityManager()
         {
             ServiceLocator.RegisterService<IEntityManager>(this);
         }
 
-        public void AddEntity(Entity entity)
+        public void AddEntity(IEntity entity)
         {
-            entities.Add(entity.name, entity);
+            entities.Add(entity.GetName(), entity);
         }
 
-        public Entity GetEntity(string name)
+        public IEntity GetEntity(string name)
         {
             return entities[name];
         }
 
-        public List<Entity> GetEntitiesOfType<T>()
+        public List<T> GetEntitiesOfType<T>()
         {
-            List<Entity> list = new List<Entity>();
+            List<T> list = new List<T>();
 
-            foreach (Entity entity in entities.Values)
+            foreach (IEntity entity in entities.Values)
             {
                 if (entity.GetType() == typeof(T))
-                    list.Add(entity);
+                    list.Add((T)entity);
             }
 
             return list;
@@ -43,7 +43,7 @@ namespace Soutenance_MonoGame
         {
             foreach(Entity entity in entities.Values)
             {
-                if (entity.enabled)
+                if (entity.IsEnabled() && entity.IsActive())
                     entity.Update(gameTime);
             }
         }
@@ -52,16 +52,24 @@ namespace Soutenance_MonoGame
         {
             foreach(Entity entity in entities.Values)
             {
-                if (entity.enabled)
+                if (entity.IsEnabled() && entity.IsActive())
                     entity.Draw();
+            }
+        }
+
+        public void UnloadEntities()
+        {
+            foreach (IEntity entity in entities.Values)
+            {
+                entity.Unload();
             }
         }
 
         public void CleanEntities()
         {
-            foreach (KeyValuePair<string, Entity> kvp in entities)
+            foreach (KeyValuePair<string, IEntity> kvp in entities)
             {
-                if (!kvp.Value.enabled)
+                if (!kvp.Value.IsEnabled())
                 {
                     entities.Remove(kvp.Key);
                 }

@@ -12,7 +12,7 @@ using System.Data;
 
 namespace Soutenance_MonoGame
 {
-    public abstract class Brick : Entity, ICollidable, ILevelElement
+    public abstract class Brick : Entity, ICollidable
     {
         public enum BrickTypes
         {
@@ -45,7 +45,7 @@ namespace Soutenance_MonoGame
 
         public Brick(BrickTypes pType, Colors pColor, string pName)
         {
-            name = pName;
+            SetName(pName);
             layer = "Brick";
             type = pType;
             color = pColor;
@@ -112,12 +112,17 @@ namespace Soutenance_MonoGame
 
         public virtual void Die()
         {
-            Destroy();
+            Unload();
         }
 
-        public virtual void Unload()
+        public override void Unload()
         {
-            Destroy();
+            foreach (IEntity ge in googlyEyes)
+                ge.Unload();
+
+            googlyEyes.Clear();
+
+            base.Unload();
         }
     }
 }

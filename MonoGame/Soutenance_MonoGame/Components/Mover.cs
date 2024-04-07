@@ -72,7 +72,7 @@ namespace Soutenance_MonoGame
 
         public void Follow(Entity entity, Entity target, Vector2 offset)
         {
-            entity.position = target.GetCenterPosition() - entity.size * 0.5f * entity.scale + offset;
+            entity.position = target.GetCenterPosition() - entity.size * 0.5f + offset;
         }
 
         public void ManageAccel(GameTime gameTime, Vector2 targetAccel)

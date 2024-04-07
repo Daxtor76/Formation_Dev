@@ -28,27 +28,30 @@ namespace Soutenance_MonoGame
             for (int i = 0; i < colliders.Count; i++)
             {
                 Collider col = colliders[i];
-                col.Update(gameTime);
-                for (int y = 0; y < colliders.Count; y++)
+                if (col.IsEnabled() && col.IsActive())
                 {
-                    Collider other = colliders[y];
-                    if (col != other)
+                    col.Update(gameTime);
+                    for (int y = 0; y < colliders.Count; y++)
                     {
-                        if (other.enabled && other.active)
+                        Collider other = colliders[y];
+                        if (col != other)
                         {
-                            if (col.IsColliding(other))
+                            if (other.IsEnabled() && other.IsActive())
                             {
-                                col.others.Add(other);
+                                if (col.IsColliding(other))
+                                {
+                                    col.others.Add(other);
+                                }
                             }
                         }
                     }
+                    if (col.others.Count != 0)
+                    {
+                        col.ApplyCollisions(col.others);
+                    }
+                    col.StorePreviousOthers();
+                    col.others.Clear();
                 }
-                if (col.others.Count != 0)
-                {
-                    col.ApplyCollisions(col.others);
-                }
-                col.StorePreviousOthers();
-                col.others.Clear();
             }
         }
 
@@ -56,7 +59,8 @@ namespace Soutenance_MonoGame
         {
             foreach (Collider col in colliders)
             {
-                col.Draw();
+                if (col.IsEnabled() && col.IsActive())
+                    col.Draw();
             }
         }
 
@@ -65,8 +69,9 @@ namespace Soutenance_MonoGame
             for (int i = colliders.Count - 1; i >= 0 ; i--)
             {
                 Collider col = colliders[i];
-                if (!col.parent.enabled || !col.enabled)
+                if (!col.parent.IsEnabled() || !col.IsEnabled())
                 {
+                    col.SetEnabled(false);
                     colliders.Remove(col);
                 }
             }

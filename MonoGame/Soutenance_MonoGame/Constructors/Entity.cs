@@ -8,22 +8,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mime;
 using System.Diagnostics;
+using Microsoft.Xna.Framework.Content;
 
 namespace Soutenance_MonoGame
 {
-    public abstract class Entity
+    public abstract class Entity : IEntity
     {
         public Vector2 position = new Vector2();
         public Vector2 size = new Vector2();
         public Vector2 baseSize = new Vector2();
         public Vector2 scale = new Vector2(1, 1);
         public float rotation = 0.0f;
-        public bool enabled = true;
-        public bool active = true;
-        public string name = "";
         public string layer = "";
         public Texture2D img;
         public Rectangle sourceRect;
+
+        bool enabled = true;
+        bool active = true;
+        string name = "";
 
         public virtual void Start()
         {
@@ -97,7 +99,42 @@ namespace Soutenance_MonoGame
 
         public virtual void Destroy()
         {
-            enabled = false;
+            SetEnabled(false);
+        }
+
+        public virtual void Unload()
+        {
+            SetEnabled(false);
+        }
+
+        public bool IsEnabled()
+        {
+            return enabled;
+        }
+
+        public void SetEnabled(bool value)
+        {
+            enabled = value;
+        }
+
+        public string GetName()
+        {
+            return name;
+        }
+
+        public void SetName(string name)
+        {
+            this.name = name;
+        }
+
+        public bool IsActive()
+        {
+            return active;
+        }
+
+        public void SetActive(bool value)
+        {
+            active = value;
         }
     }
 }

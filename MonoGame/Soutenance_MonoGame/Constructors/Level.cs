@@ -12,7 +12,7 @@ namespace Soutenance_MonoGame
     {
         public Vector2 gridSize = Vector2.Zero;
         public List<Teleporter> teleporters;
-        Dictionary<Vector2, ILevelElement> grid = new Dictionary<Vector2, ILevelElement>();
+        Dictionary<Vector2, IEntity> grid = new Dictionary<Vector2, IEntity>();
 
         public Level(int sizeX, int sizeY)
         {
@@ -29,7 +29,7 @@ namespace Soutenance_MonoGame
                     Array colors = Enum.GetValues<Brick.Colors>();
                     Random rand = new Random();
 
-                    ILevelElement element;
+                    IEntity element;
 
                     float randNb = rand.Next(0, 100);
                     if (randNb >= 25.0f)
@@ -54,7 +54,7 @@ namespace Soutenance_MonoGame
 
         public void Unload()
         {
-            foreach (ILevelElement element in grid.Values)
+            foreach (IEntity element in grid.Values)
             {
                 element.Unload();
             }

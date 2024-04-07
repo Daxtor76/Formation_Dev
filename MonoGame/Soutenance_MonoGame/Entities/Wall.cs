@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Soutenance_MonoGame
 {
-    public class Wall : Entity, ICollidable, ILevelElement
+    public class Wall : Entity, ICollidable
     {
         public Collider col;
 
         public Wall(Vector2 pPos, string pName, Vector2 pSize)
         {
-            name = pName;
+            SetName(pName);
             layer = "Wall";
             baseSize = pSize;
             size = baseSize * scale;
@@ -27,7 +27,7 @@ namespace Soutenance_MonoGame
 
         public Wall(Vector2 pPos, string pName, Texture2D pImg)
         {
-            name = pName;
+            SetName(pName);
             layer = "Wall";
             img = pImg;
             baseSize = new Vector2(img.Width, img.Height);
@@ -46,9 +46,9 @@ namespace Soutenance_MonoGame
         {
         }
 
-        public void Unload()
+        public override void Unload()
         {
-            enabled = false;
+            base.Unload();
         }
     }
 }

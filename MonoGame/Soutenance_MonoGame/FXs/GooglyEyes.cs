@@ -24,7 +24,7 @@ namespace Soutenance_MonoGame
             int rndNumber = rand.Next(0, 1000);
 
             parent = pParent;
-            name = pParent.name + "googly" + rndNumber.ToString();
+            SetName(pParent.GetName() + "googly" + rndNumber.ToString());
             layer = "FXs";
             img = ServiceLocator.GetService<ISpritesManager>().GetGoogleEyesTexture("background");
             eye = ServiceLocator.GetService<ISpritesManager>().GetGoogleEyesTexture("eye");
@@ -66,6 +66,14 @@ namespace Soutenance_MonoGame
                     (int)size.Y);
                 MainGame.spriteBatch.Draw(eye, destRect, sourceRect, Color.White, rotation, Vector2.Zero, SpriteEffects.None, 0.0f);
             }
+        }
+
+        public override void Unload()
+        {
+            mover = null;
+            parent = null;
+
+            base.Unload();
         }
     }
 }

@@ -40,7 +40,7 @@ namespace Soutenance_MonoGame
 
             type = pType;
             state = PowerUpStates.Spawn;
-            name = "PowerUp" + rndNumber.ToString();
+            SetName("PowerUp" + rndNumber.ToString());
             layer = "PowerUp";
             img = ServiceLocator.GetService<ISpritesManager>().GetPowerUpTexture($"powerup_{pType}_spritesheet");
             baseSize = new Vector2(30.0f, img.Height);
@@ -133,7 +133,7 @@ namespace Soutenance_MonoGame
         {
             foreach (Collider other in others)
             {
-                if (!col.previousOthers.Contains(other.parent.name))
+                if (!col.previousOthers.Contains(other.parent.GetName()))
                 {
                     string side = col.GetCollisionSide(other);
                     if (other.parent.layer == "Wall")
@@ -152,6 +152,18 @@ namespace Soutenance_MonoGame
 
         public void OnCollisionEnter(List<Collider> others)
         {
+        }
+
+        public override void Unload()
+        {
+            mover = null;
+
+            animator.Unload();
+            animator = null;
+
+            powerUpEffect = null;
+
+            base.Unload();
         }
     }
 }

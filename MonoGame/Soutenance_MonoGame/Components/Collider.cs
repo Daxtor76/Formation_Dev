@@ -29,6 +29,7 @@ namespace Soutenance_MonoGame
             position = pParent.position;
             collisionEnterEffect = pCollisionEffect;
             collisionEnterOthersEffect = pContinuousCollisionEffect;
+            SetActive(parent.IsActive());
 
             img = new Texture2D(MainGame.graphics.GraphicsDevice, 1, 1);
             img.SetData(new[] { Color.Green });
@@ -135,8 +136,19 @@ namespace Soutenance_MonoGame
             previousOthers.Clear();
             foreach (Collider col in others)
             {
-                previousOthers.Add(col.parent.name);
+                previousOthers.Add(col.parent.GetName());
             }
+        }
+
+        public override void Unload()
+        {
+            others.Clear();
+            previousOthers.Clear();
+            collisionEnterEffect = null;
+            collisionEnterOthersEffect = null;
+            parent = null;
+
+            base.Unload();
         }
     }
 }

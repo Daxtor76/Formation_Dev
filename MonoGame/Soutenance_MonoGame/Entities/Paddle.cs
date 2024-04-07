@@ -8,13 +8,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Soutenance_MonoGame.Scene;
 using System.Reflection.Metadata;
-using static Soutenance_MonoGame.Ball;
 
 namespace Soutenance_MonoGame
 {
-    public class Paddle : Entity, ILevelElement, ICollidable
+    public class Paddle : Entity, ICollidable
     {
         public enum Colors
         {
@@ -30,7 +28,7 @@ namespace Soutenance_MonoGame
 
         public Paddle(Colors pColor, float pSpeed, string pName)
         {
-            name = pName;
+            SetName(pName);
             layer = "Paddle";
             scale = new Vector2(1.0f, 1.0f);
             img = ServiceLocator.GetService<ISpritesManager>().GetPaddleTexture("paddle_" + pColor);
@@ -70,8 +68,11 @@ namespace Soutenance_MonoGame
         {
         }
 
-        public void Unload()
+        public override void Unload()
         {
+            mover = null;
+
+            base.Unload();
         }
     }
 }
