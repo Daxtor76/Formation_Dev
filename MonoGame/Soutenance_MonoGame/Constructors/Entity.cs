@@ -15,8 +15,8 @@ namespace Soutenance_MonoGame
     public abstract class Entity : IEntity
     {
         public Vector2 position = new Vector2();
-        public Vector2 size = new Vector2();
         public Vector2 baseSize = new Vector2();
+        public Vector2 size = new Vector2();
         public Vector2 scale = new Vector2(1, 1);
         public float rotation = 0.0f;
         public string layer = "";
@@ -83,7 +83,7 @@ namespace Soutenance_MonoGame
 
         public Vector2 GetCenterPosition()
         {
-            return position + size * 0.5f * scale;
+            return position + size * 0.5f;
         }
 
         public virtual Vector2 GetSpawnPosition()

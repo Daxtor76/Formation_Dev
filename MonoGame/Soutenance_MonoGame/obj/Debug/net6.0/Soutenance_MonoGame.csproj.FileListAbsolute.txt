@@ -184,3 +184,5 @@ E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\P
 E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\PowerUps\powerup_paddleSpeed_spritesheet.xnb
 E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\UI\Buttons\button_blue.xnb
 E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\UI\Buttons\button_green.xnb
+E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\UI\Fonts\bigFont.xnb
+E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\UI\Fonts\normalFont.xnb

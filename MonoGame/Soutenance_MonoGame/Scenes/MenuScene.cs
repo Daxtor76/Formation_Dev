@@ -23,8 +23,10 @@ namespace Soutenance_MonoGame
         {
             base.Load();
 
-            Button button = new Button(new Vector2(100.0f, 100.0f), Button.Colors.blue, "button1", OnSelectLevelButtonClick);
-            Button button2 = new Button(new Vector2(1000.0f, 100.0f), Button.Colors.green, "button2", OnSelectLevelButtonClick);
+            Button button = new Button(new Vector2(500.0f, 500.0f), Button.Colors.blue, "button1", "Play", Text.FontType.normal, Color.Red, OnSelectLevelButtonClick);
+            //Button button2 = new Button(new Vector2(1000.0f, 100.0f), Button.Colors.green, "button2", OnSelectLevelButtonClick);
+
+            Text text = new Text(new Vector2(100.0f, 100.0f), "Test", "text1", Text.FontType.big, Color.Blue);
 
             Debug.WriteLine($"{name} scene has been loaded.");
         }

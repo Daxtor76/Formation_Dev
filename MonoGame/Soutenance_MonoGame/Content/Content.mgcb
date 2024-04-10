@@ -889,3 +889,17 @@
 /processorParam:TextureFormat=Color
 /build:UI/Buttons/button_green.png
 
+#begin UI/Fonts/bigFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:UI/Fonts/bigFont.spritefont
+
+#begin UI/Fonts/normalFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:UI/Fonts/normalFont.spritefont
+

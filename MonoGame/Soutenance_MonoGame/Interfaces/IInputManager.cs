@@ -13,5 +13,7 @@ namespace Soutenance_MonoGame
         public Vector2 GetInputDirection();
         public bool KeyDown(Keys key);
         public bool KeyPressed(Keys key);
+        public bool MouseKeyDown(int buttonID);
+        public bool MouseKeyPressed(int buttonID);
     }
 }

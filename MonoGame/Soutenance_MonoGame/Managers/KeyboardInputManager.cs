@@ -11,9 +11,46 @@ namespace Soutenance_MonoGame
     public class KeyboardInputManager : IInputManager
     {
         bool pressed = false;
+        MouseState previousMouseState;
+        MouseState currentMouseState = Mouse.GetState();
         public KeyboardInputManager()
         {
             ServiceLocator.RegisterService<IInputManager>(this);
+        }
+
+        public bool MouseKeyDown(int buttonID)
+        {
+            if (buttonID == 1)
+            {
+                return Mouse.GetState().RightButton == ButtonState.Pressed;
+            }
+
+            return Mouse.GetState().LeftButton == ButtonState.Pressed;
+        }
+
+        public bool MouseKeyPressed(int buttonID)
+        {
+            previousMouseState = currentMouseState;
+
+            currentMouseState = Mouse.GetState();
+            if (buttonID == 0)
+            {
+                if (previousMouseState.LeftButton == ButtonState.Pressed && currentMouseState.LeftButton == ButtonState.Released)
+                {
+                    return true;
+                }
+                return false;
+            }
+            else if (buttonID == 1)
+            {
+                if (previousMouseState.RightButton == ButtonState.Pressed && currentMouseState.RightButton == ButtonState.Released)
+                {
+                    return true;
+                }
+                return false;
+            }
+            else
+                return false;
         }
 
         public bool KeyDown(Keys key)

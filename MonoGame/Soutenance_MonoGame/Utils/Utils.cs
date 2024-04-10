@@ -14,7 +14,6 @@ namespace Soutenance_MonoGame
     {
         public static Vector2 GetMousePosition()
         {
-            Debug.WriteLine(new Vector2(Mouse.GetState().X, Mouse.GetState().Y));
             return new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
         }
 

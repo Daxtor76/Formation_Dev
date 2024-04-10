@@ -1,3 +1,2 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/UI/Buttons/button_blue.png","E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/bin/DesktopGL/UI/Buttons/button_blue.xnb","TextureProcessor","Texture2DContent",7477,286805,0,1280319
-"E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/UI/Buttons/button_green.png","E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/bin/DesktopGL/UI/Buttons/button_green.xnb","TextureProcessor","Texture2DContent",7708,286805,0,0058179
+"E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/UI/Fonts/bigFont.spritefont","E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/bin/DesktopGL/UI/Fonts/bigFont.xnb","FontDescriptionProcessor","SpriteFontContent",2066,21535,0,1894546
