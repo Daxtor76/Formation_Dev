@@ -40,7 +40,8 @@ namespace Soutenance_MonoGame
                     font = MainGame.content.Load<SpriteFont>("UI/Fonts/bigFont");
                     break;
             }
-            size = new Vector2(font.MeasureString(value).X, font.MeasureString(value).Y);
+            baseSize = new Vector2(font.MeasureString(value).X, font.MeasureString(value).Y);
+            size = baseSize * scale;
             position = pPosition - size * 0.5f;
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);

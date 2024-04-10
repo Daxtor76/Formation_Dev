@@ -62,9 +62,6 @@ namespace Soutenance_MonoGame
             if(ServiceLocator.GetService<ISceneManager>().GetCurrentScene() != null)
                 ServiceLocator.GetService<ISceneManager>().GetCurrentScene().Update(gameTime);
 
-            ServiceLocator.GetService<ICollisionManager>().CleanColliders();
-            ServiceLocator.GetService<IEntityManager>().CleanEntities();
-
             base.Update(gameTime);
         }
 

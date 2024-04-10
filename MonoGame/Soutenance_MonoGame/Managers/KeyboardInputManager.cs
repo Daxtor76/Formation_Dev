@@ -35,7 +35,7 @@ namespace Soutenance_MonoGame
             currentMouseState = Mouse.GetState();
             if (buttonID == 0)
             {
-                if (previousMouseState.LeftButton == ButtonState.Pressed && currentMouseState.LeftButton == ButtonState.Released)
+                if (previousMouseState.LeftButton == ButtonState.Released && currentMouseState.LeftButton == ButtonState.Pressed)
                 {
                     return true;
                 }
@@ -43,7 +43,7 @@ namespace Soutenance_MonoGame
             }
             else if (buttonID == 1)
             {
-                if (previousMouseState.RightButton == ButtonState.Pressed && currentMouseState.RightButton == ButtonState.Released)
+                if (previousMouseState.RightButton == ButtonState.Released && currentMouseState.RightButton == ButtonState.Pressed)
                 {
                     return true;
                 }

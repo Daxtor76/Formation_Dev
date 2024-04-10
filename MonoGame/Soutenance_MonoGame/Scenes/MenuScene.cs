@@ -23,28 +23,22 @@ namespace Soutenance_MonoGame
         {
             base.Load();
 
-            Button button = new Button(new Vector2(500.0f, 500.0f), Button.Colors.blue, "button1", "Play", Text.FontType.normal, Color.Red, OnSelectLevelButtonClick);
-            //Button button2 = new Button(new Vector2(1000.0f, 100.0f), Button.Colors.green, "button2", OnSelectLevelButtonClick);
+            Button playButton = new Button(new Vector2(300.0f, 500.0f), Button.Colors.blue, "button1", "Play", Text.FontType.normal, Color.Red, OnPlayButtonClick);
+            Button levelEditorButton = new Button(new Vector2(700.0f, 200.0f), Button.Colors.green, "button2", "Level editor", Text.FontType.normal, Color.Red, OnLevelEditorButtonClick);
 
-            Text text = new Text(new Vector2(100.0f, 100.0f), "Test", "text1", Text.FontType.big, Color.Blue);
+            Text text = new Text(new Vector2(100.0f, 100.0f), "Menu Scene", "Title", Text.FontType.big, Color.Blue);
 
             Debug.WriteLine($"{name} scene has been loaded.");
         }
 
-        private void OnSelectLevelButtonClick()
+        private void OnPlayButtonClick()
         {
-            Debug.WriteLine("GO TO SELECT LEVEL SCREEN");
+            ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(LevelSelectorScene));
         }
 
-        public override void Update(GameTime gameTime)
+        private void OnLevelEditorButtonClick()
         {
-            base.Update(gameTime);
-
-            if(ServiceLocator.GetService<IInputManager>().KeyPressed(Keys.Space))
-            {
-                ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(GameScene));
-                ServiceLocator.GetService<ILevelManager>().ChangeLevel(1);
-            }
+            Debug.WriteLine("Plus qu'à faire un level editor, c'est rapide tkt");
         }
 
         public override void Draw()

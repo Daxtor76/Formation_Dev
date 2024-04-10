@@ -9,8 +9,6 @@ namespace Soutenance_MonoGame
 {
     sealed class EntityManager : IEntityManager
     {
-        Dictionary<string, IEntity> entities = new Dictionary<string, IEntity>();
-
         public EntityManager()
         {
             ServiceLocator.RegisterService<IEntityManager>(this);
@@ -18,19 +16,19 @@ namespace Soutenance_MonoGame
 
         public void AddEntity(IEntity entity)
         {
-            entities.Add(entity.GetName(), entity);
+            ServiceLocator.GetService<ISceneManager>().GetCurrentScene().entities.Add(entity.GetName(), entity);
         }
 
         public IEntity GetEntity(string name)
         {
-            return entities[name];
+            return ServiceLocator.GetService<ISceneManager>().GetCurrentScene().entities[name];
         }
 
         public List<T> GetEntitiesOfType<T>()
         {
             List<T> list = new List<T>();
 
-            foreach (IEntity entity in entities.Values)
+            foreach (IEntity entity in ServiceLocator.GetService<ISceneManager>().GetCurrentScene().entities.Values)
             {
                 if (entity.GetType() == typeof(T))
                     list.Add((T)entity);
@@ -41,7 +39,7 @@ namespace Soutenance_MonoGame
 
         public void UpdateEntities(GameTime gameTime)
         {
-            foreach(Entity entity in entities.Values)
+            foreach (IEntity entity in ServiceLocator.GetService<ISceneManager>().GetCurrentScene().entities.Values)
             {
                 if (entity.IsEnabled() && entity.IsActive())
                     entity.Update(gameTime);
@@ -50,7 +48,7 @@ namespace Soutenance_MonoGame
 
         public void DrawEntities()
         {
-            foreach(Entity entity in entities.Values)
+            foreach (IEntity entity in ServiceLocator.GetService<ISceneManager>().GetCurrentScene().entities.Values)
             {
                 if (entity.IsEnabled() && entity.IsActive())
                     entity.Draw();
@@ -59,7 +57,7 @@ namespace Soutenance_MonoGame
 
         public void UnloadEntities()
         {
-            foreach (IEntity entity in entities.Values)
+            foreach (IEntity entity in ServiceLocator.GetService<ISceneManager>().GetCurrentScene().entities.Values)
             {
                 entity.Unload();
             }
@@ -67,11 +65,11 @@ namespace Soutenance_MonoGame
 
         public void CleanEntities()
         {
-            foreach (KeyValuePair<string, IEntity> kvp in entities)
+            foreach (KeyValuePair<string, IEntity> kvp in ServiceLocator.GetService<ISceneManager>().GetCurrentScene().entities)
             {
                 if (!kvp.Value.IsEnabled())
                 {
-                    entities.Remove(kvp.Key);
+                    ServiceLocator.GetService<ISceneManager>().GetCurrentScene().entities.Remove(kvp.Key);
                 }
             }
         }

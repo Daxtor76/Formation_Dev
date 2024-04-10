@@ -13,6 +13,8 @@ namespace Soutenance_MonoGame
     {
         public string name;
 
+        public Dictionary<string, IEntity> entities = new Dictionary<string, IEntity>();
+
         public Scene(string pName)
         {
             name = pName;
@@ -26,6 +28,9 @@ namespace Soutenance_MonoGame
         {
             ServiceLocator.GetService<IEntityManager>().UpdateEntities(gameTime);
             ServiceLocator.GetService<ICollisionManager>().UpdateColliders(gameTime);
+
+            ServiceLocator.GetService<ICollisionManager>().CleanColliders();
+            ServiceLocator.GetService<IEntityManager>().CleanEntities();
         }
 
         public virtual void Draw()

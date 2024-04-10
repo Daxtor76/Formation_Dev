@@ -14,8 +14,8 @@
 - Gameplay: victoire -> ok
 - Gameplay: défaite -> ok
 - Unload chaque entity d'une scène -> ok
-- UI: buttons
-- UI: texts
+- UI: buttons -> ok
+- UI: texts -> ok
 - Menu: main menu
 - Menu: sélecteur de niveau
 - Menu: gameover (victoire + défaite): durée de game, rebonds, rebonds par secondes moyen

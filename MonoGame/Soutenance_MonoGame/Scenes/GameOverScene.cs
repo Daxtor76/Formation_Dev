@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vector2 = System.Numerics.Vector2;
 
 namespace Soutenance_MonoGame
 {
@@ -17,6 +18,8 @@ namespace Soutenance_MonoGame
 
         public override void Load()
         {
+            Text text = new Text(new Vector2(100.0f, 100.0f), "Game Over Scene", "Title", Text.FontType.big, Color.Blue);
+
             base.Load();
             Debug.WriteLine($"{name} scene has been loaded.");
         }

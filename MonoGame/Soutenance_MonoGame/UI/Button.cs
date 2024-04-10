@@ -19,15 +19,9 @@ namespace Soutenance_MonoGame
             blue,
             green
         }
-        public enum ButtonStates
-        {
-            idle,
-            hover
-        }
         public delegate void Effect();
 
         Effect onClick;
-        ButtonStates state;
         Text text;
 
         public Button(Vector2 pPosition, Colors pColor, string pName, string pTextValue, Text.FontType pFontType, Color pTextColor, Effect onClickEffect)
@@ -39,7 +33,6 @@ namespace Soutenance_MonoGame
             baseSize = new Vector2(img.Width, img.Height);
             size = baseSize * scale;
             onClick = onClickEffect;
-            state = ButtonStates.idle;
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
 
@@ -59,7 +52,9 @@ namespace Soutenance_MonoGame
             if (ServiceLocator.GetService<IInputManager>().MouseKeyPressed(0))
             {
                 if (IsHover())
+                {
                     onClick();
+                }
             }
         }
 
@@ -74,11 +69,6 @@ namespace Soutenance_MonoGame
                     (int)GetSize().Y);
                 MainGame.spriteBatch.Draw(img, destRect, sourceRect, Color.White, rotation, GetSize() * 0.5f, SpriteEffects.None, 0.0f);
             }
-        }
-
-        public void CheckClick()
-        {
-        
         }
 
         public void CheckHover()
