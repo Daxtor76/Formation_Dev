@@ -35,22 +35,14 @@ namespace Soutenance_MonoGame
             currentMouseState = Mouse.GetState();
             if (buttonID == 0)
             {
-                if (previousMouseState.LeftButton == ButtonState.Released && currentMouseState.LeftButton == ButtonState.Pressed)
-                {
-                    return true;
-                }
-                return false;
+                return previousMouseState.LeftButton == ButtonState.Pressed && currentMouseState.LeftButton == ButtonState.Released;
             }
             else if (buttonID == 1)
             {
-                if (previousMouseState.RightButton == ButtonState.Released && currentMouseState.RightButton == ButtonState.Pressed)
-                {
-                    return true;
-                }
-                return false;
+                return previousMouseState.RightButton == ButtonState.Pressed && currentMouseState.RightButton == ButtonState.Released;
             }
             else
-                return false;
+                return previousMouseState.LeftButton == ButtonState.Pressed && currentMouseState.LeftButton == ButtonState.Released;
         }
 
         public bool KeyDown(Keys key)

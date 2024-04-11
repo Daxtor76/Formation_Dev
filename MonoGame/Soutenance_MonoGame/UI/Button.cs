@@ -23,6 +23,7 @@ namespace Soutenance_MonoGame
 
         Effect onClick;
         Text text;
+        Collider col;
 
         public Button(Vector2 pPosition, Colors pColor, string pName, string pTextValue, Text.FontType pFontType, Color pTextColor, Effect onClickEffect)
         {
@@ -36,12 +37,8 @@ namespace Soutenance_MonoGame
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
 
-            text = new Text(pPosition, pTextValue, pName + "text", pFontType, pTextColor);
-        }
-
-        public override void Start()
-        {
-            base.Start();
+            col = new Collider(this, scale);
+            text = new Text(pPosition - GetSize() * 0.25f, pTextValue, pName + "text", pFontType, pTextColor, this);
         }
 
         public override void Update(GameTime gameTime)
@@ -49,12 +46,9 @@ namespace Soutenance_MonoGame
             base.Update(gameTime);
             CheckHover();
 
-            if (ServiceLocator.GetService<IInputManager>().MouseKeyPressed(0))
+            if (ServiceLocator.GetService<IInputManager>().MouseKeyPressed(0) && IsHover())
             {
-                if (IsHover())
-                {
-                    onClick();
-                }
+                onClick();
             }
         }
 
@@ -67,7 +61,7 @@ namespace Soutenance_MonoGame
                     (int)GetPosition().Y,
                     (int)GetSize().X,
                     (int)GetSize().Y);
-                MainGame.spriteBatch.Draw(img, destRect, sourceRect, Color.White, rotation, GetSize() * 0.5f, SpriteEffects.None, 0.0f);
+                MainGame.spriteBatch.Draw(img, destRect, sourceRect, Color.White, rotation, GetSize() * 0.25f, SpriteEffects.None, 0.0f);
             }
         }
 
@@ -81,10 +75,10 @@ namespace Soutenance_MonoGame
 
         public bool IsHover()
         {
-            return Utils.GetMousePosition().X < GetPosition().X + GetSize().X * 0.5f &&
-            Utils.GetMousePosition().X > GetPosition().X - GetSize().X * 0.5f &&
-            Utils.GetMousePosition().Y < GetPosition().Y + GetSize().Y * 0.5f &&
-            Utils.GetMousePosition().Y > GetPosition().Y - GetSize().Y * 0.5f;
+            return Utils.GetMousePosition().X < GetPosition().X + GetSize().X * 0.75f &&
+            Utils.GetMousePosition().X > GetPosition().X - GetSize().X * 0.25f &&
+            Utils.GetMousePosition().Y < GetPosition().Y + GetSize().Y * 0.75f &&
+            Utils.GetMousePosition().Y > GetPosition().Y - GetSize().Y * 0.25f;
         }
 
         public void OnHover()

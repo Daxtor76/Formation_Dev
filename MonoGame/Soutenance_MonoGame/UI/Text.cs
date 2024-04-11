@@ -20,16 +20,18 @@ namespace Soutenance_MonoGame
             big
         }
 
+        Entity parent;
         SpriteFont font;
         string value;
         Color textColor;
 
-        public Text(Vector2 pPosition, string pValue, string pName, FontType pFontType, Color pColor)
+        public Text(Vector2 pPosition, string pValue, string pName, FontType pFontType, Color pColor, Entity pParent = null)
         {
             SetName(pName);
             layer = "UI";
             value = pValue;
             textColor = pColor;
+            parent = pParent;
 
             switch (pFontType)
             {
@@ -42,21 +44,20 @@ namespace Soutenance_MonoGame
             }
             baseSize = new Vector2(font.MeasureString(value).X, font.MeasureString(value).Y);
             size = baseSize * scale;
-            position = pPosition - size * 0.5f;
+
+            if (parent != null)
+                position = pPosition + parent.GetSize() * 0.5f;
+            else
+                position = pPosition;
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
         }
-
-        public override void Start()
-        {
-            base.Start();
-        }
-
         public override void Draw()
         {
-            base.Draw();
-
-            MainGame.spriteBatch.DrawString(font, value, position, textColor);
+            if (parent != null)
+                MainGame.spriteBatch.DrawString(font, value, position, textColor, 0.0f, GetSize() * 0.5f, parent.scale, SpriteEffects.None, 0.0f);
+            else
+                MainGame.spriteBatch.DrawString(font, value, position, textColor);
         }
     }
 }
