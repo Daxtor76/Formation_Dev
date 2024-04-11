@@ -20,7 +20,7 @@ namespace Soutenance_MonoGame
             blue,
             green
         }
-        public delegate void Effect();
+        public delegate void Effect(int i = 0);
 
         Effect onClick;
         Text text;
@@ -49,7 +49,9 @@ namespace Soutenance_MonoGame
                 OnHover();
 
                 if (ServiceLocator.GetService<IInputManager>().MouseKeyPressed(0))
-                    onClick();
+                {
+                    onClick(int.Parse(GetName().Split("_")[1]));
+                }
             }
             else
                 OnNotHover();

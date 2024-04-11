@@ -23,19 +23,21 @@ namespace Soutenance_MonoGame
         {
             base.Load();
 
-            Text text = new Text(new Vector2(100.0f, 100.0f), "Menu Scene", "Title", Text.FontType.big, Color.Blue);
-            Button playButton = new Button(new Vector2(300.0f, 500.0f), Button.Colors.blue, "button1", "Play", Text.FontType.normal, Color.Red, OnPlayButtonClick);
-            Button levelEditorButton = new Button(new Vector2(300.0f, 600.0f), Button.Colors.green, "button2", "Level editor", Text.FontType.normal, Color.Red, OnLevelEditorButtonClick);
+            Vector2 screenCenter = Utils.GetScreenCenter();
+
+            Text text = new Text(new Vector2(screenCenter.X, screenCenter.Y - 200.0f), "Menu Scene", "Title", Text.FontType.big, Color.Blue);
+            Button playButton = new Button(new Vector2(screenCenter.X - 250.0f, screenCenter.Y + 100.0f), Button.Colors.blue, "button_1", "Play", Text.FontType.normal, Color.Red, OnPlayButtonClick);
+            Button levelEditorButton = new Button(new Vector2(screenCenter.X + 175.0f, screenCenter.Y + 100.0f), Button.Colors.green, "button_2", "Level editor", Text.FontType.normal, Color.Red, OnLevelEditorButtonClick);
 
             Debug.WriteLine($"{name} scene has been loaded.");
         }
 
-        private void OnPlayButtonClick()
+        private void OnPlayButtonClick(int i)
         {
             ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(LevelSelectorScene));
         }
 
-        private void OnLevelEditorButtonClick()
+        private void OnLevelEditorButtonClick(int i)
         {
             Debug.WriteLine("Plus qu'à faire un level editor, c'est rapide tkt");
         }

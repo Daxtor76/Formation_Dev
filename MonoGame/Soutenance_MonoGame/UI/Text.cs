@@ -48,7 +48,7 @@ namespace Soutenance_MonoGame
             if (parent != null)
                 position = pPosition + parent.GetSize() * 0.5f;
             else
-                position = pPosition;
+                position = pPosition - GetSize() * 0.5f;
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
         }

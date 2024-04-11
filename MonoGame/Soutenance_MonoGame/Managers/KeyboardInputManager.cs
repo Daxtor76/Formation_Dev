@@ -31,7 +31,6 @@ namespace Soutenance_MonoGame
 
         public bool MouseKeyPressed(int buttonID)
         {
-            //previousMouseState = currentMouseState;
             currentMouseState = Mouse.GetState();
 
             if (buttonID == 0)

@@ -50,6 +50,11 @@ namespace Soutenance_MonoGame
             return list;
         }
 
+        public List<Level> GetLevels()
+        {
+            return levels;
+        }
+
         public void ChangeLevel(int levelId)
         {
             if (levels[levelId] != null)

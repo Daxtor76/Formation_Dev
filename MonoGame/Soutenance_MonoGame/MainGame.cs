@@ -13,7 +13,7 @@ namespace Soutenance_MonoGame
         public static GraphicsDeviceManager graphics { get; private set; }
         public static SpriteBatch spriteBatch { get; private set; }
         public static ContentManager content { get; private set; }
-        public static bool debugMode = true;
+        public static bool debugMode = false;
 
         public MainGame()
         {

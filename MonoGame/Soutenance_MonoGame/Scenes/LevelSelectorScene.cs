@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection.Emit;
 using Vector2 = System.Numerics.Vector2;
+using System.Xml.Linq;
 
 namespace Soutenance_MonoGame
 {
@@ -23,16 +24,25 @@ namespace Soutenance_MonoGame
         {
             base.Load();
 
-            Text text = new Text(new Vector2(100.0f, 100.0f), "Level Selector Scene", "Title", Text.FontType.big, Color.Blue);
+            Vector2 screenCenter = Utils.GetScreenCenter();
+            int levelCount = ServiceLocator.GetService<ILevelManager>().GetLevels().Count;
+            float buttonGridSizeX = levelCount * 200.0f;
+
+            Text text = new Text(new Vector2(screenCenter.X, screenCenter.Y - 200.0f), "Level Selector Scene", "Title", Text.FontType.big, Color.Blue);
+
+            for (int i = 0; i < levelCount; i ++)
+            {
+                Vector2 pos = new Vector2(screenCenter.X - buttonGridSizeX * 0.5f + 220.0f * i + 40.0f, screenCenter.Y + 100.0f);
+                Button button = new Button(pos, Button.Colors.blue, "button_" + i, "Level " + (i + 1), Text.FontType.normal, Color.Red, OnLevelButtonClick);
+            }
 
             Debug.WriteLine($"{name} scene has been loaded.");
         }
 
-        private void OnPlayButtonClick()
+        private void OnLevelButtonClick(int levelId)
         {
-            Debug.WriteLine("loading");
             ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(GameScene));
-            ServiceLocator.GetService<ILevelManager>().ChangeLevel(1);
+            ServiceLocator.GetService<ILevelManager>().ChangeLevel(levelId);
         }
 
         public override void Update(GameTime gameTime)
