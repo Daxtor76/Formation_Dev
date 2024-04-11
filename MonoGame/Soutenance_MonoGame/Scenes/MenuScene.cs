@@ -32,8 +32,7 @@ namespace Soutenance_MonoGame
 
         private void OnPlayButtonClick()
         {
-            Debug.WriteLine("Button play");
-            //ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(LevelSelectorScene));
+            ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(LevelSelectorScene));
         }
 
         private void OnLevelEditorButtonClick()

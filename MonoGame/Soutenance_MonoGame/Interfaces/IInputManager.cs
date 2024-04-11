@@ -15,5 +15,6 @@ namespace Soutenance_MonoGame
         public bool KeyPressed(Keys key);
         public bool MouseKeyDown(int buttonID);
         public bool MouseKeyPressed(int buttonID);
+        public void UpdatePreviousMouseState();
     }
 }

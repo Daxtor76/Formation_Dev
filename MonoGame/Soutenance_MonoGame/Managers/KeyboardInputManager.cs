@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -30,9 +31,9 @@ namespace Soutenance_MonoGame
 
         public bool MouseKeyPressed(int buttonID)
         {
-            previousMouseState = currentMouseState;
-
+            //previousMouseState = currentMouseState;
             currentMouseState = Mouse.GetState();
+
             if (buttonID == 0)
             {
                 return previousMouseState.LeftButton == ButtonState.Pressed && currentMouseState.LeftButton == ButtonState.Released;
@@ -43,6 +44,11 @@ namespace Soutenance_MonoGame
             }
             else
                 return previousMouseState.LeftButton == ButtonState.Pressed && currentMouseState.LeftButton == ButtonState.Released;
+        }
+
+        public void UpdatePreviousMouseState()
+        {
+            previousMouseState = currentMouseState;
         }
 
         public bool KeyDown(Keys key)

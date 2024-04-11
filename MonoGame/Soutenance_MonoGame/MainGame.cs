@@ -36,9 +36,9 @@ namespace Soutenance_MonoGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            new KeyboardInputManager();
             new EntityManager();
             new CollisionManager();
-            new KeyboardInputManager();
             new SpritesManager();
             new LevelManager();
             new SceneManager();
@@ -61,6 +61,8 @@ namespace Soutenance_MonoGame
             // TODO: Add your update logic here
             if(ServiceLocator.GetService<ISceneManager>().GetCurrentScene() != null)
                 ServiceLocator.GetService<ISceneManager>().GetCurrentScene().Update(gameTime);
+
+            ServiceLocator.GetService<IInputManager>().UpdatePreviousMouseState();
 
             base.Update(gameTime);
         }

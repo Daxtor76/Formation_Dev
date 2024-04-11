@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,7 +24,6 @@ namespace Soutenance_MonoGame
 
         Effect onClick;
         Text text;
-        Collider col;
 
         public Button(Vector2 pPosition, Colors pColor, string pName, string pTextValue, Text.FontType pFontType, Color pTextColor, Effect onClickEffect)
         {
@@ -37,19 +37,22 @@ namespace Soutenance_MonoGame
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
 
-            col = new Collider(this, scale);
             text = new Text(pPosition - GetSize() * 0.25f, pTextValue, pName + "text", pFontType, pTextColor, this);
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            CheckHover();
 
-            if (ServiceLocator.GetService<IInputManager>().MouseKeyPressed(0) && IsHover())
+            if (IsHover())
             {
-                onClick();
+                OnHover();
+
+                if (ServiceLocator.GetService<IInputManager>().MouseKeyPressed(0))
+                    onClick();
             }
+            else
+                OnNotHover();
         }
 
         public override void Draw()
@@ -63,14 +66,6 @@ namespace Soutenance_MonoGame
                     (int)GetSize().Y);
                 MainGame.spriteBatch.Draw(img, destRect, sourceRect, Color.White, rotation, GetSize() * 0.25f, SpriteEffects.None, 0.0f);
             }
-        }
-
-        public void CheckHover()
-        {
-            if (IsHover())
-                OnHover();
-            else
-                OnNotHover();
         }
 
         public bool IsHover()
