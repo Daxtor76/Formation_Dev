@@ -55,7 +55,7 @@ namespace Soutenance_MonoGame
         public override void Draw()
         {
             if (parent != null)
-                MainGame.spriteBatch.DrawString(font, value, position, textColor, 0.0f, GetSize() * 0.5f, parent.scale, SpriteEffects.None, 0.0f);
+                MainGame.spriteBatch.DrawString(font, value, position, textColor, 0.0f, GetSize() * 0.5f, parent.scale, SpriteEffects.None, 1.0f);
             else
                 MainGame.spriteBatch.DrawString(font, value, position, textColor);
         }

@@ -74,7 +74,7 @@ namespace Soutenance_MonoGame
             // TODO: Add your drawing code here
             if(ServiceLocator.GetService<ISceneManager>().GetCurrentScene() != null)
             {
-                spriteBatch.Begin();
+                spriteBatch.Begin(SpriteSortMode.FrontToBack);
                 ServiceLocator.GetService<ISceneManager>().GetCurrentScene().Draw();
                 spriteBatch.End();
             }

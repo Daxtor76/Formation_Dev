@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Formation/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/PowerUps/powerup_paddleScale_spritesheet.png</SourceFile>
-  <SourceTime>2024-04-09T10:09:46.4437683+02:00</SourceTime>
-  <DestFile>C:/Formation/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/bin/DesktopGL/Content/PowerUps/powerup_paddleScale_spritesheet.xnb</DestFile>
-  <DestTime>2024-04-11T11:52:09.6928576+02:00</DestTime>
+  <SourceFile>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/PowerUps/powerup_paddleScale_spritesheet.png</SourceFile>
+  <SourceTime>2024-04-03T15:13:25.8067939+02:00</SourceTime>
+  <DestFile>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/bin/DesktopGL/Content/PowerUps/powerup_paddleScale_spritesheet.xnb</DestFile>
+  <DestTime>2024-04-12T09:43:22.1616083+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

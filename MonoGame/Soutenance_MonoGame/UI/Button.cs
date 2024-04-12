@@ -50,7 +50,13 @@ namespace Soutenance_MonoGame
 
                 if (ServiceLocator.GetService<IInputManager>().MouseKeyPressed(0))
                 {
-                    onClick(int.Parse(GetName().Split("_")[1]));
+                    int id;
+                    bool isNumber = int.TryParse(GetName().Split("_")[1], out id);
+
+                    if (isNumber)
+                        onClick(id);
+                    else
+                        onClick(-1);
                 }
             }
             else

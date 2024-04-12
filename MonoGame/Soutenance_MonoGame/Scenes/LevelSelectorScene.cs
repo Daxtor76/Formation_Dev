@@ -28,15 +28,21 @@ namespace Soutenance_MonoGame
             int levelCount = ServiceLocator.GetService<ILevelManager>().GetLevels().Count;
             float buttonGridSizeX = levelCount * 200.0f;
 
-            Text text = new Text(new Vector2(screenCenter.X, screenCenter.Y - 200.0f), "Level Selector Scene", "Title", Text.FontType.big, Color.Blue);
+            new Text(new Vector2(screenCenter.X, screenCenter.Y - 200.0f), "Level Selector Scene", "Title", Text.FontType.big, Color.Blue);
 
             for (int i = 0; i < levelCount; i ++)
             {
                 Vector2 pos = new Vector2(screenCenter.X - buttonGridSizeX * 0.5f + 220.0f * i + 40.0f, screenCenter.Y + 100.0f);
-                Button button = new Button(pos, Button.Colors.blue, "button_" + i, "Level " + (i + 1), Text.FontType.normal, Color.Red, OnLevelButtonClick);
+                new Button(pos, Button.Colors.blue, "button_" + i, "Level " + (i + 1), Text.FontType.normal, Color.Red, OnLevelButtonClick);
             }
+            new Button(new Vector2(50.0f, 50.0f), Button.Colors.blue, "button_back", "Back", Text.FontType.normal, Color.Red, OnBackButtonClick);
 
             Debug.WriteLine($"{name} scene has been loaded.");
+        }
+
+        void OnBackButtonClick(int i)
+        {
+            ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(MenuScene));
         }
 
         private void OnLevelButtonClick(int levelId)

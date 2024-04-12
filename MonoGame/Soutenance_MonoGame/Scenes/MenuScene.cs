@@ -25,9 +25,9 @@ namespace Soutenance_MonoGame
 
             Vector2 screenCenter = Utils.GetScreenCenter();
 
-            Text text = new Text(new Vector2(screenCenter.X, screenCenter.Y - 200.0f), "Menu Scene", "Title", Text.FontType.big, Color.Blue);
-            Button playButton = new Button(new Vector2(screenCenter.X - 250.0f, screenCenter.Y + 100.0f), Button.Colors.blue, "button_1", "Play", Text.FontType.normal, Color.Red, OnPlayButtonClick);
-            Button levelEditorButton = new Button(new Vector2(screenCenter.X + 175.0f, screenCenter.Y + 100.0f), Button.Colors.green, "button_2", "Level editor", Text.FontType.normal, Color.Red, OnLevelEditorButtonClick);
+            new Text(new Vector2(screenCenter.X, screenCenter.Y - 200.0f), "Menu Scene", "Title", Text.FontType.big, Color.Blue);
+            new Button(new Vector2(screenCenter.X - 250.0f, screenCenter.Y + 100.0f), Button.Colors.blue, "button_1", "Play", Text.FontType.normal, Color.Red, OnPlayButtonClick);
+            new Button(new Vector2(screenCenter.X + 175.0f, screenCenter.Y + 100.0f), Button.Colors.green, "button_2", "Level editor", Text.FontType.normal, Color.Red, OnLevelEditorButtonClick);
 
             Debug.WriteLine($"{name} scene has been loaded.");
         }
