@@ -26,7 +26,7 @@ namespace Soutenance_MonoGame
 
         public void SetFloat(string keyName, float value)
         {
-            playerPrefsFloats.Add(keyName, value);
+            playerPrefsFloats[keyName] = value;
         }
 
         public float GetFloat(string keyName)
@@ -36,7 +36,7 @@ namespace Soutenance_MonoGame
 
         public void SetInt(string keyName, int value)
         {
-            playerPrefsInts.Add(keyName, value);
+            playerPrefsInts[keyName] = value;
         }
 
         public int GetInt(string keyName)
@@ -46,7 +46,7 @@ namespace Soutenance_MonoGame
 
         public void SetString(string keyName, string value)
         {
-            playerPrefsStrings.Add(keyName, value);
+            playerPrefsStrings[keyName] = value;
         }
 
         public string GetString(string keyName)

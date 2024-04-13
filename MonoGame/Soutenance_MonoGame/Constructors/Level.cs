@@ -58,6 +58,7 @@ namespace Soutenance_MonoGame
             {
                 element.Unload();
             }
+            grid.Clear();
         }
     }
 }

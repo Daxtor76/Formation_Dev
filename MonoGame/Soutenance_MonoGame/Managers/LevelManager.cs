@@ -52,7 +52,7 @@ namespace Soutenance_MonoGame
 
         public Level GetLevel(int id)
         {
-            return levels[id];
+            return id < levels.Count && id >= 0 ? levels[id] : null;
         }
 
         public List<Level> GetLevels()
@@ -65,6 +65,8 @@ namespace Soutenance_MonoGame
             if (levels[levelId] != null)
             {
                 GetCurrentLevel().Unload();
+
+                ServiceLocator.GetService<ISaveManager>().SetInt("lastLevelPlayed", levelId);
 
                 SetCurrentLevel(levelId);
                 GetCurrentLevel().GenerateGrid();
