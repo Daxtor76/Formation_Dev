@@ -5,9 +5,11 @@
   <Config />
   <SourceFiles>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Balls/ball_green.png</File>
+    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Balls/ball_grey_spritesheet.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Balls/ball_grey.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Balls/ball_orange.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Balls/ball_purple.png</File>
+    <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Balls/ball_red_spritesheet.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Balls/ball_red.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Balls/ball_yellow.png</File>
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/Bricks/bigbrick_green_0hit.png</File>
@@ -81,6 +83,8 @@
     <File>E:/Projets/Formation_Dev/MonoGame/Soutenance_MonoGame/Content/UI/Fonts/normalFont.spritefont</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

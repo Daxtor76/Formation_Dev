@@ -18,12 +18,8 @@ namespace Soutenance_MonoGame
     {
         public enum Colors
         {
-            green,
             grey,
-            orange,
-            purple,
             red,
-            yellow
         }
         public enum States
         {
@@ -36,6 +32,7 @@ namespace Soutenance_MonoGame
 
         Collider col;
         public Mover mover;
+        public Animator animator;
 
         public bool canBeBoosted = false;
 
@@ -43,8 +40,8 @@ namespace Soutenance_MonoGame
         {
             SetName(pName);
             layer = "Ball";
-            img = ServiceLocator.GetService<ISpritesManager>().GetBallTexture("ball_" + Colors.red);
-            baseSize = new Vector2(img.Width, img.Height);
+            img = ServiceLocator.GetService<ISpritesManager>().GetBallTexture("ball_" + Colors.red + "_spritesheet");
+            baseSize = new Vector2(26.0f, img.Height);
             size = baseSize * scale;
             position = GetSpawnPosition();
             state = States.Preparation;
@@ -53,14 +50,17 @@ namespace Soutenance_MonoGame
 
             col = new Collider(this, scale, OnCollisionEnter, OnCollision);
             mover = new Mover(pSpeed);
+            animator = new Animator(size);
+
+            Start();
         }
 
         public Ball(Colors pColor, float pSpeed, string pName, Vector2 pPosition, States pState)
         {
             SetName(pName);
             layer = "Ball";
-            img = ServiceLocator.GetService<ISpritesManager>().GetBallTexture("ball_" + pColor);
-            baseSize = new Vector2(img.Width, img.Height);
+            img = ServiceLocator.GetService<ISpritesManager>().GetBallTexture("ball_" + pColor + "_spritesheet");
+            baseSize = new Vector2(26.0f, img.Height);
             size = baseSize * scale;
             position = pPosition;
 
@@ -70,6 +70,21 @@ namespace Soutenance_MonoGame
 
             col = new Collider(this, scale, OnCollisionEnter, OnCollision);
             mover = new Mover(pSpeed);
+            animator = new Animator(size);
+
+            Start();
+        }
+
+        public override void Start()
+        {
+            base.Start();
+
+            Animation preparationAnim = new Animation(0, 0, 0.1f, true);
+            Animation idleAnim = new Animation(0, 3, 0.2f, true);
+            Animation boostedAnim = new Animation(4, 7, 0.1f, true);
+            animator.anims.Add(States.Preparation.ToString(), preparationAnim);
+            animator.anims.Add(States.Normal.ToString(), idleAnim);
+            animator.anims.Add(States.Boosted.ToString(), boostedAnim);
         }
 
         public override void Update(GameTime gameTime)
@@ -106,6 +121,7 @@ namespace Soutenance_MonoGame
                 }
             }
 
+            sourceRect = animator.ReadAnim(gameTime, state.ToString());
             col.oldPosition = col.position;
         }
 
