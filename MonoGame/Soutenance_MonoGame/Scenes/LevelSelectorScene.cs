@@ -47,8 +47,15 @@ namespace Soutenance_MonoGame
 
         private void OnLevelButtonClick(int levelId)
         {
-            ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(GameScene));
-            ServiceLocator.GetService<ILevelManager>().ChangeLevel(levelId);
+            if (ServiceLocator.GetService<ILevelManager>().GetLevel(levelId) != null)
+            {
+                ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(GameScene));
+                ServiceLocator.GetService<ILevelManager>().ChangeLevel(levelId);
+            }
+            else
+            {
+                Debug.WriteLine($"Level {levelId} does not exist");
+            }
         }
 
         public override void Update(GameTime gameTime)

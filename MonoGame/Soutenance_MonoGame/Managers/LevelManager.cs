@@ -50,6 +50,11 @@ namespace Soutenance_MonoGame
             return list;
         }
 
+        public Level GetLevel(int id)
+        {
+            return levels[id];
+        }
+
         public List<Level> GetLevels()
         {
             return levels;

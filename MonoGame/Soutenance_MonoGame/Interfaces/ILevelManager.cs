@@ -10,6 +10,7 @@ namespace Soutenance_MonoGame
     {
         public void ChangeLevel(int levelId);
         public Level GetCurrentLevel();
+        public Level GetLevel(int id);
         public List<Level> GetLevels();
     }
 }
