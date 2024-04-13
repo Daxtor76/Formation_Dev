@@ -27,8 +27,8 @@ namespace Soutenance_MonoGame
             parent = pParent;
             SetName(pParent.GetName() + "googly" + rndNumber.ToString());
             layer = "FXs";
-            img = ServiceLocator.GetService<ISpritesManager>().GetGoogleEyesTexture("background");
-            eye = ServiceLocator.GetService<ISpritesManager>().GetGoogleEyesTexture("eye");
+            img = ServiceLocator.GetService<ISpritesManager>().GetGooglyEyesTexture("background");
+            eye = ServiceLocator.GetService<ISpritesManager>().GetGooglyEyesTexture("eye");
             baseSize = new Vector2(img.Width, img.Height);
             size = baseSize * scale;
             position = parent.GetCenterPosition();
@@ -56,7 +56,7 @@ namespace Soutenance_MonoGame
                     (int)position.Y,
                     (int)size.X,
                     (int)size.Y);
-                MainGame.spriteBatch.Draw(img, destRect, sourceRect, Color.White, rotation, Vector2.Zero, SpriteEffects.None, 0.0f);
+                MainGame.spriteBatch.Draw(img, destRect, sourceRect, Color.White, rotation, Vector2.Zero, SpriteEffects.None, parent.GetLayerDepth() + 0.001f);
                 
             }
 
@@ -75,7 +75,7 @@ namespace Soutenance_MonoGame
                     (int)eyePos.Y,
                     (int)size.X,
                     (int)size.Y);
-                MainGame.spriteBatch.Draw(eye, destRect, sourceRect, Color.White, rotation, Vector2.Zero, SpriteEffects.None, 0.0f);
+                MainGame.spriteBatch.Draw(eye, destRect, sourceRect, Color.White, rotation, Vector2.Zero, SpriteEffects.None, parent.GetLayerDepth() + 0.002f);
             }
         }
 

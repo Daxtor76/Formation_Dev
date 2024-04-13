@@ -86,7 +86,7 @@ namespace Soutenance_MonoGame
             return bricksTextures[textureName] != null ? bricksTextures[textureName] : bricksTextures.ElementAt(r.Next(0, bricksTextures.Count)).Value;
         }
 
-        public Texture2D GetGoogleEyesTexture(string textureName)
+        public Texture2D GetGooglyEyesTexture(string textureName)
         {
             Random r = new Random();
             return googleEyesTextures[textureName] != null ? googleEyesTextures[textureName] : googleEyesTextures.ElementAt(r.Next(0, googleEyesTextures.Count)).Value;

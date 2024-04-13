@@ -36,7 +36,7 @@ namespace Soutenance_MonoGame
         protected Collider col;
         protected BrickTypes type;
         protected Colors color;
-        protected List<Entity> googlyEyes = new List<Entity>();
+        protected List<Entity> googlyEyes;
 
         public Brick()
         {
@@ -58,18 +58,9 @@ namespace Soutenance_MonoGame
 
             maxLife = GetMaxLife(type, color);
             life = maxLife;
+            googlyEyes = new List<Entity>();
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-        }
-
-        public override void Draw()
-        {
-            base.Draw();
         }
 
         public void OnCollisionEnter(List<Collider> others)

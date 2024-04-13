@@ -26,6 +26,7 @@ namespace Soutenance_MonoGame
         bool enabled = true;
         bool active = true;
         string name = "";
+        float layerDepth = 0.0f;
 
         public virtual void Start()
         {
@@ -50,7 +51,7 @@ namespace Soutenance_MonoGame
                     (int)position.Y,
                     (int)size.X,
                     (int)size.Y);
-                MainGame.spriteBatch.Draw(img, destRect, sourceRect, Color.White, rotation, Vector2.Zero, SpriteEffects.None, 0.0f);
+                MainGame.spriteBatch.Draw(img, destRect, sourceRect, Color.White, rotation, Vector2.Zero, SpriteEffects.None, layerDepth);
             }
         }
         public void SetPosition(Vector2 pPosition)
@@ -135,6 +136,16 @@ namespace Soutenance_MonoGame
         public void SetActive(bool value)
         {
             active = value;
+        }
+
+        public void SetLayerDepth(float value)
+        {
+            layerDepth = value;
+        }
+
+        public float GetLayerDepth()
+        {
+            return layerDepth;
         }
     }
 }

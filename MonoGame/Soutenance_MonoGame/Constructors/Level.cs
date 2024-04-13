@@ -44,6 +44,7 @@ namespace Soutenance_MonoGame
                     float xPos = Utils.GetScreenCenter().X + element.GetSize().X * i - gridSize.X * element.GetSize().X * 0.5f;
                     float yPos = 50 + element.GetSize().Y * y;
                     element.SetPosition(new Vector2(xPos, yPos));
+                    element.SetLayerDepth((i+y) * 0.01f);
 
                     element.Start();
 

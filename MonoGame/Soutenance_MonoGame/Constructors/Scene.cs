@@ -38,6 +38,7 @@ namespace Soutenance_MonoGame
             MainGame.spriteBatch.Begin(SpriteSortMode.FrontToBack);
             ServiceLocator.GetService<IEntityManager>().DrawEntities();
             ServiceLocator.GetService<ICollisionManager>().DrawColliders();
+            MainGame.spriteBatch.End();
         }
 
         public virtual void Unload()

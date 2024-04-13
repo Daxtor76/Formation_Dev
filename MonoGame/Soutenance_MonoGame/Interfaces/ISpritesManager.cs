@@ -14,7 +14,7 @@ namespace Soutenance_MonoGame
         public Texture2D GetBrickTexture(string textureName);
         public Texture2D GetPortalTexture();
         public Texture2D GetPowerUpTexture(string textureName);
-        public Texture2D GetGoogleEyesTexture(string textureName);
+        public Texture2D GetGooglyEyesTexture(string textureName);
         public Texture2D GetButtonTexture(string textureName);
     }
 }

@@ -76,7 +76,6 @@ namespace Soutenance_MonoGame
             if(ServiceLocator.GetService<ISceneManager>().GetCurrentScene() != null)
             {
                 ServiceLocator.GetService<ISceneManager>().GetCurrentScene().Draw();
-                spriteBatch.End();
             }
 
             base.Draw(gameTime);

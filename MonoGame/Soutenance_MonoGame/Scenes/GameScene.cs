@@ -21,6 +21,7 @@ namespace Soutenance_MonoGame
         public Ball mainBall;
 
         public VictoryManager victoryManager;
+        List<Heart> hearts;
 
         public GameScene(string pName) : base(pName)
         {
@@ -28,6 +29,7 @@ namespace Soutenance_MonoGame
 
         public override void Load()
         {
+            hearts = new List<Heart>();
             paddle = new Paddle(Paddle.Colors.grey, 400.0f, "Paddle");
             mainBall = new Ball(350.0f, "Ball");
 
@@ -43,6 +45,8 @@ namespace Soutenance_MonoGame
 
             victoryManager = new VictoryManager();
 
+            CreateHeartsPerLifepoints(victoryManager.GetPlayerLife() - 1);
+
             Debug.WriteLine($"{name} scene has been loaded.");
             base.Load();
         }
@@ -54,6 +58,7 @@ namespace Soutenance_MonoGame
             victoryManager.AddGameDuration((float)gameTime.ElapsedGameTime.TotalSeconds);
             if (ServiceLocator.GetService<IEntityManager>().GetEntitiesOfType<Ball>().Count <= 0)
             {
+                RemoveHeart();
                 victoryManager.DecreasePlayerLife(1);
                 if (victoryManager.GetPlayerLife() <= 0)
                 {
@@ -72,19 +77,40 @@ namespace Soutenance_MonoGame
             }
         }
 
-        public override void Draw()
+        /*public override void Draw()
         {
             MainGame.spriteBatch.Begin();
             ServiceLocator.GetService<IEntityManager>().DrawEntities();
             ServiceLocator.GetService<ICollisionManager>().DrawColliders();
-        }
+        }*/
 
         public override void Unload()
         {
             paddle = null;
             mainBall = null;
             victoryManager = null;
+            hearts = null;
             base.Unload();
+        }
+
+        private void CreateHeartsPerLifepoints(int lp)
+        {
+            Vector2 screenSize = Utils.GetScreenSize();
+            for (int i = 0; i < lp; i++)
+            {
+                Heart heart = new Heart();
+                heart.SetPosition(new Vector2(i * heart.GetSize().X, screenSize.Y - heart.GetSize().Y));
+                hearts.Add(heart);
+            }
+        }
+
+        void RemoveHeart()
+        {
+            if (victoryManager.GetPlayerLife() - 2 >= 0 && hearts[victoryManager.GetPlayerLife() - 2] != null)
+            {
+                hearts[victoryManager.GetPlayerLife() - 2].Destroy();
+                hearts[victoryManager.GetPlayerLife() - 2] = null;
+            }
         }
     }
 }

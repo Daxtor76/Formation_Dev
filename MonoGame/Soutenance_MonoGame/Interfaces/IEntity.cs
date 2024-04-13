@@ -25,5 +25,7 @@ namespace Soutenance_MonoGame
         public void SetEnabled(bool value);
         public bool IsActive();
         public void SetActive(bool value);
+        public void SetLayerDepth(float value);
+        public float GetLayerDepth();
     }
 }
