@@ -35,6 +35,7 @@ namespace Soutenance_MonoGame
 
         public virtual void Draw()
         {
+            MainGame.spriteBatch.Begin(SpriteSortMode.FrontToBack);
             ServiceLocator.GetService<IEntityManager>().DrawEntities();
             ServiceLocator.GetService<ICollisionManager>().DrawColliders();
         }

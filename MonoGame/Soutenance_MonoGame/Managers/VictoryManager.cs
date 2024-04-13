@@ -15,13 +15,17 @@ namespace Soutenance_MonoGame
         int playerMaxLife;
         int playerlife;
 
+        int bouncesCount;
+        float gameDuration;
+
+
         public VictoryManager()
         {
             ballsAmount = ServiceLocator.GetService<IEntityManager>().GetEntitiesOfType<Ball>().Count;
             bricksAmount = ServiceLocator.GetService<IEntityManager>().GetEntitiesOfType<BrickNormal>().Count 
                 + ServiceLocator.GetService<IEntityManager>().GetEntitiesOfType<BrickMoving>().Count
                 + ServiceLocator.GetService<IEntityManager>().GetEntitiesOfType<BrickPowerUp>().Count;
-            playerMaxLife = 3;
+            playerMaxLife = 1;
             playerlife = playerMaxLife;
         }
 

@@ -18,7 +18,8 @@ namespace Soutenance_MonoGame
 
         public override void Load()
         {
-            Text text = new Text(new Vector2(100.0f, 100.0f), "Game Over Scene", "Title", Text.FontType.big, Color.Blue);
+            Vector2 screenCenter = Utils.GetScreenCenter();
+            Text text = new Text(new Vector2(screenCenter.X, screenCenter.Y - 200.0f), "Game Over Scene", "Title", Text.FontType.big, Color.Blue);
 
             base.Load();
             Debug.WriteLine($"{name} scene has been loaded.");

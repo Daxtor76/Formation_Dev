@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -48,7 +49,17 @@ namespace Soutenance_MonoGame
 
         public override void Draw()
         {
-            base.Draw();
+            if (img != null)
+            {
+                Rectangle destRect = new Rectangle(
+                    (int)position.X,
+                    (int)position.Y,
+                    (int)size.X,
+                    (int)size.Y);
+                MainGame.spriteBatch.Draw(img, destRect, sourceRect, Color.White, rotation, Vector2.Zero, SpriteEffects.None, 0.0f);
+                
+            }
+
             if (eye != null)
             {
                 GameScene gameScene = ServiceLocator.GetService<ISceneManager>().GetCurrentScene() as GameScene;

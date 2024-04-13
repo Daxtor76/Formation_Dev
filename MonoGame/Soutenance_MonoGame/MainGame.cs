@@ -36,6 +36,7 @@ namespace Soutenance_MonoGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            new SaveManager();
             new KeyboardInputManager();
             new EntityManager();
             new CollisionManager();
@@ -74,7 +75,6 @@ namespace Soutenance_MonoGame
             // TODO: Add your drawing code here
             if(ServiceLocator.GetService<ISceneManager>().GetCurrentScene() != null)
             {
-                spriteBatch.Begin(SpriteSortMode.FrontToBack);
                 ServiceLocator.GetService<ISceneManager>().GetCurrentScene().Draw();
                 spriteBatch.End();
             }

@@ -52,13 +52,18 @@ namespace Soutenance_MonoGame
             base.Update(gameTime);
 
             if (ServiceLocator.GetService<IEntityManager>().GetEntitiesOfType<Ball>().Count <= 0)
+            {
+                victoryManager.DecreasePlayerLife(1);
+                if (victoryManager.GetPlayerLife() <= 0)
+                {
+                    ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(GameOverScene));
+                    return;
+                }
+
                 mainBall = new Ball(350.0f, "Ball");
+            }
 
             if (victoryManager.Victory())
-            {
-                ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(GameOverScene));
-            }
-            if (victoryManager.GetPlayerLife() == 0)
             {
                 ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(GameOverScene));
             }
@@ -66,11 +71,16 @@ namespace Soutenance_MonoGame
 
         public override void Draw()
         {
-            base.Draw();
+            MainGame.spriteBatch.Begin();
+            ServiceLocator.GetService<IEntityManager>().DrawEntities();
+            ServiceLocator.GetService<ICollisionManager>().DrawColliders();
         }
 
         public override void Unload()
         {
+            paddle = null;
+            mainBall = null;
+            victoryManager = null;
             base.Unload();
         }
     }

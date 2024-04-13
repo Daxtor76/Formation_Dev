@@ -129,7 +129,10 @@ namespace Soutenance_MonoGame
                     else if (other.parent.layer == "Wall")
                     {
                         if (side == "bottom")
-                            LoseLife();
+                        {
+                            Destroy();
+                            return;
+                        }
 
                         ActivateTeleportersColliders();
                         newDir += GetNewDirFromCollision(side);
@@ -149,15 +152,6 @@ namespace Soutenance_MonoGame
             }
             if (newDir != mover.direction && newDir != Vector2.Zero)
                 Bounce(newDir);
-        }
-
-        void LoseLife()
-        {
-            Destroy();
-            return;
-            // TO DO: Ajouter ici la perte du vie du player
-            // Check la defeat -> si == 0 game over sinon reset
-            // Voir pour faire des unity event? avec un defeatManager qui regarde la vie du joueur et qui check quand la valeur change
         }
 
         void Teleport(Collider other)
