@@ -17,6 +17,13 @@ namespace Soutenance_MonoGame
             ServiceLocator.RegisterService<ISaveManager>(this);
         }
 
+        public void ClearData()
+        {
+            playerPrefsFloats.Clear();
+            playerPrefsInts.Clear();
+            playerPrefsStrings.Clear();
+        }
+
         public void SetFloat(string keyName, float value)
         {
             playerPrefsFloats.Add(keyName, value);

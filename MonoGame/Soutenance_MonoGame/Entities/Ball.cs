@@ -215,6 +215,8 @@ namespace Soutenance_MonoGame
 
         void Bounce(Vector2 newDirection)
         {
+            GameScene gameScene = ServiceLocator.GetService<ISceneManager>().GetCurrentScene() as GameScene;
+            gameScene.victoryManager.AddBounce(1);
             mover.direction = Vector2.Normalize(newDirection);
         }
 

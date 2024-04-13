@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,8 +26,17 @@ namespace Soutenance_MonoGame
             bricksAmount = ServiceLocator.GetService<IEntityManager>().GetEntitiesOfType<BrickNormal>().Count 
                 + ServiceLocator.GetService<IEntityManager>().GetEntitiesOfType<BrickMoving>().Count
                 + ServiceLocator.GetService<IEntityManager>().GetEntitiesOfType<BrickPowerUp>().Count;
-            playerMaxLife = 1;
+            playerMaxLife = 3;
             playerlife = playerMaxLife;
+        }
+
+        public void StoreGameData()
+        {
+            ISaveManager saveManager = ServiceLocator.GetService<ISaveManager>();
+
+            saveManager.SetInt("life", playerlife);
+            saveManager.SetInt("bounces", bouncesCount);
+            saveManager.SetFloat("gameDuration", gameDuration);
         }
 
         public int GetDetroyableBricksCount()
@@ -34,6 +44,26 @@ namespace Soutenance_MonoGame
             return ServiceLocator.GetService<IEntityManager>().GetEntitiesOfType<BrickNormal>().Count
                 + ServiceLocator.GetService<IEntityManager>().GetEntitiesOfType<BrickMoving>().Count
                 + ServiceLocator.GetService<IEntityManager>().GetEntitiesOfType<BrickPowerUp>().Count;
+        }
+
+        public float GetGameDuration()
+        {
+            return gameDuration;
+        }
+
+        public void AddGameDuration(float duration)
+        {
+            gameDuration += duration;
+        }
+
+        public int GetBouncesCount()
+        {
+            return bouncesCount;
+        }
+
+        public void AddBounce(int amount)
+        {
+            bouncesCount += amount;
         }
 
         public int GetPlayerLife()

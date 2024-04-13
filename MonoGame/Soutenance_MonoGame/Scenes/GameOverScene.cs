@@ -19,25 +19,20 @@ namespace Soutenance_MonoGame
         public override void Load()
         {
             Vector2 screenCenter = Utils.GetScreenCenter();
-            Text text = new Text(new Vector2(screenCenter.X, screenCenter.Y - 200.0f), "Game Over Scene", "Title", Text.FontType.big, Color.Blue);
+            ISaveManager saveManager = ServiceLocator.GetService<ISaveManager>();
+            Text textVictory = new Text(new Vector2(screenCenter.X, screenCenter.Y - 200.0f), $"{(saveManager.GetInt("life") > 0 ? "Victory!" : "Defeat :(")}", "textVictory", Text.FontType.big, saveManager.GetInt("life") > 0 ? Color.Green : Color.Red);
+
+            Text textLives = new Text(new Vector2(screenCenter.X, screenCenter.Y), $"Remaining lives: {saveManager.GetInt("life")}", "textLives", Text.FontType.normal, Color.Blue);
+            Text textBounces = new Text(new Vector2(screenCenter.X, screenCenter.Y + 50.0f), $"Total Bounces: {saveManager.GetInt("bounces")}", "textBounces", Text.FontType.normal, Color.Blue);
+            Text textDuration = new Text(new Vector2(screenCenter.X, screenCenter.Y + 100.0f), $"Total Duration: {MathF.Round(saveManager.GetFloat("gameDuration"), 0)}s", "textDuration", Text.FontType.normal, Color.Blue);
 
             base.Load();
             Debug.WriteLine($"{name} scene has been loaded.");
         }
 
-        public override void Update(GameTime gameTime)
+        public void GetGameData()
         {
-            base.Update(gameTime);
-        }
-
-        public override void Draw()
-        {
-            base.Draw();
-        }
-
-        public override void Unload()
-        {
-            base.Unload();
+                    
         }
     }
 }

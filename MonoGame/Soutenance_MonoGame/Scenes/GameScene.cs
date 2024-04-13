@@ -51,11 +51,13 @@ namespace Soutenance_MonoGame
         {
             base.Update(gameTime);
 
+            victoryManager.AddGameDuration((float)gameTime.ElapsedGameTime.TotalSeconds);
             if (ServiceLocator.GetService<IEntityManager>().GetEntitiesOfType<Ball>().Count <= 0)
             {
                 victoryManager.DecreasePlayerLife(1);
                 if (victoryManager.GetPlayerLife() <= 0)
                 {
+                    victoryManager.StoreGameData();
                     ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(GameOverScene));
                     return;
                 }
@@ -65,6 +67,7 @@ namespace Soutenance_MonoGame
 
             if (victoryManager.Victory())
             {
+                victoryManager.StoreGameData();
                 ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(GameOverScene));
             }
         }

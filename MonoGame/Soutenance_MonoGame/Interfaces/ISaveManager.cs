@@ -14,5 +14,6 @@ namespace Soutenance_MonoGame
         public int GetInt(string keyName);
         public void SetString(string keyName, string value);
         public string GetString(string keyName);
+        public void ClearData();
     }
 }
