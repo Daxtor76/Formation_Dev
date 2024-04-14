@@ -37,8 +37,6 @@ namespace Soutenance_MonoGame
 
             col = new Collider(this, new Vector2(0.5f, 0.5f), OnCollisionEnter, OnCollision);
             animator = new Animator(size);
-
-            Start();
         }
 
         public override void Start()

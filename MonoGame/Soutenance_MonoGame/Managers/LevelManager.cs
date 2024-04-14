@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Soutenance_MonoGame
 {
@@ -33,18 +34,17 @@ namespace Soutenance_MonoGame
                     JsonNode ldLevels = ld["Levels"];
                     for (int i = 0; i < ldLevels.AsObject().Count; i++)
                     {
-                        int lvlSizeX = (int)ldLevels[i.ToString()]["sizeX"];
-                        int lvlSizeY = (int)ldLevels[i.ToString()]["sizeY"];
-
-                        list.Add(new Level(lvlSizeX, lvlSizeY));
-                        Debug.WriteLine($"Level {i} ({lvlSizeX}/{lvlSizeY}) loaded.");
+                        JsonNode elements = ldLevels[i.ToString()];
+                        List<JsonNode> levelElements = new List<JsonNode>();
+                        for (int y = 0; y < elements.AsObject().Count; y++)
+                        {
+                            levelElements.Add(elements[y.ToString()]);
+                        }
+                        
+                        list.Add(new Level(levelElements));
+                        Debug.WriteLine($"Level {i} loaded with {levelElements.Count} elements");
                     }
                 }
-            }
-            else
-            {
-                Random rand = new Random();
-                list.Add(new Level(rand.Next(1, 10), rand.Next(1, 10)));
             }
 
             return list;

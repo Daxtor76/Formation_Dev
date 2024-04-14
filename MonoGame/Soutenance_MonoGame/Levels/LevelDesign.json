@@ -1,16 +1,106 @@
 {
     "Levels": {
         "0": {
-            "sizeX": 10,
-            "sizeY": 10
+            "0": {
+                "class": "unbreakable",
+                "type": "littlebrick",
+                "name": "brick_01",
+                "posX": 100,
+                "posY": 100
+            },
+            "1": {
+                "class": "powerup",
+                "type": "powerupbrick",
+                "name": "brick_02",
+                "posX": 300,
+                "posY": 100
+            },
+            "2": {
+                "class": "normal",
+                "type": "bigbrick",
+                "name": "brick_03",
+                "posX": 500,
+                "posY": 100
+            },
+            "3": {
+                "class": "moving",
+                "type": "brick",
+                "name": "brick_04",
+                "posX": 700,
+                "posY": 100
+            },
+            "4": {
+                "class": "teleporter",
+                "posX": 200,
+                "posY": 200,
+                "rotation": 45,
+                "destinationName": "portal_02",
+                "newDirectionX": 1,
+                "newDirectionY": 1,
+                "name": "portal_01",
+                "active": true,
+                "othersToActivate": {
+                    "0": "portal_02"
+                }
+            },
+            "5": {
+                "class": "teleporter",
+                "posX": 400,
+                "posY": 400,
+                "rotation": -45,
+                "destinationName": "portal_01",
+                "newDirectionX": -1,
+                "newDirectionY": -1,
+                "name": "portal_02",
+                "active": true,
+                "othersToActivate": {
+                    "0": "portal_01",
+                    "1": "portal_02"
+                }
+            }
         },
         "1": {
-            "sizeX": 3,
-            "sizeY": 3
-        },
-        "2": {
-            "sizeX": 12,
-            "sizeY": 8
+            "0": {
+                "class": "unbreakable",
+                "type": "littlebrick",
+                "name": "brick_01",
+                "posX": 100,
+                "posY": 100
+            },
+            "1": {
+                "class": "moving",
+                "type": "brick",
+                "name": "brick_03",
+                "posX": 700,
+                "posY": 100
+            },
+            "2": {
+                "class": "teleporter",
+                "posX": 200,
+                "posY": 200,
+                "rotation": 45,
+                "destinationName": "portal_02",
+                "newDirectionX": 1,
+                "newDirectionY": 1,
+                "name": "portal_01",
+                "active": true,
+                "othersToActivate": {
+                }
+            },
+            "3": {
+                "class": "teleporter",
+                "posX": 400,
+                "posY": 400,
+                "rotation": -45,
+                "destinationName": "portal_01",
+                "newDirectionX": -1,
+                "newDirectionY": -1,
+                "name": "portal_02",
+                "active": true,
+                "othersToActivate": {
+                    "0": "portal_01"
+                }
+            }
         }
     }
 }

@@ -63,6 +63,42 @@ namespace Soutenance_MonoGame
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
         }
 
+        public Brick(string pType, Colors pColor, string pName, Vector2 pPos)
+        {
+            SetName(pName);
+            layer = "Brick";
+
+            switch (pType)
+            {
+                case "littlebrick":
+                    type = BrickTypes.littlebrick;
+                    break;
+                case "powerupbrick":
+                    type = BrickTypes.powerupbrick;
+                    break;
+                case "bigbrick":
+                    type = BrickTypes.bigbrick;
+                    break;
+                case "brick":
+                    type = BrickTypes.brick;
+                    break;
+            }
+
+            color = pColor;
+            img = ServiceLocator.GetService<ISpritesManager>().GetBrickTexture(pType + "_" + pColor + "_" + (maxLife - life).ToString() + "hit");
+            baseSize = new Vector2(img.Width, img.Height);
+            size = baseSize * scale;
+            position = pPos;
+
+            col = new Collider(this, scale, OnCollisionEnter, OnCollision);
+
+            maxLife = GetMaxLife(type, color);
+            life = maxLife;
+            googlyEyes = new List<Entity>();
+
+            ServiceLocator.GetService<IEntityManager>().AddEntity(this);
+        }
+
         public void OnCollisionEnter(List<Collider> others)
         {
         }

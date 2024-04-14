@@ -13,6 +13,9 @@ namespace Soutenance_MonoGame
         public BrickPowerUp(BrickTypes pType, Colors pColor, string pName) : base(pType, pColor, pName)
         {
         }
+        public BrickPowerUp(string pType, Colors pColor, string pName, Vector2 pPos) : base(pType, pColor, pName, pPos)
+        {
+        }
 
         public void DropPowerUp(PowerUp.PowerUpTypes powerUpType)
         {

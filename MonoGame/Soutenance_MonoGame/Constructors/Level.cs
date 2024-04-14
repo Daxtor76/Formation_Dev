@@ -1,65 +1,103 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Text.Json.Nodes;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Soutenance_MonoGame
 {
     public class Level
     {
-        public Vector2 gridSize = Vector2.Zero;
         public List<Teleporter> teleporters;
-        Dictionary<Vector2, IEntity> grid = new Dictionary<Vector2, IEntity>();
+        List<JsonNode> levelElements = new List<JsonNode>();
+        List<IEntity> elements = new List<IEntity>();
 
-        public Level(int sizeX, int sizeY)
+        public Level(List<JsonNode> pLevelElements)
         {
-            gridSize = new Vector2(sizeX, sizeY);
+            levelElements = pLevelElements;
         }
 
         public void GenerateGrid()
         {
-            for (int i = 0; i < gridSize.X; i++)
+            Array colors = Enum.GetValues<Brick.Colors>();
+            Random rand = new Random();
+            for (int i = 0; i < levelElements.Count; i++)
             {
-                for (int y = 0; y < gridSize.Y; y++)
+                IEntity element = null;
+                string elementType = levelElements[i]["class"].ToString();
+                Vector2 elementPosition = new Vector2(int.Parse(levelElements[i]["posX"].ToString()), int.Parse(levelElements[i]["posY"].ToString()));
+                switch (elementType)
                 {
-                    Array types = Enum.GetValues<Brick.BrickTypes>();
-                    Array colors = Enum.GetValues<Brick.Colors>();
-                    Random rand = new Random();
-
-                    IEntity element;
-
-                    float randNb = rand.Next(0, 100);
-                    if (randNb >= 25.0f)
-                        element = new BrickNormal((Brick.BrickTypes)types.GetValue(rand.Next(0, types.Length - 1)), (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)), "Brick" + i + y);
-                    else if (randNb < 25.0f && randNb >= 20.0f)
-                        element = new BrickUnbreakable((Brick.BrickTypes)types.GetValue(rand.Next(0, types.Length - 1)), Brick.Colors.grey, "Brick" + i + y);
-                    else if (randNb < 20.0f && randNb >= 10.0f)
-                        element = new BrickMoving((Brick.BrickTypes)types.GetValue(rand.Next(0, types.Length - 1)), (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)), "Brick" + i + y, new Vector2(rand.Next(-300, 300), 0.0f));
-                    else
-                        element = new BrickPowerUp(Brick.BrickTypes.powerupbrick, (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)), "Brick" + i + y);
-
-                    float xPos = Utils.GetScreenCenter().X + element.GetSize().X * i - gridSize.X * element.GetSize().X * 0.5f;
-                    float yPos = 50 + element.GetSize().Y * y;
-                    element.SetPosition(new Vector2(xPos, yPos));
-                    element.SetLayerDepth((i+y) * 0.01f);
-
-                    element.Start();
-
-                    grid.Add(new Vector2(i, y), element);
+                    case "unbreakable":
+                        element = new BrickUnbreakable(
+                            levelElements[i]["type"].ToString(),
+                            Brick.Colors.grey,
+                            levelElements[i]["name"].ToString(),
+                            elementPosition);
+                        break;
+                    case "powerup":
+                        element = new BrickPowerUp(
+                            levelElements[i]["type"].ToString(),
+                            (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)),
+                            levelElements[i]["name"].ToString(),
+                            elementPosition);
+                        break;
+                    case "normal":
+                        element = new BrickNormal(
+                            levelElements[i]["type"].ToString(),
+                            (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)),
+                            levelElements[i]["name"].ToString(),
+                            elementPosition);
+                        break;
+                    case "moving":
+                        element = new BrickMoving(
+                            levelElements[i]["type"].ToString(),
+                            (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)),
+                            levelElements[i]["name"].ToString(),
+                            new Vector2(rand.Next(-300, 300), 0.0f),
+                            elementPosition);
+                        break;
+                    case "teleporter":
+                        Vector2 elementNewDirection = new Vector2(int.Parse(levelElements[i]["newDirectionX"].ToString()), int.Parse(levelElements[i]["newDirectionY"].ToString()));
+                        JsonNode othersElements = levelElements[i]["othersToActivate"];
+                        List<string> others = new List<string>();
+                        for (int y = 0; y < othersElements.AsObject().Count; y++)
+                        {
+                            others.Add(othersElements[y.ToString()].ToString());
+                        }
+                        element = new Teleporter(
+                            elementPosition,
+                            (float)levelElements[i]["rotation"],
+                            levelElements[i]["destinationName"].ToString(),
+                            elementNewDirection,
+                            levelElements[i]["name"].ToString(),
+                            (bool)levelElements[i]["active"],
+                            others);
+                        ;
+                        break;
+                    default:
+                        break; 
                 }
+                Debug.WriteLine($"Generate Element : {element.GetName()} at {element.GetPosition()}");
+                element.SetLayerDepth(i * 0.01f);
+                element.Start();
+
+                elements.Add(element);
             }
         }
 
         public void Unload()
         {
-            foreach (IEntity element in grid.Values)
+            foreach (IEntity element in elements)
             {
                 element.Unload();
             }
-            grid.Clear();
+            elements.Clear();
         }
     }
 }

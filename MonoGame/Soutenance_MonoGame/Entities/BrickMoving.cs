@@ -23,16 +23,15 @@ namespace Soutenance_MonoGame
 
             Random rand = new Random();
             currentTimer = 0.0f;
-
-            Start();
         }
-
-        public override void Start()
+        public BrickMoving(string pType, Colors pColor, string pName, Vector2 pPoint2, Vector2 pPos) : base(pType, pColor, pName, pPos)
         {
-            point1 = position;
-            point2 += position;
-
+            CreateEyesPerLifepoints(maxLife);
+            mover = new Mover(1.0f);
+            point1 = pPos;
+            point2 = pPos + pPoint2;
             destination = point2;
+            currentTimer = 0.0f;
         }
 
         public override void Update(GameTime gameTime)
