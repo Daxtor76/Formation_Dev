@@ -248,6 +248,7 @@ namespace Soutenance_MonoGame
         public override void Unload()
         {
             mover = null;
+            animator = null;
 
             SetEnabled(false);
         }

@@ -13,7 +13,6 @@ namespace Soutenance_MonoGame
 {
     public class Level
     {
-        public List<Teleporter> teleporters;
         List<JsonNode> levelElements = new List<JsonNode>();
         List<IEntity> elements = new List<IEntity>();
 
@@ -93,10 +92,6 @@ namespace Soutenance_MonoGame
 
         public void Unload()
         {
-            foreach (IEntity element in elements)
-            {
-                element.Unload();
-            }
             elements.Clear();
         }
     }
