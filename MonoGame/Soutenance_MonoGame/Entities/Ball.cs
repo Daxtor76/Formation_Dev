@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.ComponentModel.Design;
 using System.Threading;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Soutenance_MonoGame
 {
@@ -128,6 +129,10 @@ namespace Soutenance_MonoGame
         public void OnCollisionEnter(List<Collider> others)
         {
             Vector2 newDir = Vector2.Zero;
+            if (others.Count > 1)
+            {
+                Debug.WriteLine(newDir);
+            }
 
             foreach (Collider other in others)
             {
@@ -156,7 +161,11 @@ namespace Soutenance_MonoGame
                         }
 
                         ActivateTeleportersColliders();
+
                         newDir += GetNewDirFromCollision(side);
+                        if (newDir == Vector2.Zero)
+                            newDir = -mover.direction;
+
                         if (side == "top")
                             state = States.Normal;
                     }
@@ -165,14 +174,20 @@ namespace Soutenance_MonoGame
                         ActivateTeleportersColliders();
 
                         if (state == States.Normal)
+                        {
                             newDir += GetNewDirFromCollision(side);
+
+                            if (newDir == Vector2.Zero)
+                                newDir = -mover.direction;
+                        }
                     }
 
                     if (other.parent is IDamageable)
                         Hit(other.parent as IDamageable);
                 }
             }
-            if (newDir != mover.direction && newDir != Vector2.Zero)
+
+            if (newDir != Vector2.Zero)
                 Bounce(newDir);
         }
 
@@ -244,6 +259,7 @@ namespace Soutenance_MonoGame
         {
             GameScene gameScene = ServiceLocator.GetService<ISceneManager>().GetCurrentScene() as GameScene;
             gameScene.victoryManager.AddBounce(1);
+
             mover.direction = Vector2.Normalize(newDirection);
         }
 

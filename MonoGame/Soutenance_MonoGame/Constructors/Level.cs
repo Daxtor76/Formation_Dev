@@ -29,7 +29,7 @@ namespace Soutenance_MonoGame
             {
                 IEntity element = null;
                 string elementType = levelElements[i]["class"].ToString();
-                Vector2 elementPosition = new Vector2(int.Parse(levelElements[i]["posX"].ToString()), int.Parse(levelElements[i]["posY"].ToString()));
+                Vector2 elementPosition = new Vector2(float.Parse(levelElements[i]["posX"].ToString()), float.Parse(levelElements[i]["posY"].ToString()));
                 switch (elementType)
                 {
                     case "unbreakable":
@@ -62,7 +62,7 @@ namespace Soutenance_MonoGame
                             elementPosition);
                         break;
                     case "teleporter":
-                        Vector2 elementNewDirection = new Vector2(int.Parse(levelElements[i]["newDirectionX"].ToString()), int.Parse(levelElements[i]["newDirectionY"].ToString()));
+                        Vector2 elementNewDirection = new Vector2(float.Parse(levelElements[i]["newDirectionX"].ToString()), float.Parse(levelElements[i]["newDirectionY"].ToString()));
                         JsonNode othersElements = levelElements[i]["othersToActivate"];
                         List<string> others = new List<string>();
                         for (int y = 0; y < othersElements.AsObject().Count; y++)
