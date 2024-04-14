@@ -127,7 +127,11 @@ namespace Soutenance_MonoGame
 
         public void OnCollisionEnter(List<Collider> others)
         {
-            Vector2 newDir = Vector2.Zero;
+            Vector2 newDir = new Vector2(1.0f, 1.0f);
+            if (others.Count > 1)
+            {
+                Debug.WriteLine("coucou");
+            }
 
             foreach (Collider other in others)
             {
@@ -141,7 +145,12 @@ namespace Soutenance_MonoGame
                         ActivateTeleportersColliders();
                     }
                     else if (other.parent.layer == "Teleporter")
-                        Teleport(other);
+                    {
+                        Teleporter tp = ServiceLocator.GetService<IEntityManager>().GetEntity(other.parent.GetName()) as Teleporter;
+                        Teleporter destTp = ServiceLocator.GetService<IEntityManager>().GetEntity(tp.destinationName) as Teleporter;
+                        Teleport(destTp);
+                        newDir = GetNewDirFromTeleport(destTp);
+                    }
                     else if (other.parent.layer == "Wall")
                     {
                         if (side == "bottom")
@@ -151,7 +160,7 @@ namespace Soutenance_MonoGame
                         }
 
                         ActivateTeleportersColliders();
-                        newDir += GetNewDirFromCollision(side);
+                        newDir *= GetNewDirFromCollision(side);
                         if (side == "top")
                             state = States.Normal;
                     }
@@ -159,7 +168,7 @@ namespace Soutenance_MonoGame
                     {
                         ActivateTeleportersColliders();
                         if (state == States.Normal)
-                            newDir += GetNewDirFromCollision(side);
+                            newDir *= GetNewDirFromCollision(side);
                     }
 
                     if (other.parent is IDamageable)
@@ -170,13 +179,10 @@ namespace Soutenance_MonoGame
                 Bounce(newDir);
         }
 
-        void Teleport(Collider other)
+        void Teleport(Teleporter destination)
         {
-            Teleporter tp = other.parent as Teleporter;
-            Teleporter destTp = ServiceLocator.GetService<IEntityManager>().GetEntity(tp.destinationName) as Teleporter;
-            destTp.col.SetActive(false);
-            position = destTp.position;
-            mover.direction = Vector2.Normalize(destTp.newDirection);
+            destination.col.SetActive(false);
+            SetPosition(destination.position);
         }
 
         void ActivateTeleportersColliders()
@@ -186,6 +192,11 @@ namespace Soutenance_MonoGame
                 if (tp.IsActive())
                     tp.col.SetActive(true);
             }
+        }
+
+        Vector2 GetNewDirFromTeleport(Teleporter other)
+        {
+            return other.GetNewDirection();
         }
 
         Vector2 GetNewDirFromCollisionOnPaddle(Collider other)
@@ -213,16 +224,19 @@ namespace Soutenance_MonoGame
             switch (side)
             {
                 case "top":
-                    dir = new Vector2(mover.direction.X, -mover.direction.Y);
+                    dir = mover.direction * new Vector2(1, -1);
                     break;
                 case "right":
-                    dir = new Vector2(-mover.direction.X, mover.direction.Y);
+                    dir = mover.direction * new Vector2(-1, 1);
                     break;
                 case "bottom":
-                    dir = new Vector2(mover.direction.X, -mover.direction.Y);
+                    dir = mover.direction * new Vector2(1, -1);
                     break;
                 case "left":
-                    dir = new Vector2(-mover.direction.X, mover.direction.Y);
+                    dir = mover.direction * new Vector2(-1, 1);
+                    break;
+                default:
+                    dir = mover.direction * new Vector2(1, 1);
                     break;
             }
 

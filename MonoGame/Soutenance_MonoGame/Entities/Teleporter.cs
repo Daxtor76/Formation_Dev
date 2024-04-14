@@ -26,7 +26,7 @@ namespace Soutenance_MonoGame
             baseSize = new Vector2(53.3f, 92.0f);
             size = baseSize * scale;
             position = pPos;
-            rotation = pRotation;
+            rotation = Utils.DegreesToRad(pRotation);
             SetActive(pActive);
             destinationName = pdestinationName;
             newDirection = pNewDirection;
@@ -71,18 +71,11 @@ namespace Soutenance_MonoGame
 
         public void OnCollisionEnter(List<Collider> others)
         {
-            foreach (Collider other in others)
-            {
-                if (other.parent.layer == "Ball")
-                {
-                    if (othersToActivate != null)
-                    {
-                        ActivateOthers();
-                        SetActive(false);
-                        col.SetActive(false);
-                    }
-                }
-            }
+        }
+
+        public override Vector2 GetNewDirection()
+        {
+            return newDirection;
         }
 
         public void ActivateOthers()
@@ -90,7 +83,7 @@ namespace Soutenance_MonoGame
             foreach (string tpName in othersToActivate)
             {
                 Teleporter tp = ServiceLocator.GetService<IEntityManager>().GetEntity(tpName) as Teleporter;
-                tp.SetActive(true);
+                //tp.SetActive(true);
                 tp.col.SetActive(true);
             }
         }

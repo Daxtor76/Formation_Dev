@@ -147,5 +147,10 @@ namespace Soutenance_MonoGame
         {
             return layerDepth;
         }
+
+        public virtual Vector2 GetNewDirection()
+        {
+            return Vector2.Zero;
+        }
     }
 }

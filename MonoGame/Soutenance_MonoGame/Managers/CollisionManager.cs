@@ -31,6 +31,7 @@ namespace Soutenance_MonoGame
                 if (col.IsEnabled() && col.IsActive())
                 {
                     col.Update(gameTime);
+                    col.others.Clear();
                     for (int y = 0; y < colliders.Count; y++)
                     {
                         Collider other = colliders[y];
@@ -50,7 +51,6 @@ namespace Soutenance_MonoGame
                         col.ApplyCollisions(col.others);
                     }
                     col.StorePreviousOthers();
-                    col.others.Clear();
                 }
             }
         }

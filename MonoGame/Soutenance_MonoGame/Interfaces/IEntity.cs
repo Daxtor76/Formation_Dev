@@ -27,5 +27,6 @@ namespace Soutenance_MonoGame
         public void SetActive(bool value);
         public void SetLayerDepth(float value);
         public float GetLayerDepth();
+        public Vector2 GetNewDirection();
     }
 }

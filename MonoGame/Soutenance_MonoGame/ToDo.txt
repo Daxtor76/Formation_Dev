@@ -22,7 +22,7 @@
 - Reload une scène (gamescene) -> ok
 - Feedback ball boosted -> ok
 - Life display -> ok
-- Random level generator v2 (bon alignement des pièces, ajouts d'options etc)
+- Random level generator v2 (bon alignement des pièces, ajouts d'options etc) -> ok
 - Map editor
 - Visuel: backgrounds
 - Visuel: screenshake

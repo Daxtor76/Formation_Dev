@@ -61,44 +61,168 @@
         },
         "1": {
             "0": {
-                "class": "unbreakable",
-                "type": "littlebrick",
-                "name": "brick_01",
-                "posX": 100,
+                "class": "normal",
+                "type": "bigbrick",
+                "name": "brick_00",
+                "posX": 500,
+                "posY": 100
+            },
+            "18": {
+                "class": "normal",
+                "type": "bigbrick",
+                "name": "brick_55",
+                "posX": 900,
                 "posY": 100
             },
             "1": {
-                "class": "moving",
-                "type": "brick",
-                "name": "brick_03",
-                "posX": 700,
-                "posY": 100
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "name": "brick_01",
+                "posX": 0,
+                "posY": 336
             },
             "2": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "name": "brick_02",
+                "posX": 99,
+                "posY": 336
+            },
+            "3": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "name": "brick_03",
+                "posX": 198,
+                "posY": 336
+            },
+            "4": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "name": "brick_04",
+                "posX": 297,
+                "posY": 336
+            },
+            "5": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "name": "brick_05",
+                "posX": 396,
+                "posY": 336
+            },
+            "6": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "name": "brick_06",
+                "posX": 495,
+                "posY": 336
+            },
+            "7": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "name": "brick_07",
+                "posX": 594,
+                "posY": 336
+            },
+            "8": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "name": "brick_8",
+                "posX": 693,
+                "posY": 336
+            },
+            "9": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "name": "brick_9",
+                "posX": 792,
+                "posY": 336
+            },
+            "10": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "name": "brick_10",
+                "posX": 891,
+                "posY": 336
+            },
+            "11": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "name": "brick_11",
+                "posX": 990,
+                "posY": 336
+            },
+            "12": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "name": "brick_12",
+                "posX": 1089,
+                "posY": 336
+            },
+            "13": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "name": "brick_13",
+                "posX": 1188,
+                "posY": 336
+            },
+            "14": {
                 "class": "teleporter",
                 "posX": 200,
-                "posY": 200,
-                "rotation": 45,
+                "posY": 450,
+                "rotation": 90,
                 "destinationName": "portal_02",
-                "newDirectionX": 1,
-                "newDirectionY": 1,
+                "newDirectionX": 0,
+                "newDirectionY": -1,
                 "name": "portal_01",
                 "active": true,
                 "othersToActivate": {
+                    "0": "portal_02",
+                    "1": "portal_04"
                 }
             },
-            "3": {
+            "15": {
                 "class": "teleporter",
-                "posX": 400,
-                "posY": 400,
-                "rotation": -45,
+                "posX": 550,
+                "posY": 230,
+                "rotation": 45,
                 "destinationName": "portal_01",
                 "newDirectionX": -1,
                 "newDirectionY": -1,
                 "name": "portal_02",
                 "active": true,
                 "othersToActivate": {
-                    "0": "portal_01"
+                    "0": "portal_01",
+                    "1": "portal_03"
+                }
+            },
+            "16": {
+                "class": "teleporter",
+                "posX": 900,
+                "posY": 450,
+                "rotation": 90,
+                "destinationName": "portal_04",
+                "newDirectionX": 0,
+                "newDirectionY": -1,
+                "name": "portal_03",
+                "active": true,
+                "othersToActivate": {
+                    "0": "portal_02",
+                    "1": "portal_04"
+                }
+            },
+            "17": {
+                "class": "teleporter",
+                "posX": 750,
+                "posY": 230,
+                "rotation": -45,
+                "destinationName": "portal_03",
+                "newDirectionX": 1,
+                "newDirectionY": -1,
+                "name": "portal_04",
+                "active": true,
+                "othersToActivate": {
+                    "0": "portal_01",
+                    "1": "portal_03"
                 }
             }
         }
