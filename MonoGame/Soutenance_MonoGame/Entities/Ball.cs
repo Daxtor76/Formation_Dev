@@ -127,11 +127,7 @@ namespace Soutenance_MonoGame
 
         public void OnCollisionEnter(List<Collider> others)
         {
-            Vector2 newDir = new Vector2(1.0f, 1.0f);
-            if (others.Count > 1)
-            {
-                Debug.WriteLine("coucou");
-            }
+            Vector2 newDir = Vector2.Zero;
 
             foreach (Collider other in others)
             {
@@ -160,15 +156,16 @@ namespace Soutenance_MonoGame
                         }
 
                         ActivateTeleportersColliders();
-                        newDir *= GetNewDirFromCollision(side);
+                        newDir += GetNewDirFromCollision(side);
                         if (side == "top")
                             state = States.Normal;
                     }
                     else if (other.parent.layer == "Brick")
                     {
                         ActivateTeleportersColliders();
+
                         if (state == States.Normal)
-                            newDir *= GetNewDirFromCollision(side);
+                            newDir += GetNewDirFromCollision(side);
                     }
 
                     if (other.parent is IDamageable)
@@ -206,7 +203,7 @@ namespace Soutenance_MonoGame
             if (state == States.Boosted)
                 mover.accel += new Vector2(1.0f, 1.0f);
 
-            return new Vector2(modifier, -mover.direction.Y);
+            return new Vector2(modifier, -1.0f);
         }
 
         float GetImpactPointRelativePositionX(Entity target)
@@ -224,19 +221,19 @@ namespace Soutenance_MonoGame
             switch (side)
             {
                 case "top":
-                    dir = mover.direction * new Vector2(1, -1);
+                    dir = new Vector2(mover.direction.X, -mover.direction.Y);
                     break;
                 case "right":
-                    dir = mover.direction * new Vector2(-1, 1);
+                    dir = new Vector2(-mover.direction.X, mover.direction.Y);
                     break;
                 case "bottom":
-                    dir = mover.direction * new Vector2(1, -1);
+                    dir = new Vector2(mover.direction.X, -mover.direction.Y);
                     break;
                 case "left":
-                    dir = mover.direction * new Vector2(-1, 1);
+                    dir = new Vector2(-mover.direction.X, mover.direction.Y);
                     break;
                 default:
-                    dir = mover.direction * new Vector2(1, 1);
+                    dir = new Vector2(mover.direction.X, mover.direction.Y);
                     break;
             }
 

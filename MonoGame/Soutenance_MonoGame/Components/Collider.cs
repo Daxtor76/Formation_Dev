@@ -44,18 +44,6 @@ namespace Soutenance_MonoGame
             {
                 position = parent.position + parent.size * 0.5f - size * 0.5f;
                 size = parent.size * scale;
-                if (parent.layer == "Ball")
-                {
-                    if (others.Count != 0)
-                    {
-                        Debug.WriteLine("--------------------");
-                        foreach (Collider other in others)
-                        {
-                            Debug.WriteLine(other.parent.GetName());
-                        }
-                        Debug.WriteLine("--------------------");
-                    }
-                }
             }
         }
 

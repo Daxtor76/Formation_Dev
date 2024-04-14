@@ -55,6 +55,11 @@ namespace Soutenance_MonoGame
             {
                 RemoveHeart();
                 victoryManager.DecreasePlayerLife(1);
+                foreach (Teleporter tp in ServiceLocator.GetService<IEntityManager>().GetEntitiesOfType<Teleporter>())
+                {
+                    if (tp.IsActive())
+                        tp.col.SetActive(true);
+                }
                 if (victoryManager.GetPlayerLife() <= 0)
                 {
                     victoryManager.StoreGameData();
