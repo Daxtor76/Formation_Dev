@@ -22,10 +22,9 @@ namespace Soutenance_MonoGame
         public GooglyEyes(Brick pParent, int pId)
         {
             Random rand = new Random();
-            int rndNumber = rand.Next(0, 1000);
 
             parent = pParent;
-            SetName(pParent.GetName() + "googly" + rndNumber.ToString());
+            SetName(pParent.GetName() + "googly" + rand.Next(0, 1000).ToString() + rand.Next(0, 1000).ToString() + rand.Next(0, 1000).ToString());
             layer = "FXs";
             img = ServiceLocator.GetService<ISpritesManager>().GetGooglyEyesTexture("background");
             eye = ServiceLocator.GetService<ISpritesManager>().GetGooglyEyesTexture("eye");

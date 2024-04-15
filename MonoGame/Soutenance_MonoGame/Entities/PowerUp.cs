@@ -36,11 +36,10 @@ namespace Soutenance_MonoGame
         public PowerUp(Vector2 pPos, PowerUpTypes pType)
         {
             Random rand = new Random();
-            int rndNumber = rand.Next(0, 1000);
 
             type = pType;
             state = PowerUpStates.Spawn;
-            SetName("PowerUp" + rndNumber.ToString());
+            SetName("PowerUp" + rand.Next(0, 1000).ToString() + rand.Next(0, 1000).ToString() + rand.Next(0, 1000).ToString());
             layer = "PowerUp";
             img = ServiceLocator.GetService<ISpritesManager>().GetPowerUpTexture($"powerup_{pType}_spritesheet");
             baseSize = new Vector2(30.0f, img.Height);
@@ -61,7 +60,7 @@ namespace Soutenance_MonoGame
             }
 
             col = new Collider(this, scale, OnCollisionEnter, OnCollision);
-            mover = new Mover(100.0f);
+            mover = new Mover(150.0f);
             animator = new Animator(size);
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
