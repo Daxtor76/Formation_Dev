@@ -1,0 +1,6 @@
+E:\Projets\Formation_Dev\MonoGame\Exo01\obj\Release\net6.0\Exo01.csproj.AssemblyReference.cache
+E:\Projets\Formation_Dev\MonoGame\Exo01\obj\Release\net6.0\Exo01.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projets\Formation_Dev\MonoGame\Exo01\obj\Release\net6.0\Exo01.AssemblyInfoInputs.cache
+E:\Projets\Formation_Dev\MonoGame\Exo01\obj\Release\net6.0\Exo01.AssemblyInfo.cs
+E:\Projets\Formation_Dev\MonoGame\Exo01\obj\Release\net6.0\Exo01.csproj.CoreCompileInputs.cache
+E:\Projets\Formation_Dev\MonoGame\Exo01\obj\Release\net6.0\Exo01.sourcelink.json

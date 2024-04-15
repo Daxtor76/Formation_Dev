@@ -1,0 +1,1361 @@
+{
+    "Levels": {
+        "0": {
+            "0": {
+                "class": "unbreakable",
+                "type": "littlebrick",
+                "posX": 338,
+                "posY": 79
+            },
+            "1": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 386,
+                "posY": 79
+            },
+            "2": {
+                "class": "unbreakable",
+                "type": "littlebrick",
+                "posX": 434,
+                "posY": 79
+            },
+            "3": {
+                "class": "unbreakable",
+                "type": "littlebrick",
+                "posX": 770,
+                "posY": 79
+            },
+            "4": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 818,
+                "posY": 79
+            },
+            "5": {
+                "class": "unbreakable",
+                "type": "littlebrick",
+                "posX": 866,
+                "posY": 79
+            },
+            "6": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 50,
+                "posY": 336
+            },
+            "7": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 146,
+                "posY": 336
+            },
+            "8": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 575,
+                "posY": 336
+            },
+            "9": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 1010,
+                "posY": 336
+            },
+            "10": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 1106,
+                "posY": 336
+            },
+            "11": {
+                "class": "moving",
+                "type": "brick",
+                "posX": 50,
+                "posY": 50
+            },
+            "12": {
+                "class": "moving",
+                "type": "brick",
+                "posX": 338,
+                "posY": 50
+            },
+            "13": {
+                "class": "moving",
+                "type": "brick",
+                "posX": 592,
+                "posY": 50
+            },
+            "14": {
+                "class": "moving",
+                "type": "brick",
+                "posX": 770,
+                "posY": 50
+            },
+            "15": {
+                "class": "moving",
+                "type": "brick",
+                "posX": 914,
+                "posY": 50
+            },
+            "16": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 50,
+                "posY": 146
+            },
+            "17": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 194,
+                "posY": 146
+            },
+            "18": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 290,
+                "posY": 146
+            },
+            "19": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 434,
+                "posY": 146
+            },
+            "20": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 530,
+                "posY": 146
+            },
+            "21": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 674,
+                "posY": 146
+            },
+            "22": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 770,
+                "posY": 146
+            },
+            "23": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 914,
+                "posY": 146
+            },
+            "24": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1010,
+                "posY": 146
+            },
+            "25": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 1154,
+                "posY": 146
+            },
+            "26": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 74,
+                "posY": 194
+            },
+            "27": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 170,
+                "posY": 194
+            },
+            "28": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 314,
+                "posY": 194
+            },
+            "29": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 410,
+                "posY": 194
+            },
+            "30": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 554,
+                "posY": 194
+            },
+            "31": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 650,
+                "posY": 194
+            },
+            "32": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 794,
+                "posY": 194
+            },
+            "33": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 890,
+                "posY": 194
+            },
+            "34": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 1034,
+                "posY": 194
+            },
+            "35": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1130,
+                "posY": 194
+            },
+            "36": {
+                "class": "powerup",
+                "type": "powerupbrick",
+                "posX": 362,
+                "posY": 266
+            },
+            "37": {
+                "class": "powerup",
+                "type": "powerupbrick",
+                "posX": 818,
+                "posY": 266
+            },
+            "38": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 242,
+                "posY": 360
+            },
+            "39": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 290,
+                "posY": 384
+            },
+            "40": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 338,
+                "posY": 408
+            },
+            "41": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 386,
+                "posY": 408
+            },
+            "42": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 434,
+                "posY": 408
+            },
+            "43": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 482,
+                "posY": 384
+            },
+            "44": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 530,
+                "posY": 360
+            },
+            "45": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 673,
+                "posY": 360
+            },
+            "46": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 721,
+                "posY": 384
+            },
+            "47": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 769,
+                "posY": 408
+            },
+            "48": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 817,
+                "posY": 408
+            },
+            "49": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 865,
+                "posY": 408
+            },
+            "50": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 913,
+                "posY": 384
+            },
+            "51": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 961,
+                "posY": 360
+            }
+        },
+        "1": {
+            "0": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 496,
+                "posY": 250
+            },
+            "1": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 592,
+                "posY": 250
+            },
+            "2": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 688,
+                "posY": 250
+            },
+            "3": {
+                "class": "unbreakable",
+                "type": "littlebrick",
+                "posX": 616,
+                "posY": 202
+            },
+            "4": {
+                "class": "unbreakable",
+                "type": "littlebrick",
+                "posX": 616,
+                "posY": 154
+            },
+            "5": {
+                "class": "unbreakable",
+                "type": "littlebrick",
+                "posX": 616,
+                "posY": 106
+            },
+            "6": {
+                "class": "unbreakable",
+                "type": "littlebrick",
+                "posX": 616,
+                "posY": 298
+            },
+            "7": {
+                "class": "unbreakable",
+                "type": "littlebrick",
+                "posX": 616,
+                "posY": 346
+            },
+            "8": {
+                "class": "unbreakable",
+                "type": "littlebrick",
+                "posX": 616,
+                "posY": 394
+            },
+            "9": {
+                "class": "teleporter",
+                "posX": 535,
+                "posY": 300,
+                "rotation": -45,
+                "destinationName": "portal_02",
+                "newDirectionX": -1,
+                "newDirectionY": -1,
+                "name": "portal_01",
+                "active": true,
+                "othersToActivate": {
+                    "0": "portal_02",
+                    "1": "portal_04"
+                }
+            },
+            "10": {
+                "class": "teleporter",
+                "posX": 535,
+                "posY": 150,
+                "rotation": 45,
+                "destinationName": "portal_03",
+                "newDirectionX": -1,
+                "newDirectionY": -1,
+                "name": "portal_02",
+                "active": true,
+                "othersToActivate": {
+                    "0": "portal_01",
+                    "1": "portal_03"
+                }
+            },
+            "11": {
+                "class": "teleporter",
+                "posX": 690,
+                "posY": 300,
+                "rotation": 45,
+                "destinationName": "portal_04",
+                "newDirectionX": 1,
+                "newDirectionY": -1,
+                "name": "portal_03",
+                "active": true,
+                "othersToActivate": {
+                    "0": "portal_02",
+                    "1": "portal_04"
+                }
+            },
+            "12": {
+                "class": "teleporter",
+                "posX": 690,
+                "posY": 150,
+                "rotation": -45,
+                "destinationName": "portal_01",
+                "newDirectionX": 1,
+                "newDirectionY": -1,
+                "name": "portal_04",
+                "active": true,
+                "othersToActivate": {
+                    "0": "portal_01",
+                    "1": "portal_03"
+                }
+            },
+            "13": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 50,
+                "posY": 394
+            },
+            "14": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 146,
+                "posY": 394
+            },
+            "15": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 242,
+                "posY": 394
+            },
+            "16": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 338,
+                "posY": 394
+            },
+            "17": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 846,
+                "posY": 106
+            },
+            "18": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 942,
+                "posY": 106
+            },
+            "19": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 1038,
+                "posY": 106
+            },
+            "20": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 1134,
+                "posY": 106
+            },
+            "21": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 50,
+                "posY": 35
+            },
+            "22": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 146,
+                "posY": 35
+            },
+            "23": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 242,
+                "posY": 35
+            },
+            "24": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 338,
+                "posY": 35
+            },
+            "25": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 434,
+                "posY": 35
+            },
+            "26": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 530,
+                "posY": 35
+            },
+            "27": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 626,
+                "posY": 35
+            },
+            "28": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 722,
+                "posY": 35
+            },
+            "29": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 818,
+                "posY": 35
+            },
+            "30": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 914,
+                "posY": 35
+            },
+            "31": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1010,
+                "posY": 35
+            },
+            "32": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1106,
+                "posY": 35
+            },
+            "33": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 50,
+                "posY": 83
+            },
+            "34": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 146,
+                "posY": 83
+            },
+            "35": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 242,
+                "posY": 83
+            },
+            "36": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 338,
+                "posY": 83
+            },
+            "37": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 50,
+                "posY": 131
+            },
+            "38": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 146,
+                "posY": 131
+            },
+            "39": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 242,
+                "posY": 131
+            },
+            "40": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 338,
+                "posY": 131
+            },
+            "41": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 50,
+                "posY": 179
+            },
+            "42": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 146,
+                "posY": 179
+            },
+            "43": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 242,
+                "posY": 179
+            },
+            "44": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 338,
+                "posY": 179
+            },
+            "45": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 50,
+                "posY": 227
+            },
+            "46": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 146,
+                "posY": 227
+            },
+            "47": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 242,
+                "posY": 227
+            },
+            "48": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 338,
+                "posY": 227
+            },
+            "49": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 50,
+                "posY": 275
+            },
+            "50": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 146,
+                "posY": 275
+            },
+            "51": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 242,
+                "posY": 275
+            },
+            "52": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 338,
+                "posY": 275
+            },
+            "53": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 50,
+                "posY": 323
+            },
+            "54": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 146,
+                "posY": 323
+            },
+            "55": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 242,
+                "posY": 323
+            },
+            "56": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 338,
+                "posY": 323
+            },
+            "57": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 846,
+                "posY": 154
+            },
+            "58": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 942,
+                "posY": 154
+            },
+            "59": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1038,
+                "posY": 154
+            },
+            "60": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1134,
+                "posY": 154
+            },
+            "61": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 846,
+                "posY": 202
+            },
+            "62": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 942,
+                "posY": 202
+            },
+            "63": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1038,
+                "posY": 202
+            },
+            "64": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1134,
+                "posY": 202
+            },
+            "65": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 846,
+                "posY": 250
+            },
+            "66": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 942,
+                "posY": 250
+            },
+            "67": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1038,
+                "posY": 250
+            },
+            "68": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1134,
+                "posY": 250
+            },
+            "69": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 846,
+                "posY": 298
+            },
+            "70": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 942,
+                "posY": 298
+            },
+            "71": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1038,
+                "posY": 298
+            },
+            "72": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1134,
+                "posY": 298
+            },
+            "73": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 846,
+                "posY": 346
+            },
+            "74": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 942,
+                "posY": 346
+            },
+            "75": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1038,
+                "posY": 346
+            },
+            "76": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1134,
+                "posY": 346
+            },
+            "77": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 846,
+                "posY": 394
+            },
+            "78": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 942,
+                "posY": 394
+            },
+            "79": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1038,
+                "posY": 394
+            },
+            "80": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1134,
+                "posY": 394
+            },
+            "81": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 78,
+                "posY": 442
+            },
+            "82": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 174,
+                "posY": 442
+            },
+            "83": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 270,
+                "posY": 442
+            },
+            "84": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 366,
+                "posY": 442
+            },
+            "85": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 462,
+                "posY": 442
+            },
+            "86": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 558,
+                "posY": 442
+            },
+            "87": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 654,
+                "posY": 442
+            },
+            "88": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 750,
+                "posY": 442
+            },
+            "89": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 846,
+                "posY": 442
+            },
+            "90": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 942,
+                "posY": 442
+            },
+            "91": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1038,
+                "posY": 442
+            },
+            "92": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1134,
+                "posY": 442
+            }
+        },
+        "2": {
+            "0": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 0,
+                "posY": 336
+            },
+            "1": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 96,
+                "posY": 336
+            },
+            "2": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 192,
+                "posY": 336
+            },
+            "3": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 288,
+                "posY": 336
+            },
+            "4": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 384,
+                "posY": 336
+            },
+            "5": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 480,
+                "posY": 336
+            },
+            "6": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 576,
+                "posY": 336
+            },
+            "7": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 672,
+                "posY": 336
+            },
+            "8": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 768,
+                "posY": 336
+            },
+            "9": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 864,
+                "posY": 336
+            },
+            "10": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 960,
+                "posY": 336
+            },
+            "11": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 1056,
+                "posY": 336
+            },
+            "12": {
+                "class": "unbreakable",
+                "type": "bigbrick",
+                "posX": 1152,
+                "posY": 336
+            },
+            "13": {
+                "class": "unbreakable",
+                "type": "littlebrick",
+                "posX": 1248,
+                "posY": 336
+            },
+            "14": {
+                "class": "teleporter",
+                "posX": 350,
+                "posY": 400,
+                "rotation": 90,
+                "destinationName": "portal_02",
+                "newDirectionX": 0,
+                "newDirectionY": 1,
+                "name": "portal_01",
+                "active": true,
+                "othersToActivate": {
+                    "0": "portal_02",
+                    "1": "portal_04"
+                }
+            },
+            "15": {
+                "class": "teleporter",
+                "posX": 550,
+                "posY": 230,
+                "rotation": 45,
+                "destinationName": "portal_01",
+                "newDirectionX": -1,
+                "newDirectionY": -1,
+                "name": "portal_02",
+                "active": true,
+                "othersToActivate": {
+                    "0": "portal_01",
+                    "1": "portal_03"
+                }
+            },
+            "16": {
+                "class": "teleporter",
+                "posX": 900,
+                "posY": 400,
+                "rotation": 90,
+                "destinationName": "portal_04",
+                "newDirectionX": 0,
+                "newDirectionY": 1,
+                "name": "portal_03",
+                "active": true,
+                "othersToActivate": {
+                    "0": "portal_02",
+                    "1": "portal_04"
+                }
+            },
+            "17": {
+                "class": "teleporter",
+                "posX": 750,
+                "posY": 230,
+                "rotation": -45,
+                "destinationName": "portal_03",
+                "newDirectionX": 1,
+                "newDirectionY": -1,
+                "name": "portal_04",
+                "active": true,
+                "othersToActivate": {
+                    "0": "portal_01",
+                    "1": "portal_03"
+                }
+            },
+            "18": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 50,
+                "posY": 50
+            },
+            "19": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 146,
+                "posY": 50
+            },
+            "20": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 242,
+                "posY": 50
+            },
+            "21": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 338,
+                "posY": 50
+            },
+            "22": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 434,
+                "posY": 50
+            },
+            "23": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 530,
+                "posY": 50
+            },
+            "24": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 722,
+                "posY": 50
+            },
+            "25": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 818,
+                "posY": 50
+            },
+            "26": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 914,
+                "posY": 50
+            },
+            "27": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 1010,
+                "posY": 50
+            },
+            "28": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 1106,
+                "posY": 50
+            },
+            "29": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 50,
+                "posY": 79
+            },
+            "30": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 146,
+                "posY": 79
+            },
+            "31": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 242,
+                "posY": 79
+            },
+            "32": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 338,
+                "posY": 79
+            },
+            "33": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 434,
+                "posY": 79
+            },
+            "34": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 530,
+                "posY": 79
+            },
+            "35": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 722,
+                "posY": 79
+            },
+            "36": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 818,
+                "posY": 79
+            },
+            "37": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 914,
+                "posY": 79
+            },
+            "38": {
+                "class": "normal",
+                "type": "brick",
+                "name": "brick_37",
+                "posX": 1010,
+                "posY": 79
+            },
+            "39": {
+                "class": "normal",
+                "type": "brick",
+                "posX": 1106,
+                "posY": 79
+            },
+            "40": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 50,
+                "posY": 108
+            },
+            "41": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 242,
+                "posY": 108
+            },
+            "42": {
+                "class": "powerup",
+                "type": "powerupbrick",
+                "posX": 338,
+                "posY": 108
+            },
+            "43": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 434,
+                "posY": 108
+            },
+            "44": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 914,
+                "posY": 108
+            },
+            "45": {
+                "class": "powerup",
+                "type": "powerupbrick",
+                "posX": 1010,
+                "posY": 108
+            },
+            "46": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1106,
+                "posY": 108
+            },
+            "47": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 140,
+                "posY": 155
+            },
+            "48": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 338,
+                "posY": 155
+            },
+            "49": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 626,
+                "posY": 155
+            },
+            "50": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 818,
+                "posY": 155
+            },
+            "51": {
+                "class": "normal",
+                "type": "bigbrick",
+                "posX": 1010,
+                "posY": 155
+            },
+            "52": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 50,
+                "posY": 203
+            },
+            "53": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 146,
+                "posY": 203
+            },
+            "54": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 242,
+                "posY": 203
+            },
+            "55": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 338,
+                "posY": 203
+            },
+            "56": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 818,
+                "posY": 203
+            },
+            "57": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 914,
+                "posY": 203
+            },
+            "58": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 1010,
+                "posY": 203
+            },
+            "59": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 1106,
+                "posY": 203
+            },
+            "60": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 98,
+                "posY": 252
+            },
+            "61": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 194,
+                "posY": 252
+            },
+            "62": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 290,
+                "posY": 252
+            },
+            "63": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 386,
+                "posY": 252
+            },
+            "64": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 866,
+                "posY": 252
+            },
+            "65": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 962,
+                "posY": 252
+            },
+            "66": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 1058,
+                "posY": 252
+            },
+            "67": {
+                "class": "normal",
+                "type": "littlebrick",
+                "posX": 1154,
+                "posY": 252
+            }
+        }
+    }
+}

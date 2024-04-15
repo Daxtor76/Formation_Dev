@@ -28,7 +28,11 @@ namespace Soutenance_MonoGame
             if (fileName != null)
             {
                 char sep = Path.DirectorySeparatorChar;
+#if DEBUG
                 JsonNode ld = JSonReader.Deserialize($"{Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName}{sep}Levels{sep}{fileName}.json");
+#else
+                JsonNode ld = JSonReader.Deserialize($"{Directory.GetCurrentDirectory()}{sep}Levels{sep}{fileName}.json");
+#endif
                 if (ld["Levels"] != null)
                 {
                     JsonNode ldLevels = ld["Levels"];
