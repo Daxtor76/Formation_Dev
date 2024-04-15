@@ -1,0 +1,28 @@
+carte => 
+id (PrK), 
+nom, 
+image, 
+est spécialisé par classe (0,2), 
+possède rareté (1,1), 
+descriptif,
+coût,
+pv,
+attaque,
+detient mot clé (0,n)
+
+classe => 
+id (PrK), 
+nom,
+couleur,
+spécialise cartes (0,n)
+
+rareté => 
+id (PrK), 
+nom,
+couleur,
+est possédé par cartes (0,n)
+
+mot clé =>
+id (PrK), 
+nom,
+est détenu par cartes (0,n)
