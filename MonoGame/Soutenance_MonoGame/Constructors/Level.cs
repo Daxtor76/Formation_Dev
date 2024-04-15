@@ -36,29 +36,29 @@ namespace Soutenance_MonoGame
                         element = new BrickUnbreakable(
                             levelElements[i]["type"].ToString(),
                             Brick.Colors.grey,
-                            levelElements[i]["name"].ToString(),
+                            i.ToString() + rand.Next(0, 1000) + rand.Next(0, 1000),
                             elementPosition);
                         break;
                     case "powerup":
                         element = new BrickPowerUp(
                             levelElements[i]["type"].ToString(),
                             (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)),
-                            levelElements[i]["name"].ToString(),
+                            i.ToString() + rand.Next(0, 1000) + rand.Next(0, 1000),
                             elementPosition);
                         break;
                     case "normal":
                         element = new BrickNormal(
                             levelElements[i]["type"].ToString(),
                             (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)),
-                            levelElements[i]["name"].ToString(),
+                            i.ToString() + rand.Next(0, 1000) + rand.Next(0, 1000),
                             elementPosition);
                         break;
                     case "moving":
                         element = new BrickMoving(
                             levelElements[i]["type"].ToString(),
                             (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)),
-                            levelElements[i]["name"].ToString(),
-                            new Vector2(rand.Next(-300, 300), 0.0f),
+                            i.ToString() + rand.Next(0, 1000) + rand.Next(0, 1000),
+                            new Vector2(rand.Next(-200, 200), 0.0f),
                             elementPosition);
                         break;
                     case "teleporter":
@@ -77,7 +77,6 @@ namespace Soutenance_MonoGame
                             levelElements[i]["name"].ToString(),
                             (bool)levelElements[i]["active"],
                             others);
-                        ;
                         break;
                     default:
                         break; 

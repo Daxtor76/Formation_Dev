@@ -129,10 +129,6 @@ namespace Soutenance_MonoGame
         public void OnCollisionEnter(List<Collider> others)
         {
             Vector2 newDir = Vector2.Zero;
-            if (others.Count > 1)
-            {
-                Debug.WriteLine(newDir);
-            }
 
             foreach (Collider other in others)
             {

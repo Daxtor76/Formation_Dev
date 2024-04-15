@@ -31,7 +31,7 @@ namespace Soutenance_MonoGame
         {
             hearts = new List<Heart>();
             paddle = new Paddle(Paddle.Colors.grey, 400.0f, "Paddle");
-            mainBall = new Ball(350.0f, "Ball");
+            mainBall = new Ball(250.0f, "Ball");
 
             Wall wallTop = new Wall(new Vector2(0, 0), "WallTop", new Vector2(Utils.GetScreenSize().X, 2));
             Wall wallRight = new Wall(new Vector2(Utils.GetScreenSize().X - 2, 0), "WallRight", new Vector2(2, Utils.GetScreenSize().Y));
@@ -67,7 +67,7 @@ namespace Soutenance_MonoGame
                     return;
                 }
 
-                mainBall = new Ball(350.0f, "Ball");
+                mainBall = new Ball(250.0f, "Ball");
             }
 
             if (victoryManager.Victory())
