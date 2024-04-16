@@ -22,7 +22,7 @@ namespace Soutenance_MonoGame
 
         Entity parent;
         SpriteFont font;
-        string value;
+        public string value;
         Color textColor;
 
         public Text(Vector2 pPosition, string pValue, string pName, FontType pFontType, Color pColor, Entity pParent = null)

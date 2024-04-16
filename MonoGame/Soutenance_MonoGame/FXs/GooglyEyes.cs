@@ -62,12 +62,14 @@ namespace Soutenance_MonoGame
             if (eye != null)
             {
                 GameScene gameScene = ServiceLocator.GetService<ISceneManager>().GetCurrentScene() as GameScene;
-                if (gameScene.mainBall != null)
+                Vector2 ballToEyeVector = Vector2.Zero;
+                float distance = 0.0f;
+                if (gameScene != null && gameScene.mainBall != null)
                 {
-                    Vector2 ballToEyeVector = gameScene.mainBall.position - GetCenterPosition();
-                    float distance = 0.01f;
-                    eyePos = position + ballToEyeVector * distance;
+                    ballToEyeVector = gameScene.mainBall.position - GetCenterPosition();
+                    distance = 0.01f;
                 }
+                eyePos = position + ballToEyeVector * distance;
 
                 Rectangle destRect = new Rectangle(
                     (int)eyePos.X,

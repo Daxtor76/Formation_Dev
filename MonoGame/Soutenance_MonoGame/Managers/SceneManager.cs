@@ -24,11 +24,13 @@ namespace Soutenance_MonoGame
         {
             Scene menuScene = new MenuScene("Menu");
             Scene levelSelectorScene = new LevelSelectorScene("LevelSelector");
+            Scene levelEditorScene = new LevelEditorScene("LevelEditor");
             Scene gameScene = new GameScene("Game");
             Scene gameOverScene = new GameOverScene("GameOver");
 
             scenes.Add(typeof(MenuScene), menuScene);
             scenes.Add(typeof(LevelSelectorScene), levelSelectorScene);
+            scenes.Add(typeof(LevelEditorScene), levelEditorScene);
             scenes.Add(typeof(GameScene), gameScene);
             scenes.Add(typeof(GameOverScene), gameOverScene);
 

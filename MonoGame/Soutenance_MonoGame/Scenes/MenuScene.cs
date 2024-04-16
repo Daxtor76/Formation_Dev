@@ -39,7 +39,7 @@ namespace Soutenance_MonoGame
 
         private void OnLevelEditorButtonClick(int i)
         {
-            Debug.WriteLine("Plus qu'à faire un level editor, c'est rapide tkt");
+            ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(LevelEditorScene));
         }
     }
 }
