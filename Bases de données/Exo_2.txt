@@ -1,0 +1,29 @@
+carte => 
+id_carte (PrK), 
+nom, 
+image, 
+id_classe (Foreign Key) (1,2), 
+id_rareté (Foreign Key) (1,1), 
+descriptif,
+coût,
+pv,
+attaque
+
+classe => 
+id_classe (PrK), 
+nom,
+couleur
+
+rareté => 
+id_rareté (PrK), 
+nom,
+couleur
+
+mot clé =>
+id_motclé (PrK), 
+nom,
+description
+
+carte_motclé =>
+id_carte
+id_motclé

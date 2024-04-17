@@ -1,0 +1,4 @@
+Un fan de rock souhaite créer un site consacré à ses groupes préférés. Il doit donc tenir l'inventaire des disques, avec pour chacun d'eux le titre, l'artiste, le label et l'année.
+
+1. Un disque ne comprend qu'un seul artiste
+2. Un disque comprend plusieurs artistes

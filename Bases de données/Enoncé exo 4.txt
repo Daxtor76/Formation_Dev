@@ -1,0 +1,15 @@
+Vous êtes missionné par  un de vos amis qui exerce la profession d'agent immobilier pour lui réaliser un petit programme.
+Il désire un logiciel dans lequel il peut inscrire son fichier des maisons, des proprio, et des locataires
+
+Deux règles pour le MCD :
+- Une maison appartient à une ou plusieurs personnes
+- Une personne peut être proprio d'une maison et en louer une autre
+
+Personnes
+Nom - varchar (60)
+Prénom - varchar (60)
+
+Maisons
+Adresse - varchar (255)
+Code postal - int
+Ville - varchar (100)
