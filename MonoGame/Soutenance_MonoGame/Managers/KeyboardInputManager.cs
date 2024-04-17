@@ -76,7 +76,7 @@ namespace Soutenance_MonoGame
 
             if (KeyDown(Keys.D))
                 direction.X = 1;
-            else if (KeyDown(Keys.Q))
+            else if (KeyDown(Keys.Q) || KeyDown(Keys.A))
                 direction.X = -1;
 
             return direction;
