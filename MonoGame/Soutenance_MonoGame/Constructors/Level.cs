@@ -32,28 +32,28 @@ namespace Soutenance_MonoGame
                 Vector2 elementPosition = new Vector2(float.Parse(levelElements[i]["posX"].ToString()), float.Parse(levelElements[i]["posY"].ToString()));
                 switch (elementType)
                 {
-                    case "unbreakable":
-                        element = new BrickUnbreakable(
+                    case "BrickUnbreakable":
+                        element = new BrickBrickUnbreakable(
                             levelElements[i]["type"].ToString(),
                             Brick.Colors.grey,
                             i.ToString() + rand.Next(0, 1000) + rand.Next(0, 1000),
                             elementPosition);
                         break;
-                    case "powerup":
+                    case "BrickPowerUp":
                         element = new BrickPowerUp(
                             levelElements[i]["type"].ToString(),
                             (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)),
                             i.ToString() + rand.Next(0, 1000) + rand.Next(0, 1000),
                             elementPosition);
                         break;
-                    case "normal":
+                    case "BrickNormal":
                         element = new BrickNormal(
                             levelElements[i]["type"].ToString(),
                             (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)),
                             i.ToString() + rand.Next(0, 1000) + rand.Next(0, 1000),
                             elementPosition);
                         break;
-                    case "moving":
+                    case "BrickMoving":
                         element = new BrickMoving(
                             levelElements[i]["type"].ToString(),
                             (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)),

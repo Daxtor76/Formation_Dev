@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Reflection.Emit;
 using Vector2 = System.Numerics.Vector2;
 using System.Xml.Linq;
+using System.IO;
+using System.Text.Json;
 
 namespace Soutenance_MonoGame
 {
@@ -22,17 +24,25 @@ namespace Soutenance_MonoGame
 
         Text tutorial;
         Text selectedTemplateText;
+        Button writeButton;
 
-        public LevelEditorScene(string pName) : base(pName)
+        FileStream fs;
+        JsonWriterOptions writerOptions = new JsonWriterOptions {
+            Indented = true
+        };
+        Utf8JsonWriter writer;
+
+    public LevelEditorScene(string pName) : base(pName)
         {
         }
 
         public override void Load()
         {
             base.Load();
-            templates.Add(new BrickUnbreakable(Brick.BrickTypes.littlebrick, Brick.Colors.grey, "littlebrick_unbreakable"));
-            templates.Add(new BrickUnbreakable(Brick.BrickTypes.brick, Brick.Colors.grey, "brick_unbreakable"));
-            templates.Add(new BrickUnbreakable(Brick.BrickTypes.bigbrick, Brick.Colors.grey, "bigbrick_unbreakable"));
+
+            templates.Add(new BrickBrickUnbreakable(Brick.BrickTypes.littlebrick, Brick.Colors.grey, "littlebrick_BrickUnbreakable"));
+            templates.Add(new BrickBrickUnbreakable(Brick.BrickTypes.brick, Brick.Colors.grey, "brick_BrickUnbreakable"));
+            templates.Add(new BrickBrickUnbreakable(Brick.BrickTypes.bigbrick, Brick.Colors.grey, "bigbrick_BrickUnbreakable"));
             templates.Add(new BrickPowerUp(Brick.BrickTypes.powerupbrick, Brick.Colors.green, "powerupbrick_powerup"));
             templates.Add(new BrickNormal(Brick.BrickTypes.littlebrick, Brick.Colors.green, "littlebrick_normal"));
             templates.Add(new BrickNormal(Brick.BrickTypes.brick, Brick.Colors.green, "brick_normal"));
@@ -43,6 +53,7 @@ namespace Soutenance_MonoGame
 
             tutorial = new Text(new Vector2(Utils.GetScreenCenter().X, Utils.GetScreenSize().Y - 50.0f), "Space to switch elements // left click to place", "tutorial", Text.FontType.normal, Color.White);
             selectedTemplateText = new Text(new Vector2(Utils.GetScreenCenter().X, Utils.GetScreenSize().Y - 100.0f), $"{templates[selectedTemplate].GetType()}", "currentTemplate", Text.FontType.normal, Color.White);
+            writeButton = new Button(Utils.GetScreenSize() - new Vector2(100.0f), Button.Colors.green, "button_write", "Save Level", Text.FontType.normal, Color.Black, WriteJson);
 
             Debug.WriteLine($"{name} scene has been loaded.");
         }
@@ -74,12 +85,12 @@ namespace Soutenance_MonoGame
                 else
                     type = "teleporter";
 
-                if (template.GetType() == typeof(BrickUnbreakable))
+                if (template.GetType() == typeof(BrickBrickUnbreakable))
                 {
-                    element = new BrickUnbreakable(
+                    element = new BrickBrickUnbreakable(
                         type,
                         Brick.Colors.grey,
-                        "brickunbreakable" + placedElements.Count,
+                        "brickBrickUnbreakable_" + placedElements.Count,
                         template.GetPosition());
                 }
                 else if (template.GetType() == typeof(BrickPowerUp))
@@ -87,7 +98,7 @@ namespace Soutenance_MonoGame
                     element = new BrickPowerUp(
                         type,
                         (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)),
-                        "brickpowerup" + placedElements.Count,
+                        "brickpowerup_" + placedElements.Count,
                         template.GetPosition());
                 }
                 else if (template.GetType() == typeof(BrickNormal))
@@ -95,7 +106,7 @@ namespace Soutenance_MonoGame
                     element = new BrickNormal(
                         type,
                         (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)),
-                        "bricknormal" + placedElements.Count,
+                        "bricknormal_" + placedElements.Count,
                         template.GetPosition());
                 }
                 else if (template.GetType() == typeof(BrickMoving))
@@ -103,7 +114,7 @@ namespace Soutenance_MonoGame
                     element = new BrickMoving(
                         type,
                         (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)),
-                        "brickmoving" + placedElements.Count,
+                        "brickmoving_" + placedElements.Count,
                         new Vector2(rand.Next(-200, 200), 0.0f),
                         template.GetPosition());
                 }
@@ -121,7 +132,34 @@ namespace Soutenance_MonoGame
             }
             tutorial.Draw();
             selectedTemplateText.Draw();
+            writeButton.Draw();
             MainGame.spriteBatch.End();
+        }
+
+        void WriteJson(int i)
+        {
+            fs = File.Create($"E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\test.json");
+            writer = new Utf8JsonWriter(fs, writerOptions);
+
+            writer.WriteStartObject();
+            writer.WriteStartObject("0");
+            for (int y = 0; y < placedElements.Count; y++)
+            {
+                writer.WriteStartObject(y.ToString());
+                IEntity entity = placedElements[y];
+                if (entity.GetType().ToString().Contains("Brick"))
+                {
+                    Brick brick = entity as Brick;
+                    writer.WriteString("class", entity.GetType().ToString().Split('.')[1]);
+                    writer.WriteString("type", brick.type.ToString());
+                    writer.WriteNumber("posX", entity.GetPosition().X);
+                    writer.WriteNumber("posY", entity.GetPosition().Y);
+                }
+                writer.WriteEndObject();
+            }
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+            writer.Flush();
         }
     }
 }

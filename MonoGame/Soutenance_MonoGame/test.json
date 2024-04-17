@@ -1,0 +1,40 @@
+{
+  "0": {
+    "0": {
+      "class": "BrickBrickUnbreakable",
+      "type": "littlebrick",
+      "posX": 280,
+      "posY": 425
+    },
+    "1": {
+      "class": "BrickBrickUnbreakable",
+      "type": "littlebrick",
+      "posX": 605,
+      "posY": 188
+    },
+    "2": {
+      "class": "BrickBrickUnbreakable",
+      "type": "bigbrick",
+      "posX": 610,
+      "posY": 400.5
+    },
+    "3": {
+      "class": "BrickNormal",
+      "type": "littlebrick",
+      "posX": 190,
+      "posY": 221
+    },
+    "4": {
+      "class": "BrickNormal",
+      "type": "brick",
+      "posX": 364,
+      "posY": 99.5
+    },
+    "5": {
+      "class": "BrickMoving",
+      "type": "littlebrick",
+      "posX": 765.57996,
+      "posY": 240
+    }
+  }
+}

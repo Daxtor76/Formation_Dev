@@ -34,7 +34,7 @@ namespace Soutenance_MonoGame
         public int life;
         protected int maxLife;
         protected Collider col;
-        protected BrickTypes type;
+        public BrickTypes type;
         protected Colors color;
         protected List<Entity> googlyEyes;
 

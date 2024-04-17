@@ -74,6 +74,7 @@ namespace Soutenance_MonoGame
                     (int)GetSize().Y);
                 MainGame.spriteBatch.Draw(img, destRect, sourceRect, Color.White, rotation, GetSize() * 0.25f, SpriteEffects.None, 0.0f);
             }
+            text.Draw();
         }
 
         public bool IsHover()
