@@ -164,6 +164,34 @@ namespace Soutenance_MonoGame
                         writer.WriteNumber("posX", float.Parse(elements[a]["posX"].ToString()));
                         writer.WriteNumber("posY", float.Parse(elements[a]["posY"].ToString()));
                     }
+                    else if (elements[a]["class"].ToString().Contains("Teleporter"))
+                    {
+                        writer.WriteString("class", elements[a]["class"].ToString());
+                        writer.WriteNumber("posX", float.Parse(elements[a]["posX"].ToString()));
+                        writer.WriteNumber("posY", float.Parse(elements[a]["posY"].ToString()));
+                        writer.WriteNumber("rotation", float.Parse(elements[a]["rotation"].ToString()));
+                        writer.WriteString("destinationName", "");
+                        writer.WriteNumber("newDirectionX", float.Parse(elements[a]["posX"].ToString()));
+                        writer.WriteNumber("newDirectionY", float.Parse(elements[a]["posY"].ToString()));
+                        writer.WriteString("name", a.ToString());
+                        writer.WriteString("active", "true");
+                        /*
+                         * 
+                "class": "teleporter",
+                "posX": 350,
+                "posY": 400,
+                "rotation": 90,
+                "destinationName": "portal_02",
+                "newDirectionX": 0,
+                "newDirectionY": 1,
+                "name": "portal_01",
+                "active": true,
+                "othersToActivate": {
+                    "0": "portal_02",
+                    "1": "portal_04"
+                }
+                         */
+                    }
                     writer.WriteEndObject();
                 }
                 writer.WriteEndObject();
@@ -180,6 +208,10 @@ namespace Soutenance_MonoGame
                     writer.WriteString("type", brick.type.ToString());
                     writer.WriteNumber("posX", entity.GetPosition().X);
                     writer.WriteNumber("posY", entity.GetPosition().Y);
+                }
+                else if (entity.GetType().ToString().Contains("Teleporter"))
+                {
+
                 }
                 writer.WriteEndObject();
             }

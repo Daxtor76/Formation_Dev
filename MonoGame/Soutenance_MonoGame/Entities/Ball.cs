@@ -129,6 +129,7 @@ namespace Soutenance_MonoGame
         public void OnCollisionEnter(List<Collider> others)
         {
             Vector2 newDir = Vector2.Zero;
+            Random rand = new Random();
 
             foreach (Collider other in others)
             {
@@ -144,7 +145,16 @@ namespace Soutenance_MonoGame
                     else if (other.parent.layer == "Teleporter")
                     {
                         Teleporter tp = ServiceLocator.GetService<IEntityManager>().GetEntity(other.parent.GetName()) as Teleporter;
-                        Teleporter destTp = ServiceLocator.GetService<IEntityManager>().GetEntity(tp.destinationName) as Teleporter;
+                        Teleporter destTp = null;
+                        if (tp.destinationName != "")
+                        {
+                            destTp = ServiceLocator.GetService<IEntityManager>().GetEntity(tp.destinationName) as Teleporter;
+                        }
+                        else
+                        {
+                            List<Teleporter> tps = ServiceLocator.GetService<IEntityManager>().GetEntitiesOfType<Teleporter>();
+                            destTp = tps[rand.Next(0, tps.Count)];
+                        }
                         Teleport(destTp);
                         newDir = GetNewDirFromTeleport(destTp);
                     }
