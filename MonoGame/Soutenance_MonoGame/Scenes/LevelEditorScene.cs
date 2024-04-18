@@ -13,6 +13,7 @@ using Vector2 = System.Numerics.Vector2;
 using System.Xml.Linq;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace Soutenance_MonoGame
 {
@@ -136,13 +137,38 @@ namespace Soutenance_MonoGame
             MainGame.spriteBatch.End();
         }
 
-        void WriteJson(int i)
+        void WriteJson(int z)
         {
-            fs = File.Create($"E:\\Projets\\Formation_Dev\\MonoGame\\Soutenance_MonoGame\\test.json");
+            List<Level> levels = ServiceLocator.GetService<ILevelManager>().GetLevels();
+            char sep = Path.DirectorySeparatorChar;
+#if DEBUG
+            fs = File.Create($"{Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName}{sep}Levels{sep}LevelDesign.json");
+#else
+            fs = File.Create($"{Directory.GetCurrentDirectory()}{sep}Levels{sep}LevelDesign.json");
+#endif
             writer = new Utf8JsonWriter(fs, writerOptions);
 
             writer.WriteStartObject();
-            writer.WriteStartObject("0");
+            writer.WriteStartObject("Levels");
+            for (int i = 0; i < levels.Count; i++)
+            {
+                writer.WriteStartObject(i.ToString());
+                List<JsonNode> elements = levels[i].GetLevelElements();
+                for (int a = 0; a < elements.Count; a++)
+                {
+                    writer.WriteStartObject(a.ToString());
+                    if (elements[a]["class"].ToString().Contains("Brick"))
+                    {
+                        writer.WriteString("class", elements[a]["class"].ToString());
+                        writer.WriteString("type", elements[a]["type"].ToString());
+                        writer.WriteNumber("posX", float.Parse(elements[a]["posX"].ToString()));
+                        writer.WriteNumber("posY", float.Parse(elements[a]["posY"].ToString()));
+                    }
+                    writer.WriteEndObject();
+                }
+                writer.WriteEndObject();
+            }
+            writer.WriteStartObject(levels.Count.ToString());
             for (int y = 0; y < placedElements.Count; y++)
             {
                 writer.WriteStartObject(y.ToString());
@@ -159,7 +185,12 @@ namespace Soutenance_MonoGame
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
+            writer.WriteEndObject();
             writer.Flush();
+
+            fs.Close();
+
+            ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(MenuScene));
         }
     }
 }

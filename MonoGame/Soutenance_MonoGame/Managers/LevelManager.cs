@@ -18,8 +18,13 @@ namespace Soutenance_MonoGame
         int currentLevelId = 0;
         public LevelManager()
         {
-            levels = LoadLevelsFromJSon("LevelDesign");
             ServiceLocator.RegisterService<ILevelManager>(this);
+        }
+
+        public void LoadLevels()
+        {
+            levels.Clear();
+            levels = LoadLevelsFromJSon("LevelDesign");
         }
 
         public List<Level> LoadLevelsFromJSon(string fileName = null)

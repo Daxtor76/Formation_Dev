@@ -21,6 +21,11 @@ namespace Soutenance_MonoGame
             levelElements = pLevelElements;
         }
 
+        public List<JsonNode> GetLevelElements()
+        {
+            return levelElements;
+        }
+
         public void GenerateGrid()
         {
             Array colors = Enum.GetValues<Brick.Colors>();

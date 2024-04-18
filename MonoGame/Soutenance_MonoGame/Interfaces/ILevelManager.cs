@@ -12,5 +12,6 @@ namespace Soutenance_MonoGame
         public Level GetCurrentLevel();
         public Level GetLevel(int id);
         public List<Level> GetLevels();
+        public void LoadLevels();
     }
 }

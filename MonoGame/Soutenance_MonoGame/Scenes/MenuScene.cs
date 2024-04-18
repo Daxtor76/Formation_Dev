@@ -23,6 +23,8 @@ namespace Soutenance_MonoGame
         {
             base.Load();
 
+            ServiceLocator.GetService<ILevelManager>().LoadLevels();
+
             Vector2 screenCenter = Utils.GetScreenCenter();
 
             new Text(new Vector2(screenCenter.X, screenCenter.Y - 200.0f), "Menu Scene", "Title", Text.FontType.big, Color.Blue);

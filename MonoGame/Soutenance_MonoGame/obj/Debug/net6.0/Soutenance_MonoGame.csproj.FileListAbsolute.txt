@@ -204,3 +204,5 @@ C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content
 C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Newtonsoft.Json.dll
 E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Balls\ball_grey_spritesheet.xnb
 E:\Projets\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Balls\ball_red_spritesheet.xnb
+C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Balls\ball_grey_spritesheet.xnb
+C:\Formation\Formation_Dev\MonoGame\Soutenance_MonoGame\bin\Debug\net6.0\Content\Balls\ball_red_spritesheet.xnb
