@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Soutenance_MonoGame
 {
-    public class BrickBrickUnbreakable : Brick
+    public class BrickUnbreakable : Brick
     {
-        public BrickBrickUnbreakable(BrickTypes pType, Colors pColor, string pName) : base(pType, pColor, pName)
+        public BrickUnbreakable(BrickTypes pType, Colors pColor, string pName) : base(pType, pColor, pName)
         {
         }
-        public BrickBrickUnbreakable(string pType, Colors pColor, string pName, Vector2 pPos) : base(pType, pColor, pName, pPos)
+        public BrickUnbreakable(string pType, Colors pColor, string pName, Vector2 pPos) : base(pType, pColor, pName, pPos)
         {
         }
     }

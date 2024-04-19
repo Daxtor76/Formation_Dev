@@ -14,6 +14,8 @@ using System.Xml.Linq;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using System.Drawing;
+using Color = Microsoft.Xna.Framework.Color;
 
 namespace Soutenance_MonoGame
 {
@@ -26,6 +28,7 @@ namespace Soutenance_MonoGame
         Text tutorial;
         Text selectedTemplateText;
         Button writeButton;
+        Button backButton;
 
         FileStream fs;
         JsonWriterOptions writerOptions = new JsonWriterOptions {
@@ -41,9 +44,9 @@ namespace Soutenance_MonoGame
         {
             base.Load();
 
-            templates.Add(new BrickBrickUnbreakable(Brick.BrickTypes.littlebrick, Brick.Colors.grey, "littlebrick_BrickUnbreakable"));
-            templates.Add(new BrickBrickUnbreakable(Brick.BrickTypes.brick, Brick.Colors.grey, "brick_BrickUnbreakable"));
-            templates.Add(new BrickBrickUnbreakable(Brick.BrickTypes.bigbrick, Brick.Colors.grey, "bigbrick_BrickUnbreakable"));
+            templates.Add(new BrickUnbreakable(Brick.BrickTypes.littlebrick, Brick.Colors.grey, "littlebrick_BrickUnbreakable"));
+            templates.Add(new BrickUnbreakable(Brick.BrickTypes.brick, Brick.Colors.grey, "brick_BrickUnbreakable"));
+            templates.Add(new BrickUnbreakable(Brick.BrickTypes.bigbrick, Brick.Colors.grey, "bigbrick_BrickUnbreakable"));
             templates.Add(new BrickPowerUp(Brick.BrickTypes.powerupbrick, Brick.Colors.green, "powerupbrick_powerup"));
             templates.Add(new BrickNormal(Brick.BrickTypes.littlebrick, Brick.Colors.green, "littlebrick_normal"));
             templates.Add(new BrickNormal(Brick.BrickTypes.brick, Brick.Colors.green, "brick_normal"));
@@ -51,10 +54,15 @@ namespace Soutenance_MonoGame
             templates.Add(new BrickMoving(Brick.BrickTypes.littlebrick, Brick.Colors.green, "littlebrick_moving", new Vector2(-200.0f, 200.0f)));
             templates.Add(new BrickMoving(Brick.BrickTypes.brick, Brick.Colors.green, "brick_moving", new Vector2(-200.0f, 200.0f)));
             templates.Add(new BrickMoving(Brick.BrickTypes.bigbrick, Brick.Colors.green, "bigbrick_moving", new Vector2(-200.0f, 200.0f)));
+            templates.Add(new Teleporter(Vector2.Zero, -45.0f, "", new Vector2(1, -1), "teleporter_topright", true));
+            templates.Add(new Teleporter(Vector2.Zero, -135.0f, "", new Vector2(-1, -1), "teleporter_topleft", true));
+            templates.Add(new Teleporter(Vector2.Zero, -225.0f, "", new Vector2(-1, 1), "teleporter_bottomleft", true));
+            templates.Add(new Teleporter(Vector2.Zero, -315.0f, "", new Vector2(1, 1), "teleporter_bottomright", true));
 
             tutorial = new Text(new Vector2(Utils.GetScreenCenter().X, Utils.GetScreenSize().Y - 50.0f), "Space to switch elements // left click to place", "tutorial", Text.FontType.normal, Color.White);
             selectedTemplateText = new Text(new Vector2(Utils.GetScreenCenter().X, Utils.GetScreenSize().Y - 100.0f), $"{templates[selectedTemplate].GetType()}", "currentTemplate", Text.FontType.normal, Color.White);
-            writeButton = new Button(Utils.GetScreenSize() - new Vector2(100.0f), Button.Colors.green, "button_write", "Save Level", Text.FontType.normal, Color.Black, WriteJson);
+            writeButton = new Button(new Vector2(Utils.GetScreenSize().X - 200.0f, Utils.GetScreenSize().Y - 75.0f), Button.Colors.green, "button_write", "Save Level", Text.FontType.normal, Color.Black, WriteJson);
+            backButton = new Button(new Vector2(75.0f, Utils.GetScreenSize().Y - 75.0f), Button.Colors.blue, "button_back", "Back", Text.FontType.normal, Color.Red, OnBackButtonClick);
 
             Debug.WriteLine($"{name} scene has been loaded.");
         }
@@ -63,63 +71,76 @@ namespace Soutenance_MonoGame
         {
             base.Update(gameTime);
 
-            IEntity template = templates[selectedTemplate];
+            IEntity template = templates[selectedTemplate] != null ? templates[selectedTemplate] : null;
             Vector2 mousePos = Utils.GetMousePosition();
 
-            template.SetPosition(mousePos - template.GetSize() * 0.5f);
-
-            if (ServiceLocator.GetService<IInputManager>().KeyPressed(Keys.Space))
+            if (template != null)
             {
-                selectedTemplate = (selectedTemplate + 1) % templates.Count;
-                selectedTemplateText.value = templates[selectedTemplate].GetType().ToString();
-            }
+                template.SetPosition(mousePos - template.GetSize() * 0.5f);
 
-            if (ServiceLocator.GetService<IInputManager>().MouseKeyPressed(0))
-            {
-                IEntity element = null;
-                Array colors = Enum.GetValues<Brick.Colors>();
-                Random rand = new Random();
+                if (ServiceLocator.GetService<IInputManager>().KeyPressed(Keys.Space))
+                {
+                    selectedTemplate = (selectedTemplate + 1) % templates.Count;
+                    selectedTemplateText.value = templates[selectedTemplate].GetType().ToString();
+                }
 
-                string type = "";
-                if (template.GetName().Contains("_"))
-                    type = template.GetName().Split('_')[0];
-                else
-                    type = "teleporter";
+                if (ServiceLocator.GetService<IInputManager>().MouseKeyPressed(0))
+                {
+                    IEntity element = null;
+                    Array colors = Enum.GetValues<Brick.Colors>();
+                    Random rand = new Random();
 
-                if (template.GetType() == typeof(BrickBrickUnbreakable))
-                {
-                    element = new BrickBrickUnbreakable(
-                        type,
-                        Brick.Colors.grey,
-                        "brickBrickUnbreakable_" + placedElements.Count,
-                        template.GetPosition());
+                    string type = "";
+                    if (template.GetName().Contains("_"))
+                        type = template.GetName().Split('_')[0];
+                    else
+                        type = "Teleporter";
+
+                    if (template.GetType() == typeof(BrickUnbreakable))
+                    {
+                        element = new BrickUnbreakable(
+                            type,
+                            Brick.Colors.grey,
+                            "brickunbreakable_" + placedElements.Count,
+                            template.GetPosition());
+                    }
+                    else if (template.GetType() == typeof(BrickPowerUp))
+                    {
+                        element = new BrickPowerUp(
+                            type,
+                            (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)),
+                            "brickpowerup_" + placedElements.Count,
+                            template.GetPosition());
+                    }
+                    else if (template.GetType() == typeof(BrickNormal))
+                    {
+                        element = new BrickNormal(
+                            type,
+                            (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)),
+                            "bricknormal_" + placedElements.Count,
+                            template.GetPosition());
+                    }
+                    else if (template.GetType() == typeof(BrickMoving))
+                    {
+                        element = new BrickMoving(
+                            type,
+                            (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)),
+                            "brickmoving_" + placedElements.Count,
+                            new Vector2(rand.Next(-200, 200), 0.0f),
+                            template.GetPosition());
+                    }
+                    else if (template.GetType() == typeof(Teleporter))
+                    {
+                        element = new Teleporter(
+                            template.GetPosition(),
+                            template.GetRotation(),
+                            "",
+                            template.GetNewDirection(),
+                            "teleporter_" + placedElements.Count,
+                            true);
+                    }
+                    placedElements.Add(element);
                 }
-                else if (template.GetType() == typeof(BrickPowerUp))
-                {
-                    element = new BrickPowerUp(
-                        type,
-                        (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)),
-                        "brickpowerup_" + placedElements.Count,
-                        template.GetPosition());
-                }
-                else if (template.GetType() == typeof(BrickNormal))
-                {
-                    element = new BrickNormal(
-                        type,
-                        (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)),
-                        "bricknormal_" + placedElements.Count,
-                        template.GetPosition());
-                }
-                else if (template.GetType() == typeof(BrickMoving))
-                {
-                    element = new BrickMoving(
-                        type,
-                        (Brick.Colors)colors.GetValue(rand.Next(1, colors.Length)),
-                        "brickmoving_" + placedElements.Count,
-                        new Vector2(rand.Next(-200, 200), 0.0f),
-                        template.GetPosition());
-                }
-                placedElements.Add(element);
             }
         }
 
@@ -134,6 +155,7 @@ namespace Soutenance_MonoGame
             tutorial.Draw();
             selectedTemplateText.Draw();
             writeButton.Draw();
+            backButton.Draw();
             MainGame.spriteBatch.End();
         }
 
@@ -161,36 +183,17 @@ namespace Soutenance_MonoGame
                     {
                         writer.WriteString("class", elements[a]["class"].ToString());
                         writer.WriteString("type", elements[a]["type"].ToString());
-                        writer.WriteNumber("posX", float.Parse(elements[a]["posX"].ToString()));
-                        writer.WriteNumber("posY", float.Parse(elements[a]["posY"].ToString()));
+                        writer.WriteNumber("posX", (float)elements[a]["posX"]);
+                        writer.WriteNumber("posY", (float)elements[a]["posY"]);
                     }
                     else if (elements[a]["class"].ToString().Contains("Teleporter"))
                     {
                         writer.WriteString("class", elements[a]["class"].ToString());
-                        writer.WriteNumber("posX", float.Parse(elements[a]["posX"].ToString()));
-                        writer.WriteNumber("posY", float.Parse(elements[a]["posY"].ToString()));
-                        writer.WriteNumber("rotation", float.Parse(elements[a]["rotation"].ToString()));
-                        writer.WriteString("destinationName", "");
-                        writer.WriteNumber("newDirectionX", float.Parse(elements[a]["posX"].ToString()));
-                        writer.WriteNumber("newDirectionY", float.Parse(elements[a]["posY"].ToString()));
-                        writer.WriteString("name", a.ToString());
-                        writer.WriteString("active", "true");
-                        /*
-                         * 
-                "class": "teleporter",
-                "posX": 350,
-                "posY": 400,
-                "rotation": 90,
-                "destinationName": "portal_02",
-                "newDirectionX": 0,
-                "newDirectionY": 1,
-                "name": "portal_01",
-                "active": true,
-                "othersToActivate": {
-                    "0": "portal_02",
-                    "1": "portal_04"
-                }
-                         */
+                        writer.WriteNumber("posX", (float)elements[a]["posX"]);
+                        writer.WriteNumber("posY", (float)elements[a]["posY"]);
+                        writer.WriteNumber("rotation", (float)elements[a]["rotation"]);
+                        writer.WriteNumber("newDirectionX", (float)elements[a]["newDirectionX"]);
+                        writer.WriteNumber("newDirectionY", (float)elements[a]["newDirectionY"]);
                     }
                     writer.WriteEndObject();
                 }
@@ -211,7 +214,13 @@ namespace Soutenance_MonoGame
                 }
                 else if (entity.GetType().ToString().Contains("Teleporter"))
                 {
-
+                    Teleporter tp = entity as Teleporter;
+                    writer.WriteString("class", entity.GetType().ToString().Split('.')[1]);
+                    writer.WriteNumber("posX", entity.GetPosition().X);
+                    writer.WriteNumber("posY", entity.GetPosition().Y);
+                    writer.WriteNumber("rotation", tp.rotation);
+                    writer.WriteNumber("newDirectionX", tp.GetNewDirection().X);
+                    writer.WriteNumber("newDirectionY", tp.GetNewDirection().Y);
                 }
                 writer.WriteEndObject();
             }
@@ -223,6 +232,32 @@ namespace Soutenance_MonoGame
             fs.Close();
 
             ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(MenuScene));
+        }
+
+        void OnBackButtonClick(int i)
+        {
+            ServiceLocator.GetService<ISceneManager>().SetCurrentScene(typeof(MenuScene));
+        }
+
+        public override void Unload()
+        {
+            placedElements.Clear();
+            selectedTemplate = 0;
+            tutorial.Unload();
+            selectedTemplateText.Unload();
+            writeButton.Unload();
+            backButton.Unload();
+
+            if (fs != null)
+            {
+                fs = null;
+            }
+
+            if (writer != null)
+            {
+                writer = null;
+            }
+            base.Unload();
         }
     }
 }

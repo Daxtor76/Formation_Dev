@@ -54,6 +54,17 @@ namespace Soutenance_MonoGame
                 MainGame.spriteBatch.Draw(img, destRect, sourceRect, Color.White, rotation, Vector2.Zero, SpriteEffects.None, layerDepth);
             }
         }
+
+        public float GetRotation()
+        {
+            return rotation;
+        }
+
+        public void SetRotation(float pRotation)
+        {
+            rotation = pRotation;
+        }
+
         public void SetPosition(Vector2 pPosition)
         {
             position = pPosition;

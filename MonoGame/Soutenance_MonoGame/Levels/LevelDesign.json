@@ -370,64 +370,36 @@
                 "posY": 394
             },
             "9": {
-                "class": "teleporter",
+                "class": "Teleporter",
                 "posX": 535,
                 "posY": 300,
                 "rotation": -45,
-                "destinationName": "portal_02",
                 "newDirectionX": -1,
-                "newDirectionY": -1,
-                "name": "portal_01",
-                "active": true,
-                "othersToActivate": {
-                    "0": "portal_02",
-                    "1": "portal_04"
-                }
+                "newDirectionY": -1
             },
             "10": {
-                "class": "teleporter",
+                "class": "Teleporter",
                 "posX": 535,
                 "posY": 150,
                 "rotation": 45,
-                "destinationName": "portal_03",
                 "newDirectionX": -1,
-                "newDirectionY": -1,
-                "name": "portal_02",
-                "active": true,
-                "othersToActivate": {
-                    "0": "portal_01",
-                    "1": "portal_03"
-                }
+                "newDirectionY": -1
             },
             "11": {
-                "class": "teleporter",
+                "class": "Teleporter",
                 "posX": 690,
                 "posY": 300,
                 "rotation": 45,
-                "destinationName": "portal_04",
                 "newDirectionX": 1,
-                "newDirectionY": -1,
-                "name": "portal_03",
-                "active": true,
-                "othersToActivate": {
-                    "0": "portal_02",
-                    "1": "portal_04"
-                }
+                "newDirectionY": -1
             },
             "12": {
-                "class": "teleporter",
+                "class": "Teleporter",
                 "posX": 690,
                 "posY": 150,
                 "rotation": -45,
-                "destinationName": "portal_01",
                 "newDirectionX": 1,
-                "newDirectionY": -1,
-                "name": "portal_04",
-                "active": true,
-                "othersToActivate": {
-                    "0": "portal_01",
-                    "1": "portal_03"
-                }
+                "newDirectionY": -1
             },
             "13": {
                 "class": "BrickUnbreakable",
@@ -996,64 +968,36 @@
                 "posY": 336
             },
             "14": {
-                "class": "teleporter",
+                "class": "Teleporter",
                 "posX": 350,
                 "posY": 400,
                 "rotation": 90,
-                "destinationName": "portal_02",
                 "newDirectionX": 0,
-                "newDirectionY": 1,
-                "name": "portal_01",
-                "active": true,
-                "othersToActivate": {
-                    "0": "portal_02",
-                    "1": "portal_04"
-                }
+                "newDirectionY": 1
             },
             "15": {
-                "class": "teleporter",
+                "class": "Teleporter",
                 "posX": 550,
                 "posY": 230,
                 "rotation": 45,
-                "destinationName": "portal_01",
                 "newDirectionX": -1,
-                "newDirectionY": -1,
-                "name": "portal_02",
-                "active": true,
-                "othersToActivate": {
-                    "0": "portal_01",
-                    "1": "portal_03"
-                }
+                "newDirectionY": -1
             },
             "16": {
-                "class": "teleporter",
+                "class": "Teleporter",
                 "posX": 900,
                 "posY": 400,
                 "rotation": 90,
-                "destinationName": "portal_04",
                 "newDirectionX": 0,
-                "newDirectionY": 1,
-                "name": "portal_03",
-                "active": true,
-                "othersToActivate": {
-                    "0": "portal_02",
-                    "1": "portal_04"
-                }
+                "newDirectionY": 1
             },
             "17": {
-                "class": "teleporter",
+                "class": "Teleporter",
                 "posX": 750,
                 "posY": 230,
                 "rotation": -45,
-                "destinationName": "portal_03",
                 "newDirectionX": 1,
-                "newDirectionY": -1,
-                "name": "portal_04",
-                "active": true,
-                "othersToActivate": {
-                    "0": "portal_01",
-                    "1": "portal_03"
-                }
+                "newDirectionY": -1
             },
             "18": {
                 "class": "BrickNormal",

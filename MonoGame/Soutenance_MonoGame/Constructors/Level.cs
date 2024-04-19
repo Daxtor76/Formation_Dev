@@ -34,11 +34,11 @@ namespace Soutenance_MonoGame
             {
                 IEntity element = null;
                 string elementType = levelElements[i]["class"].ToString();
-                Vector2 elementPosition = new Vector2(float.Parse(levelElements[i]["posX"].ToString()), float.Parse(levelElements[i]["posY"].ToString()));
+                Vector2 elementPosition = new Vector2((float)levelElements[i]["posX"], (float)levelElements[i]["posY"]);
                 switch (elementType)
                 {
                     case "BrickUnbreakable":
-                        element = new BrickBrickUnbreakable(
+                        element = new BrickUnbreakable(
                             levelElements[i]["type"].ToString(),
                             Brick.Colors.grey,
                             i.ToString() + rand.Next(0, 1000) + rand.Next(0, 1000),
@@ -66,22 +66,15 @@ namespace Soutenance_MonoGame
                             new Vector2(rand.Next(-200, 200), 0.0f),
                             elementPosition);
                         break;
-                    case "teleporter":
-                        Vector2 elementNewDirection = new Vector2(float.Parse(levelElements[i]["newDirectionX"].ToString()), float.Parse(levelElements[i]["newDirectionY"].ToString()));
-                        JsonNode othersElements = levelElements[i]["othersToActivate"];
-                        List<string> others = new List<string>();
-                        for (int y = 0; y < othersElements.AsObject().Count; y++)
-                        {
-                            others.Add(othersElements[y.ToString()].ToString());
-                        }
+                    case "Teleporter":
+                        Vector2 elementNewDirection = new Vector2((float)levelElements[i]["newDirectionX"], (float)levelElements[i]["newDirectionY"]);
                         element = new Teleporter(
                             elementPosition,
                             (float)levelElements[i]["rotation"],
-                            levelElements[i]["destinationName"].ToString(),
+                            "",
                             elementNewDirection,
-                            levelElements[i]["name"].ToString(),
-                            (bool)levelElements[i]["active"],
-                            others);
+                            i.ToString() + rand.Next(0, 1000) + rand.Next(0, 1000),
+                            true);
                         break;
                     default:
                         break; 

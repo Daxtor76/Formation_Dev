@@ -14,6 +14,8 @@ namespace Soutenance_MonoGame
         public void Start();
         public string GetName();
         public void SetName(string name);
+        public float GetRotation();
+        public void SetRotation(float pRotation);
         public void SetPosition(Vector2 position);
         public void SetScale(Vector2 scale);
         public Vector2 GetPosition();

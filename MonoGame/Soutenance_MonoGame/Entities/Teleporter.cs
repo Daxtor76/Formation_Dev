@@ -16,9 +16,8 @@ namespace Soutenance_MonoGame
         public string destinationName;
         public Vector2 newDirection;
         public Collider col;
-        public List<string> othersToActivate;
         Animator animator;
-        public Teleporter(Vector2 pPos, float pRotation, string pdestinationName, Vector2 pNewDirection, string pName, bool pActive, List<string> pOthersToActivate = null)
+        public Teleporter(Vector2 pPos, float pRotation, string pdestinationName, Vector2 pNewDirection, string pName, bool pActive)
         {
             SetName(pName);
             layer = "Teleporter";
@@ -30,8 +29,6 @@ namespace Soutenance_MonoGame
             SetActive(pActive);
             destinationName = pdestinationName;
             newDirection = pNewDirection;
-
-            othersToActivate = pOthersToActivate;
 
             ServiceLocator.GetService<IEntityManager>().AddEntity(this);
 
@@ -49,7 +46,14 @@ namespace Soutenance_MonoGame
 
         public override void Update(GameTime gameTime)
         {
-            sourceRect = animator.ReadAnim(gameTime, "Idle");
+            if  (animator.anims.Count != 0)
+                sourceRect = animator.ReadAnim(gameTime, "Idle");
+            else
+                sourceRect = new Rectangle(
+                    0,
+                    0,
+                    (int)baseSize.X,
+                    (int)baseSize.Y);
         }
 
         public override void Draw()
@@ -78,22 +82,13 @@ namespace Soutenance_MonoGame
             return newDirection;
         }
 
-        public void ActivateOthers()
-        {
-            foreach (string tpName in othersToActivate)
-            {
-                Teleporter tp = ServiceLocator.GetService<IEntityManager>().GetEntity(tpName) as Teleporter;
-                //tp.SetActive(true);
-                tp.col.SetActive(true);
-            }
-        }
-
         public override void Unload()
         {
-            othersToActivate.Clear();
-
-            animator.Unload();
-            animator = null;
+            if (animator != null)
+            {
+                animator.Unload();
+                animator = null;
+            }
 
             base.Unload();
         }
