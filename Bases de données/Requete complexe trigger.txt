@@ -1,7 +1,0 @@
-CREATE TRIGGER OnCardAdded
-AFTER INSERT ON carte
-WHEN new.descriptif like '%' || SELECT nom FROM mots_cles || '%'
-BEGIN
-INSERT INTO mots_cles_carte (id_mots_cles, id_carte) 
-	SELECT id_mots_cles FROM mots_cles WHERE new.descriptif like '%' || mots_cles.nom || '%', new.id_carte
-END

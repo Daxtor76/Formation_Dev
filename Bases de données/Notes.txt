@@ -1,0 +1,41 @@
+CREATE TRIGGER OnCardAdded
+AFTER INSERT ON carte
+WHEN new.descriptif like '%' || SELECT nom FROM mots_cles || '%'
+BEGIN
+INSERT INTO mots_cles_carte (id_mots_cles, id_carte) 
+	SELECT id_mots_cles FROM mots_cles WHERE new.descriptif like '%' || mots_cles.nom || '%', new.id_carte
+END
+
+
+heidiSQL à ouvrir avec Laragon
+
+Procédure stockée = l'équivalent des fonctions
+	Voir screenshot DELIMITER
+	Appeler la procédure stockée : Call selectCart('Démon belliqueux')
+	
+	Ex: 
+	DELIMITER $$
+	CREATE PROCEDURE AddCard
+	(IN nom VARCHAR(30),
+	IN descriptif VARCHAR(50),
+	IN rarity INT,
+	IN class INT)
+	BEGIN
+	INSERT INTO carte(nom, descriptif, id_rarete, id_classe) VALUES (nom, descriptif, rarity, class);
+	END $$
+	DELIMITER;
+	
+	Ex call : 
+	CALL AddCard('Julien', 'Un camarade de la promo DODOMA', 4, 5)
+	
+VIEWS
+	Table virtuelle, sorte de table temporaire
+	CREATE VIEW nom_delavue AS + requête de sélection;
+
+	Ex: 
+	CREATE VIEW viewByCard AS
+	SELECT c.nom, c.descriptif, r.nom AS nom_rarete, cl.nom AS nom_classe
+	FROM carte c
+	INNER JOIN rarete r ON c.id_rarete = r.id_rarete
+	INNER JOIN classe cl ON c.id_classe = cl.id_classe
+	;
